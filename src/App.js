@@ -7,8 +7,15 @@ import MainContent from './components/MainContent'
 
 import Home from './pages/Home'
 import About from './pages/About'
-import ProductList from './pages/ProductList/ProductList'
+import ProductList from './pages/ProductList'
+import CourseList from './pages/CourseList/CourseList'
 import Cart from './pages/Cart'
+import Membercenter from './pages/Membercenter'
+
+import CartComfirm from "./pages/CartComfirm"
+import CartComplete from "./pages/CartComplete"
+import CartPayment from "./pages/CartPayment"
+import CartComfirmChange from "./pages/CartComfirmChange"
 
 import NotFoundPage from './pages/NotFoundPage'
 import MemberLogin from './pages/MemberLogin'
@@ -74,9 +81,30 @@ function App(props) {
             <Route path="/shop/:second?/:third?/:fourth?/:page?">
               <ProductList />
             </Route>
-            <Route path="/cart">
+            <Route path="/course/:second?/:third?/:fourth?/:page?">
+              <CourseList />
+            </Route>
+            <Route path="/searchtest">
+            
+            </Route>
+
+            <Route path="/cart" exact>
               <Cart />
             </Route>
+            <Route path="/cart/comfirm" exact>
+              <CartComfirm />
+            </Route>
+            <Route path="/cart/comfirm/change">
+              <CartComfirmChange />
+            </Route>
+
+            <Route path="/cart/payment">
+              <CartPayment />
+            </Route>
+            <Route path="/cart/complete">
+              <CartComplete />
+            </Route>
+
             <Route path="/memberlogin">
               <MemberLogin
                 name={name}
@@ -94,6 +122,10 @@ function App(props) {
             {/* <ProtectedRoute path="/todoapp">
               <TodoApp todos={todos} setTodos={setTodos} isAuth={auth} />
             </ProtectedRoute> */}
+            <Route exact path="/membercenter">
+              <Membercenter />
+            </Route>
+
             <Route exact path="/">
               <Home />
             </Route>

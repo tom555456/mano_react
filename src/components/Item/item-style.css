@@ -1,5 +1,4 @@
 .item-card {
-    width: 80%;
     display: flex;
     padding: 15px;
 }
@@ -29,13 +28,10 @@
     width: 65%;
 }
 
-/* .item-name {
-
+.fd-col {
+    flex-direction: column;
 }
 
-.item-description {
-
-} */
 
 .item-content-right {
     display: flex;
@@ -55,6 +51,7 @@
     border-radius: 20px;
     padding: 5px;
     width: 150px;
+    text-align: center;
 }
 
 .add-fav {
@@ -64,4 +61,63 @@
     background-color: #FFFFFF;
     padding: 5px;
     width: 150px;
+}
+
+.item-content-top {
+    justify-content: space-between;
+}
+
+
+.item-content-bottom {
+    padding-top: 25px;
+}
+
+.mark-btn {
+    background-color: #BF8C60;
+    color: #FFFFFF;
+    border: 1px solid #BF8C60;
+    border-radius: 20px;
+    padding: 0;
+    width: 80px;
+    text-align: center;
+    line-height: 17px;
+    font-size: 12px;
+}
+
+
+.total-container {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 1px 1px 1px gray;
+    margin: 20px;
+    padding: 20px;
+}
+
+.border-bottom {
+    border-bottom: 1px solid black;
+    margin: 100px 0 40px 0;
+}
+
+
+.comfirm-lists {
+    width: 100%;
+}
+
+.comfirm-card {
+    width: 100%;
+    display: flex;
+    padding: 15px;
+}
+
+.comfirm-content {
+    width: 100%;
+    display: flex;
+    box-shadow: 1px 1px 1px gray;
+    margin-left: 15px;
+    padding: 0 10px 15px 10px;
+}
+
+
+.bg-brown {
+    background-color: #DFBC9E;
 }
