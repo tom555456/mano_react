@@ -7,6 +7,14 @@ $secondary: #131010;
 
 // 其它要導入覆蓋掉原本的預設bootstrap樣式要放在這下面
 
+body {
+  font-family: 微軟正黑體;
+}
+
+.fd-col {
+  flex-direction: column;
+}
+
 main > .container {
   padding: 60px 15px 0;
 }

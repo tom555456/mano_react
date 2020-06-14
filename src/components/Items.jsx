@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Modal, Button } from 'react-bootstrap'
 import { withRouter } from 'react-router-dom'
-import Item from "../Item/Item";
-import "./items-style.css"
+import Item from "./Item";
 
 class Items extends Component {
     constructor() {
@@ -132,11 +131,11 @@ class Items extends Component {
         for(let i=1; i <= this.state.totalPages; i++) {
             if(i < 10){
                 lists.push(
-                    <li className="page-list" key={i} value={i} onClick={this.handleChange}>0{i}</li>
+                    <Button size="sm" className="m-1 p-1" key={i} value={i} onClick={this.handleChange}>0{i}</Button>
                 )
             }else{
                 lists.push(
-                    <li className="page-list" key={i} value={i} onClick={this.handleChange}>{i}</li>
+                    <Button size="sm" className="m-1 p-1" key={i} value={i} onClick={this.handleChange}>{i}</Button>
                 )
             }
         }
@@ -163,15 +162,6 @@ class Items extends Component {
             </Modal>
           )
         
-          const spinner = (
-            <>
-              <div className="d-flex justify-content-center">
-                <div className="spinner-border" role="status">
-                  <span className="sr-only">Loading...</span>
-                </div>
-              </div>
-            </>
-          )
         
     
         return(
@@ -186,6 +176,7 @@ class Items extends Component {
                 handleClick={() => {    
                     this.updateCartToLocalStorage({
                     id: item.itemId,
+                    img: item.itemImg,
                     name: item.itemName,
                     amount: 1,
                     price: item.itemPrice
@@ -195,9 +186,9 @@ class Items extends Component {
                />
                 ))}
        
-                <ul className="page-lists">
+                <div className="d-flex align-items-center justify-content-center">
                     {lists}
-                </ul>
+                </div>
             </div>
             
         )

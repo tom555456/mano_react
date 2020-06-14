@@ -1,54 +1,36 @@
 import React, { useState, useEffect } from 'react'
+import { Table, Container, Row, Col, ListGroup, Image, Button } from "react-bootstrap"
+import { withRouter } from "react-router-dom";
+import { GrFormSubtract, GrFormAdd } from "react-icons/gr";
 
-function Cart() {
+function Cart(props) {
   const [mycart, setMycart] = useState([])
   const [mycartDisplay, setMycartDisplay] = useState([])
-  const [dataLoading, setDataLoading] = useState(false)
 
-  // 模擬componentDidMount
   useEffect(() => {
-    // 開啟指示(spinner)
-    setDataLoading(true)
-
-    console.log(localStorage.getItem('cart'))
-
-    // 得到值(字串) !!重要
     const initCart = localStorage.getItem('cart') || '[]'
-    // 設定到mycart，轉為真正的陣列 !!重要
-    setMycart(JSON.parse(initCart))
+    const cartJson = JSON.parse(initCart)
 
-    // 1000ms(一秒後)關閉指示(spinner)
-    setTimeout(() => {
-      setDataLoading(false)
-    }, 1000)
+    console.log(cartJson)
+
+    setMycart(cartJson)
+
   }, [])
 
-  // 模擬componentDidUpdate
+
   useEffect(() => {
-    //console.log(mycart)
     let newMycartDisplay = []
 
-    //console.log('mycartDisplay', mycartDisplay)
     console.log('mycart', mycart)
 
-    //尋找mycartDisplay
     for (let i = 0; i < mycart.length; i++) {
-      //尋找mycartDisplay中有沒有此mycart[i].id
-      //有找到會返回陣列成員的索引值
-      //沒找到會返回-1
       const index = newMycartDisplay.findIndex(
         (value) => value.id === mycart[i].id
       )
 
-      //有的話就數量+1
       if (index !== -1) {
-        //console.log('findindex', index)
-        //每次只有加1個數量
-        //newMycartDisplay[index].amount++
-        //假設是加數量的
         newMycartDisplay[index].amount += mycart[i].amount
       } else {
-        //沒有的話就把項目加入，數量為1
         const newItem = { ...mycart[i] }
         newMycartDisplay = [...newMycartDisplay, newItem]
       }
@@ -57,6 +39,27 @@ function Cart() {
     console.log('newMycartDisplay', newMycartDisplay)
     setMycartDisplay(newMycartDisplay)
   }, [mycart])
+
+  function updateCartToLocalStorage (value) {
+    const currentCart = JSON.parse(localStorage.getItem('cart')) || []
+
+    const newCart = [...currentCart, value]
+    localStorage.setItem('cart', JSON.stringify(newCart))
+
+    setMycart(newCart);
+  }
+
+  function substarctCartToLocalStorage (value) {
+    
+    let foundObj = mycart.find(obj => obj.name === value.name)
+    let filtered = mycart.filter(el => el != foundObj);
+    const newCart = filtered
+    localStorage.setItem('cart', JSON.stringify(newCart))
+
+    setMycart(newCart);
+  }
+
+
 
   // 計算總價用的函式
   function sum(items) {
@@ -67,35 +70,82 @@ function Cart() {
     return total
   }
 
-  const spinner = (
-    <div className="spinner-border text-primary" role="status">
-      <span className="sr-only">Loading...</span>
-    </div>
-  )
 
-  const display = (
-    <>
-      <ul className="list-group">
-        {mycartDisplay.map((value, index) => {
-          return (
-            <li className="list-group-item" key={value.id}>
-              產品：{value.name}/數量：{value.amount} /單價：{value.price}/
-              {'   '}
-              小計：{value.amount * value.price}
-            </li>
-          )
-        })}
-      </ul>
-      {/* 判斷mycartDisplay是否在初次render的階段 */}
-      {mycartDisplay.length > 0 ? <h3>總價：{sum(mycartDisplay)}</h3> : ''}
-    </>
-  )
 
   return (
-    <>
-      <div className="container">{dataLoading ? spinner : display}</div>
+    <> 
+    {mycartDisplay.length > 0 ? (
+    <Container>
+      <Row>
+          <Col sm={9} className="d-flex fd-col">
+          {mycartDisplay.map(value => ( 
+                  <Container className="mt-0 m-3">
+                      <Row>
+                          <Col xs={3}>
+                              <Image
+                              width={100}
+                              height={100}
+                              className="mr-3"
+                              src={`/items/${value.img}`}
+                              alt={value.img}
+                              />
+                          </Col>
+                          <Col xs={8}>
+                              <Row className="d-flex">
+                                  <p className="w-25">{value.name}</p>
+                                  <p className="w-25 text-right">${value.price}</p>
+                                  <p className="w-25 text-right">
+                                    <GrFormSubtract onClick={() => substarctCartToLocalStorage({
+                                        id: value.id,
+                                        img: value.img,
+                                        name: value.name,
+                                        amount: 1,
+                                        price: value.price
+                                      }) }/>
+                                      {" "}
+                                      {value.amount}
+                                      {" "}
+                                    <GrFormAdd  onClick={() => updateCartToLocalStorage({
+                                        id: value.id,
+                                        img: value.img,
+                                        name: value.name,
+                                        amount: 1,
+                                        price: value.price
+                                      }) } />
+                                  </p>
+                                  <p className="w-25 text-right">${value.price * value.amount}</p>
+                              </Row>
+                              <Row className="mt-2">
+                                  <Button className="mt-2 mb-2" size="sm" variant="primary">優惠活動</Button>
+                              </Row>
+                          </Col>
+                      </Row>
+                  </Container>
+            ))}
+            </Col>
+            <Col sm={3} className="d-flex fd-col p-3 pl-5">
+              <h6>商品總金額</h6>
+              <h5>小計  ${sum(mycartDisplay)}</h5>
+              <h5>運費  $</h5>
+              <hr className="mt-5" />
+              <h5>總金額  ${sum(mycartDisplay)}</h5>
+            </Col>
+          </Row>
+          <Row className="d-flex justify-content-center pt-3 pb-3">
+            <Button className="mt-2 mb-2" variant="outline-primary" onClick={() => props.history.push("/cart/comfirm")}>去買單</Button>
+          </Row> 
+        </Container> ) : (
+          <div className="d-flex fd-col justify-content-center align-items-center">
+              <h2 className="mt-3 mb-3">購物車沒有東西</h2>
+              <Button className="mt-2 mb-2" variant="outline-primary" onClick={() => {
+                        props.history.push("/shop");
+                        localStorage.setItem("page",1);
+                      }}>繼續購物</Button>
+          </div>
+
+        )}
     </>
   )
 }
 
-export default Cart
+export default withRouter(Cart)
