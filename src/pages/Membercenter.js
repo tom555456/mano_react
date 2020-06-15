@@ -25,6 +25,7 @@ function Membercenter() {
     // 設定資料
     setMember(data[0])
   }
+  
   useEffect(() => {
     getData()
   }, [])

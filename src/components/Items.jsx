@@ -179,7 +179,8 @@ class Items extends Component {
                     img: item.itemImg,
                     name: item.itemName,
                     amount: 1,
-                    price: item.itemPrice
+                    price: item.itemPrice,
+                    shippingId: item.shippingId
                     })
                 }
               }

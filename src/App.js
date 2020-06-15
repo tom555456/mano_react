@@ -9,13 +9,12 @@ import Home from './pages/Home'
 import About from './pages/About'
 import ProductList from './pages/ProductList'
 import CourseList from './pages/CourseList/CourseList'
-import Cart from './pages/Cart'
-import Membercenter from './pages/Membercenter'
-
 import CartComfirm from "./pages/CartComfirm"
+import CartComfirmChange from "./pages/CartComfirmChange"
 import CartComplete from "./pages/CartComplete"
 import CartPayment from "./pages/CartPayment"
-import CartComfirmChange from "./pages/CartComfirmChange"
+import Cart from './pages/Cart'
+import Membercenter from './pages/Membercenter'
 
 import NotFoundPage from './pages/NotFoundPage'
 import MemberLogin from './pages/MemberLogin'
@@ -23,7 +22,6 @@ import MemberLogin from './pages/MemberLogin'
 import ProtectedRoute from './utils/ProtectedRoute'
 
 function App(props) {
-
   const [name, setName] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -72,7 +70,7 @@ function App(props) {
   return (
     <Router>
       <>
-        <MyNavbar auth={auth} name={name}/>
+        <MyNavbar auth={auth} name={name} />
         <MainContent>
           <Switch>
             <Route path="/about">
@@ -84,10 +82,6 @@ function App(props) {
             <Route path="/course/:second?/:third?/:fourth?/:page?">
               <CourseList />
             </Route>
-            <Route path="/searchtest">
-            
-            </Route>
-
             <Route path="/cart" exact>
               <Cart />
             </Route>
@@ -97,14 +91,15 @@ function App(props) {
             <Route path="/cart/comfirm/change">
               <CartComfirmChange />
             </Route>
-
-            <Route path="/cart/payment">
-              <CartPayment />
-            </Route>
             <Route path="/cart/complete">
               <CartComplete />
             </Route>
+            <Route path="/cart/payment">
+              <CartPayment />
+            </Route>
 
+
+            <Route path="/searchtest"></Route>
             <Route path="/memberlogin">
               <MemberLogin
                 name={name}
@@ -125,7 +120,6 @@ function App(props) {
             <Route exact path="/membercenter">
               <Membercenter />
             </Route>
-
             <Route exact path="/">
               <Home />
             </Route>

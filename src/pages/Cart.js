@@ -60,6 +60,48 @@ function Cart(props) {
   }
 
 
+  function sumShipping(items) {
+    let shipColdMoney = 0;
+    let coldItemTotal = 0;
+    let shipRoomMoney = 0;
+    let roomItemTotal = 0;
+    let shipMoney = 0;
+    let shiptotalMoney = 0;
+
+    //計算個別單獨運費
+    for (let i = 0; i < items.length; i++) {
+        if (items[i].shippingId == 'S001') {
+            shipColdMoney += 150;
+            coldItemTotal += items[i].price * items[i].amount;
+        } else if (items[i].shippingId == 'S002') {
+            shipRoomMoney += 100;
+            roomItemTotal += items[i].price * items[i].amount;
+        } else {
+            shipMoney += 0;
+        };
+    };
+    //避免運費重複計算
+    if (shipColdMoney > 150) {
+        shipColdMoney = 150;
+    };
+    if (shipRoomMoney > 100) {
+        shipRoomMoney = 100;
+    };
+    //設定滿額免運
+    if (coldItemTotal > 1199) {
+        shipColdMoney -= 150;
+    };
+    if (roomItemTotal > 799) {
+        shipRoomMoney -= 100;
+    };
+    //計算運費總額
+    shiptotalMoney += shipColdMoney;
+    shiptotalMoney += shipRoomMoney;
+    shiptotalMoney += shipMoney;
+    //先把訂單總金額加上運費=(0+運費)
+    return shiptotalMoney
+
+  }
 
   // 計算總價用的函式
   function sum(items) {
@@ -100,7 +142,8 @@ function Cart(props) {
                                         img: value.img,
                                         name: value.name,
                                         amount: 1,
-                                        price: value.price
+                                        price: value.price,
+                                        shippingId: value.shippingId
                                       }) }/>
                                       {" "}
                                       {value.amount}
@@ -110,7 +153,8 @@ function Cart(props) {
                                         img: value.img,
                                         name: value.name,
                                         amount: 1,
-                                        price: value.price
+                                        price: value.price,
+                                        shippingId: value.shippingId
                                       }) } />
                                   </p>
                                   <p className="w-25 text-right">${value.price * value.amount}</p>
@@ -126,9 +170,9 @@ function Cart(props) {
             <Col sm={3} className="d-flex fd-col p-3 pl-5">
               <h6>商品總金額</h6>
               <h5>小計  ${sum(mycartDisplay)}</h5>
-              <h5>運費  $</h5>
+              <h5>運費  ${sumShipping(mycartDisplay)}</h5>
               <hr className="mt-5" />
-              <h5>總金額  ${sum(mycartDisplay)}</h5>
+              <h5>總金額  ${sum(mycartDisplay) + sumShipping(mycartDisplay)}</h5>
             </Col>
           </Row>
           <Row className="d-flex justify-content-center pt-3 pb-3">
