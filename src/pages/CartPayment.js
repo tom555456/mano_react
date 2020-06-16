@@ -6,30 +6,46 @@ import { withRouter } from "react-router-dom";
 
 
 function CartPayment (props) {
+    const [order, setOrder] = useState("")
+    const [orderList, setOrderList] = useState("")
     const [orderPayment, setOrderPayment] = useState("")
+    const [finalCart, setFinalCart] = useState([])
+    const [total, setTotal] = useState(0)
+    const [discount, setDiscount] = useState("")
+    const [shipInfo, setShipInfo] = useState("")
+    const [note, setNote] = useState("")
+    const [insertId, setInsertId] = useState(0)
 
-    async function getData() {
-        const request = new Request("http://localhost:3002/orderPayment", {
-          method: "GET",
-          headers: new Headers({
-            Accept: "application/json",
-            "Content-Type": "appliaction/json",
-          }),
+
+    useEffect(() => {
+
+        const finalCart = JSON.parse(localStorage.getItem('finalCart'))
+        const total = localStorage.getItem('total')
+        const discount = localStorage.getItem('discount')
+        const shipInfo = JSON.parse(localStorage.getItem('shipInfo'))
+        const note = localStorage.getItem('note')
+
+        setFinalCart(finalCart)
+        setTotal(Number(total))
+        setDiscount(discount)
+        setShipInfo(shipInfo)
+        setNote(note)
+
+        setOrder({
+            ...order,
+            username: shipInfo.memberName,
+            orderPhone: Number(shipInfo.phone),
+            shipAddress: shipInfo.shipAddress,
+            discount: discount,
+            totalPrice: Number(total)
         })
     
-        const response = await fetch(request)
-        const data = await response.json()
-        // 設定資料
-        setOrderPayment(data)
-      }
-      
-      useEffect(() => {
-        getData()
       }, [])
 
 
-    async function insertOrderPaymentToSever(item) {
-        const request = new Request("http://localhost:3002/orderPayment/insert", {
+
+      async function insertOrderListToSever(item) {
+        const request = new Request("http://localhost:3002/order/insertOrderList", {
           method: "POST",
           body: JSON.stringify(item),
           headers: new Headers({
@@ -44,11 +60,84 @@ function CartPayment (props) {
         const data = await response.json()
     
       }
+
+
+      async function insertOrderPaymentToSever(item) {
+        const request = new Request("http://localhost:3002/order/insertOrderPayment", {
+          method: "POST",
+          body: JSON.stringify(item),
+          headers: new Headers({
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          }),
+        })
+    
+        console.log("After JSON: ", JSON.stringify(item))
+    
+        const response = await fetch(request)
+        const data = await response.json()
+    
+      }
+
+    // useEffect(() => {
+
+    //     for(let i=0; i < finalCart.length; i++ ) {
+    //         setOrderList({
+    //             ...orderList,
+    //             orderId: insertId,
+    //             itemId: finalCart[i].id,
+    //             checkPrice: finalCart[i].price,
+    //             checkQuantity: finalCart[i].amount,
+    //             checkSubtotal: finalCart[i].price * finalCart[i].amount
+    //         })
+    //         const newOrderList = orderList
+    //         insertOrderListToSever(newOrderList);
+    //     }
+
+          
+    // },[order])
+
+
+
+    async function insertOrderToSever(item) {
+        const request = new Request("http://localhost:3002/order/insertOrder", {
+          method: "POST",
+          body: JSON.stringify(item),
+          headers: new Headers({
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          }),
+        })
+    
+        console.log("After JSON: ", JSON.stringify(item))
+    
+        const response = await fetch(request)
+        const data = await response.json()
+
+        console.log(data)
+
+        const id = data.results.insertId
+
+        return id
+      }
+
       
-      const handleInsertSave = (orderPayment) => {
-        const newOrderPayment = orderPayment
-        insertOrderPaymentToSever(newOrderPayment)
-        setOrderPayment(newOrderPayment)
+      const handleInsertSave = async () => {
+
+        const id = await insertOrderToSever(order);
+        await setOrderPayment({
+            ...orderPayment,
+            orderId: id
+        })
+        insertOrderPaymentToSever(orderPayment);
+
+        // const newOrder = order
+        // insertOrderToSever(newOrder);
+        // setOrder(newOrder)
+
+        // const newOrderPayment = orderPayment
+        // insertOrderPaymentToSever(newOrderPayment)
+        // setOrderPayment(newOrderPayment)
       }
     
     return(
@@ -104,7 +193,7 @@ function CartPayment (props) {
             <div className="d-flex justify-content-center pt-3 pb-3">
                 <Button className="mt-2 mb-2" variant="outline-primary" 
                     onClick={() => {
-                        handleInsertSave(orderPayment);
+                        handleInsertSave();
                         props.history.push("/cart/complete");
                     }}>前往付款</Button>
             </div>

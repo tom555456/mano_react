@@ -17,7 +17,10 @@ import Cart from './pages/Cart'
 import Membercenter from './pages/Membercenter'
 
 import NotFoundPage from './pages/NotFoundPage'
-import MemberLogin from './pages/MemberLogin'
+
+import Login from './pages/login/login'
+import Welcome from './pages/login/welcome'
+
 
 import ProtectedRoute from './utils/ProtectedRoute'
 
@@ -37,9 +40,8 @@ function App(props) {
     const errors = []
 
     // 檢查錯誤
-    if (name === '') errors.push('姓名沒填')
-    if (username === '') errors.push('帳號沒填')
-    if (password === '') errors.push('密碼沒填')
+    if (username === '') errors.push('Account is empty')
+    if (password === '') errors.push('Password is empty')
 
     if (errors.length > 0) {
       setLoginErrors(errors)
@@ -100,8 +102,8 @@ function App(props) {
 
 
             <Route path="/searchtest"></Route>
-            <Route path="/memberlogin">
-              <MemberLogin
+            <Route path="/login">
+              <Login
                 name={name}
                 setName={setName}
                 username={username}
@@ -114,6 +116,22 @@ function App(props) {
                 auth={auth}
               />
             </Route>
+
+            <Route path="/welcome">
+              <Welcome
+                name={name}
+                setName={setName}
+                username={username}
+                setUsername={setUsername}
+                password={password}
+                setPassword={setPassword}
+                loginProcess={loginProcess}
+                logoutProcess={logoutProcess}
+                loginErrors={loginErrors}
+                auth={auth}
+              />
+            </Route>
+
             {/* <ProtectedRoute path="/todoapp">
               <TodoApp todos={todos} setTodos={setTodos} isAuth={auth} />
             </ProtectedRoute> */}

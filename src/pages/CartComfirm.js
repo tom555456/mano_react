@@ -4,8 +4,11 @@ import { withRouter } from "react-router-dom";
 import { MdLocalShipping } from "react-icons/md"
 
 function Cart(props) {
-  const [mycart, setMycart] = useState([])
-  const [mycartDisplay, setMycartDisplay] = useState([])
+  const [finalCart, setFinalCart] = useState([])
+  const [shipTotal, setShipTotal] = useState(0)
+  const [shopTotal, setShopTotal] = useState(0)
+  const [total, setTotal] = useState(0)
+  const [discount, setDiscount] = useState("")
   const [member, setMember] = useState("")
 
   async function getData() {
@@ -28,85 +31,23 @@ function Cart(props) {
   useEffect(() => {
 
     getData()
-    const initCart = localStorage.getItem('cart') || '[]'
-    setMycart(JSON.parse(initCart))
+    const finalCart = localStorage.getItem('finalCart')
+    const shipTotal = localStorage.getItem('shipTotal')
+    const shopTotal = localStorage.getItem('shopTotal')
+    const total = localStorage.getItem('total')
+
+    setFinalCart(JSON.parse(finalCart))
+    setShipTotal(Number(shipTotal))
+    setShopTotal(Number(shopTotal))
+    setTotal(Number(total))
 
   }, [])
 
 
-  useEffect(() => {
-    let newMycartDisplay = []
-    for (let i = 0; i < mycart.length; i++) {
-      const index = newMycartDisplay.findIndex(
-        (value) => value.id === mycart[i].id
-      )
-
-      if (index !== -1) {
-        newMycartDisplay[index].amount += mycart[i].amount
-      } else {
-        const newItem = { ...mycart[i] }
-        newMycartDisplay = [...newMycartDisplay, newItem]
-      }
-    }
-    setMycartDisplay(newMycartDisplay)
-  }, [mycart])
-
-
-  function sumShipping(items) {
-    let shipColdMoney = 0;
-    let coldItemTotal = 0;
-    let shipRoomMoney = 0;
-    let roomItemTotal = 0;
-    let shipMoney = 0;
-    let shiptotalMoney = 0;
-
-    //計算個別單獨運費
-    for (let i = 0; i < items.length; i++) {
-        if (items[i].shippingId == 'S001') {
-            shipColdMoney += 150;
-            coldItemTotal += items[i].price * items[i].amount;
-        } else if (items[i].shippingId == 'S002') {
-            shipRoomMoney += 100;
-            roomItemTotal += items[i].price * items[i].amount;
-        } else {
-            shipMoney += 0;
-        };
-    };
-    //避免運費重複計算
-    if (shipColdMoney > 150) {
-        shipColdMoney = 150;
-    };
-    if (shipRoomMoney > 100) {
-        shipRoomMoney = 100;
-    };
-    //設定滿額免運
-    if (coldItemTotal > 1199) {
-        shipColdMoney -= 150;
-    };
-    if (roomItemTotal > 799) {
-        shipRoomMoney -= 100;
-    };
-    //計算運費總額
-    shiptotalMoney += shipColdMoney;
-    shiptotalMoney += shipRoomMoney;
-    shiptotalMoney += shipMoney;
-    //先把訂單總金額加上運費=(0+運費)
-    return shiptotalMoney
-
-  }
-
-  // 計算總價用的函式
-  function sum(items) {
-    let total = 0
-    for (let i = 0; i < items.length; i++) {
-      total += items[i].amount * items[i].price
-    }
-    return total
-  }
 
     const display = (
     <>
-      {mycartDisplay.map(value => ( 
+      {finalCart.map(value => ( 
                   <Container className="mb-3">
                       <Row>
                           <Col xs={2}>
@@ -135,27 +76,24 @@ function Cart(props) {
                     <p>{member.phone}</p>
                     <p>{member.shipAddress}</p>
                     <Button className="mt-2 mb-2" size="sm" variant="outline-primary" onClick={() => props.history.push("/cart/comfirm/change")}>變更</Button>
-                    <p>運費：${sumShipping(mycartDisplay)}</p>
+                    <p>運費：${shipTotal}</p>
                   </Col>
                 </Row>
            
-
-        
-        
             <Row className="d-flex">
                 <Col xs={5} className="item-content-left m-4 pt-4">
-                    <h5 className="item-name">折扣碼：</h5>
+                  <div className="form-group w-25 ml-5">
+                      <label htmlFor="example3">折扣碼：</label>
+                      <input type="text" id="example3" className="form-control form-control-sm"
+                              onChange={(event) => setDiscount(event.target.value)}/>
+                  </div>
                 </Col>
                 <Col xs={6} className="d-flex fd-col text-right p-5">
-                    <p className="">商品總金額：${sum(mycartDisplay)}</p>
-                    <p className="">折扣金額：${props.itemPrice}</p>
-                    <p className="">折扣後總金額：${sum(mycartDisplay) + sumShipping(mycartDisplay)}</p>
+                    <p className="">商品總金額：${shopTotal}</p>
+                    <p className="">{(discount !== "") ? `折扣金額：$` : ""}</p>
+                    <p className="">折扣後總金額：${total}</p>
                 </Col>
-            </Row>
-
-     
-
-      
+            </Row>   
     </>
   )
 
@@ -164,7 +102,11 @@ function Cart(props) {
     <Container>
           {display}
         <Row className="d-flex justify-content-center pt-3 pb-3">
-            <Button className="mt-2 mb-2" variant="outline-primary" onClick={() => props.history.push("/cart/payment")}>確認付款</Button>
+            <Button className="mt-2 mb-2" variant="outline-primary" onClick={() => {
+                  localStorage.setItem("shipInfo", JSON.stringify(member))
+                  localStorage.setItem("discount", discount)
+                  props.history.push("/cart/payment")
+              }}>確認付款</Button>
         </Row>
     </Container>
     </>

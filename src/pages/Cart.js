@@ -176,7 +176,13 @@ function Cart(props) {
             </Col>
           </Row>
           <Row className="d-flex justify-content-center pt-3 pb-3">
-            <Button className="mt-2 mb-2" variant="outline-primary" onClick={() => props.history.push("/cart/comfirm")}>去買單</Button>
+            <Button className="mt-2 mb-2" variant="outline-primary" onClick={() => {
+                    localStorage.setItem("finalCart", JSON.stringify(mycartDisplay))
+                    localStorage.setItem("shipTotal", sumShipping(mycartDisplay))
+                    localStorage.setItem("shopTotal", sum(mycartDisplay))
+                    localStorage.setItem("total", sum(mycartDisplay) + sumShipping(mycartDisplay))
+                    props.history.push("/cart/comfirm")
+              }}>去買單</Button>
           </Row> 
         </Container> ) : (
           <div className="d-flex fd-col justify-content-center align-items-center">

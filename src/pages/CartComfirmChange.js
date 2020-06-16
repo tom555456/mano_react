@@ -7,6 +7,7 @@ import { withRouter } from "react-router-dom";
 
 function CartComfirmChange(props) {
     const [member, setMember] = useState("")
+    const [note, setNote] = useState("")
     const [isSame, setIsSame] = useState(true)
 
     async function getData() {
@@ -100,7 +101,8 @@ function CartComfirmChange(props) {
 
             <div className="form-group">
                 <label htmlFor="example3">備註：</label>
-                <input type="text" id="example3" className="form-control form-control-sm" />
+                <input type="text" id="example3" className="form-control form-control-sm"
+                        onChange={(event) => setNote(event.target.value)} />
             </div>
 
             </Fragment>
@@ -108,6 +110,8 @@ function CartComfirmChange(props) {
                 <Button className="mt-2 mb-2" variant="outline-primary" 
                         onClick={() => {
                             handleEditedSave(member);
+                            localStorage.setItem("shipInfo", JSON.stringify(member))
+                            localStorage.setItem("note", note)
                             props.history.push("/cart/comfirm")
                         }}>確認配送資訊</Button>
             </div>

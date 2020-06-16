@@ -6,14 +6,12 @@ import { MdShoppingCart, MdKeyboardArrowRight }from "react-icons/md"
 function MyNavbar(props) {
   const { auth, name } = props
 
-  const [isCart, setIsCart] = useState(false);
-
   const loginButton = (
     <>
       <Button
         variant="outline-light"
         onClick={() => {
-          props.history.push('/memberlogin')
+          props.history.push('/login')
         }}
       >
         登入
@@ -26,7 +24,7 @@ function MyNavbar(props) {
       <Button
         variant="outline-light"
         onClick={() => {
-          props.history.push('/memberlogin')
+          props.history.push('/welcome')
         }}
       >
         登出
@@ -47,7 +45,7 @@ function MyNavbar(props) {
               <Nav.Link as={NavLink} to="/about">
                 關於我們
               </Nav.Link>
-              <Nav.Link as={NavLink} to="/memberlogin">
+              <Nav.Link as={NavLink} to="/login">
                 會員登入
               </Nav.Link>
               <Nav.Link as={NavLink} to="/shop" onClick={() => localStorage.setItem("page",1)}>
@@ -59,7 +57,7 @@ function MyNavbar(props) {
               <Nav.Link as={NavLink} to="/membercenter"> 
                 Member center
               </Nav.Link>
-              <Nav.Link as={NavLink} to="/cart" onClick={() => setIsCart(true)}>
+              <Nav.Link as={NavLink} to="/cart">
                 購物車
               </Nav.Link>
               <Nav.Link as={NavLink} to="/searchtest">
@@ -100,7 +98,7 @@ function MyNavbar(props) {
     const path = props.history.location.pathname;
     
     if(path === "/cart" || path === "/cart/comfirm" || path === "/cart/complete" || path === "/cart/payment" ) displayNav = cartNav
-    else if(path === "/cart/comfirm/change") displayNav = "";
+    else if(path === "/cart/comfirm/change" || path === "/login" || path === "/welcome") displayNav = "";
     else displayNav = nav
     
 
