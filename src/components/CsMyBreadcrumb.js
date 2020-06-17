@@ -17,28 +17,58 @@ function MyBreadcrumb(props) {
   // 先找出對應的中文詞
   let locationPathname = props.location.pathname
   // `/product/xxxx` 轉為 `/product`
-  if (locationPathname.includes('/course')) locationPathname = '/course'
+  // if (locationPathname.includes('/course')) locationPathname = '/course'
+  // if (locationPathname.includes('/cuisine')) locationPathname = '/cuisine'
 
   const index = pathlist.findIndex((v) => v === locationPathname)
 
-  return (
-    <>
-      <nav aria-label="breadcrumb">
-        <ol className="breadcrumb">
+console.log(locationPathname)
+
+
+const allcourse = (
+  <>
+  <ol className="breadcrumb">
           <li className="breadcrumb-item">
             <Link to="/">首頁</Link>
-            {/* <Link to="/course">所有課程</Link>
-            <Link to="/course/cuisine?categoryId=27">抹の食</Link>
-            <Link to="/course/clothes">抹の著</Link>
-            <Link to="/course/life">抹の生活</Link>
-            <Link to="/course/limit">期間限定</Link>
-            <Link to="/course/new">手摘專屬體驗</Link>
-            <Link to="/course/anti">防疫限定</Link> */}
           </li>
           <li className="breadcrumb-item active" aria-current="page">
             {pathnames[index]}
           </li>
         </ol>
+  </>
+)
+
+const detail = (
+  <>
+  <ol className="breadcrumb">
+          <li className="breadcrumb-item">
+            <Link to="/">首頁</Link>
+          </li>
+          <li className="breadcrumb-item">
+          <Link 
+          to="/course?categoryId=26"
+          onClick={() => props.history.push("/course?categoryId=26")}
+          >所有課程</Link>
+          </li>
+          <li className="breadcrumb-item active" aria-current="page">
+            {pathnames[index]}
+          </li>
+        </ol>
+     </>
+)
+
+let display;
+
+if(locationPathname = '/course/limit'){
+  display = allcourse
+}else{
+  display = detail
+}
+
+  return (
+    <>
+      <nav aria-label="breadcrumb">
+      {display}
       </nav>
     </>
   )

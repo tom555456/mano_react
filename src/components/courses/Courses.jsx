@@ -21,6 +21,7 @@ class Courses extends Component {
       catIds: '',
       catData: [],
       showPage: true,
+      detailKey : '',
     }
   }
 
@@ -66,29 +67,32 @@ class Courses extends Component {
     return this.state.catData
   }
 
-  getRecursiveCategoryIds = async (categoryId) => {
-    const output = await this.getCatData(categoryId)
-
-    //console.log(output)
-    if (output.length > 0) {
-      for (let i = 0; i < output.length; i++) {
-        await this.setState({
-          catIds: (this.state.catIds += `,${output[i]['categoryId']}`),
-        })
-        await this.getRecursiveCategoryIds(output[i]['categoryId'])
-      }
-    }
-
-    return this.state.catIds
-  }
+//   getRecursiveCategoryIds = async (categoryId) => {
+//     const output = await this.getCatData(categoryId)
+    
+//     //console.log(output)
+//     if (output.length > 0) {
+//       for (let i = 0; i < output.length; i++) {
+//         await this.setState({
+//           catIds: (this.state.catIds += `,${output[i]['categoryId']}`),
+//         })
+//         await this.getRecursiveCategoryIds(output[i]['categoryId'])
+//       }
+//     }
+// console.log(this.state.catIds)
+//     return this.state.catIds
+    
+//   }
 
   //fetch 商品
   getItemsData = async () => {
+
     let currentPage = localStorage.getItem('page') || 1
     const response = await fetch(
       `http://localhost:3002/courses/${this.state.catIds}/${currentPage}`
       //${this.state.catIds}/${currentPage}
     )
+    console.log(this.state.catIds)
 
     const json = await response.json()
     const courses = json.rows
@@ -105,6 +109,19 @@ class Courses extends Component {
     return this.state.data
   }
 
+  //  getItemsDetail = (event) => {
+  //   console.log("detail!!")
+  //   console.log(event.target.value);
+  //   console.log(event.target);
+
+  //   const value = event.target.value;
+    
+    
+  //   this.props.history.push(`/courseDetail?courseId=${value}`)
+   
+
+  // }
+
   async componentDidMount() {
     let params = new URLSearchParams(this.props.location.search)
     let catIdParams = params.get('categoryId')
@@ -113,10 +130,11 @@ class Courses extends Component {
         catIds: (this.state.catIds += catIdParams),
       })
 
-      await this.getRecursiveCategoryIds(catIdParams)
+      // await this.getRecursiveCategoryIds(catIdParams)
     }
 
     await this.getItemsData()
+    
   }
 
   //頁碼
@@ -250,6 +268,8 @@ class Courses extends Component {
       </>
     )
 
+    
+
     return (
       <div className="container">
         {messageModal}
@@ -268,6 +288,7 @@ class Courses extends Component {
           .map((course) => (
             <Course
               key={course.courseId}
+              courseId={course.courseId}
               courseImg={course.courseImg}
               courseImg2={course.courseImg2}
               courseName={course.courseName}
@@ -283,6 +304,7 @@ class Courses extends Component {
                   price: course.coursePrice,
                 })
               }}
+              // getDetail={this.getItemsDetail}
             />
           ))}
 

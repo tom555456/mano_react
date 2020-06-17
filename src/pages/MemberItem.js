@@ -50,7 +50,7 @@ function MemberItem(props) {
           </thead>
           <tbody>
             <tr>
-              <td>{member.paymentCity}</td>
+              <td>{member.paymentCity}{member.paymentDistrict}</td>
               <td>{member.shipAddress}</td>
             </tr>
           </tbody>
@@ -66,6 +66,7 @@ function MemberItem(props) {
         <button className="btn btn-primary" onClick={() => setIsedit(!isedit)}>
           Edit
         </button>
+        
       </Col>
     </>
   )

@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react"
 import { Table, Container, Row, Col, ListGroup, Image } from "react-bootstrap"
 
 import { withRouter } from "react-router-dom"
-import MemberListShow from "../components/MemberListShow"
-import Editpassword from "../components/Editpassword"
+import MemberListShow from "./MemberListShow"
+import Editpassword from "./Editpassword"
+import MyBreadcrumb from '../components/MyBreadcrumb'
 
 function Membercenter() {
   const [member, setMember] = useState("")
   const [isedit, setIsedit] = useState(false)
   const [ischangepwd, setIschangepwd] = useState(false)
-
   async function getData() {
     const request = new Request("http://localhost:3002/membercenter/list", {
       method: "GET",
@@ -25,11 +25,9 @@ function Membercenter() {
     // 設定資料
     setMember(data[0])
   }
-  
   useEffect(() => {
     getData()
   }, [])
-
   async function updateMemberToSever(item, successCallback = () => {}) {
     // 開啟載入指示
     // setDataLoading(true)
@@ -57,24 +55,45 @@ function Membercenter() {
     //   console.log('call successCallback')
     // }
   }
-  
   const handleEditedSave = (member) => {
     const newMember = member
     updateMemberToSever(newMember)
-    setIsedit(!isedit)
     setMember(newMember)
     alert("儲存成功")
   }
+  async function updateImgToSever(item, successCallback = () => {}) {
+    const fd = new FormData(document.form1)
+    const request = new Request("http://localhost:3002/membercenter/upimg", {
+      method: "PUT",
+      body: JSON.stringify(item),
+      headers: new Headers({
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      }),
+    })
 
+    console.log("image-After JSON: ", JSON.stringify(fd))
+
+    const response = await fetch(request)
+    const data = await response.json()
+    // await document.getElementById("myimg").setAttribute('src', 'http://localhost:3002/img-uploads/' +data.filename);
+  }
+  const handleImgSave = (member) => {
+    const newMember = member
+    updateImgToSever(newMember)
+    setMember(newMember)
+    alert("儲存成功")
+  }
   return (
     <>
-      
+      <MyBreadcrumb />
       {ischangepwd ? (
         <Editpassword
           member={member}
           setMember={setMember}
           ischangepwd={ischangepwd}
           setIschangepwd={setIschangepwd}
+          handleEditedSave={handleEditedSave}
         />
       ) : (
         <MemberListShow
@@ -85,6 +104,7 @@ function Membercenter() {
         handleEditedSave={handleEditedSave}
         ischangepwd={ischangepwd}
         setIschangepwd={setIschangepwd}
+        handleImgSave={handleImgSave}
       />
       )}
     </>

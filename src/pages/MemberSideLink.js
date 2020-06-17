@@ -14,7 +14,7 @@ function MemberSideLink(props) {
               <ListGroup.Item action href="#link2">
                 我的訂單
               </ListGroup.Item>
-              <ListGroup.Item action href="#link3">
+              <ListGroup.Item action href="/membercenter/coupon">
                 折價券
               </ListGroup.Item>
               <ListGroup.Item action href="#link4">

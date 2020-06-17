@@ -8,26 +8,38 @@ import MainContent from './components/MainContent'
 import Home from './pages/Home'
 import About from './pages/About'
 import ProductList from './pages/ProductList'
+import ItemDetail from './pages/ItemDetail/ItemDetail'
+
 import CourseList from './pages/CourseList/CourseList'
+import CourseDetail from './pages/CourseDetail/CourseDetail'
+
 import CartComfirm from "./pages/CartComfirm"
 import CartComfirmChange from "./pages/CartComfirmChange"
 import CartComplete from "./pages/CartComplete"
 import CartPayment from "./pages/CartPayment"
 import Cart from './pages/Cart'
 import Membercenter from './pages/Membercenter'
+import Coupon from './pages/Coupon'
 
 import NotFoundPage from './pages/NotFoundPage'
 
 import Login from './pages/login/login'
-import Welcome from './pages/login/welcome'
+import MyWelcome from './pages/login/welcome'
+import MyRegister from './pages/login/register'
+import MyForgetPwd from './pages/login/forgetPwd'
+import Faq from './pages/Faq'
 
 
 import ProtectedRoute from './utils/ProtectedRoute'
+var sha1 = require('sha1');
+
 
 function App(props) {
   const [name, setName] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [data, setData] = useState([])
+
 
   // 錯誤訊息陣列
   const [loginErrors, setLoginErrors] = useState([])
@@ -40,8 +52,14 @@ function App(props) {
     const errors = []
 
     // 檢查錯誤
+    if (data.length === 0) {
+      errors.push('email not exist')
+    } else {
+      if (sha1(password) !== data[0].pwd) errors.push('wrong pwd')
+    }
     if (username === '') errors.push('Account is empty')
     if (password === '') errors.push('Password is empty')
+
 
     if (errors.length > 0) {
       setLoginErrors(errors)
@@ -81,9 +99,17 @@ function App(props) {
             <Route path="/shop/:second?/:third?/:fourth?/:page?">
               <ProductList />
             </Route>
+            <Route path="/itemDetail">
+              <ItemDetail />
+            </Route>
+
             <Route path="/course/:second?/:third?/:fourth?/:page?">
               <CourseList />
             </Route>
+            <Route path="/courseDetail">
+              <CourseDetail />
+            </Route>
+
             <Route path="/cart" exact>
               <Cart />
             </Route>
@@ -114,11 +140,30 @@ function App(props) {
                 logoutProcess={logoutProcess}
                 loginErrors={loginErrors}
                 auth={auth}
+                data={data}
+                setData={setData}
               />
             </Route>
 
             <Route path="/welcome">
-              <Welcome
+              <MyWelcome
+                name={name}
+                setName={setName}
+                username={username}
+                setUsername={setUsername}
+                password={password}
+                setPassword={setPassword}
+                loginProcess={loginProcess}
+                logoutProcess={logoutProcess}
+                loginErrors={loginErrors}
+                auth={auth}
+                data={data}
+                setData={setData}
+              />
+            </Route>
+
+            <Route path="/register">
+              <MyRegister
                 name={name}
                 setName={setName}
                 username={username}
@@ -132,12 +177,36 @@ function App(props) {
               />
             </Route>
 
+            <Route path="/forgetpwd">
+              <MyForgetPwd
+                name={name}
+                setName={setName}
+                username={username}
+                setUsername={setUsername}
+                password={password}
+                setPassword={setPassword}
+                loginProcess={loginProcess}
+                logoutProcess={logoutProcess}
+                loginErrors={loginErrors}
+                auth={auth}
+              />
+            </Route>
+
+            <Route path="/faq">
+              <Faq />
+            </Route>
+
             {/* <ProtectedRoute path="/todoapp">
               <TodoApp todos={todos} setTodos={setTodos} isAuth={auth} />
             </ProtectedRoute> */}
             <Route exact path="/membercenter">
               <Membercenter />
             </Route>
+            <Route exact path="/membercenter/coupon">
+              <Coupon />
+            </Route>
+
+
             <Route exact path="/">
               <Home />
             </Route>

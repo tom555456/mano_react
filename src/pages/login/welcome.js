@@ -6,6 +6,8 @@ import { withRouter } from 'react-router-dom'
 
 function MyWelcome(props) {
   const {
+    data,
+    setData,
     name,
     setName,
     username,
@@ -27,7 +29,8 @@ function MyWelcome(props) {
   // logout成功時的callback
   const logoutSuccessCallback = () => {
     alert('登出成功，跳回上一頁')
-    props.history.goBack()
+    localStorage.removeItem('member')
+    props.history.push('/login', { from: '從welcome來的' })
   }
 
   const displayButton = (
@@ -43,13 +46,15 @@ function MyWelcome(props) {
     </div>
   )
 
+  const member = JSON.parse(localStorage.getItem('member'))
+
   const displayForm = (
     <>
       <div className="bg position-relative d-flex">
         <div className="bgLeft">
           <div className="loginInput">
             <div className="loginBlock">
-              <h5>{username}</h5>
+              <h4>{member[0].memberName}</h4>
             </div>
             <div className="loginBlock">
               <h1>Welcome</h1>

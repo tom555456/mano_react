@@ -1,13 +1,32 @@
 import React, { useState, useEffect } from 'react'
 import './course-style.css'
+import { withRouter } from "react-router-dom"
 
-const Course = (props) => {
+  function Course(props) {
+    const[cid ,setCid]=useState("")
+    const {
+      courseImg,
+      courseImg2,
+      courseName,
+      courseDesc,
+      courseQty,
+      coursePrice,    
+      handleClick,
+      getDetail
+
+    } = props
+
+  //  console.log(courseImg2)
   return (
-    <div className="item-card">
-      <div className="item-img">
+    <div className="item-card" 
+    value={props.courseId}  
+    >
+      <div className="item-img"  onClick={() => props.history.push(`/courseDetail?courseId=${props.courseId}`)}>
         <img
           src={`/courses/${props.courseImg}`}
           alt={props.courseImg}
+          value={props.courseId}
+         
           onMouseOver={(e) =>
             (e.currentTarget.src = `/courses/${props.courseImg2}`)
           }
@@ -35,4 +54,4 @@ const Course = (props) => {
   )
 }
 
-export default Course
+export default withRouter(Course)

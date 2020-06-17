@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './login.scss'
-// import MyBanner from '../../components/MyBanner'
-import MyBreadcrumb from '../../components/MyBreadcrumb'
 import { withRouter } from 'react-router-dom'
 
 function MyLogin(props) {
   const {
+    data,
+    setData,
     name,
     setName,
     username,
@@ -17,6 +17,15 @@ function MyLogin(props) {
     loginErrors,
     auth,
   } = props
+
+  async function getData(username) {
+    const response = await fetch(`http://localhost:3002/member/${username}`)
+    const json = await response.json()
+    const items = json.rows
+    setData(items)
+
+    return data
+  }
 
   // 錯誤訊息陣列的呈現
   const displayErrors = loginErrors.length ? (
@@ -33,6 +42,7 @@ function MyLogin(props) {
 
   // login成功時的callback
   const loginSuccessCallback = () => {
+    localStorage.setItem("member", JSON.stringify(data))
     alert('登入成功，跳到Welcome')
     props.history.push('/welcome', { from: '從登入頁來的' })
   }
@@ -41,6 +51,14 @@ function MyLogin(props) {
   const logoutSuccessCallback = () => {
     alert('登出成功，跳回上一頁')
     props.history.goBack()
+  }
+
+  const forgetCallback = () => {
+    props.history.push('/forgetpwd', { from: '從登入頁來的' })
+  }
+
+  const registerCallback = () => {
+    props.history.push('/register', { from: '從登入頁來的' })
   }
 
   const displayButton = auth ? (
@@ -59,10 +77,37 @@ function MyLogin(props) {
       <button
         className="btn btn-primary mb2 loginBlock"
         onClick={() => {
+          getData(username)
           loginProcess(loginSuccessCallback)
         }}
       >
         Login
+      </button>
+    </div>
+  )
+
+  const forgetButton = (
+    <div className="loginBlock">
+      <button
+        className="btn btn-primary mb2 loginBlock forgetBtn"
+        onClick={() => {
+          logoutProcess(forgetCallback)
+        }}
+      >
+        forget password?
+      </button>
+    </div>
+  )
+
+  const registerButton = (
+    <div className="loginBlock">
+      <button
+        className="btn btn-primary mb2 loginBlock registerBtn"
+        onClick={() => {
+          logoutProcess(registerCallback)
+        }}
+      >
+        register
       </button>
     </div>
   )
@@ -90,14 +135,29 @@ function MyLogin(props) {
               <h5>Password</h5>
               <input
                 className="form-control mb2"
-                type="text"
+                type="password"
                 value={password}
                 placeholder="請輸入密碼"
                 onChange={(event) => {
                   setPassword(event.target.value)
                 }}
               />
-              {displayButton}
+              <div className="loginBlock">
+                <button
+                  className="btn btn-primary mb2 loginBlock loginBtn"
+                  onMouseEnter={() => {
+                    console.log(data)
+                    getData(username)
+                  }}
+                  onClick={() => {
+                    loginProcess(loginSuccessCallback)
+                  }}
+                >
+                  Login
+                </button>
+              </div>
+              {registerButton}
+              {forgetButton}
               {displayErrors}
             </div>
           </div>
