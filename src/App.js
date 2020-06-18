@@ -13,11 +13,12 @@ import ItemDetail from './pages/ItemDetail/ItemDetail'
 import CourseList from './pages/CourseList/CourseList'
 import CourseDetail from './pages/CourseDetail/CourseDetail'
 
-import CartComfirm from "./pages/CartComfirm"
-import CartComfirmChange from "./pages/CartComfirmChange"
-import CartComplete from "./pages/CartComplete"
-import CartPayment from "./pages/CartPayment"
-import Cart from './pages/Cart'
+import CartComfirm from "./pages/Cart/CartComfirm"
+import CartComfirmChange from "./pages/Cart/CartComfirmChange"
+import CartComplete from "./pages/Cart/CartComplete"
+import CartPayment from "./pages/Cart/CartPayment"
+import Cart from './pages/Cart/Cart'
+
 import Membercenter from './pages/Membercenter'
 import Coupon from './pages/Coupon'
 
@@ -39,27 +40,30 @@ function App(props) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [data, setData] = useState([])
-
+  const [confirmpassword, setConfirmpassword] = useState('')
 
   // 錯誤訊息陣列
   const [loginErrors, setLoginErrors] = useState([])
 
-  // 會員是否登入狀態(認証狀態)
-  const [auth, setAuth] = useState(false)
+
 
   // 處理會員登入
   const loginProcess = (loginSuccessCallback) => {
     const errors = []
 
     // 檢查錯誤
-    if (data.length === 0) {
-      errors.push('email not exist')
-    } else {
-      if (sha1(password) !== data[0].pwd) errors.push('wrong pwd')
-    }
-    if (username === '') errors.push('Account is empty')
-    if (password === '') errors.push('Password is empty')
 
+    if (username === '') {
+      errors.push('Account is empty')
+    } else {
+      if (data.length === 0) {
+        errors.push('E-mail not exist')
+      } else {
+        if (sha1(password) !== data[0].pwd) errors.push('Wrong password')
+      }
+    }
+
+    if (password === '') errors.push('Password is empty')
 
     if (errors.length > 0) {
       setLoginErrors(errors)
@@ -69,7 +73,6 @@ function App(props) {
     // 清空錯誤訊息陣列 + 登入
     // 清空錯誤訊息陣列為必要
     setLoginErrors([])
-    setAuth(true)
 
     // 執行成功的callback(來自MemberLogin)
     loginSuccessCallback()
@@ -81,16 +84,44 @@ function App(props) {
     setPassword('')
 
     // 認証改為false
-    setAuth(false)
 
     // 執行成功的callback(來自MemberLogin)
     logoutSuccessCallback()
   }
 
+  // 處理會員註冊
+  const registerProcess = (registerSuccessCallback) => {
+    const errors = []
+    var matches = username.match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)
+    if (name === '') {
+      errors.push('Name is empty')
+    }
+    if (username === '') {
+      errors.push('Account is empty')
+    } else {
+      if (data.length !== 0) {
+        errors.push('E-mail is exist')
+      } else if (matches === null)
+        errors.push("E-mail doesn't match the pattern")
+    }
+
+    // if (password === '') errors.push('Password is empty')
+
+    // 檢查錯誤
+    if (errors.length > 0) {
+      setLoginErrors(errors)
+      return
+    }
+    // 清空錯誤訊息陣列 + 登入
+    // 清空錯誤訊息陣列為必要
+    setLoginErrors([])
+    registerSuccessCallback()
+  }
+
   return (
     <Router>
       <>
-        <MyNavbar auth={auth} name={name} />
+        <MyNavbar />
         <MainContent>
           <Switch>
             <Route path="/about">
@@ -130,16 +161,12 @@ function App(props) {
             <Route path="/searchtest"></Route>
             <Route path="/login">
               <Login
-                name={name}
-                setName={setName}
                 username={username}
                 setUsername={setUsername}
-                password={password}
                 setPassword={setPassword}
                 loginProcess={loginProcess}
                 logoutProcess={logoutProcess}
                 loginErrors={loginErrors}
-                auth={auth}
                 data={data}
                 setData={setData}
               />
@@ -147,54 +174,32 @@ function App(props) {
 
             <Route path="/welcome">
               <MyWelcome
-                name={name}
-                setName={setName}
-                username={username}
-                setUsername={setUsername}
-                password={password}
-                setPassword={setPassword}
-                loginProcess={loginProcess}
                 logoutProcess={logoutProcess}
-                loginErrors={loginErrors}
-                auth={auth}
-                data={data}
-                setData={setData}
               />
             </Route>
 
             <Route path="/register">
               <MyRegister
-                name={name}
                 setName={setName}
                 username={username}
                 setUsername={setUsername}
                 password={password}
                 setPassword={setPassword}
-                loginProcess={loginProcess}
-                logoutProcess={logoutProcess}
                 loginErrors={loginErrors}
-                auth={auth}
+                setConfirmpassword={setConfirmpassword}
+                registerProcess={registerProcess}
+                data={data}
+                setData={setData}
               />
             </Route>
 
             <Route path="/forgetpwd">
               <MyForgetPwd
-                name={name}
-                setName={setName}
                 username={username}
                 setUsername={setUsername}
-                password={password}
-                setPassword={setPassword}
-                loginProcess={loginProcess}
-                logoutProcess={logoutProcess}
-                loginErrors={loginErrors}
-                auth={auth}
               />
             </Route>
 
-            <Route path="/faq">
-              <Faq />
-            </Route>
 
             {/* <ProtectedRoute path="/todoapp">
               <TodoApp todos={todos} setTodos={setTodos} isAuth={auth} />
@@ -205,6 +210,11 @@ function App(props) {
             <Route exact path="/membercenter/coupon">
               <Coupon />
             </Route>
+
+            <Route exact path="/faq">
+              <Faq />
+            </Route>
+
 
 
             <Route exact path="/">

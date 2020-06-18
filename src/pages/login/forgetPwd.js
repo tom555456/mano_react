@@ -4,15 +4,8 @@ import { withRouter } from 'react-router-dom'
 
 function MyForgetPwd(props) {
   const {
-    name,
-    setName,
     username,
     setUsername,
-    password,
-    setPassword,
-    loginProcess,
-    logoutProcess,
-    loginErrors,
     auth,
   } = props
 

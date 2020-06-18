@@ -10,11 +10,16 @@ function Cart(props) {
   const [shipTotal, setShipTotal] = useState(0)
   const [shopTotal, setShopTotal] = useState(0)
   const [courseTotal, setCourseTotal] = useState(0)
-  const [discount, setDiscount] = useState("")
-  const [member, setMember] = useState("")
+  const [shopDiscount, setShopDiscount] = useState(0)
+  const [courseDiscount, setCourseDiscount] = useState(0)
 
-  async function getData() {
-    const request = new Request("http://localhost:3002/membercenter/list", {
+  const [shopCoupon, setShopCoupon] = useState([])
+  const [courseCoupon, setCourseCoupon] = useState([])
+  const [member, setMember] = useState([])
+
+
+  async function getShopCouponData(memberId) {
+    const request = new Request(`http://localhost:3002/order/shopCoupon/${memberId}`, {
       method: "GET",
       headers: new Headers({
         Accept: "application/json",
@@ -24,15 +29,33 @@ function Cart(props) {
 
     const response = await fetch(request)
     const data = await response.json()
-    console.log("顯示的資料", data)
-    // 設定資料
-    setMember(data[0])
+    setShopCoupon(data)
   }
-  
+
+  async function getCourseCouponData(memberId) {
+    const request = new Request(`http://localhost:3002/order/courseCoupon/${memberId}`, {
+      method: "GET",
+      headers: new Headers({
+        Accept: "application/json",
+        "Content-Type": "appliaction/json",
+      }),
+    })
+
+    const response = await fetch(request)
+    const data = await response.json()
+    setCourseCoupon(data)
+  }
+
+
 
   useEffect(() => {
 
-    getData()
+    const member = JSON.parse(localStorage.getItem('member'))
+    const memberId = member[0].memberId
+
+    getCourseCouponData(memberId)
+    getShopCouponData(memberId)
+
     const finalCart = localStorage.getItem('finalCart')
     const finalCourseCart = localStorage.getItem('finalCourseCart')
 
@@ -47,6 +70,7 @@ function Cart(props) {
     setShopTotal(Number(shopTotal))
     setCourseTotal(Number(courseTotal))
 
+    setMember(member)
   }, [])
 
 
@@ -96,26 +120,43 @@ function Cart(props) {
                 <Row>
                   <Col xs={11} className="d-flex align-items-center justify-content-between m-4">
                     <p><MdLocalShipping className="font-48 mr-1"/>寄送資訊：宅配</p>
-                    <p>{member.memberName}</p>
-                    <p>{member.phone}</p>
-                    <p>{member.shipAddress}</p>
+                    <p>{member[0].memberName}</p>
+                    <p>{member[0].phone}</p>
+                    <p>{member[0].shipAddress}</p>
                     <Button className="mt-2 mb-2" size="sm" variant="outline-primary" onClick={() => props.history.push("/cart/comfirm/change")}>變更</Button>
                     <p>運費：${shipTotal}</p>
                   </Col>
                 </Row>
            
             <Row className="d-flex">
-                <Col xs={5} className="item-content-left m-4 pt-4">
-                  <div className="form-group w-25 ml-5">
-                      <label htmlFor="example3">折扣碼：</label>
-                      <input type="text" id="example3" className="form-control form-control-sm"
-                              onChange={(event) => setDiscount(event.target.value)}/>
-                  </div>
+                <Col xs={7} className="item-content-left m-4 pt-4">
+                {shopCoupon.length > 0 ? (
+                  <Table bordered hover>
+                    <thead>
+                      <tr>
+                        <th>折價券名稱</th>
+                        <th>折扣內容</th>
+                        <th>有效期限</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {shopCoupon.map((value, index) => {
+                        return(
+                          <tr onClick={() => setShopDiscount(shopTotal - parseInt(shopTotal * Number(value.discountMethod)))}>
+                        <td>{value.discountName}</td>
+                        <td>{value.discountMethod}</td>
+                        <td>{value.discountPeriod}</td>
+                      </tr>
+                      )})}
+                    </tbody>
+                  </Table>) : (
+                    <p>目前沒有可使用的優惠</p>
+                  )}
                 </Col>
-                <Col xs={6} className="d-flex fd-col text-right p-5">
+                <Col xs={4} className="d-flex fd-col text-right p-5">
                     <p className="">商品總金額：${shopTotal}</p>
-                    <p className="">{(discount !== "") ? `折扣金額：$` : ""}</p>
-                    <p className="">折扣後總金額：${shopTotal}</p>
+                    {(shopDiscount !== 0) ? (<p>折扣金額：${shopDiscount} </p>) : (<p>折扣金額：$0 </p>)}
+                    <p className="">折扣後總金額：${shopTotal - shopDiscount}</p>
                 </Col>
             </Row>  
             </>
@@ -159,17 +200,34 @@ function Cart(props) {
             ))}
            
             <Row className="d-flex">
-                <Col xs={5} className="item-content-left m-4 pt-4">
-                  <div className="form-group w-25 ml-5">
-                      <label htmlFor="example3">折扣碼：</label>
-                      <input type="text" id="example3" className="form-control form-control-sm"
-                              onChange={(event) => setDiscount(event.target.value)}/>
-                  </div>
+                <Col xs={7} className="item-content-left m-4 pt-4">
+                {courseCoupon.length > 0 ? (
+                  <Table bordered hover>
+                  <thead>
+                    <tr>
+                      <th>折價券名稱</th>
+                      <th>折扣內容</th>
+                      <th>有效期限</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {courseCoupon.map((value, index) => {
+                      return(
+                    <tr onClick={() => setCourseDiscount(courseTotal - parseInt(courseTotal * Number(value.discountMethod)))}>
+                      <td>{value.discountName}</td>
+                      <td>{value.discountMethod}</td>
+                      <td>{value.discountPeriod}</td>
+                    </tr>
+                    )})}
+                  </tbody>
+                </Table>) : (
+                  <p>目前沒有可使用的優惠</p>
+                )}
                 </Col>
-                <Col xs={6} className="d-flex fd-col text-right p-5">
-                    <p className="">商品總金額：${courseTotal}</p>
-                    <p className="">{(discount !== "") ? `折扣金額：$` : ""}</p>
-                    <p className="">折扣後總金額：${courseTotal}</p>
+                <Col xs={4} className="d-flex fd-col text-right p-5">
+                    <p className="">課程總金額：${courseTotal}</p>
+                    {(courseDiscount !== 0) ? (<p>折扣金額：${courseDiscount} </p>) : (<p>折扣金額：$0 </p>)}
+                    <p className="">折扣後總金額：${courseTotal - courseDiscount}</p>
                 </Col>
             </Row>  
             </>
@@ -177,14 +235,14 @@ function Cart(props) {
 
           <Row className="text-right mr-5">
             <Col>
-              <p>訂單總金額：${courseTotal + shopTotal}</p>           
+              <p>訂單總金額：${courseTotal + shopTotal - courseDiscount - shopDiscount}</p>           
             </Col>
           </Row>
 
         <Row className="d-flex justify-content-center pt-3 pb-3">
             <Button className="mt-2 mb-2" variant="outline-primary" onClick={() => {
                   localStorage.setItem("shipInfo", JSON.stringify(member))
-                  localStorage.setItem("total", courseTotal + shopTotal)
+                  localStorage.setItem("total", courseTotal + shopTotal - courseDiscount - shopDiscount)
                   props.history.push("/cart/payment")
               }}>確認付款</Button>
         </Row>

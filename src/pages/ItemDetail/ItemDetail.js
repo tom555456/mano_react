@@ -202,6 +202,7 @@ class ItemDetail extends Component {
                     name: this.state.single.itemName,
                     amount: 1,
                     price: this.state.single.itemPrice,
+                    shippingId: this.state.single.shippingId
                   })
                 }}
               >

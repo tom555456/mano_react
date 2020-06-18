@@ -260,6 +260,7 @@ class Items extends Component {
                   name: item.itemName,
                   amount: 1,
                   price: item.itemPrice,
+                  shippingId: item.shippingId
                 })
               }}
             />

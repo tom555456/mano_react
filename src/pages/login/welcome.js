@@ -6,18 +6,7 @@ import { withRouter } from 'react-router-dom'
 
 function MyWelcome(props) {
   const {
-    data,
-    setData,
-    name,
-    setName,
-    username,
-    setUsername,
-    password,
-    setPassword,
-    loginProcess,
-    logoutProcess,
-    loginErrors,
-    auth,
+    logoutProcess
   } = props
 
   //continue shop的callback
@@ -46,7 +35,7 @@ function MyWelcome(props) {
     </div>
   )
 
-  const member = JSON.parse(localStorage.getItem('member'))
+  const member = JSON.parse(localStorage.getItem('member')) || [{memberName: ""}]
 
   const displayForm = (
     <>
@@ -61,7 +50,7 @@ function MyWelcome(props) {
               <button
                 className="btn btn-primary mb2 loginBlock continueShopBtn"
                 onClick={() => {
-                  loginProcess(continueShopCallback)
+                  continueShopCallback()
                 }}
               >
                 Continue shop

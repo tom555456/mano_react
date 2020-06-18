@@ -10,6 +10,7 @@ function CartPayment (props) {
     const [orderList, setOrderList] = useState("")
     const [orderPayment, setOrderPayment] = useState("")
     const [finalCart, setFinalCart] = useState([])
+    const [finalCourseCart, setFinalCourseCart] = useState([])
     const [total, setTotal] = useState(0)
     const [discount, setDiscount] = useState("")
     const [shipInfo, setShipInfo] = useState("")
@@ -20,21 +21,23 @@ function CartPayment (props) {
     useEffect(() => {
 
         const finalCart = JSON.parse(localStorage.getItem('finalCart'))
+        const finalCourseCart = JSON.parse(localStorage.getItem('finalCourseCart'))
+
         const total = localStorage.getItem('total')
         const shipInfo = JSON.parse(localStorage.getItem('shipInfo'))
-        const note = localStorage.getItem('note')
+        const note = localStorage.getItem('note') || ""
 
         setFinalCart(finalCart)
+        setFinalCourseCart(finalCourseCart)
         setTotal(Number(total))
-        setDiscount(discount)
         setShipInfo(shipInfo)
         setNote(note)
 
         setOrder({
             ...order,
-            username: shipInfo.memberName,
-            orderPhone: Number(shipInfo.phone),
-            shipAddress: shipInfo.shipAddress,
+            username: shipInfo[0].memberName,
+            orderPhone: Number(shipInfo[0].phone),
+            shipAddress: shipInfo[0].shipAddress,
             totalPrice: Number(total),
             paymentStatus: "已付款",
             shipStatus: "未出貨",
@@ -80,23 +83,6 @@ function CartPayment (props) {
     
       }
 
-    // useEffect(() => {
-
-    //     for(let i=0; i < finalCart.length; i++ ) {
-    //         setOrderList({
-    //             ...orderList,
-    //             orderId: insertId,
-    //             itemId: finalCart[i].id,
-    //             checkPrice: finalCart[i].price,
-    //             checkQuantity: finalCart[i].amount,
-    //             checkSubtotal: finalCart[i].price * finalCart[i].amount
-    //         })
-    //         const newOrderList = orderList
-    //         insertOrderListToSever(newOrderList);
-    //     }
-
-          
-    // },[order])
 
 
 
@@ -118,30 +104,46 @@ function CartPayment (props) {
         console.log(data)
 
         const id = data.results.insertId
-        setInsertId(id)
+        await setInsertId(id)
       }
 
       
-      const handleInsertSave = (orderPayment) => {
+      const handleInsertData = () => {
 
-        const id = insertOrderToSever(order);
         setOrderPayment({
             ...orderPayment,
-            orderId: id
+            orderId: insertId
         })
-        insertOrderPaymentToSever(orderPayment);
 
-        // const newOrder = order
-        // insertOrderToSever(newOrder);
-        // setOrder(newOrder)
+        let newOrderList = []
 
-        // const newOrderPayment = orderPayment
-        // insertOrderPaymentToSever(newOrderPayment)
-        // setOrderPayment(newOrderPayment)
-      }
+          for(let i=0; i < finalCart.length; i++ ) {
+            newOrderList.push({
+                orderId: insertId,
+                itemId: finalCart[i].id,
+                checkPrice: finalCart[i].price,
+                checkQuantity: finalCart[i].amount,
+                checkSubtotal: finalCart[i].price * finalCart[i].amount
+            })
+          }
+
+          for(let i=0; i < finalCourseCart.length; i++ ) {
+            newOrderList.push({
+                ...orderList,
+                orderId: insertId,
+                courseId: finalCourseCart[i].id,
+                checkPrice: finalCourseCart[i].price,
+                checkQuantity: finalCourseCart[i].amount,
+                checkSubtotal: finalCourseCart[i].price * finalCourseCart[i].amount
+            })
+          }
+
+          setOrderList(newOrderList)
+    }
     
     return(
         <>
+        <Container className="w-75">
             <div className="text-center">
                 <h3>付款資訊</h3>
             </div>
@@ -192,15 +194,38 @@ function CartPayment (props) {
             </Fragment>
             <div className="d-flex justify-content-center pt-3 pb-3">
                 <Button className="mt-2 mb-2" variant="outline-primary"
-                    onMouseEnter={()=>{
-                      
-                    }}        
-                    onClick={() => {
-                        handleInsertSave();
-                        props.history.push("/cart/complete");
-                    }}>前往付款</Button>
-            </div>
+                    onMouseDown={async () => {
+                      //console.log("down")
+                      await insertOrderToSever(order)
+                    }}
+                    onMouseUp={async () => {
+                      //console.log("up")
+                      await handleInsertData()
 
+                    }}        
+                    onClick={async () => {
+                      //console.log("click")
+                      insertOrderPaymentToSever(orderPayment)
+                      //console.log(orderList)
+                      for(let i = 0; i < orderList.length; i++) {
+                        await insertOrderListToSever(orderList[i])
+                      }
+                      props.history.push("/cart/complete");
+
+                      localStorage.removeItem("shipTotal")
+                      localStorage.removeItem("finalCourseCart")
+                      localStorage.removeItem("shopTotal")
+                      localStorage.removeItem("total")
+                      localStorage.removeItem("shipInfo")
+                      localStorage.removeItem("coursecart")
+                      localStorage.removeItem("cart")
+                      localStorage.removeItem("finalCart")
+                      localStorage.removeItem("courseTotal")
+                      
+                    }}
+                    >前往付款</Button>
+            </div>  
+        </Container>
         </>
     )
     

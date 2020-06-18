@@ -4,7 +4,7 @@ import { Link, NavLink, withRouter } from 'react-router-dom'
 import { MdShoppingCart, MdKeyboardArrowRight } from 'react-icons/md'
 
 function MyNavbar(props) {
-  const { auth } = props
+
 
   const loginButton = (
     <>
@@ -18,13 +18,11 @@ function MyNavbar(props) {
       </Button>
     </>
   )
-  const member = JSON.parse(localStorage.getItem('member')) || [
-    { memberName: '' },
-  ]
+  const member = JSON.parse(localStorage.getItem('member')) || [{ memberName: '' }]
 
   const logoutButton = (
     <>
-      <span style={{ color: '#ffffff' }}>{member[0].memberName}, 您好</span>
+      <span style={{ color: '#ffffff' }} className="mr-3">{member[0].memberName} , 您好</span>
       <Button
         variant="outline-light"
         onClick={() => {
@@ -36,7 +34,7 @@ function MyNavbar(props) {
     </>
   )
 
-  const displayButton = auth ? logoutButton : loginButton
+  const displayButton = member[0].memberName !== '' ? logoutButton : loginButton
 
   const nav = (
     <>
@@ -49,9 +47,17 @@ function MyNavbar(props) {
           <Nav.Link as={NavLink} to="/about">
             關於我們
           </Nav.Link>
-          <Nav.Link as={NavLink} to="/login">
-            會員登入
-          </Nav.Link>
+
+          {member[0].memberName !== '' ? (
+            <Nav.Link as={NavLink} to="/membercenter">
+              Member center
+            </Nav.Link>
+          ) : (
+            <Nav.Link as={NavLink} to="/login">
+              會員登入
+            </Nav.Link>
+          )}
+
           <Nav.Link
             as={NavLink}
             to="/shop"
@@ -62,12 +68,9 @@ function MyNavbar(props) {
           <Nav.Link
             as={NavLink}
             to="/course"
-            onClick={() => localStorage.setItem('page', 2)}
+            onClick={() => localStorage.setItem('page', 1)}
           >
             課程列表
-          </Nav.Link>
-          <Nav.Link as={NavLink} to="/membercenter">
-            Member center
           </Nav.Link>
           <Nav.Link as={NavLink} to="/cart">
             購物車

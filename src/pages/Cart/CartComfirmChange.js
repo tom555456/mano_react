@@ -1,34 +1,42 @@
-import React, { Component, Fragment, useEffect, useState } from "react";
-import { Table, Container, Row, Col, ListGroup, Image, Button } from "react-bootstrap"
+import React, { Fragment, useEffect, useState } from "react";
+import { Container, Button } from "react-bootstrap"
 
 import { withRouter } from "react-router-dom";
 
 
 
 function CartComfirmChange(props) {
-    const [member, setMember] = useState("")
+
+    const [member, setMember] = useState([])
     const [note, setNote] = useState("")
     const [isSame, setIsSame] = useState(true)
 
-    async function getData() {
-        const request = new Request("http://localhost:3002/membercenter/list", {
-          method: "GET",
-          headers: new Headers({
-            Accept: "application/json",
-            "Content-Type": "appliaction/json",
-          }),
-        })
-    
-        const response = await fetch(request)
-        const data = await response.json()
-        console.log("顯示的資料", data)
-        // 設定資料
-        setMember(data[0])
-      }
+
+    async function getData(id) {
+      const request = new Request(`http://localhost:3002/order/member/${id}`, {
+        method: "GET",
+        headers: new Headers({
+          Accept: "application/json",
+          "Content-Type": "appliaction/json",
+        }),
+      })
+  
+      const response = await fetch(request)
+      const data = await response.json()
+
+      setMember(data[0])
+    }
+
       
       useEffect(() => {
-        getData()
+
+        const member = JSON.parse(localStorage.getItem('member'))
+        const id = member[0].id
+
+        getData(id)
+
       }, [])
+
     
       async function updateMemberToSever(item, successCallback = () => {}) {
         const request = new Request("http://localhost:3002/membercenter/edit", {
@@ -52,13 +60,11 @@ function CartComfirmChange(props) {
         updateMemberToSever(newMember)
         setMember(newMember)
       }
-    
-
-
-
+  
     
     return(
         <>   
+        <Container className="w-75">
             <div className="text-center">
                 <h3>配送資訊</h3>
             </div>
@@ -107,15 +113,19 @@ function CartComfirmChange(props) {
 
             </Fragment>
             <div className="d-flex justify-content-center pt-3 pb-3">
-                <Button className="mt-2 mb-2" variant="outline-primary" 
+                <Button className="mt-2 mb-2" variant="outline-primary"
                         onClick={() => {
                             handleEditedSave(member);
-                            localStorage.setItem("shipInfo", JSON.stringify(member))
+                            const memberArray = []
+                            memberArray.push(member)
+                            console.log(memberArray)
+                            localStorage.setItem("member", JSON.stringify(memberArray))
+                            localStorage.setItem("shipInfo", JSON.stringify(memberArray))
                             localStorage.setItem("note", note)
                             props.history.push("/cart/comfirm")
                         }}>確認配送資訊</Button>
             </div>
-            
+            </Container>
         </>
     )
     

@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import { Table, Container, Row, Col, ListGroup, Image, Button } from "react-bootstrap"
+import { Table, Container, Row, Col, Image, Button } from "react-bootstrap"
 import { withRouter, Link } from "react-router-dom";
 import { GrFormSubtract, GrFormAdd } from "react-icons/gr";
 import { FaUndo } from "react-icons/fa"
 import { BsFillPlayFill } from "react-icons/bs"
 
-function Cart(props) {
+function Cart (props) {
+
   const [mycart, setMycart] = useState([])
   const [mycartDisplay, setMycartDisplay] = useState([])
 
   const [myCourseCart, setMyCourseCart] = useState([])
   const [myCourseCartDisplay, setMyCourseCartDisplay] = useState([])
+  const [member, setMember] = useState([])
 
 
   useEffect(() => {
@@ -18,12 +20,11 @@ function Cart(props) {
     const cartJson = JSON.parse(initCart)
     const initCourseCart = localStorage.getItem('coursecart') || '[]'
     const courseCartJson = JSON.parse(initCourseCart)
-
-
-    console.log(cartJson)
+    const member = JSON.parse(localStorage.getItem('member')) || [{ memberName: '' }]
 
     setMycart(cartJson)
     setMyCourseCart(courseCartJson)
+    setMember(member)
 
   }, [])
 
@@ -324,7 +325,7 @@ function Cart(props) {
                       </tr>
                     </thead>
                   </Table>
-              <h6>商品總金額</h6>
+              <h6>課程總金額</h6>
               <h5>小計  ${sum(myCourseCartDisplay)}</h5>
               <hr className="mt-5" />
               <h5>總金額  ${sum(myCourseCartDisplay)}</h5>
@@ -341,13 +342,18 @@ function Cart(props) {
        {mycartDisplay.length > 0 || myCourseCartDisplay.length > 0 ? (
           <Container>
             <Row className="d-flex justify-content-center pt-3 pb-3">
-                <Button className="mt-2 mb-2" variant="outline-primary" onClick={() => {
+                <Button className="mt-2 mb-2" variant="outline-primary" 
+                    onClick={() => {
+                      if(member[0].memberName === "") {
+                        props.history.push("/login")
+                      }else {
                         localStorage.setItem("finalCart", JSON.stringify(mycartDisplay))
                         localStorage.setItem("finalCourseCart", JSON.stringify(myCourseCartDisplay))
                         localStorage.setItem("shipTotal", sumShipping(mycartDisplay))
                         localStorage.setItem("shopTotal", sum(mycartDisplay) + sumShipping(mycartDisplay))
                         localStorage.setItem("courseTotal", sum(myCourseCartDisplay))
                         props.history.push("/cart/comfirm")
+                      }
                   }}>去買單</Button>
               </Row> 
           </Container>

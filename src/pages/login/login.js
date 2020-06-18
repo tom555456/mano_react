@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import './login.scss'
 import { withRouter } from 'react-router-dom'
+import { error } from 'jquery'
+
+var sha1 = require('sha1')
 
 function MyLogin(props) {
   const {
     data,
     setData,
-    name,
-    setName,
     username,
     setUsername,
-    password,
     setPassword,
     loginProcess,
     logoutProcess,
     loginErrors,
-    auth,
   } = props
 
   async function getData(username) {
@@ -42,7 +41,7 @@ function MyLogin(props) {
 
   // login成功時的callback
   const loginSuccessCallback = () => {
-    localStorage.setItem("member", JSON.stringify(data))
+    localStorage.setItem('member', JSON.stringify(data))
     alert('登入成功，跳到Welcome')
     props.history.push('/welcome', { from: '從登入頁來的' })
   }
@@ -60,31 +59,6 @@ function MyLogin(props) {
   const registerCallback = () => {
     props.history.push('/register', { from: '從登入頁來的' })
   }
-
-  const displayButton = auth ? (
-    <div className="loginBlock">
-      <button
-        className="btn btn-primary mb2 loginBlock"
-        onClick={() => {
-          logoutProcess(logoutSuccessCallback)
-        }}
-      >
-        Logout
-      </button>
-    </div>
-  ) : (
-    <div className="loginBlock">
-      <button
-        className="btn btn-primary mb2 loginBlock"
-        onClick={() => {
-          getData(username)
-          loginProcess(loginSuccessCallback)
-        }}
-      >
-        Login
-      </button>
-    </div>
-  )
 
   const forgetButton = (
     <div className="loginBlock">
@@ -112,58 +86,61 @@ function MyLogin(props) {
     </div>
   )
 
-  const displayForm = auth ? (
-    ''
-  ) : (
+  const displayForm =  (
+    
     <>
-      <div className="bg position-relative d-flex">
-        <div className="bgLeft">
-          <div className="loginInput">
-            <div className="loginBlock">
-              <h5>Account</h5>
-              <input
-                className="form-control mb2"
-                type="text"
-                value={username}
-                placeholder="請輸入帳號"
-                onChange={(event) => {
-                  setUsername(event.target.value)
-                }}
-              />
-            </div>
-            <div className="loginBlock">
-              <h5>Password</h5>
-              <input
-                className="form-control mb2"
-                type="password"
-                value={password}
-                placeholder="請輸入密碼"
-                onChange={(event) => {
-                  setPassword(event.target.value)
-                }}
-              />
+      <form action="" method="">
+        <div className="bg position-relative d-flex">
+          <div className="bgLeft">
+            <div className="loginInput">
               <div className="loginBlock">
-                <button
-                  className="btn btn-primary mb2 loginBlock loginBtn"
-                  onMouseEnter={() => {
-                    console.log(data)
-                    getData(username)
+                <h5>Account</h5>
+                <input
+                  className="form-control mb2"
+                  type="text"
+                  required="required"
+                  // value={username}
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                  placeholder="請輸入帳號"
+                  onChange={(event) => {
+                    setUsername(event.target.value)
                   }}
-                  onClick={() => {
-                    loginProcess(loginSuccessCallback)
-                  }}
-                >
-                  Login
-                </button>
+                />
               </div>
-              {registerButton}
-              {forgetButton}
-              {displayErrors}
+              <div className="loginBlock">
+                <h5>Password</h5>
+                <input
+                  className="form-control mb2"
+                  type="password"
+                  required="required"
+                  placeholder="請輸入密碼"
+                  onChange={(event) => {
+                    setPassword(event.target.value)
+                  }}
+                />
+                <div className="loginBlock">
+                  <input
+                    value="login"
+                    type="submit"
+                    className="btn btn-primary mb2 loginBlock loginBtn"
+                    onMouseEnter={() => {
+                      console.log(data)
+                      getData(username)
+                    }}
+                    onClick={() => {
+                      loginProcess(loginSuccessCallback)
+                    }}
+                  />
+                </div>
+                {registerButton}
+                {forgetButton}
+                {displayErrors}
+              </div>
             </div>
           </div>
+          <div className="bgRight-login"></div>
         </div>
-        <div className="bgRight-login"></div>
-      </div>
+      </form>
     </>
   )
 
