@@ -33,12 +33,12 @@ class Courses extends Component {
     // 開啟載入指示
     //setDataLoading(true)
 
-    const currentCart = JSON.parse(localStorage.getItem('cart')) || []
+    const currentCart = JSON.parse(localStorage.getItem('coursecart')) || []
 
     // console.log('currentCart', currentCart)
 
     const newCart = [...currentCart, value]
-    localStorage.setItem('cart', JSON.stringify(newCart))
+    localStorage.setItem('coursecart', JSON.stringify(newCart))
 
     // console.log('newCart', newCart)
     // 設定資料

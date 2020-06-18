@@ -1,19 +1,29 @@
 import React, { useState, useEffect } from 'react'
 import { Table, Container, Row, Col, ListGroup, Image, Button } from "react-bootstrap"
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { GrFormSubtract, GrFormAdd } from "react-icons/gr";
+import { FaUndo } from "react-icons/fa"
+import { BsFillPlayFill } from "react-icons/bs"
 
 function Cart(props) {
   const [mycart, setMycart] = useState([])
   const [mycartDisplay, setMycartDisplay] = useState([])
 
+  const [myCourseCart, setMyCourseCart] = useState([])
+  const [myCourseCartDisplay, setMyCourseCartDisplay] = useState([])
+
+
   useEffect(() => {
     const initCart = localStorage.getItem('cart') || '[]'
     const cartJson = JSON.parse(initCart)
+    const initCourseCart = localStorage.getItem('coursecart') || '[]'
+    const courseCartJson = JSON.parse(initCourseCart)
+
 
     console.log(cartJson)
 
     setMycart(cartJson)
+    setMyCourseCart(courseCartJson)
 
   }, [])
 
@@ -38,7 +48,30 @@ function Cart(props) {
 
     console.log('newMycartDisplay', newMycartDisplay)
     setMycartDisplay(newMycartDisplay)
+
   }, [mycart])
+
+  useEffect(() => {
+    let newMyCourseCartDisplay = []
+
+    for (let i = 0; i < myCourseCart.length; i++) {
+      const index = newMyCourseCartDisplay.findIndex(
+        (value) => value.id === myCourseCart[i].id
+      )
+
+      if (index !== -1) {
+        newMyCourseCartDisplay[index].amount += myCourseCart[i].amount
+      } else {
+        const newCourseItem = { ...myCourseCart[i] }
+        newMyCourseCartDisplay = [...newMyCourseCartDisplay, newCourseItem]
+      }
+    }
+
+    setMyCourseCartDisplay(newMyCourseCartDisplay)
+
+  },[myCourseCart])
+
+
 
   function updateCartToLocalStorage (value) {
     const currentCart = JSON.parse(localStorage.getItem('cart')) || []
@@ -49,6 +82,16 @@ function Cart(props) {
     setMycart(newCart);
   }
 
+  function updateCourseCartToLocalStorage (value) {
+    const currentCart = JSON.parse(localStorage.getItem('coursecart')) || []
+
+    const newCart = [...currentCart, value]
+    localStorage.setItem('coursecart', JSON.stringify(newCart))
+
+    setMyCourseCart(newCart);
+  }
+
+
   function substarctCartToLocalStorage (value) {
     
     let foundObj = mycart.find(obj => obj.name === value.name)
@@ -58,6 +101,17 @@ function Cart(props) {
 
     setMycart(newCart);
   }
+
+  function substarctCourseCartToLocalStorage (value) {
+    
+    let foundObj = myCourseCart.find(obj => obj.name === value.name)
+    let filtered = myCourseCart.filter(el => el != foundObj);
+    const newCart = filtered
+    localStorage.setItem('coursecart', JSON.stringify(newCart))
+
+    setMyCourseCart(newCart);
+  }
+
 
 
   function sumShipping(items) {
@@ -116,10 +170,25 @@ function Cart(props) {
 
   return (
     <> 
+    <div className="w-75 d-flex justify-content-end">
+        <Link to="/shop" onClick={() => localStorage.setItem("page",1)}>繼續購物 <FaUndo/></Link>
+    </div>
     {mycartDisplay.length > 0 ? (
     <Container>
+    <h5><BsFillPlayFill />購買的商品</h5>
       <Row>
           <Col sm={9} className="d-flex fd-col">
+          <Table responsive>
+                    <thead>
+                      <tr>
+                        <th className="w-50">商品</th>
+                        <th></th>
+                        <th>價格</th>
+                        <th>數量</th>
+                        <th>小計</th>
+                      </tr>
+                    </thead>
+                    </Table>
           {mycartDisplay.map(value => ( 
                   <Container className="mt-0 m-3">
                       <Row>
@@ -167,7 +236,15 @@ function Cart(props) {
                   </Container>
             ))}
             </Col>
+
             <Col sm={3} className="d-flex fd-col p-3 pl-5">
+                  <Table>
+                    <thead>
+                      <tr>
+                        <th>總計</th>
+                      </tr>
+                    </thead>
+                  </Table>
               <h6>商品總金額</h6>
               <h5>小計  ${sum(mycartDisplay)}</h5>
               <h5>運費  ${sumShipping(mycartDisplay)}</h5>
@@ -175,25 +252,109 @@ function Cart(props) {
               <h5>總金額  ${sum(mycartDisplay) + sumShipping(mycartDisplay)}</h5>
             </Col>
           </Row>
-          <Row className="d-flex justify-content-center pt-3 pb-3">
-            <Button className="mt-2 mb-2" variant="outline-primary" onClick={() => {
-                    localStorage.setItem("finalCart", JSON.stringify(mycartDisplay))
-                    localStorage.setItem("shipTotal", sumShipping(mycartDisplay))
-                    localStorage.setItem("shopTotal", sum(mycartDisplay))
-                    localStorage.setItem("total", sum(mycartDisplay) + sumShipping(mycartDisplay))
-                    props.history.push("/cart/comfirm")
-              }}>去買單</Button>
-          </Row> 
-        </Container> ) : (
-          <div className="d-flex fd-col justify-content-center align-items-center">
-              <h2 className="mt-3 mb-3">購物車沒有東西</h2>
-              <Button className="mt-2 mb-2" variant="outline-primary" onClick={() => {
-                        props.history.push("/shop");
-                        localStorage.setItem("page",1);
-                      }}>繼續購物</Button>
-          </div>
+        </Container> ) : ""}
 
-        )}
+        {myCourseCartDisplay.length > 0 ? (
+    <Container>
+    <h5><BsFillPlayFill />購買的課程</h5>
+      <Row>
+          <Col sm={9} className="d-flex fd-col">
+                  <Table responsive>
+                    <thead>
+                      <tr>
+                        <th className="w-50">課程</th>
+                        <th></th>
+                        <th>價格</th>
+                        <th>數量</th>
+                        <th>小計</th>
+                      </tr>
+                    </thead>
+                    </Table>
+          {myCourseCartDisplay.map(value => ( 
+                  <Container className="mt-0 m-3">
+                      <Row>
+                          <Col xs={3}>
+                              <Image
+                              width={100}
+                              height={100}
+                              className="mr-3"
+                              src={`/items/${value.img}`}
+                              alt={value.img}
+                              />
+                          </Col>
+                          <Col xs={8}>
+                              <Row className="d-flex">
+                                  <p className="w-25">{value.name}</p>
+                                  <p className="w-25 text-right">${value.price}</p>
+                                  <p className="w-25 text-right">
+                                    <GrFormSubtract onClick={() => substarctCourseCartToLocalStorage({
+                                        id: value.id,
+                                        img: value.img,
+                                        name: value.name,
+                                        amount: 1,
+                                        price: value.price
+                                      }) }/>
+                                      {" "}
+                                      {value.amount}
+                                      {" "}
+                                    <GrFormAdd  onClick={() => updateCourseCartToLocalStorage({
+                                        id: value.id,
+                                        img: value.img,
+                                        name: value.name,
+                                        amount: 1,
+                                        price: value.price
+                                      }) } />
+                                  </p>
+                                  <p className="w-25 text-right">${value.price * value.amount}</p>
+                              </Row>
+                              <Row className="mt-2">
+                                  <Button className="mt-2 mb-2" size="sm" variant="primary">優惠活動</Button>
+                              </Row>
+                          </Col>
+                      </Row>
+                  </Container>
+            ))}
+            </Col>
+
+            <Col sm={3} className="d-flex fd-col p-3 pl-5">
+                  <Table>
+                    <thead>
+                      <tr>
+                        <th>總計</th>
+                      </tr>
+                    </thead>
+                  </Table>
+              <h6>商品總金額</h6>
+              <h5>小計  ${sum(myCourseCartDisplay)}</h5>
+              <hr className="mt-5" />
+              <h5>總金額  ${sum(myCourseCartDisplay)}</h5>
+            </Col>
+          </Row>
+        </Container> ) : "" }
+
+        {mycartDisplay.length <= 0 && myCourseCartDisplay.length <= 0 ? (
+          <div className="d-flex justify-content-center">
+              <h2 className="mt-3 mb-3">購物車沒有東西</h2>
+          </div>
+        ) : "" }
+
+       {mycartDisplay.length > 0 || myCourseCartDisplay.length > 0 ? (
+          <Container>
+            <Row className="d-flex justify-content-center pt-3 pb-3">
+                <Button className="mt-2 mb-2" variant="outline-primary" onClick={() => {
+                        localStorage.setItem("finalCart", JSON.stringify(mycartDisplay))
+                        localStorage.setItem("finalCourseCart", JSON.stringify(myCourseCartDisplay))
+                        localStorage.setItem("shipTotal", sumShipping(mycartDisplay))
+                        localStorage.setItem("shopTotal", sum(mycartDisplay) + sumShipping(mycartDisplay))
+                        localStorage.setItem("courseTotal", sum(myCourseCartDisplay))
+                        props.history.push("/cart/comfirm")
+                  }}>去買單</Button>
+              </Row> 
+          </Container>
+
+       ) : ""}   
+
+
     </>
   )
 }

@@ -21,7 +21,6 @@ function CartPayment (props) {
 
         const finalCart = JSON.parse(localStorage.getItem('finalCart'))
         const total = localStorage.getItem('total')
-        const discount = localStorage.getItem('discount')
         const shipInfo = JSON.parse(localStorage.getItem('shipInfo'))
         const note = localStorage.getItem('note')
 
@@ -36,8 +35,10 @@ function CartPayment (props) {
             username: shipInfo.memberName,
             orderPhone: Number(shipInfo.phone),
             shipAddress: shipInfo.shipAddress,
-            discount: discount,
-            totalPrice: Number(total)
+            totalPrice: Number(total),
+            paymentStatus: "已付款",
+            shipStatus: "未出貨",
+            note: note
         })
     
       }, [])
@@ -117,15 +118,14 @@ function CartPayment (props) {
         console.log(data)
 
         const id = data.results.insertId
-
-        return id
+        setInsertId(id)
       }
 
       
-      const handleInsertSave = async () => {
+      const handleInsertSave = (orderPayment) => {
 
-        const id = await insertOrderToSever(order);
-        await setOrderPayment({
+        const id = insertOrderToSever(order);
+        setOrderPayment({
             ...orderPayment,
             orderId: id
         })
