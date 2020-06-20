@@ -16,7 +16,8 @@ function MyFooter(props) {
   const path = props.history.location.pathname;
   let displayFooter;
 
-  if(path === "/login" || path === "/welcome") displayFooter = "";
+  if(path === "/login" || path === "/welcome" ||
+  path === '/') displayFooter = "";
   else displayFooter = footer
 
   return (

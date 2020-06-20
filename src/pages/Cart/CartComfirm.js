@@ -259,6 +259,7 @@ function Cart(props) {
                   if(shopDiscount !== 0){
                     localStorage.setItem("relShopCouponId", relShopCouponId)
                   }
+                  localStorage.setItem("discount", courseDiscount + shopDiscount)
                   localStorage.setItem("total", courseTotal + shopTotal - courseDiscount - shopDiscount)
                   props.history.push("/cart/payment")
               }}>確認付款</Button>

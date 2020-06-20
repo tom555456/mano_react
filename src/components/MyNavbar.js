@@ -191,7 +191,8 @@ function MyNavbar(props) {
   )
     displayNav = cartNav
   else if (
-    path === '/cart/comfirm/change'
+    path === '/cart/comfirm/change' ||
+    path === '/'
   )
     displayNav = ''
   else displayNav = nav

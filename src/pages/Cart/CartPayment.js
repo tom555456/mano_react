@@ -29,6 +29,8 @@ function CartPayment (props) {
         const finalCart = JSON.parse(localStorage.getItem('finalCart'))
         const finalCourseCart = JSON.parse(localStorage.getItem('finalCourseCart'))
 
+        const discount = localStorage.getItem("discount")
+        const shipTotal = localStorage.getItem('shipTotal')
         const total = localStorage.getItem('total')
         const member = JSON.parse(localStorage.getItem('member'))
         const note = localStorage.getItem('note') || ""
@@ -56,6 +58,8 @@ function CartPayment (props) {
             shipCity: member[0].paymentCity,
             shipDistrict: member[0].paymentDistrict,
             shipAddress: member[0].shipAddress,
+            shiptotalMoney: Number(shipTotal),
+            shopDiscount: Number(discount),
             totalPrice: Number(total),
             paymentStatus: "已付款",
             shipStatus: "未出貨",
@@ -71,7 +75,6 @@ function CartPayment (props) {
         console.log("callback")
         await insertOrderToSever(order)
         if(courseDiscountUpdate !== "") await updateDiscountToSever(courseDiscountUpdate)
-        if(shopDiscountUpdate !== "") await updateDiscountToSever(shopDiscountUpdate)
         console.log(shopDiscountUpdate)
       }
 
@@ -303,7 +306,11 @@ function CartPayment (props) {
                     }}
 
                     onMouseUp={async () => {
-                      if(orderErrors.length === 0) await handleInsertData()
+                      if(orderErrors.length === 0) {
+                        await handleInsertData()
+                        if(shopDiscountUpdate !== "") {await updateDiscountToSever(shopDiscountUpdate);}
+  
+                      }
                     }}    
 
                     onClick={async () => {
@@ -312,10 +319,11 @@ function CartPayment (props) {
                         for(let i = 0; i < orderList.length; i++) {
                           await insertOrderListToSever(orderList[i])
                         }
-
+                      
                       props.history.push("/cart/complete");
 
                       {/* localStorage.removeItem("shipTotal")
+                      localStorage.removeItem("discount")
                       localStorage.removeItem("finalCourseCart")
                       localStorage.removeItem("shopTotal")
                       localStorage.removeItem("total")
