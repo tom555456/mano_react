@@ -1,6 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-
+import Heart from "./ItemTracking/Heart"
 import {
   Table,
   Container,
@@ -47,7 +47,7 @@ function Item(props) {
           <button className="add-cart" onClick={props.handleClick}>
             add to cart
           </button>
-          <button className="add-fav">add to favtorite</button>
+          <button className="add-fav" onClick={props.handleWishListClick}>add to favtorite</button>
         </div>
       </div>
     </div>

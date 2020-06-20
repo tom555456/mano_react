@@ -35,10 +35,62 @@ function MyNavbar(props) {
   )
 
   const displayButton = member[0].memberName !== '' ? logoutButton : loginButton
+  const pathlist = [
+    "/",
+    "/about",
+    "/product",
+    "/todoapp",
+    "/login",
+    "/counter",
+    "/membercenter",
+    "/coupon",
+    "/cart",
+    "/course",
+    "/faq",
+    "/welcome",
+    "/register",
+    "/forgetpwd",
+    "*",
+    "/testupload",
+    "/marketing",
+    "/ItemTracking"
+  ]
+  const themenames = [
+    "light",
+    "light",
+    "light",
+    "light",
+    "light",
+    "light",
+    "dark",
+    "dark",
+    "light",
+    "light",
+    "light",
+    "light",
+    "light",
+    "light",
+    "light",
+    "light",
+    "light",
+    "light"
+  ]
+
+
+  // 先找出對應的主題
+  let locationPathname = props.location.pathname
+  // `/product/xxxx` 轉為 `/product`
+  if (locationPathname.includes("/product")) locationPathname = "/product"
+  if (locationPathname.includes("/coupon")) locationPathname = "/membercenter"
+  if (locationPathname.includes("/cart")) locationPathname = "/cart"
+  if (locationPathname.includes("/course")) locationPathname = "/course"
+
+  
+  const index = pathlist.findIndex((v) => v === locationPathname)
 
   const nav = (
     <>
-      <Navbar bg="primary" variant="dark" fixed="top">
+      <Navbar variant={themenames[index]}>
         <Navbar.Brand href="/">抹の</Navbar.Brand>
         <Nav className="mr-auto">
           <Nav.Link as={NavLink} to="/" exact>
@@ -72,11 +124,17 @@ function MyNavbar(props) {
           >
             課程列表
           </Nav.Link>
+          <Nav.Link as={NavLink} to="/ItemTracking">
+            願望清單
+          </Nav.Link>
           <Nav.Link as={NavLink} to="/cart">
             購物車
           </Nav.Link>
-          <Nav.Link as={NavLink} to="/searchtest">
-            Search Test
+          <Nav.Link as={NavLink} to="/marketing">
+            Marketing
+          </Nav.Link>
+          <Nav.Link as={NavLink} to="/testupload">
+            Test Upload
           </Nav.Link>
           <Nav.Link as={NavLink} to="/faq">
             FAQ
@@ -90,7 +148,7 @@ function MyNavbar(props) {
 
   const cartNav = (
     <>
-      <Navbar>
+      <Navbar variant={themenames[index]}>
         <Navbar.Brand href="/">抹の</Navbar.Brand>
         <Nav className="mr-auto justify-content-end w-75 align-items-center">
           <Nav.Link
@@ -134,8 +192,6 @@ function MyNavbar(props) {
     displayNav = cartNav
   else if (
     path === '/cart/comfirm/change'
-    // ||path === '/login' ||
-    // path === '/welcome'
   )
     displayNav = ''
   else displayNav = nav

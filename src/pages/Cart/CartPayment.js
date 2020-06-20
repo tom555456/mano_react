@@ -19,6 +19,7 @@ function CartPayment (props) {
 
 
     useEffect(() => {
+        props.changeBackgroundColorLight()
 
         const finalCart = JSON.parse(localStorage.getItem('finalCart'))
         const finalCourseCart = JSON.parse(localStorage.getItem('finalCourseCart'))

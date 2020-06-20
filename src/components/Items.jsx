@@ -20,6 +20,8 @@ class Items extends Component {
       productName: '',
       catIds: '',
       catData: [],
+      wishList: []
+
     }
   }
 
@@ -47,6 +49,23 @@ class Items extends Component {
     this.handleShow()
     //alert('已成功加入購物車')
   }
+
+  insertWishListToDb = async (wishList) => {
+    const request = new Request(`http://localhost:3002/itemTracking/add`, {
+      method: "POST",
+      body: JSON.stringify(wishList),
+      headers: new Headers({
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      }),
+    })
+
+    console.log("After JSON: ", JSON.stringify(wishList))
+
+    const response =  await fetch(request)
+    //const data =  await response.json()
+}
+
 
   getCatData = async (categoryParentId) => {
     const response = await fetch(
@@ -263,6 +282,14 @@ class Items extends Component {
                   shippingId: item.shippingId
                 })
               }}
+              handleWishListClick={()=>{
+                    alert('已成功加入願望清單')
+                 this.insertWishListToDb({
+                    "itemId": item.itemId,
+                    "itemPrice": item.itemPrice
+                })
+                    }
+                }
             />
           ))}
 

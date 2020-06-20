@@ -29,7 +29,7 @@ function CartComfirmChange(props) {
 
       
       useEffect(() => {
-
+        props.changeBackgroundColorLight()
         const member = JSON.parse(localStorage.getItem('member'))
         const id = member[0].id
 

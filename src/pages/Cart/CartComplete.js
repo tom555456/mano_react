@@ -5,8 +5,12 @@ import { Button } from "react-bootstrap"
 
 
 class CartComplete extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
+    }
+
+    componentDidMount() {
+        this.props.changeBackgroundColorLight()
     }
 
     render() {

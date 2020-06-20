@@ -2,8 +2,13 @@ import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
 
 import MyBanner from '../components/MyBanner'
+import { useEffect } from 'react'
 
 function Home(props) {
+
+  useEffect(()=>{
+    props.changeBackgroundColorLight()
+  },[])
   //console.log(props)
   return (
     <>

@@ -11,12 +11,16 @@ class uploadMyFile extends Component {
     axios.post('/files', data).then((response) => {
       console.log(response); // do something with the response
     });
-    
+    }
     render() {
+      return(
+        <>
       <div>
         <input type="file" onChange={this.handleUploadFile} />
       </div>
+        </>
+      )
     }
-}
+  }
 
-export default uploadMyFile;
+export default uploadMyFile

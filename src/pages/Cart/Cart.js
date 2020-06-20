@@ -15,7 +15,11 @@ function Cart (props) {
   const [member, setMember] = useState([])
 
 
+
   useEffect(() => {
+    
+    props.changeBackgroundColorLight()
+
     const initCart = localStorage.getItem('cart') || '[]'
     const cartJson = JSON.parse(initCart)
     const initCourseCart = localStorage.getItem('coursecart') || '[]'

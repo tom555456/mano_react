@@ -18,6 +18,7 @@ function Cart(props) {
   const [member, setMember] = useState([])
 
 
+
   async function getShopCouponData(memberId) {
     const request = new Request(`http://localhost:3002/order/shopCoupon/${memberId}`, {
       method: "GET",
@@ -49,7 +50,8 @@ function Cart(props) {
 
 
   useEffect(() => {
-
+    props.changeBackgroundColorLight()
+    
     const member = JSON.parse(localStorage.getItem('member'))
     const memberId = member[0].memberId
 

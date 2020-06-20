@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 
 import MyBanner from '../components/MyBanner'
 import MyBreadcrumb from '../components/MyBreadcrumb'
 
 function About(props) {
- // console.log(props)
+
+  useEffect(() => {
+    props.changeBackgroundColorLight()
+  }, [])
 
   return (
     <>

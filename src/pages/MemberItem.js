@@ -3,17 +3,22 @@ import { Table, Container, Row, Col, ListGroup, Image } from "react-bootstrap"
 
 function MemberItem(props) {
   const { member,isedit,setIsedit,ischangepwd, setIschangepwd} = props
-  
+  useEffect(()=>{
+    document.getElementById("maintable").classList.add('membercenterlist')
+  })
   return (
     <>
-      <Col md={10} xs={12}>
-        <Table responsive>
+
+      <Col md={10} xs={12} style={{background:"white"}}>
+        <Table responsive id="maintable">
           <thead>
+            
             <tr>
+            
               <th colSpan={4}>
                 <Image
                   style={{ width: "100px", height: "100px" }}
-                  src={`./memberimgs/${member.memberImg}`}
+                  src={`http://localhost:3002/img-uploads/${member.memberImg}`}
                   alt={member.memberImg}
                   rounded
                 />
@@ -63,10 +68,11 @@ function MemberItem(props) {
             <td>{member.created_at}</td>
           </tbody>
         </Table>
+        <div className=" d-flex justify-content-end">
         <button className="btn btn-primary" onClick={() => setIsedit(!isedit)}>
           Edit
         </button>
-        
+        </div>
       </Col>
     </>
   )

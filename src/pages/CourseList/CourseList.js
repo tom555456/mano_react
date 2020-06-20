@@ -8,6 +8,13 @@ import bgSvg from '../../components/bg-pattern.svg'
 import LeftBg from '../../components/courses/LeftBg'
 
 function CourseList(props) {
+
+
+  useEffect(()=>{
+    props.changeBackgroundColorLight()
+  },[])
+
+  
   const loading = (
     <>
       <div className="d-flex justify-content-center">

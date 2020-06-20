@@ -6,8 +6,8 @@ import MyBreadcrumb from '../../components/MyBreadcrumb'
 // import Detail from '../../components/Course/Detail'
 
 class ItemDetail extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       data: [],
       totalPages: '',
@@ -106,6 +106,9 @@ class ItemDetail extends Component {
   }
 
   async componentDidMount() {
+
+    this.props.changeBackgroundColorLight()
+    
     let params = new URLSearchParams(this.props.location.search)
     let catIdParams = params.get('categoryId')
     if (catIdParams) {

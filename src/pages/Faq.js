@@ -1,7 +1,16 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { Accordion, Card, Button } from 'react-bootstrap'
 
-const Faq = () => (
+const Faq = (props) => {
+  
+  useEffect(()=>{
+    props.changeBackgroundColorLight()
+  }, [])
+  
+  
+  
+  return(
+    <>
   <div className="container">
     <div className="py-4">
       <h4 className="grass text-center fs-32 mb-3">常見問題集Q&A</h4>
@@ -93,6 +102,7 @@ const Faq = () => (
       <p>感謝您的來電，謝謝!</p>
     </div>
   </div>
-)
+  </>
+)}
 
 export default Faq

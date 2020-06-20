@@ -6,8 +6,8 @@ import CsMyBreadcrumb from '../../components/CsMyBreadcrumb'
 // import Detail from '../../components/Course/Detail'
 
 class CourseDetail extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       data: [],
       totalPages: '',
@@ -78,6 +78,7 @@ class CourseDetail extends Component {
 
   async componentDidMount() {
     await this.getItemsDetail()
+    this.props.changeBackgroundColorLight()
   }
 
  

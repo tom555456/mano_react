@@ -11,7 +11,7 @@ function MemberEditForm(props) {
     handleImgSave,
   } = props
 
-
+  //選擇地區時會自動改變
   const [indexstatus, setIndexstatus] = useState(0)
   const city = areaData.map((value,index) => {
     return(
@@ -30,16 +30,37 @@ function MemberEditForm(props) {
     var objS = document.getElementById("pid");
     setIndexstatus(objS.selectedIndex)
     }
+  //真正的圖片上傳
+  function doUpload(event){
+    // const fd = new FormData(document.form1)
+    fetch('http://localhost:3002/membercenter/try-upload2',{
+        method: 'POST',
+        body: new FormData(document.form1)
+    })
+    .then(r=>r.json())
+    .then(obj=>{
+        //$('#myimg').attr('src', '/img-uploads/' +obj.filename)
+        console.log(obj.filename)
+        setMember({
+          ...member,
+          memberImg:obj.filename
+        })
+    })
+  }
+  const handleImgToDirectory = (event) => {
+    doUpload(event)
+    alert("儲存成功")
+  }
 
   return (
     <>
-      <Col md={10} xs={12}>
-        <Table responsive>
+      <Col md={10} xs={12} style={{background:"white"}}>
+        <Table responsive style={{color:"#5C6447"}}>
           <thead>
             <tr>
               <Image
-                style={{ width: "50px", height: "50px" }}
-                src={`./memberimgs/${member.memberImg}`}
+                style={{ width: "100px", height: "100px" }}
+                src={`http://localhost:3002/img-uploads/${member.memberImg}`}
                 alt={member.memberImg}
                 rounded
               />
@@ -50,23 +71,19 @@ function MemberEditForm(props) {
                       id="avatar"
                       name="avatar"
                       onChange={(event) => {
-                        setMember({
-                          ...member,
-                          memberImg:
-                            Date.now() +
-                            event.target.files[0].name.substr(-4, 4),
-                        })
+                      handleImgToDirectory(event)
                       }}
                     />
-                    
-                  </Form.Group>
-                  <button
-                    onClick={() => {
+                    <button
+                    className="btn btn-primary"
+                    onClick={(event) => {
                       handleImgSave(member)
                     }}
                   >
-                    上傳新的大頭貼
+                    儲存為新的大頭貼
                   </button>
+                  </Form.Group>
+                  
                 </Form>
                 <img src="" alt="" id="myimg"></img>
               </th>
@@ -180,6 +197,7 @@ function MemberEditForm(props) {
             <td>{member.created_at}</td>
           </tbody>
         </Table>
+        <div className=" d-flex justify-content-end">
         <button
           className="btn btn-primary"
           onClick={() => {
@@ -195,6 +213,7 @@ function MemberEditForm(props) {
         >
           取消編輯
         </button>
+        </div>
       </Col>
     </>
   )

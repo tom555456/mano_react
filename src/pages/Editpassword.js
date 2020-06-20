@@ -33,8 +33,8 @@ function Editpassword(props) {
   }
   return (
     <>
-      <form style={{ width: "200px" }}>
-        <Form.Group controlId="formBasicEmail">
+      <form style={{ width: "200px" ,color:"white"}}>
+        <Form.Group controlId="formBasicEmail" >
           <Form.Label>輸入舊密碼</Form.Label>
           <Form.Control
             id="oldpassword"

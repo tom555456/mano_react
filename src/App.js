@@ -13,6 +13,8 @@ import ItemDetail from './pages/ItemDetail/ItemDetail'
 import CourseList from './pages/CourseList/CourseList'
 import CourseDetail from './pages/CourseDetail/CourseDetail'
 
+import ItemTracking from './pages/ItemTracking/ItemTracking'
+
 import CartComfirm from "./pages/Cart/CartComfirm"
 import CartComfirmChange from "./pages/Cart/CartComfirmChange"
 import CartComplete from "./pages/Cart/CartComplete"
@@ -23,6 +25,9 @@ import Membercenter from './pages/Membercenter'
 import Coupon from './pages/Coupon'
 
 import NotFoundPage from './pages/NotFoundPage'
+import uploadMyFile from "./pages/testupload"
+
+import Marketing from './pages/Marketing'
 
 import Login from './pages/login/login'
 import MyWelcome from './pages/login/welcome'
@@ -44,6 +49,16 @@ function App(props) {
 
   // 錯誤訊息陣列
   const [loginErrors, setLoginErrors] = useState([])
+
+
+  //更改背景顏色
+  function changeBackgroundColorLight(){
+    document.body.style.background ='#EFF3EC'
+  }
+
+  function changeBackgroundColorDark(){
+    document.body.style.background ='#5C6447'
+  }
 
 
 
@@ -125,40 +140,59 @@ function App(props) {
         <MainContent>
           <Switch>
             <Route path="/about">
-              <About />
+              <About 
+              changeBackgroundColorLight={changeBackgroundColorLight}/>
             </Route>
             <Route path="/shop/:second?/:third?/:fourth?/:page?">
-              <ProductList />
+              <ProductList 
+              changeBackgroundColorLight={changeBackgroundColorLight}/>
             </Route>
             <Route path="/itemDetail">
-              <ItemDetail />
+              <ItemDetail 
+              changeBackgroundColorLight={changeBackgroundColorLight}/>
             </Route>
 
             <Route path="/course/:second?/:third?/:fourth?/:page?">
-              <CourseList />
+              <CourseList 
+              changeBackgroundColorLight={changeBackgroundColorLight}/>
             </Route>
             <Route path="/courseDetail">
-              <CourseDetail />
+              <CourseDetail 
+              changeBackgroundColorLight={changeBackgroundColorLight}/>
+            </Route>
+
+            <Route path="/ItemTracking">
+              <ItemTracking />
             </Route>
 
             <Route path="/cart" exact>
-              <Cart />
+              <Cart changeBackgroundColorLight={changeBackgroundColorLight} />
             </Route>
             <Route path="/cart/comfirm" exact>
-              <CartComfirm />
+              <CartComfirm 
+              changeBackgroundColorLight={changeBackgroundColorLight} />
             </Route>
             <Route path="/cart/comfirm/change">
-              <CartComfirmChange />
+              <CartComfirmChange
+              changeBackgroundColorLight={changeBackgroundColorLight} />
             </Route>
             <Route path="/cart/complete">
-              <CartComplete />
+              <CartComplete 
+              changeBackgroundColorLight={changeBackgroundColorLight} />
             </Route>
             <Route path="/cart/payment">
-              <CartPayment />
+              <CartPayment 
+              changeBackgroundColorLight={changeBackgroundColorLight}/>
             </Route>
 
+            <Route exact path="/marketing">
+              <Marketing 
+              changeBackgroundColorLight={changeBackgroundColorLight}/>
+            </Route>
 
-            <Route path="/searchtest"></Route>
+            <Route path="/testupload">
+              <uploadMyFile />
+            </Route>
             <Route path="/login">
               <Login
                 username={username}
@@ -212,16 +246,19 @@ function App(props) {
             </Route>
 
             <Route exact path="/faq">
-              <Faq />
+              <Faq 
+              changeBackgroundColorLight={changeBackgroundColorLight}/>
             </Route>
 
 
 
             <Route exact path="/">
-              <Home />
+              <Home 
+              changeBackgroundColorLight={changeBackgroundColorLight}/>
             </Route>
             <Route exact path="*">
-              <NotFoundPage />
+              <NotFoundPage 
+              changeBackgroundColorLight={changeBackgroundColorLight}/>
             </Route>
           </Switch>
         </MainContent>

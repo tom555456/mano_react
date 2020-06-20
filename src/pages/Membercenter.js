@@ -10,6 +10,11 @@ function Membercenter() {
   const [member, setMember] = useState("")
   const [isedit, setIsedit] = useState(false)
   const [ischangepwd, setIschangepwd] = useState(false)
+
+  function changeBackgroundColor(){
+    document.body.style.background ='#5C6447'
+  }
+  
   async function getData() {
     const request = new Request("http://localhost:3002/membercenter/list", {
       method: "GET",
@@ -27,6 +32,7 @@ function Membercenter() {
   }
   useEffect(() => {
     getData()
+    changeBackgroundColor()
   }, [])
   async function updateMemberToSever(item, successCallback = () => {}) {
     // 開啟載入指示
@@ -61,8 +67,9 @@ function Membercenter() {
     setMember(newMember)
     alert("儲存成功")
   }
+
+  //把新的圖片名稱存回database
   async function updateImgToSever(item, successCallback = () => {}) {
-    const fd = new FormData(document.form1)
     const request = new Request("http://localhost:3002/membercenter/upimg", {
       method: "PUT",
       body: JSON.stringify(item),
@@ -71,8 +78,6 @@ function Membercenter() {
         "Content-Type": "application/json",
       }),
     })
-
-    console.log("image-After JSON: ", JSON.stringify(fd))
 
     const response = await fetch(request)
     const data = await response.json()
@@ -84,6 +89,8 @@ function Membercenter() {
     setMember(newMember)
     alert("儲存成功")
   }
+
+  
   return (
     <>
       <MyBreadcrumb />
