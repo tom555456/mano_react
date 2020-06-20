@@ -13,10 +13,12 @@ function MemberEditForm(props) {
 
   //選擇地區時會自動改變
   const [indexstatus, setIndexstatus] = useState(0)
+
   const city = areaData.map((value,index) => {
     return(
       <option key={index}value={value.city} >{value.city}</option>
   )})
+
   const district = areaData.map((value,index) => {
     return(
       value.district.map((area,index)=>{
@@ -29,7 +31,8 @@ function MemberEditForm(props) {
   function areaChange(){
     var objS = document.getElementById("pid");
     setIndexstatus(objS.selectedIndex)
-    }
+  }
+
   //真正的圖片上傳
   function doUpload(event){
     // const fd = new FormData(document.form1)
