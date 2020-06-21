@@ -25,11 +25,13 @@ import Cart from './pages/Cart/Cart'
 
 import Membercenter from './pages/Membercenter'
 import Coupon from './pages/Coupon'
+import MemberOrders from "./pages/MemberOrders"
 
 import NotFoundPage from './pages/NotFoundPage'
 import uploadMyFile from "./pages/testupload"
 
 import Marketing from './pages/Marketing'
+import Comment from './pages/Comment'
 
 import Login from './pages/login/login'
 import MyWelcome from './pages/login/welcome'
@@ -177,7 +179,8 @@ function App(props) {
             </Route>
 
             <Route path="/mall/ItemTracking">
-              <ItemTracking />
+              <ItemTracking 
+              changeBackgroundColorLight={changeBackgroundColorLight}/>
             </Route>
 
             <Route path="/mall/cart" exact>
@@ -223,6 +226,10 @@ function App(props) {
 
             <Route exact path="/life/marketing">
               <Marketing 
+              changeBackgroundColorLight={changeBackgroundColorLight}/>
+            </Route>
+            <Route exact path="/life/comment">
+              <Comment 
               changeBackgroundColorLight={changeBackgroundColorLight}/>
             </Route>
 
@@ -319,18 +326,25 @@ function App(props) {
               <TodoApp todos={todos} setTodos={setTodos} isAuth={auth} />
             </ProtectedRoute> */}
 
-            <Route exact path="/mall/membercenter" exact>
+            <Route exact path="/mall/membercenter">
               <Membercenter />
             </Route>
             <Route exact path="/mall/membercenter/coupon">
               <Coupon />
             </Route>
-            <Route exact path="/life/membercenter" exact>
+            <Route exact path="/mall/membercenter/memberorders">
+              <MemberOrders />
+            </Route>
+            <Route exact path="/life/membercenter">
               <Membercenter />
             </Route>
             <Route exact path="/life/membercenter/coupon">
               <Coupon />
             </Route>
+            <Route exact path="/life/membercenter/memberorders">
+              <MemberOrders />
+            </Route>
+
 
 
             <Route exact path="/mall/faq">

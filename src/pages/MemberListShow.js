@@ -5,7 +5,7 @@ import MemberItem from "./MemberItem"
 import MemberEditForm from "./MemberEditForm"
 
 function MemberListShow(props) {
-  const { member,setMember, isedit, setIsedit,handleEditedSave,ischangepwd, setIschangepwd,handleImgSave } = props
+  const { member,setMember, isedit, setIsedit,handleEditedSave,ischangepwd, setIschangepwd,handleImgSave,localMember } = props
   return (
     <>
       <MemberSideLink>
@@ -17,6 +17,7 @@ function MemberListShow(props) {
           setIsedit={setIsedit}
           handleEditedSave={handleEditedSave}
           handleImgSave={handleImgSave}
+          localMember={localMember}
         />
         ) : (
           <MemberItem member={member} isedit={isedit} setIsedit={setIsedit} ischangepwd={ischangepwd}

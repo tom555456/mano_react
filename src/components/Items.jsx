@@ -20,13 +20,14 @@ class Items extends Component {
       productName: '',
       catIds: '',
       catData: [],
-      wishList: []
-
     }
   }
 
   handleClose = () => this.setState({ show: false })
   handleShow = () => this.setState({ show: true })
+
+  handleWishClose = () => this.setState({ wishShow: false })
+  handleWishShow = () => this.setState({ wishShow: true })
 
   updateCartToLocalStorage = (value) => {
     // 開啟載入指示
@@ -64,8 +65,8 @@ class Items extends Component {
 
     const response =  await fetch(request)
     //const data =  await response.json()
+    this.handleWishShow()
 }
-
 
   getCatData = async (categoryParentId) => {
     const response = await fetch(
@@ -217,10 +218,40 @@ class Items extends Component {
           <Button
             variant="primary"
             onClick={() => {
-              this.props.history.push('/cart')
+              const path = this.props.history.location.pathname
+              if(path.includes("/mall")) this.props.history.push("/mall/cart")
+              else this.props.history.push("/life/cart")
+
             }}
           >
             前往購物車結帳
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    )
+
+    const wishListModal = (
+      <Modal
+        show={this.state.wishShow}
+        onHide={this.handleWishClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>加入願望清單訊息</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>產品：{this.state.productName} 已成功加入願望清單</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={this.handleWishClose}>
+            繼續購物
+          </Button>
+          <Button
+            variant="primary"
+            onClick={() => {
+              this.props.history.push('/mall/ItemTracking')
+            }}
+          >
+            前往願望清單
           </Button>
         </Modal.Footer>
       </Modal>
@@ -250,6 +281,7 @@ class Items extends Component {
 
     return (
       <div className="container">
+        {wishListModal}
         {messageModal}
         <div className="tools">
           <MyBreadcrumb />
@@ -267,6 +299,8 @@ class Items extends Component {
           .map((item) => (
             <Item
               key={item.itemId}
+              linkUrl={item.linkUrl}
+              categoryId={item.categoryId}
               itemId={item.itemId}
               itemImg={item.itemImg}
               itemName={item.itemName}
@@ -279,15 +313,16 @@ class Items extends Component {
                   name: item.itemName,
                   amount: 1,
                   price: item.itemPrice,
-                  shippingId: item.shippingId
+                  shippingId: item.shippingId,
                 })
               }}
+
               handleWishListClick={()=>{
-                    alert('已成功加入願望清單')
                  this.insertWishListToDb({
                     "itemId": item.itemId,
                     "itemPrice": item.itemPrice
                 })
+                this.setState({productName: item.itemName})
                     }
                 }
             />

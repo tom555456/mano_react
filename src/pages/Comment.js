@@ -19,6 +19,7 @@ function Comment(props) {
   const [text, setText] = useState('')
   const [username, setUser] = useState('')
   // const [page, setPage] = useState('')
+
   const {
     replyCom,
     setReplyCom,
@@ -27,6 +28,8 @@ function Comment(props) {
     replyUser,
     setReplyUser,
   } = props
+
+
   async function getComFromServer() {
     const request = new Request('http://localhost:3002/comment/', {
       method: 'GET',
@@ -87,6 +90,7 @@ function Comment(props) {
   }
   // 一開始就會開始載入資料
   useEffect(() => {
+    props.changeBackgroundColorLight()
     getComFromServer()
   }, [])
 

@@ -150,6 +150,9 @@ function MyNavbar(props) {
           <Nav.Link as={NavLink} to="/life/marketing">
             Marketing
           </Nav.Link>
+          <Nav.Link as={NavLink} to="/life/comment">
+            Comment
+          </Nav.Link>
           <Nav.Link as={NavLink} to="/life/testupload">
             Test Upload
           </Nav.Link>

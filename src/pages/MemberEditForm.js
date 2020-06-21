@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react"
-import { Table, Container, Row, Col, ListGroup, Image,Form } from "react-bootstrap"
+import {
+  Table,
+  Container,
+  Row,
+  Col,
+  ListGroup,
+  Image,
+  Form,
+} from "react-bootstrap"
 import areaData from "./areaData"
 function MemberEditForm(props) {
   const {
@@ -9,56 +17,60 @@ function MemberEditForm(props) {
     setIsedit,
     handleEditedSave,
     handleImgSave,
+    localMember,
   } = props
 
   //選擇地區時會自動改變
   const [indexstatus, setIndexstatus] = useState(0)
-
-  const city = areaData.map((value,index) => {
-    return(
-      <option key={index}value={value.city} >{value.city}</option>
-  )})
-
-  const district = areaData.map((value,index) => {
-    return(
-      value.district.map((area,index)=>{
-        return(
-          <option key={index}value={area} >{area}</option>
-        )
-      })
-     
-  )})
-  function areaChange(){
-    var objS = document.getElementById("pid");
+  const city = areaData.map((value, index) => {
+    return (
+      <option key={index} value={value.city}>
+        {value.city}
+      </option>
+    )
+  })
+  const district = areaData.map((value, index) => {
+    return value.district.map((area, index) => {
+      return (
+        <option key={index} value={area}>
+          {area}
+        </option>
+      )
+    })
+  })
+  function areaChange() {
+    var objS = document.getElementById("pid")
     setIndexstatus(objS.selectedIndex)
   }
-
   //真正的圖片上傳
-  function doUpload(event){
+  function doUpload(event) {
     // const fd = new FormData(document.form1)
-    fetch('http://localhost:3002/membercenter/try-upload2',{
-        method: 'POST',
-        body: new FormData(document.form1)
+    fetch("http://localhost:3002/membercenter/try-upload2", {
+      method: "POST",
+      body: new FormData(document.form1),
     })
-    .then(r=>r.json())
-    .then(obj=>{
+      .then((r) => r.json())
+      .then((obj) => {
         //$('#myimg').attr('src', '/img-uploads/' +obj.filename)
         console.log(obj.filename)
         setMember({
           ...member,
-          memberImg:obj.filename
+          memberImg: obj.filename,
         })
-    })
+      })
   }
   const handleImgToDirectory = (event) => {
     doUpload(event)
-    alert("儲存成功")
+    alert("上傳成功")
   }
+  useEffect(() => {
+    // setMember({ ...member, memberId: localMember[0].memberId })
+  })
 
   return (
     <>
-      <Col md={10} xs={12} style={{background:"white"}}>
-        <Table responsive style={{color:"#5C6447"}}>
+      <Col md={10} xs={12} style={{ background: "white" }}>
+        <Table responsive style={{ color: "#5C6447" }}>
           <thead>
             <tr>
               <Image
@@ -74,19 +86,19 @@ function MemberEditForm(props) {
                       id="avatar"
                       name="avatar"
                       onChange={(event) => {
-                      handleImgToDirectory(event)
+                        handleImgToDirectory(event)
+                        setMember({ ...member, memberId: localMember[0].memberId })
                       }}
                     />
                     <button
-                    className="btn btn-primary"
-                    onClick={(event) => {
-                      handleImgSave(member)
-                    }}
-                  >
-                    儲存為新的大頭貼
-                  </button>
+                      className="btn btn-primary"
+                      onClick={(event) => {
+                        handleImgSave(member)
+                      }}
+                    >
+                      儲存為新的大頭貼
+                    </button>
                   </Form.Group>
-                  
                 </Form>
                 <img src="" alt="" id="myimg"></img>
               </th>
@@ -155,26 +167,32 @@ function MemberEditForm(props) {
           <tbody>
             <tr>
               <td>
-              {member.paymentCity}{member.paymentDistrict}
-              <br />
-                <select id="pid" onChange={(event)=>{areaChange();
-                  setMember({
-                    ...member,
-                    paymentCity: event.target.value,
-                    paymentDistrict: "請選擇區域",
-                  })
-                }}>
-                 {city}
+                {member.paymentCity}
+                {member.paymentDistrict}
+                <br />
+                <select
+                  id="pid"
+                  onChange={(event) => {
+                    areaChange()
+                    setMember({
+                      ...member,
+                      paymentCity: event.target.value,
+                      paymentDistrict: "請選擇區域",
+                    })
+                  }}
+                >
+                  {city}
                 </select>
-                <select onChange={(event)=>{
-                  setMember({
-                    ...member,
-                    paymentDistrict: event.target.value,
-                  })
-                }}>
+                <select
+                  onChange={(event) => {
+                    setMember({
+                      ...member,
+                      paymentDistrict: event.target.value,
+                    })
+                  }}
+                >
                   {district[indexstatus]}
                 </select>
-                
               </td>
               <td>
                 <input
@@ -201,21 +219,24 @@ function MemberEditForm(props) {
           </tbody>
         </Table>
         <div className=" d-flex justify-content-end">
-        <button
-          className="btn btn-primary"
-          onClick={() => {
-            handleEditedSave(member)
-            setIsedit(!isedit)
-          }}
-        >
-          SAVE
-        </button>
-        <button
-          className="btn btn-secondary"
-          onClick={() => setIsedit(!isedit)}
-        >
-          取消編輯
-        </button>
+          <button
+            className="btn btn-primary"
+            onMouseEnter={()=>{
+              setMember({ ...member, memberId: localMember[0].memberId })
+            }}
+            onClick={() => {
+              handleEditedSave(member)
+              setIsedit(!isedit)
+            }}
+          >
+            SAVE
+          </button>
+          <button
+            className="btn btn-secondary"
+            onClick={() => setIsedit(!isedit)}
+          >
+            取消編輯
+          </button>
         </div>
       </Col>
     </>

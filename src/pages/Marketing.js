@@ -7,6 +7,13 @@ import { ToastsContainer, ToastsStore } from 'react-toasts'
 import MyBanner from '../components/MyBanner'
 
 function Marketing(props) {
+
+
+  useEffect(() => {
+    props.changeBackgroundColorLight()
+  }, [])
+
+  
   return (
     <>
       <MyBanner title="專屬優惠" lead="mano友" />

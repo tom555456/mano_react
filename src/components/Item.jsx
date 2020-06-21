@@ -1,6 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import Heart from "./ItemTracking/Heart"
+
 import {
   Table,
   Container,
@@ -21,6 +21,8 @@ function Item(props) {
     itemPrice,
     handleClick,
     getDetail,
+    linkUrl,
+    categoryId,
   } = props
   // console.log(props)
 
@@ -28,7 +30,11 @@ function Item(props) {
     <div className="item-card" value={props.itemId}>
       <div
         className="item-img"
-        onClick={() => props.history.push(`/itemDetail?itemId=${props.itemId}`)}
+        onClick={() =>
+          props.history.push(
+            `/mall/itemDetail${props.linkUrl}/categoryId=${props.categoryId}?itemId=${props.itemId}`
+          )
+        }
       >
         <img
           src={`/items/${props.itemImg}`}
