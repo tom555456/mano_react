@@ -11,7 +11,10 @@ function MyNavbar(props) {
       <Button
         variant="outline-light"
         onClick={() => {
-          props.history.push('/login')
+          const path = props.history.location.pathname
+          if(path.includes("/mall")) props.history.push("/mall/login")
+          else props.history.push("/life/login")
+
         }}
       >
         登入
@@ -26,7 +29,10 @@ function MyNavbar(props) {
       <Button
         variant="outline-light"
         onClick={() => {
-          props.history.push('/welcome')
+          const path = props.history.location.pathname
+          if(path.includes("/mall")) props.history.push("/mall/welcome")
+          else props.history.push("/life/welcome")
+
         }}
       >
         登出

@@ -4,20 +4,7 @@ import { withRouter } from "react-router-dom"
 
 
   function Course(props) {
-    const[cid ,setCid]=useState("")
-    const {
-      courseImg,
-      courseImg2,
-      courseName,
-      courseDesc,
-      courseQty,
-      coursePrice,    
-      handleClick,
-      getDetail
-
-    } = props
-
-  //  console.log(courseImg2)
+    
   return (
     <div className="item-card" 
     value={props.courseId}  

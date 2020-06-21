@@ -5,8 +5,8 @@ import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap'
 import ReactCompareImage from 'react-compare-image'
 import '../styles/Slider.css'
 
-import img1 from '../homeImages/social2.svg'
-import img2 from '../homeImages/shop.svg'
+import img1 from '../homeImages/hand_with_button.svg'
+import img2 from '../homeImages/women_with_button.svg'
 
 export default function Slider() {
   const [posx, setPosx] = useState(`${window.innerWidth * 0.5}`)
