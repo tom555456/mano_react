@@ -44,10 +44,10 @@
   color: white;
   background-color: #a8b38b;
   border: none;
-  width: 50%;
+  width: 100%;
   position: absolute;
-  right: 20vh;
-  top: 90vh;
+  left: -20vh;
+  top: 30vh;
 }
 
 .life {
@@ -60,10 +60,11 @@
   color: white;
   background-color: #bf8c60;
   border: none;
-  width: 50%;
+  width: 100%;
   position: absolute;
-  right: 20vh;
-  top: 90vh;
+  left: -20vh;
+  top: 30vh;
+  
 }
 
 .button-shop2 {
@@ -72,8 +73,9 @@
   border: none;
   width: 35%;
   position: absolute;
-  top: 90vh;
-  left: 0;
+  left: 65vh;
+  top: 30vh;
+
 }
 
 .button-life2 {
@@ -82,6 +84,6 @@
   border: none;
   width: 35%;
   position: absolute;
-  left: 85vw;
-  top: 90vh;
+  left: 102vh;
+  top: 30vh;
 }

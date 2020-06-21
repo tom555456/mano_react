@@ -44,7 +44,7 @@ export default function Slider() {
   )
   const both = (
     <div className="both">
-      <Button href="/shop" className="button-shop2">
+      <Button href="/mall" className="button-shop2">
         SHOP →
       </Button>
       <Button href="/life" className="button-life2">

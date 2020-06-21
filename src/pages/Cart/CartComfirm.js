@@ -129,7 +129,12 @@ function Cart(props) {
                     <p>{member[0].paymentCity}</p>
                     <p>{member[0].paymentDistrict}</p>
                     <p>{member[0].shipAddress}</p>
-                    <Button className="mt-2 mb-2" size="sm" variant="outline-primary" onClick={() => props.history.push("/cart/comfirm/change")}>變更</Button>
+                    <Button className="mt-2 mb-2" size="sm" variant="outline-primary" onClick={() => {
+                        const path = props.history.location.pathname
+                        if(path.includes("/mall")) props.history.push("/mall/cart/comfirm/change")
+                        else props.history.push("/life/cart/comfirm/change")
+
+                      }}>變更</Button>
                     <p>運費：${shipTotal}</p>
                   </Col>
                 </Row>
@@ -261,7 +266,10 @@ function Cart(props) {
                   }
                   localStorage.setItem("discount", courseDiscount + shopDiscount)
                   localStorage.setItem("total", courseTotal + shopTotal - courseDiscount - shopDiscount)
-                  props.history.push("/cart/payment")
+                  const path = props.history.location.pathname
+                  if(path.includes("/mall")) props.history.push("/mall/cart/payment")
+                  else props.history.push("/life/cart/payment")
+
               }}>確認付款</Button>
         </Row>
     </Container>

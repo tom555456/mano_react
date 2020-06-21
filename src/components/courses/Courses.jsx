@@ -21,7 +21,7 @@ class Courses extends Component {
       catIds: '',
       catData: [],
       showPage: true,
-      detailKey : '',
+      detailKey: '',
     }
   }
 
@@ -67,26 +67,25 @@ class Courses extends Component {
     return this.state.catData
   }
 
-//   getRecursiveCategoryIds = async (categoryId) => {
-//     const output = await this.getCatData(categoryId)
-    
-//     //console.log(output)
-//     if (output.length > 0) {
-//       for (let i = 0; i < output.length; i++) {
-//         await this.setState({
-//           catIds: (this.state.catIds += `,${output[i]['categoryId']}`),
-//         })
-//         await this.getRecursiveCategoryIds(output[i]['categoryId'])
-//       }
-//     }
-// console.log(this.state.catIds)
-//     return this.state.catIds
-    
-//   }
+  //   getRecursiveCategoryIds = async (categoryId) => {
+  //     const output = await this.getCatData(categoryId)
+
+  //     //console.log(output)
+  //     if (output.length > 0) {
+  //       for (let i = 0; i < output.length; i++) {
+  //         await this.setState({
+  //           catIds: (this.state.catIds += `,${output[i]['categoryId']}`),
+  //         })
+  //         await this.getRecursiveCategoryIds(output[i]['categoryId'])
+  //       }
+  //     }
+  // console.log(this.state.catIds)
+  //     return this.state.catIds
+
+  //   }
 
   //fetch 商品
   getItemsData = async () => {
-
     let currentPage = localStorage.getItem('page') || 1
     const response = await fetch(
       `http://localhost:3002/courses/${this.state.catIds}/${currentPage}`
@@ -115,10 +114,8 @@ class Courses extends Component {
   //   console.log(event.target);
 
   //   const value = event.target.value;
-    
-    
+
   //   this.props.history.push(`/courseDetail?courseId=${value}`)
-   
 
   // }
 
@@ -134,7 +131,6 @@ class Courses extends Component {
     }
 
     await this.getItemsData()
-    
   }
 
   //頁碼
@@ -227,7 +223,10 @@ class Courses extends Component {
           <Button
             variant="primary"
             onClick={() => {
-              this.props.history.push('/cart')
+              const path = this.props.history.location.pathname
+              if(path.includes("/mall")) this.props.history.push("/mall/cart")
+              else this.props.history.push("/life/cart")
+
             }}
           >
             前往購物車結帳
@@ -267,8 +266,6 @@ class Courses extends Component {
         </div>
       </>
     )
-
-    
 
     return (
       <div className="container">

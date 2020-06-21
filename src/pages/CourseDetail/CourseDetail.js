@@ -102,7 +102,10 @@ class CourseDetail extends Component {
           <Button
             variant="primary"
             onClick={() => {
-              this.props.history.push('/cart')
+              const path = this.props.history.location.pathname
+              if(path.includes("/mall")) this.props.history.push("/mall/cart")
+              else this.props.history.push("/life/cart")
+
             }}
           >
             前往購物車結帳

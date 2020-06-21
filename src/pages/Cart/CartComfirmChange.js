@@ -167,7 +167,10 @@ function CartComfirmChange(props) {
                             console.log(memberArray)
                             localStorage.setItem("member", JSON.stringify(memberArray))
                             localStorage.setItem("note", note)
-                            props.history.push("/cart/comfirm")
+                            const path = props.history.location.pathname
+                            if(path.includes("/mall")) props.history.push("/mall/cart/comfirm")
+                            else props.history.push("/life/cart/comfirm")
+
                         }}>確認配送資訊</Button>
             </div>
             </Container>

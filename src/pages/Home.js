@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import MyBanner from '../components/MyBanner'
 import '../styles/home.scss'
 import Slider from './Slider'
+
+
 function Home(props) {
   return (
     <>

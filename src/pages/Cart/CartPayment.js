@@ -320,7 +320,10 @@ function CartPayment (props) {
                           await insertOrderListToSever(orderList[i])
                         }
                       
-                      props.history.push("/cart/complete");
+                        const path = props.history.location.pathname
+                        if(path.includes("/mall")) props.history.push("/mall/cart/complete")
+                        else props.history.push("/life/cart/complete")
+
 
                       {/* localStorage.removeItem("shipTotal")
                       localStorage.removeItem("discount")
