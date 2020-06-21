@@ -17,6 +17,7 @@ class Items extends Component {
       mycart: [],
       dataLoading: false,
       show: false,
+      wishShow: false,
       productName: '',
       catIds: '',
       catData: [],
@@ -27,6 +28,9 @@ class Items extends Component {
 
   handleClose = () => this.setState({ show: false })
   handleShow = () => this.setState({ show: true })
+
+  handleWishClose = () => this.setState({ wishShow: false })
+  handleWishShow = () => this.setState({ wishShow: true })
 
   updateCartToLocalStorage = (value) => {
     // 開啟載入指示
@@ -47,7 +51,6 @@ class Items extends Component {
       productName: value.name,
     })
     this.handleShow()
-    //alert('已成功加入購物車')
   }
 
   insertWishListToDb = async (wishList) => {
@@ -64,6 +67,7 @@ class Items extends Component {
 
     const response =  await fetch(request)
     //const data =  await response.json()
+    this.handleWishShow()
 }
 
 
@@ -226,6 +230,33 @@ class Items extends Component {
       </Modal>
     )
 
+    const wishListModal = (
+      <Modal
+        show={this.state.wishShow}
+        onHide={this.handleWishClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>加入願望清單訊息</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>產品：{this.state.productName} 已成功加入願望清單</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={this.handleWishClose}>
+            繼續購物
+          </Button>
+          <Button
+            variant="primary"
+            onClick={() => {
+              this.props.history.push('/cart')
+            }}
+          >
+            前往購物車結帳
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    )
+
     const originResults = (
       <div>
         <p className="results resultsOrigin">
@@ -251,6 +282,7 @@ class Items extends Component {
     return (
       <div className="container">
         {messageModal}
+        {wishListModal}
         <div className="tools">
           <MyBreadcrumb />
           {result}
@@ -283,7 +315,6 @@ class Items extends Component {
                 })
               }}
               handleWishListClick={()=>{
-                    alert('已成功加入願望清單')
                  this.insertWishListToDb({
                     "itemId": item.itemId,
                     "itemPrice": item.itemPrice

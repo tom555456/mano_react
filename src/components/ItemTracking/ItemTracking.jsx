@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Modal, Button } from 'react-bootstrap'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import TrackingCard from "./TrackingCard";
 import "./item-tracking.css"
 
@@ -105,6 +105,12 @@ class ItemTracking extends Component {
                 }
                />
                 ))}
+            {this.state.data.length <= 0 ? (
+                <div className="d-flex justify-content-center m-auto">
+                    <Link className='text-center' style={{ textDecoration: 'none' }} to="/shop" onClick={() => localStorage.setItem("page",1)}><i class="fas fa-heart-broken fa-7x" align-item-center></i><h2 className="mt-3 mb-3">尚未將商品加到願望清單中</h2></Link>
+                    
+                </div>
+              ) : "" }
        {messageModal}
             </div>
             
