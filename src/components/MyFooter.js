@@ -3,6 +3,11 @@ import Button from 'react-bootstrap/Button'
 import { withRouter } from "react-router-dom"
 
 function MyFooter(props) {
+
+
+  useEffect(()=>{
+    console.log(props.history)
+  },[])
   //document.body.style.background ='#5C6447'
   const cssSocial = {
     height: '250px',
@@ -40,13 +45,15 @@ function MyFooter(props) {
 
           <img className="m-2 p-2" src="/picture/mano_logo_dark-01.svg"></img>
 
+
+
           <div className="d-flex row" style={cssSocial}>
             <div className="col-lg align-self-center">
-            <a style={{ color: '#5C6447' }} href="/About">About us</a>
+            <a style={{ color: '#5C6447' }} href={props.history.location.pathname.includes("/mall") ? "/mall/about" : "/life/about"}>About us</a>
               <br />
-              <a style={{ color: '#5C6447' }} href="/FAQ">FAQ</a>
+              <a style={{ color: '#5C6447' }} href={props.history.location.pathname.includes("/mall") ? "/mall/faq" : "/life/faq"}>FAQ</a>
               <br />
-              <a style={{ color: '#5C6447' }} href="/MemberCenter">Member Center</a>
+              <a style={{ color: '#5C6447' }} href={props.history.location.pathname.includes("/mall") ? "/mall/membercenter" : "/life/membercenter"}>Member Center</a>
             </div>
             <div className="col-lg align-self-center">
               <a>
@@ -60,11 +67,11 @@ function MyFooter(props) {
               </a>
             </div>
             <div className="col-lg align-self-center">
-              <a style={{ color: '#5C6447' }} href="/Shop">Shop</a>
+              <a style={{ color: '#5C6447' }} href="/mall">Shop</a>
               <br />
-              <a style={{ color: '#5C6447' }} href="/LifeStyle">Life Style</a>
+              <a style={{ color: '#5C6447' }} href="/life">Life Style</a>
               <br />
-              <a style={{ color: '#5C6447' }} href="/Contact">Contact Us</a>
+              <a style={{ color: '#5C6447' }} href={props.history.location.pathname.includes("/mall") ? "/mall/contact" : "/life/contact"}>Contact Us</a>
             </div>
           </div>
           <span className="text-muted">2020 MANO copyright</span>
@@ -77,7 +84,7 @@ function MyFooter(props) {
   let displayFooter;
 
   if(path === "/mall/login" || path === "/mall/welcome" ||
-  path === '/' || path === "/life/welcome" || path === "life/login") displayFooter = "";
+  path === '/' || path === "/life/welcome" || path === "life/login" ) displayFooter = "";
   else displayFooter = footer
 
 
