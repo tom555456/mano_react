@@ -11,7 +11,10 @@ function MyNavbar(props) {
       <Button
         variant="outline-light"
         onClick={() => {
-          props.history.push('/login')
+          const path = props.history.location.pathname
+          if(path.includes("/mall")) props.history.push("/mall/login")
+          else props.history.push("/life/login")
+
         }}
       >
         登入
@@ -26,7 +29,10 @@ function MyNavbar(props) {
       <Button
         variant="outline-light"
         onClick={() => {
-          props.history.push('/welcome')
+          const path = props.history.location.pathname
+          if(path.includes("/mall")) props.history.push("/mall/welcome")
+          else props.history.push("/life/welcome")
+
         }}
       >
         登出
@@ -36,54 +42,28 @@ function MyNavbar(props) {
 
   const displayButton = member[0].memberName !== '' ? logoutButton : loginButton
   const pathlist = [
-    "/",
-    "/about",
-    "/product",
-    "/todoapp",
-    "/login",
-    "/counter",
     "/membercenter",
-    "/coupon",
-    "/cart",
-    "/course",
-    "/faq",
-    "/welcome",
-    "/register",
-    "/forgetpwd",
     "*",
-    "/testupload",
-    "/marketing",
-    "/ItemTracking"
+    "/life",
+    "/mall"
   ]
   const themenames = [
-    "light",
-    "light",
-    "light",
-    "light",
-    "light",
-    "light",
     "dark",
     "dark",
     "light",
     "light",
     "light",
-    "light",
-    "light",
-    "light",
-    "light",
-    "light",
-    "light",
-    "light"
   ]
 
 
   // 先找出對應的主題
   let locationPathname = props.location.pathname
   // `/product/xxxx` 轉為 `/product`
-  if (locationPathname.includes("/product")) locationPathname = "/product"
+  if (locationPathname.includes("/membercenter")) locationPathname = "/membercenter"
   if (locationPathname.includes("/coupon")) locationPathname = "/membercenter"
-  if (locationPathname.includes("/cart")) locationPathname = "/cart"
-  if (locationPathname.includes("/course")) locationPathname = "/course"
+
+  if (locationPathname.includes("/mall")) locationPathname = "/mall"
+  if (locationPathname.includes("/life")) locationPathname = "/life"
 
   
   const index = pathlist.findIndex((v) => v === locationPathname)
@@ -93,53 +73,92 @@ function MyNavbar(props) {
       <Navbar variant={themenames[index]}>
         <Navbar.Brand href="/">抹の</Navbar.Brand>
         <Nav className="mr-auto">
-          <Nav.Link as={NavLink} to="/" exact>
-            Home
+          <Nav.Link as={NavLink} to="/mall" exact>
+            商城首頁
           </Nav.Link>
-          <Nav.Link as={NavLink} to="/about">
+          <Nav.Link as={NavLink} to="/mall/about">
             關於我們
           </Nav.Link>
 
           {member[0].memberName !== '' ? (
-            <Nav.Link as={NavLink} to="/membercenter">
+            <Nav.Link as={NavLink} to="/mall/membercenter">
               Member center
             </Nav.Link>
           ) : (
-            <Nav.Link as={NavLink} to="/login">
+            <Nav.Link as={NavLink} to="/mall/login">
               會員登入
             </Nav.Link>
           )}
 
           <Nav.Link
             as={NavLink}
-            to="/shop"
+            to="/mall/shop"
             onClick={() => localStorage.setItem('page', 1)}
           >
             產品列表
           </Nav.Link>
+          <Nav.Link as={NavLink} to="/mall/ItemTracking">
+            願望清單
+          </Nav.Link>
+          <Nav.Link as={NavLink} to="/mall/cart">
+            購物車
+          </Nav.Link>
+          <Nav.Link as={NavLink} to="/mall/testupload">
+            Test Upload
+          </Nav.Link>
+          <Nav.Link as={NavLink} to="/mall/faq">
+            FAQ
+          </Nav.Link>
+        </Nav>
+        <Form inline>{displayButton}</Form>
+      </Navbar>
+    </>
+  )
+
+  const lifeNav = (
+    <>
+      <Navbar variant={themenames[index]}>
+        <Navbar.Brand href="/">抹の</Navbar.Brand>
+        <Nav className="mr-auto">
+          <Nav.Link as={NavLink} to="/life" exact>
+            社群首頁
+          </Nav.Link>
+          <Nav.Link as={NavLink} to="/life/about">
+            關於我們
+          </Nav.Link>
+
+          {member[0].memberName !== '' ? (
+            <Nav.Link as={NavLink} to="/life/membercenter">
+              Member center
+            </Nav.Link>
+          ) : (
+            <Nav.Link as={NavLink} to="/life/login">
+              會員登入
+            </Nav.Link>
+          )}
+
           <Nav.Link
             as={NavLink}
-            to="/course"
+            to="/life/course"
             onClick={() => localStorage.setItem('page', 1)}
           >
             課程列表
           </Nav.Link>
-          <Nav.Link as={NavLink} to="/ItemTracking">
-            願望清單
-          </Nav.Link>
-          <Nav.Link as={NavLink} to="/cart">
+          <Nav.Link as={NavLink} to="/life/cart">
             購物車
           </Nav.Link>
-          <Nav.Link as={NavLink} to="/marketing">
+          <Nav.Link as={NavLink} to="/life/marketing">
             Marketing
           </Nav.Link>
-          <Nav.Link as={NavLink} to="/testupload">
+          <Nav.Link as={NavLink} to="/life/comment">
+            Comment
+          </Nav.Link>
+          <Nav.Link as={NavLink} to="/life/testupload">
             Test Upload
           </Nav.Link>
-          <Nav.Link as={NavLink} to="/faq">
+          <Nav.Link as={NavLink} to="/life/faq">
             FAQ
           </Nav.Link>
-
         </Nav>
         <Form inline>{displayButton}</Form>
       </Navbar>
@@ -181,19 +200,27 @@ function MyNavbar(props) {
   )
 
   let displayNav
-  const path = props.history.location.pathname
+  let path = props.history.location.pathname
+
+  if (path.includes("/change")) path = "/change"
+  if (path.includes("/cart")) path = "/cart"
+  if (path.includes("/mall")) path = "/mall"
+  if (path.includes("/life")) path = "/life" 
 
   if (
-    path === '/cart' ||
-    path === '/cart/comfirm' ||
-    path === '/cart/complete' ||
-    path === '/cart/payment'
+    path === '/cart'
   )
     displayNav = cartNav
   else if (
-    path === '/cart/comfirm/change'
+    path === '/change' ||
+    path === '/'
   )
     displayNav = ''
+  else if (
+    path === '/life'
+  )
+
+   displayNav = lifeNav
   else displayNav = nav
 
   return <>{displayNav}</>

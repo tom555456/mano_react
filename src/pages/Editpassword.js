@@ -6,7 +6,7 @@ var sha1 = require('sha1');
 
 
 function Editpassword(props) {
-  const { member, setMember, ischangepwd, setIschangepwd,handleEditedSave } = props
+  const { member, setMember, ischangepwd, setIschangepwd,handleEditedSave,localMember } = props
   const [thesame, setThesame] = useState(false)
   const [pwd1, setPwd1] = useState("")
   const [pwd2, setPwd2] = useState("")
@@ -31,6 +31,7 @@ function Editpassword(props) {
       setContent(false)
     }
   }
+ 
   return (
     <>
       <form style={{ width: "200px" ,color:"white"}}>
@@ -39,6 +40,8 @@ function Editpassword(props) {
           <Form.Control
             id="oldpassword"
             type="password"
+            onFocus={()=>setAppear(true)}
+            onKeyUp={()=>checkOldPwd()}
             onChange={(event) => {
               setOldpwd(event.target.value)
             }}
@@ -56,7 +59,8 @@ function Editpassword(props) {
             id="pwd1"
             type="password"
             min={6}
-            onFocus={()=>{checkOldPwd();setAppear(true)}}
+            onFocus={()=>{setMember({...member,
+              memberId:localMember[0].memberId});}}
             onKeyUp={() => validate()}
             value={pwd1}
             onChange={(event) => {

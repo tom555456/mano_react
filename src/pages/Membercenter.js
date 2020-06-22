@@ -11,12 +11,14 @@ function Membercenter() {
   const [isedit, setIsedit] = useState(false)
   const [ischangepwd, setIschangepwd] = useState(false)
 
+  const localMember = JSON.parse(localStorage.getItem('member')) || [{ memberName: '' ,memberId:''}]
+  
   function changeBackgroundColor(){
     document.body.style.background ='#5C6447'
   }
   
-  async function getData() {
-    const request = new Request("http://localhost:3002/membercenter/list", {
+  async function getData(memberId) {
+    const request = new Request(`http://localhost:3002/membercenter/list/${memberId}`, {
       method: "GET",
       headers: new Headers({
         Accept: "application/json",
@@ -31,7 +33,7 @@ function Membercenter() {
     setMember(data[0])
   }
   useEffect(() => {
-    getData()
+    getData(localMember[0].memberId)
     changeBackgroundColor()
   }, [])
   async function updateMemberToSever(item, successCallback = () => {}) {
@@ -101,6 +103,7 @@ function Membercenter() {
           ischangepwd={ischangepwd}
           setIschangepwd={setIschangepwd}
           handleEditedSave={handleEditedSave}
+          localMember={localMember}
         />
       ) : (
         <MemberListShow
@@ -112,6 +115,7 @@ function Membercenter() {
         ischangepwd={ischangepwd}
         setIschangepwd={setIschangepwd}
         handleImgSave={handleImgSave}
+        localMember={localMember}
       />
       )}
     </>

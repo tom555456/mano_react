@@ -176,7 +176,8 @@ function Cart (props) {
   return (
     <> 
     <div className="w-75 d-flex justify-content-end">
-        <Link to="/shop" onClick={() => localStorage.setItem("page",1)}>繼續購物 <FaUndo/></Link>
+        {props.history.location.pathname.includes("/mall") ? 
+        (<Link to="/mall/shop" onClick={() => localStorage.setItem("page",1)}>繼續購物 <FaUndo/></Link>) : (<Link to="/life/course" onClick={() => localStorage.setItem("page",1)}>繼續購物 <FaUndo/></Link>)}
     </div>
     {mycartDisplay.length > 0 ? (
     <Container>
@@ -356,7 +357,10 @@ function Cart (props) {
                         localStorage.setItem("shipTotal", sumShipping(mycartDisplay))
                         localStorage.setItem("shopTotal", sum(mycartDisplay) + sumShipping(mycartDisplay))
                         localStorage.setItem("courseTotal", sum(myCourseCartDisplay))
-                        props.history.push("/cart/comfirm")
+
+                        const path = props.history.location.pathname
+                        if(path.includes("/mall")) props.history.push("/mall/cart/comfirm")
+                        else props.history.push("/life/cart/comfirm")
                       }
                   }}>去買單</Button>
               </Row> 

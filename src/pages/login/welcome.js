@@ -1,7 +1,6 @@
 import React from 'react'
 import './login.scss'
 // import MyBanner from '../../components/MyBanner'
-import MyBreadcrumb from '../../components/MyBreadcrumb'
 import { withRouter } from 'react-router-dom'
 
 function MyWelcome(props) {
@@ -12,14 +11,18 @@ function MyWelcome(props) {
   //continue shop的callback
   const continueShopCallback = () => {
     alert('開始購物囉!!!')
-    props.history.push('/shop', { from: '從登入頁來的' })
+    const path = props.history.location.pathname
+    if(path.includes("/mall")) props.history.push("/mall")
+    else props.history.push("/life")
+
   }
 
   // logout成功時的callback
   const logoutSuccessCallback = () => {
     alert('登出成功，跳回上一頁')
     localStorage.removeItem('member')
-    props.history.push('/login', { from: '從welcome來的' })
+    props.history.push("/")
+
   }
 
   const displayButton = (

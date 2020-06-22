@@ -1,7 +1,8 @@
-/* .product-list {
+.product-list {
   margin-top: 50px;
   justify-content: center;
 }
+
 .bgSvg {
   top: 0;
   position: absolute;
@@ -11,14 +12,25 @@
 }
 
 .leftBox {
+  height: 20%;
+}
+
+/* .item-img {
+  width: 100%;
   height: 100%;
-}
-
-.container {
-  width: 90%;
-  margin-right: 5% -15px;
-}
-
-.courseDetail-img {
-  width: 60%;
 } */
+
+.card-detail {
+  width: 200px;
+  height: 100px;
+}
+
+.item-price {
+  padding-bottom: 20px;
+}
+
+.link-para {
+  position: relative;
+  bottom: 40vh;
+  left: 20vh;
+}

@@ -5,8 +5,8 @@ import TrackingCard from "./TrackingCard";
 import "./item-tracking.css"
 
 class ItemTracking extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = { 
             data: [],
             show: false,
@@ -32,7 +32,8 @@ class ItemTracking extends Component {
     }
 
 
-      async componentDidMount() {    
+      async componentDidMount() {  
+        this.props.changeBackgroundColorLight() 
         await this.getItemsData();
     }
 
@@ -73,7 +74,10 @@ class ItemTracking extends Component {
                 <Button
                   variant="primary"
                   onClick={() => {
-                    this.props.history.push('/cart')
+                    const path = this.props.history.location.pathname
+                    if(path.includes("/mall")) this.props.history.push("/mall/cart")
+                    else this.props.history.push("/life/cart")
+
                   }}
                 >
                   前往購物車結帳

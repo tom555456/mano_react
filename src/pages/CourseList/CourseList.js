@@ -9,12 +9,9 @@ import LeftBg from '../../components/courses/LeftBg'
 
 function CourseList(props) {
 
-
-  useEffect(()=>{
+  useEffect(()=> {
     props.changeBackgroundColorLight()
   },[])
-
-  
   const loading = (
     <>
       <div className="d-flex justify-content-center">

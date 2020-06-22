@@ -43,8 +43,10 @@ function MyLogin(props) {
   const loginSuccessCallback = () => {
     localStorage.setItem('member', JSON.stringify(data))
     alert('登入成功，跳到Welcome')
-    props.history.push('/welcome', { from: '從登入頁來的' })
-  }
+    const path = props.history.location.pathname
+    if(path.includes("/mall")) props.history.push("/mall/welcome")
+    else props.history.push("/life/welcome")
+}
 
   // logout成功時的callback
   const logoutSuccessCallback = () => {
@@ -53,11 +55,17 @@ function MyLogin(props) {
   }
 
   const forgetCallback = () => {
-    props.history.push('/forgetpwd', { from: '從登入頁來的' })
+    const path = props.history.location.pathname
+    if(path.includes("/mall")) props.history.push("/mall/forgetpwd")
+    else props.history.push("/life/forgetpwd")
+
   }
 
   const registerCallback = () => {
-    props.history.push('/register', { from: '從登入頁來的' })
+    const path = props.history.location.pathname
+    if(path.includes("/mall")) props.history.push("/mall/register")
+    else props.history.push("/life/register")
+
   }
 
   const forgetButton = (

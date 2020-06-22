@@ -21,8 +21,6 @@ class Items extends Component {
       productName: '',
       catIds: '',
       catData: [],
-      wishList: []
-
     }
   }
 
@@ -69,7 +67,6 @@ class Items extends Component {
     //const data =  await response.json()
     this.handleWishShow()
 }
-
 
   getCatData = async (categoryParentId) => {
     const response = await fetch(
@@ -221,7 +218,10 @@ class Items extends Component {
           <Button
             variant="primary"
             onClick={() => {
-              this.props.history.push('/cart')
+              const path = this.props.history.location.pathname
+              if(path.includes("/mall")) this.props.history.push("/mall/cart")
+              else this.props.history.push("/life/cart")
+
             }}
           >
             前往購物車結帳
@@ -248,10 +248,17 @@ class Items extends Component {
           <Button
             variant="primary"
             onClick={() => {
+<<<<<<< HEAD
               this.props.history.push('/cart')
             }}
           >
             前往購物車結帳
+=======
+              this.props.history.push('/mall/ItemTracking')
+            }}
+          >
+            前往願望清單
+>>>>>>> 436cae4b8467e1b3e3c1b50436c4217811a63c4d
           </Button>
         </Modal.Footer>
       </Modal>
@@ -281,6 +288,7 @@ class Items extends Component {
 
     return (
       <div className="container">
+        {wishListModal}
         {messageModal}
         {wishListModal}
         <div className="tools">
@@ -299,6 +307,8 @@ class Items extends Component {
           .map((item) => (
             <Item
               key={item.itemId}
+              linkUrl={item.linkUrl}
+              categoryId={item.categoryId}
               itemId={item.itemId}
               itemImg={item.itemImg}
               itemName={item.itemName}
@@ -311,14 +321,16 @@ class Items extends Component {
                   name: item.itemName,
                   amount: 1,
                   price: item.itemPrice,
-                  shippingId: item.shippingId
+                  shippingId: item.shippingId,
                 })
               }}
+
               handleWishListClick={()=>{
                  this.insertWishListToDb({
                     "itemId": item.itemId,
                     "itemPrice": item.itemPrice
                 })
+                this.setState({productName: item.itemName})
                     }
                 }
             />

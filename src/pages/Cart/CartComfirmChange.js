@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Container, Button } from "react-bootstrap"
-
+import areaData from "../areaData"
 import { withRouter } from "react-router-dom";
 
 
@@ -10,6 +10,30 @@ function CartComfirmChange(props) {
     const [member, setMember] = useState([])
     const [note, setNote] = useState("")
     const [isSame, setIsSame] = useState(true)
+
+
+      //選擇地區時會自動改變
+    const [indexstatus, setIndexstatus] = useState(0)
+
+    const city = areaData.map((value,index) => {
+      return(
+        <option key={index}value={value.city} >{value.city}</option>
+    )})
+
+    const district = areaData.map((value,index) => {
+      return(
+        value.district.map((area,index)=>{
+          return(
+            <option key={index}value={area} >{area}</option>
+          )
+        })
+      
+    )})
+    function areaChange(){
+      var objS = document.getElementById("pid");
+      setIndexstatus(objS.selectedIndex)
+    }
+
 
 
     async function getData(id) {
@@ -38,7 +62,7 @@ function CartComfirmChange(props) {
       }, [])
 
     
-      async function updateMemberToSever(item, successCallback = () => {}) {
+      async function updateMemberToSever(item) {
         const request = new Request("http://localhost:3002/membercenter/edit", {
           method: "PUT",
           body: JSON.stringify(item),
@@ -90,14 +114,36 @@ function CartComfirmChange(props) {
                 </div>
             </div>
 
+            <label htmlFor="example3">收件地址：</label>
+            <div className="d-flex align-items-center justify-content-between">
             <div className="form-group">
-                <label htmlFor="example3">收件地址：</label>
+              <select id="pid" onChange={(event)=>{areaChange();
+                    setMember({
+                      ...member,
+                      paymentCity: event.target.value,
+                      paymentDistrict: "請選擇區域",
+                    })
+                  }}>
+                  {city}
+                  </select>
+                  <select className="ml-4" value={isSame ? member.paymentDistrict : ""} onChange={(event)=>{
+                    setMember({
+                      ...member,
+                      paymentDistrict: event.target.value,
+                    })
+                  }}>
+                  {district[indexstatus]}
+                  </select>
+              </div>
+              <div className="form-group w-75 ml-3">
+                {/* <label htmlFor="example3">收件地址：</label> */}
                 <input type="text" id="example3" className="form-control form-control-sm"
                        value={isSame ? member.shipAddress : ""}
                        onChange={(event) => setMember({
                             ...member,
                             shipAddress: event.target.value
                         })}/>
+              </div>
             </div>
 
             <div class="custom-control custom-checkbox">
@@ -120,9 +166,11 @@ function CartComfirmChange(props) {
                             memberArray.push(member)
                             console.log(memberArray)
                             localStorage.setItem("member", JSON.stringify(memberArray))
-                            localStorage.setItem("shipInfo", JSON.stringify(memberArray))
                             localStorage.setItem("note", note)
-                            props.history.push("/cart/comfirm")
+                            const path = props.history.location.pathname
+                            if(path.includes("/mall")) props.history.push("/mall/cart/comfirm")
+                            else props.history.push("/life/cart/comfirm")
+
                         }}>確認配送資訊</Button>
             </div>
             </Container>

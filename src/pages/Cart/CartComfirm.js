@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Table, Container, Row, Col, ListGroup, Image, Button } from "react-bootstrap"
+import { Table, Container, Row, Col, Image, Button } from "react-bootstrap"
 import { withRouter } from "react-router-dom";
 import { MdLocalShipping } from "react-icons/md"
 
@@ -17,6 +17,8 @@ function Cart(props) {
   const [courseCoupon, setCourseCoupon] = useState([])
   const [member, setMember] = useState([])
 
+  const [relCourseCouponId, setRelCourseCouponId] = useState(0)
+  const [relShopCouponId, setRelShopCouponId] = useState(0)
 
 
   async function getShopCouponData(memberId) {
@@ -124,8 +126,15 @@ function Cart(props) {
                     <p><MdLocalShipping className="font-48 mr-1"/>寄送資訊：宅配</p>
                     <p>{member[0].memberName}</p>
                     <p>{member[0].phone}</p>
+                    <p>{member[0].paymentCity}</p>
+                    <p>{member[0].paymentDistrict}</p>
                     <p>{member[0].shipAddress}</p>
-                    <Button className="mt-2 mb-2" size="sm" variant="outline-primary" onClick={() => props.history.push("/cart/comfirm/change")}>變更</Button>
+                    <Button className="mt-2 mb-2" size="sm" variant="outline-primary" onClick={() => {
+                        const path = props.history.location.pathname
+                        if(path.includes("/mall")) props.history.push("/mall/cart/comfirm/change")
+                        else props.history.push("/life/cart/comfirm/change")
+
+                      }}>變更</Button>
                     <p>運費：${shipTotal}</p>
                   </Col>
                 </Row>
@@ -144,7 +153,10 @@ function Cart(props) {
                     <tbody>
                     {shopCoupon.map((value, index) => {
                         return(
-                          <tr onClick={() => setShopDiscount(shopTotal - parseInt(shopTotal * Number(value.discountMethod)))}>
+                          <tr onClick={() => {
+                            setRelShopCouponId(value.rel_coupon_member_id)
+                            setShopDiscount(shopTotal - parseInt(shopTotal * Number(value.discountMethod)))
+                            }}>
                         <td>{value.discountName}</td>
                         <td>{value.discountMethod}</td>
                         <td>{value.discountPeriod}</td>
@@ -215,7 +227,10 @@ function Cart(props) {
                   <tbody>
                   {courseCoupon.map((value, index) => {
                       return(
-                    <tr onClick={() => setCourseDiscount(courseTotal - parseInt(courseTotal * Number(value.discountMethod)))}>
+                    <tr onClick={() => {
+                      setRelCourseCouponId(value.rel_coupon_member_id)
+                      setCourseDiscount(courseTotal - parseInt(courseTotal * Number(value.discountMethod)))
+                      }}>
                       <td>{value.discountName}</td>
                       <td>{value.discountMethod}</td>
                       <td>{value.discountPeriod}</td>
@@ -243,9 +258,18 @@ function Cart(props) {
 
         <Row className="d-flex justify-content-center pt-3 pb-3">
             <Button className="mt-2 mb-2" variant="outline-primary" onClick={() => {
-                  localStorage.setItem("shipInfo", JSON.stringify(member))
+                  if(courseDiscount !== 0){
+                    localStorage.setItem("relCourseCouponId", relCourseCouponId)
+                  }
+                  if(shopDiscount !== 0){
+                    localStorage.setItem("relShopCouponId", relShopCouponId)
+                  }
+                  localStorage.setItem("discount", courseDiscount + shopDiscount)
                   localStorage.setItem("total", courseTotal + shopTotal - courseDiscount - shopDiscount)
-                  props.history.push("/cart/payment")
+                  const path = props.history.location.pathname
+                  if(path.includes("/mall")) props.history.push("/mall/cart/payment")
+                  else props.history.push("/life/cart/payment")
+
               }}>確認付款</Button>
         </Row>
     </Container>

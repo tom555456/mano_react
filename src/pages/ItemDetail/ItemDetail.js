@@ -1,9 +1,21 @@
 import React, { Component } from 'react'
-import { Modal, Button } from 'react-bootstrap'
+import {
+  Modal,
+  Button,
+  Image,
+  InputGroup,
+  Col,
+  Card,
+  Container,
+  Row,
+} from 'react-bootstrap'
 import { withRouter } from 'react-router-dom'
 import './ItemDetail-style.css'
 import MyBreadcrumb from '../../components/MyBreadcrumb'
-// import Detail from '../../components/Course/Detail'
+import { FaFacebookSquare, FaLine } from 'react-icons/fa'
+
+import bgSvg from '../../components/bg-pattern.svg'
+import ItemDetailBg from './ItemDetailBg'
 
 class ItemDetail extends Component {
   constructor(props) {
@@ -20,8 +32,8 @@ class ItemDetail extends Component {
       catIds: '',
       catData: [],
       showPage: true,
-
       single: [],
+      amount: 1,
     }
   }
 
@@ -106,9 +118,7 @@ class ItemDetail extends Component {
   }
 
   async componentDidMount() {
-
     this.props.changeBackgroundColorLight()
-    
     let params = new URLSearchParams(this.props.location.search)
     let catIdParams = params.get('categoryId')
     if (catIdParams) {
@@ -142,7 +152,10 @@ class ItemDetail extends Component {
           <Button
             variant="primary"
             onClick={() => {
-              this.props.history.push('/cart')
+              const path = this.props.history.location.pathname
+              if(path.includes("/mall")) this.props.history.push("/mall/cart")
+              else this.props.history.push("/life/cart")
+
             }}
           >
             前往購物車結帳
@@ -152,71 +165,125 @@ class ItemDetail extends Component {
     )
 
     return (
-      <div className="container">
-        {messageModal}
-        <div className="tools">
-          <MyBreadcrumb />
+      <>
+        <div style={{ backgroundImage: `url(${bgSvg})` }} className="bgSvg">
+          <ItemDetailBg />
         </div>
-        {/* {this.state.data.map(course =>( */}
-        {/* <Detail
-              key={this.state.single.courseId}
-              courseImg={this.state.single.courseImg}
-              courseImg2={this.state.single.courseImg2}
-              courseName={this.state.single.courseName}
-              courseDesc={this.state.single.courseDesc}
-              coursePrice={this.state.single.coursePrice}
-              courseQty={this.state.single.courseQty}
-              handleClick={() => {
-                this.updateCartToLocalStorage({
-                  id: this.state.single.courseId,
-                  img: this.state.single.courseImg,
-                  name: this.state.single.courseName,
-                  amount: 1,
-                  price: this.state.single.coursePrice,
-                })
-              }}
-            /> */}
-        <div className="item-card">
-          <div className="courseDetail-img">
-            <img
-              src={`/items/${this.state.single.itemImg}`}
-              alt={this.state.single.itemImg}
-            />
-            <div className="learnMore">どうぞ</div>
+        <div className="container">
+          {messageModal}
+          <div className="tools">
+            <MyBreadcrumb />
           </div>
-          <div className="item-content">
-            <div className="item-content-left">
-              <h3 className="item-name">{this.state.single.itemName}</h3>
-              <p className="item-description">
-                {this.state.single.itemDescription}
-              </p>
-              {/* <p className="item-qty">
-                人數上限：{this.state.single.courseQty}
-              </p> */}
-            </div>
-            <div className="item-content-right">
-              <h3 className="item-price">$ {this.state.single.itemPrice}</h3>
-              <button
-                className="add-cart"
-                onClick={() => {
-                  this.updateCartToLocalStorage({
-                    id: this.state.single.itemId,
-                    img: this.state.single.itemImg,
-                    name: this.state.single.itemName,
-                    amount: 1,
-                    price: this.state.single.itemPrice,
-                    shippingId: this.state.single.shippingId
-                  })
-                }}
-              >
-                add to cart
-              </button>
-              <button className="add-fav">add to favtorite</button>
-            </div>
-          </div>
+
+          <Container>
+            <Row xs={12} md={2}>
+              <Image
+                src={`/items/${this.state.single.itemImg}`}
+                alt={this.state.single.itemImg}
+                thumbnail
+              />
+
+              <Row xs={12} md={2}>
+                <Card style={{ marginLeft: '50px' }}>
+                  <Card.Body className="card-detail">
+                    <Card.Title
+                      style={{
+                        borderBottom: '5px solid #5E6248',
+                        padding: '5px',
+                      }}
+                    >
+                      {this.state.single.itemName}
+                    </Card.Title>
+                    <Card.Text style={{ fontSize: '15px', color: '#999' }}>
+                      {this.state.single.itemDescription}
+                    </Card.Text>
+                  </Card.Body>
+
+                  <div className="link1">
+                    <a href="http://www.facebook.com">
+                      <FaFacebookSquare
+                        style={{
+                          fontSize: '40px',
+                        }}
+                      />
+                    </a>
+                  </div>
+                  <div className="link2">
+                    <a href="https://line.me/zh-hant/">
+                      <FaLine
+                        style={{
+                          fontSize: '40px',
+                        }}
+                      />
+                    </a>
+                  </div>
+
+                  <h3 className="item-price">
+                    $ {this.state.single.itemPrice}
+                  </h3>
+
+                  <div>
+                    <Button
+                      onClick={() =>
+                        this.setState({ amount: this.state.amount - 1 })
+                      }
+                      style={{ margin: '5px' }}
+                    >
+                      -
+                    </Button>
+
+                    <input
+                      style={{
+                        textAlign: 'center',
+                      }}
+                      onChange={(event) => {
+                        this.setState({ amount: event.target.value })
+                      }}
+                      value={this.state.amount < 1 ? 1 : this.state.amount}
+                    />
+
+                    <Button
+                      onClick={() =>
+                        this.setState({ amount: this.state.amount + 1 })
+                      }
+                      style={{ margin: '5px' }}
+                    >
+                      +
+                    </Button>
+                  </div>
+
+                  <select style={{ margin: '10px' }}>
+                    {/* <option>請選擇商品尺寸</option> */}
+                    <option>F</option>
+                  </select>
+
+                  <div>
+                    <Button
+                      className="add-cart"
+                      onClick={() => {
+                        for (let i = 0; i < this.state.amount; i++) {
+                          this.updateCartToLocalStorage({
+                            id: this.state.single.itemId,
+                            img: this.state.single.itemImg,
+                            name: this.state.single.itemName,
+                            amount: 1,
+                            price: this.state.single.itemPrice,
+                            shippingId: this.state.single.shippingId,
+                          })
+                        }
+                      }}
+                    >
+                      add to cart
+                    </Button>
+
+                    <Button className="add-fav">add to favtorite</Button>
+                  </div>
+                </Card>
+              </Row>
+            </Row>
+          </Container>
         </div>
-        {/* ))} */}
-      </div>
+      </>
     )
   }
 }

@@ -59,7 +59,7 @@ class CategoryBar extends Component {
             <div className="cat-container" onClick={() => localStorage.setItem("page",1)}>
               <ListGroup variant="flush">
                 {this.state.listArray.map(list => (
-                    <ListGroup.Item action href={`${list.url}?categoryId=${list.id}`}>{list.name}</ListGroup.Item>
+                    <ListGroup.Item action href={`/mall${list.url}?categoryId=${list.id}`}>{list.name}</ListGroup.Item>
                 ))}
               </ListGroup>
             </div>
