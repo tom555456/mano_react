@@ -359,7 +359,7 @@ function CartPayment (props) {
                         else props.history.push("/life/cart/complete")
 
 
-                      {/* localStorage.removeItem("shipTotal")
+                      localStorage.removeItem("shipTotal")
                       localStorage.removeItem("discount")
                       localStorage.removeItem("finalCourseCart")
                       localStorage.removeItem("shopTotal")
@@ -369,7 +369,7 @@ function CartPayment (props) {
                       localStorage.removeItem("finalCart")
                       localStorage.removeItem("courseTotal")
                       localStorage.removeItem("relCourseCouponId")
-                      localStorage.removeItem("relShopCouponId") */}
+                      localStorage.removeItem("relShopCouponId")
                       }
                     }}
                     >前往付款</Button>
@@ -400,7 +400,7 @@ function CartPayment (props) {
                         else props.history.push("/life/cart/complete")
 
 
-                      {/* localStorage.removeItem("shipTotal")
+                      localStorage.removeItem("shipTotal")
                       localStorage.removeItem("discount")
                       localStorage.removeItem("finalCourseCart")
                       localStorage.removeItem("shopTotal")
@@ -410,7 +410,7 @@ function CartPayment (props) {
                       localStorage.removeItem("finalCart")
                       localStorage.removeItem("courseTotal")
                       localStorage.removeItem("relCourseCouponId")
-                      localStorage.removeItem("relShopCouponId") */}
+                      localStorage.removeItem("relShopCouponId")
                     }}
                     >前往付款</Button>
             </div> ) : "" }
