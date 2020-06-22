@@ -1,43 +1,50 @@
-import React, { useState, useEffect } from "react"
-import { Table, Container, Row, Col, ListGroup, Image,Pagination } from "react-bootstrap"
-import { Link, withRouter } from "react-router-dom"
+import React, { useState, useEffect } from 'react'
+import {
+  Table,
+  Container,
+  Row,
+  Col,
+  ListGroup,
+  Image,
+  Pagination,
+} from 'react-bootstrap'
+import { Link, withRouter } from 'react-router-dom'
 
-import MyBreadcrumb from "../components/MyBreadcrumb"
+import MyBreadcrumb from '../components/MyBreadcrumb'
 
-import MemberSideLink from "./MemberSideLink"
+import MemberSideLink from './MemberSideLink'
 
-function MemberOrders() {
+function MemberOrders(props) {
+  const {changeBackgroundColorDark}=props
+
   const [order, setOrder] = useState([])
   const [pageArr, setPagearr] = useState([])
-  const [pageNow,setPagenow] = useState(1)
+  const [pageNow, setPagenow] = useState(1)
   const [detail, setDetail] = useState([])
   const [coursedetail, setCoursedetail] = useState([])
   const [detailshow, setDetailshow] = useState(false)
   const [orderindex, setOrderindex] = useState(0)
 
-  const active = { borderBottom: "2px solid #C5895A" }
-  const localMember = JSON.parse(localStorage.getItem("member")) || [
-    { memberName: "", memberId: "" },
+  const active = { borderBottom: '2px solid #C5895A' }
+  const localMember = JSON.parse(localStorage.getItem('member')) || [
+    { memberName: '', memberId: '' },
   ]
 
-  function changeBackgroundColor() {
-    document.body.style.background = "#5C6447"
-  }
   async function getData(memberId, pageNow) {
     const request = new Request(
       `http://localhost:3002/membercenter/memberorder/${memberId}/${pageNow}`,
       {
-        method: "GET",
+        method: 'GET',
         headers: new Headers({
-          Accept: "application/json",
-          "Content-Type": "appliaction/json",
+          Accept: 'application/json',
+          'Content-Type': 'appliaction/json',
         }),
       }
     )
 
     const response = await fetch(request)
     const data = await response.json()
-    console.log("主要的資料", data)
+    console.log('主要的資料', data)
     // 設定資料
     setOrder(data)
   }
@@ -45,41 +52,42 @@ function MemberOrders() {
     const request = new Request(
       `http://localhost:3002/membercenter/memberorderpage/${memberId}`,
       {
-        method: "GET",
+        method: 'GET',
         headers: new Headers({
-          Accept: "application/json",
-          "Content-Type": "appliaction/json",
+          Accept: 'application/json',
+          'Content-Type': 'appliaction/json',
         }),
       }
     )
 
     const response = await fetch(request)
     const data = await response.json()
-    console.log("總共幾筆訂單的arr", data)
+    console.log('總共幾筆訂單的arr', data)
     // 設定總共幾筆訂單
     setPagearr(data)
   }
   useEffect(() => {
     getData(localMember[0].memberId, 1)
     getPageData(localMember[0].memberId)
-    document.getElementById("maintable").classList.add("coupontable")
-    changeBackgroundColor()
+    document.getElementById('maintable').classList.add('coupontable')
+    changeBackgroundColorDark()
+
   }, [])
   async function getDetailData(orderId) {
     const request = new Request(
       `http://localhost:3002/membercenter/memberorderdetail/${orderId}`,
       {
-        method: "GET",
+        method: 'GET',
         headers: new Headers({
-          Accept: "application/json",
-          "Content-Type": "appliaction/json",
+          Accept: 'application/json',
+          'Content-Type': 'appliaction/json',
         }),
       }
     )
 
     const response = await fetch(request)
     const data = await response.json()
-    console.log("詳細的商品資料", data)
+    console.log('詳細的商品資料', data)
     // 設定資料
     setDetail(data)
   }
@@ -87,17 +95,17 @@ function MemberOrders() {
     const request = new Request(
       `http://localhost:3002/membercenter/memberordercoursedetail/${orderId}`,
       {
-        method: "GET",
+        method: 'GET',
         headers: new Headers({
-          Accept: "application/json",
-          "Content-Type": "appliaction/json",
+          Accept: 'application/json',
+          'Content-Type': 'appliaction/json',
         }),
       }
     )
 
     const response = await fetch(request)
     const data = await response.json()
-    console.log("詳細的課程資料", data)
+    console.log('詳細的課程資料', data)
     // 設定資料
     setCoursedetail(data)
   }
@@ -108,7 +116,7 @@ function MemberOrders() {
   }
   const displayDetail = (
     <>
-      <Table responsive bordered style={{ fontSize: "10pt" }}>
+      <Table responsive bordered style={{ fontSize: '10pt' }}>
         <thead>
           <Link
             to="#"
@@ -155,24 +163,24 @@ function MemberOrders() {
 
           <tr className="text-danger">
             <td>運費</td>
-            <td>{detailshow ? "$" + order[orderindex].shiptotalMoney : ""}</td>
+            <td>{detailshow ? '$' + order[orderindex].shiptotalMoney : ''}</td>
             <td>活動折扣</td>
             <td>
               {detailshow && order[orderindex].shopDiscount > 1
-                ? "-$" + order[orderindex].shopDiscount
-                : "無"}
+                ? '-$' + order[orderindex].shopDiscount
+                : '無'}
             </td>
           </tr>
           <tr className="text-primary">
             <td>收件資料</td>
             <td colSpan={3}>
-              {detailshow ? order[orderindex].ship_name : ""}
+              {detailshow ? order[orderindex].ship_name : ''}
               <br />
               {detailshow
                 ? order[orderindex].shipCity +
                   order[orderindex].shipDistrict +
                   order[orderindex].shipAddress
-                : ""}
+                : ''}
             </td>
           </tr>
         </tbody>
@@ -185,31 +193,31 @@ function MemberOrders() {
       <MyBreadcrumb />
 
       <MemberSideLink>
-        <Col md={10} xs={12} style={{ background: "white", padding: "0" }}>
+        <Col md={10} xs={12} style={{ background: 'white', padding: '0' }}>
           <div
             style={{
-              width: "100%",
-              height: "44px",
-              background: "#D1DBCE",
-              marginBottom: "32px",
+              width: '100%',
+              height: '44px',
+              background: '#D1DBCE',
+              marginBottom: '32px',
             }}
           >
             <button
               className="btn"
               style={{
-                width: "120px",
-                height: "44px",
-                color: "#5C6447",
-                borderBottom: "2px solid #C5895A",
+                width: '120px',
+                height: '44px',
+                color: '#5C6447',
+                borderBottom: '2px solid #C5895A',
               }}
             >
               全部訂單
             </button>
           </div>
           <Col md={{ span: 10, offset: 1 }}>
-            <Table responsive hover id="maintable" style={{ fontSize: "10pt" }}>
+            <Table responsive hover id="maintable" style={{ fontSize: '10pt' }}>
               <thead
-                style={{ border: "2px solid #C5895A", borderBottom: "#C5895A" }}
+                style={{ border: '2px solid #C5895A', borderBottom: '#C5895A' }}
               >
                 <tr className="bg-primary ">
                   <th>訂單日期</th>
@@ -238,7 +246,7 @@ function MemberOrders() {
                           setOrderindex(index)
                         }}
                       >
-                        {" "}
+                        {' '}
                         <Link
                           to="#"
                           onClick={() => {
@@ -253,47 +261,51 @@ function MemberOrders() {
                 })}
               </tbody>
             </Table>
-            {detailshow ? displayDetail : ""}
+            {detailshow ? displayDetail : ''}
             <div className="d-flex justify-content-center">
-            <Pagination>
-              <Pagination.Prev 
-              onClick={() => {
-                setPagenow(pageNow-1);
-                getData(localMember[0].memberId, pageNow-1)
-              }}
-              />
-              {pageArr.map((value) => {
-                return (
-                  <>
-                   <Pagination.Item
-                    key={value}
-                    value={value}
-                    active={value === pageNow}
-                    onClick={() => {
-                      getData(localMember[0].memberId, value);
-                      setPagenow(value)
-                    }}
-                   >{value}</Pagination.Item>
-                    
-                  </>
-                )
-              })}
-              <Pagination.Next 
-              onClick={() => {
-                let nextnum = 1
-                if (pageNow+1 > pageArr.length){
-                  nextnum = 1;setPagenow(1);
-                }else{nextnum = pageNow+1
-                  setPagenow(pageNow+1)}
-                
-                getData(localMember[0].memberId, nextnum)
-              }}
-              />
-            </Pagination></div>
+              <Pagination>
+                <Pagination.Prev
+                  onClick={() => {
+                    setPagenow(pageNow - 1)
+                    getData(localMember[0].memberId, pageNow - 1)
+                  }}
+                />
+                {pageArr.map((value) => {
+                  return (
+                    <>
+                      <Pagination.Item
+                        key={value}
+                        value={value}
+                        active={value === pageNow}
+                        onClick={() => {
+                          getData(localMember[0].memberId, value)
+                          setPagenow(value)
+                        }}
+                      >
+                        {value}
+                      </Pagination.Item>
+                    </>
+                  )
+                })}
+                <Pagination.Next
+                  onClick={() => {
+                    let nextnum = 1
+                    if (pageNow + 1 > pageArr.length) {
+                      nextnum = 1
+                      setPagenow(1)
+                    } else {
+                      nextnum = pageNow + 1
+                      setPagenow(pageNow + 1)
+                    }
+
+                    getData(localMember[0].memberId, nextnum)
+                  }}
+                />
+              </Pagination>
+            </div>
           </Col>
         </Col>
       </MemberSideLink>
-      
     </>
   )
 }

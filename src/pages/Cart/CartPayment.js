@@ -1,5 +1,5 @@
 import React, { Component, Fragment, useState, useEffect } from "react";
-import { Table, Container, Alert, Button } from "react-bootstrap"
+import { Table, Container, Alert, Button, Form } from "react-bootstrap"
 
 import { withRouter } from "react-router-dom";
 
@@ -22,6 +22,9 @@ function CartPayment (props) {
 
     const [courseDiscountUpdate, setCourseDiscountUpdate] = useState("")
     const [shopDiscountUpdate, setShopDiscountUpdate] = useState("")
+
+    const [paymentMethod, setPaymentMedthod] = useState("")
+
 
     useEffect(() => {
         props.changeBackgroundColorLight()
@@ -224,7 +227,37 @@ function CartPayment (props) {
     
     return(
         <>
+        <Container className="w-25">
+          <Form.Group className="text-center" controlId="exampleForm.ControlSelect1">
+            <Form.Label>選擇付款方式：</Form.Label>
+            <Form.Control as="select" onChange={(event) => {
+              console.log(event.target.value)
+              setPaymentMedthod(event.target.value)
+              if(event.target.value !== "信用卡") {
+                  setOrder({
+                  ...order,
+                  paymentStatus: "未付款",
+                  paymentMethod: event.target.value
+                })
+              }else {
+                  setOrder({
+                  ...order,
+                  paymentMethod: event.target.value
+                })
+              }
+              }}>
+              <option>請選擇付款方式</option>
+              <option value="ATM轉帳">ATM 轉帳</option>
+              <option value="貨到付款">貨到付款</option>
+              <option value="信用卡">信用卡</option>
+              <option value="LinePay">LINE PAY</option>
+            </Form.Control>
+          </Form.Group>
+        </Container>
+
         <Container className="w-75">
+          {paymentMethod === "信用卡" ? (
+            <>
             <div className="text-center">
                 <h3>付款資訊</h3>
             </div>
@@ -299,7 +332,8 @@ function CartPayment (props) {
 
                 </div>
             </Fragment>
-            <div className="d-flex justify-content-center pt-3 pb-3">
+            
+            <div className="d-flex justify-content-center pt-3 pb-3 mt-5">
                 <Button className="mt-2 mb-2" variant="outline-primary"
                     onMouseDown={async () => {
                       await validate()
@@ -339,7 +373,47 @@ function CartPayment (props) {
                       }
                     }}
                     >前往付款</Button>
-            </div>  
+            </div> 
+            </> ) : "" }
+            {paymentMethod !== "" && paymentMethod !== "信用卡" ? (
+              <div className="d-flex justify-content-center pt-3 pb-3">
+                <Button className="mt-2 mb-2" variant="outline-primary"
+                    onMouseDown={async () => {
+                      await insertOrderToSever(order)
+                      if(courseDiscountUpdate !== "") await updateDiscountToSever(courseDiscountUpdate)
+
+                    }}
+
+                    onMouseUp={async () => {
+                        await handleInsertData()
+                        if(shopDiscountUpdate !== "") {await updateDiscountToSever(shopDiscountUpdate);}
+                    }}    
+
+                    onClick={async () => {
+                        console.log(order)
+                        for(let i = 0; i < orderList.length; i++) {
+                          await insertOrderListToSever(orderList[i])
+                        }
+                      
+                        const path = props.history.location.pathname
+                        if(path.includes("/mall")) props.history.push("/mall/cart/complete")
+                        else props.history.push("/life/cart/complete")
+
+
+                      {/* localStorage.removeItem("shipTotal")
+                      localStorage.removeItem("discount")
+                      localStorage.removeItem("finalCourseCart")
+                      localStorage.removeItem("shopTotal")
+                      localStorage.removeItem("total")
+                      localStorage.removeItem("coursecart")
+                      localStorage.removeItem("cart")
+                      localStorage.removeItem("finalCart")
+                      localStorage.removeItem("courseTotal")
+                      localStorage.removeItem("relCourseCouponId")
+                      localStorage.removeItem("relShopCouponId") */}
+                    }}
+                    >前往付款</Button>
+            </div> ) : "" }
         </Container>
         </>
     )

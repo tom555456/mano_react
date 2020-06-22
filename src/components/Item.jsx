@@ -41,7 +41,7 @@ function Item(props) {
           alt={props.itemImg}
           value={props.itemId}
         />
-        <div className="learnMore">どうぞ</div>
+        <div className="learnMore">ディテール</div>
       </div>
       <div className="item-content">
         <div className="item-content-left">
@@ -53,7 +53,9 @@ function Item(props) {
           <button className="add-cart" onClick={props.handleClick}>
             add to cart
           </button>
-          <button className="add-fav" onClick={props.handleWishListClick}>add to favtorite</button>
+          <button className="add-fav" onClick={props.handleWishListClick}>
+            add to favtorite
+          </button>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Table, Container, Row, Col, Image, Button } from "react-bootstrap"
+import { Table, Container, Row, Col, Image, Button, Form } from "react-bootstrap"
 import { withRouter } from "react-router-dom";
 import { MdLocalShipping } from "react-icons/md"
 
@@ -145,6 +145,7 @@ function Cart(props) {
                   <Table bordered hover>
                     <thead>
                       <tr>
+                        <th></th>
                         <th>折價券名稱</th>
                         <th>折扣內容</th>
                         <th>有效期限</th>
@@ -157,6 +158,7 @@ function Cart(props) {
                             setRelShopCouponId(value.rel_coupon_member_id)
                             setShopDiscount(shopTotal - parseInt(shopTotal * Number(value.discountMethod)))
                             }}>
+                        <td><input name="shopradio" type="radio"/></td>
                         <td>{value.discountName}</td>
                         <td>{value.discountMethod}</td>
                         <td>{value.discountPeriod}</td>
@@ -219,6 +221,7 @@ function Cart(props) {
                   <Table bordered hover>
                   <thead>
                     <tr>
+                      <th></th>
                       <th>折價券名稱</th>
                       <th>折扣內容</th>
                       <th>有效期限</th>
@@ -231,6 +234,7 @@ function Cart(props) {
                       setRelCourseCouponId(value.rel_coupon_member_id)
                       setCourseDiscount(courseTotal - parseInt(courseTotal * Number(value.discountMethod)))
                       }}>
+                      <td><input name="courseradio" type="radio"/></td>
                       <td>{value.discountName}</td>
                       <td>{value.discountMethod}</td>
                       <td>{value.discountPeriod}</td>
@@ -250,13 +254,25 @@ function Cart(props) {
             </>
           ) : "" } 
 
-          <Row className="text-right mr-5">
-            <Col>
+          <Row className="mr-5">
+            <Col className="w-25">
+              {/* <Form.Group controlId="exampleForm.ControlSelect1">
+                <Form.Label>選擇付款方式</Form.Label>
+                <Form.Control as="select" onChange={(event) => setPaymentMedthod(event.target.value)}>
+                  <option>請選擇付款方式</option>
+                  <option value="ATM 轉帳">ATM 轉帳</option>
+                  <option value="貨到付款">貨到付款</option>
+                  <option value="信用卡">信用卡</option>
+                  <option value="LINE PAY">LINE PAY</option>
+                </Form.Control>
+              </Form.Group> */}
+            </Col>
+            <Col className="text-right">
               <p>訂單總金額：${courseTotal + shopTotal - courseDiscount - shopDiscount}</p>           
             </Col>
           </Row>
 
-        <Row className="d-flex justify-content-center pt-3 pb-3">
+        <Row className="d-flex justify-content-center pt-3 pb-3 mt-5">
             <Button className="mt-2 mb-2" variant="outline-primary" onClick={() => {
                   if(courseDiscount !== 0){
                     localStorage.setItem("relCourseCouponId", relCourseCouponId)
@@ -264,13 +280,14 @@ function Cart(props) {
                   if(shopDiscount !== 0){
                     localStorage.setItem("relShopCouponId", relShopCouponId)
                   }
+
                   localStorage.setItem("discount", courseDiscount + shopDiscount)
                   localStorage.setItem("total", courseTotal + shopTotal - courseDiscount - shopDiscount)
                   const path = props.history.location.pathname
                   if(path.includes("/mall")) props.history.push("/mall/cart/payment")
                   else props.history.push("/life/cart/payment")
 
-              }}>確認付款</Button>
+              }}>前往付款</Button>
         </Row>
     </Container>
     </>

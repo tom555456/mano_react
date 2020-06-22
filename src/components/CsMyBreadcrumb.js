@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 
 function MyBreadcrumb(props) {
-  const [showAll, setShowAll] = useState('visible');
   // useEffect(() => {
   //   if (clickParams) {
   //     setShowAll("visible")
@@ -10,27 +9,30 @@ function MyBreadcrumb(props) {
   //   });
   const pathlist = [
     '/',
-    '/life/course',
-    '/life/course/cuisine',
-    '/life/course/clothes',
-    '/life/course/life',
-    '/life/course/limit',
-    '/life/course/new',
-    '/life/course/anti',
-    '/life/courseDetail',
+    '/course',
+    '/cuisine',
+    '/clothes',
+    '/life',
+    '/limit',
+    '/new',
+    '/anti',
   ]
-  const pathnames = ['首頁', '所有課程', '抹の食', '抹の著', '抹の生活', '期間限定', '手摘專屬體驗', '防疫限定', 
-  '課程列表', 
-]
-
+  const pathnames = ['首頁', '所有課程', '抹の食', '抹の著', '抹の生活', '期間限定', '手摘專屬體驗', '防疫限定']
+// /course/new?categoryId=31
+// /courseDetail/course/new?courseId=8
   // 先找出對應的中文詞
   let locationPathname = props.location.pathname
+  let catUrl = `/${props.match.params.second}/${props.match.params.third}?${props.match.params.fourth}`
 
-
+  // console.log(`${locationPathname}${courseId}`)
   console.log(props)
   // `/product/xxxx` 轉為 `/product`
-  // if (locationPathname.includes('/course')) locationPathname = '/course'
-  // if (locationPathname.includes('/cuisine')) locationPathname = '/cuisine'
+   if (locationPathname.includes('/clothes')) locationPathname = '/clothes'
+   if (locationPathname.includes('/cuisine')) locationPathname = '/cuisine'
+   if (locationPathname.includes('/life')) locationPathname = '/life'
+   if (locationPathname.includes('/limit')) locationPathname = '/limit'
+   if (locationPathname.includes('/new')) locationPathname = '/new'
+   if (locationPathname.includes('/anti')) locationPathname = '/anti'
 
   const index = pathlist.findIndex((v) => v === locationPathname)
 
@@ -42,7 +44,7 @@ const allcourse = (
   <ol
    className="breadcrumb">
           <li className="breadcrumb-item">
-            <Link to="/life">首頁</Link>
+            <Link to="/">首頁</Link>
           </li>
           <li 
           className="breadcrumb-item active" aria-current="page">
@@ -52,60 +54,63 @@ const allcourse = (
   </>
 )
 
-const two = (
+const detail = (
   <>
   <ol 
-  // style={{visibility : 'hidden'}}
   className="breadcrumb">
           <li className="breadcrumb-item">
-            <Link to="/life">首頁</Link>
+            <Link to="/">首頁</Link>
           </li>
           <li 
             className="breadcrumb-item">
           <a 
-          href="/life/course?categoryId=26"
+          href="/course?categoryId=26"
           >所有課程</a>
           </li>
           <li className="breadcrumb-item active" aria-current="page">
-            {pathnames[index]}
-          </li>
-        </ol>
-     </>
-)
-
-const detail = (
-  <>
-  <ol
-   className="breadcrumb">
-          <li className="breadcrumb-item">
-            <Link to="/life">首頁</Link>
-          </li>
-          <li 
-            className="breadcrumb-item">
           <a 
-          href="/life/course"
-          >課程列表</a>
+          href={catUrl}
+          >{pathnames[index]}</a>
           </li>
           <li 
           className="breadcrumb-item active" aria-current="page">
             商品內容
           </li>
         </ol>
+     </>
+)
+
+const two = (
+  <>
+  <ol
+   className="breadcrumb">
+          <li className="breadcrumb-item">
+            <Link to="/">首頁</Link>
+          </li>
+          <li 
+            className="breadcrumb-item">
+          <a 
+          href="/course"
+          >所有課程</a>
+          </li>
+          <li 
+          className="breadcrumb-item active" aria-current="page">
+            {pathnames[index]}
+          </li>
+        </ol>
   </>
 )
 
 
-
-
 let display;
 
-if(props.location.pathname =="/life/course"){
-  display = allcourse
-}else{
+if(props.location.pathname === "/course"){
+      display = allcourse
+  }else{
   display = two
 }
 
-if(props.location.pathname =="/life/courseDetail"){
+if(props.match.params.fourth){
   display = detail
 }
 

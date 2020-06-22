@@ -24,7 +24,12 @@ class CartComplete extends Component {
                         else this.props.history.push("/life/course")
                         localStorage.setItem("page",1);
                       }}>繼續購物</Button>
-                    <Button className="mt-2 mb-2" variant="outline-primary">訂單查詢</Button>
+                    <Button className="mt-2 mb-2" variant="outline-primary"
+                        onClick={() => {
+                            const path = this.props.history.location.pathname
+                            if(path.includes("/mall")) this.props.history.push("/mall/membercenter/memberorders")
+                            else this.props.history.push("/life/membercenter/memberorders")
+                      }}>訂單查詢</Button>
                 </div>
             </>
         )

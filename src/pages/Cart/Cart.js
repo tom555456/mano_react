@@ -117,6 +117,27 @@ function Cart (props) {
     setMyCourseCart(newCart);
   }
 
+  function removeCourseCartToLocalStorage (value) {
+    
+    let foundObj = value
+    let filtered = myCourseCart.filter(el => el.id != foundObj.id);
+    const newCart = filtered
+    localStorage.setItem('coursecart', JSON.stringify(newCart))
+
+    setMyCourseCart(newCart);
+  }
+
+  function removeCartToLocalStorage (value) {
+    
+    let foundObj = value
+    let filtered = mycart.filter(el => el.id != foundObj.id);
+    const newCart = filtered
+    localStorage.setItem('cart', JSON.stringify(newCart))
+
+    setMyCourseCart(newCart);
+  }
+
+
 
 
   function sumShipping(items) {
@@ -207,11 +228,11 @@ function Cart (props) {
                               alt={value.img}
                               />
                           </Col>
-                          <Col xs={8}>
-                              <Row className="d-flex">
+                          <Col xs={9}>
+                              <Row className="d-flex justify-content-between">
                                   <p className="w-25">{value.name}</p>
                                   <p className="w-25 text-right">${value.price}</p>
-                                  <p className="w-25 text-right">
+                                  <p className="text-right">
                                     <GrFormSubtract onClick={() => substarctCartToLocalStorage({
                                         id: value.id,
                                         img: value.img,
@@ -232,7 +253,10 @@ function Cart (props) {
                                         shippingId: value.shippingId
                                       }) } />
                                   </p>
-                                  <p className="w-25 text-right">${value.price * value.amount}</p>
+                                  <p className="text-right">${value.price * value.amount}</p>
+                                  <p className="text-right" onClick={() => removeCartToLocalStorage({
+                                        id: value.id
+                                      }) }><i class="fas fa-times"></i></p>
                               </Row>
                               <Row className="mt-2">
                                   <Button className="mt-2 mb-2" size="sm" variant="primary">優惠活動</Button>
@@ -288,11 +312,11 @@ function Cart (props) {
                               alt={value.img}
                               />
                           </Col>
-                          <Col xs={8}>
-                              <Row className="d-flex">
+                          <Col xs={9}>
+                              <Row className="d-flex justify-content-between">
                                   <p className="w-25">{value.name}</p>
                                   <p className="w-25 text-right">${value.price}</p>
-                                  <p className="w-25 text-right">
+                                  <p className="text-right">
                                     <GrFormSubtract onClick={() => substarctCourseCartToLocalStorage({
                                         id: value.id,
                                         img: value.img,
@@ -311,7 +335,14 @@ function Cart (props) {
                                         price: value.price
                                       }) } />
                                   </p>
-                                  <p className="w-25 text-right">${value.price * value.amount}</p>
+                                  <p className="text-right">${value.price * value.amount}</p>
+                                  <p className="text-right" onClick={() => removeCourseCartToLocalStorage({
+                                        id: value.id,
+                                        img: value.img,
+                                        name: value.name,
+                                        amount: 1,
+                                        price: value.price
+                                      }) }><i class="fas fa-times"></i></p>
                               </Row>
                               <Row className="mt-2">
                                   <Button className="mt-2 mb-2" size="sm" variant="primary">優惠活動</Button>
@@ -350,7 +381,10 @@ function Cart (props) {
                 <Button className="mt-2 mb-2" variant="outline-primary" 
                     onClick={() => {
                       if(member[0].memberName === "") {
-                        props.history.push("/login")
+                        const path = props.history.location.pathname
+                        if(path.includes("/mall")) props.history.push("/mall/login")
+                        else props.history.push("/life/login")
+
                       }else {
                         localStorage.setItem("finalCart", JSON.stringify(mycartDisplay))
                         localStorage.setItem("finalCourseCart", JSON.stringify(myCourseCartDisplay))

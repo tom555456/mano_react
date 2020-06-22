@@ -95,7 +95,7 @@ class CourseDetail extends Component {
     const related2 = allData[courseId + 1 ]
     const related3 = allData[courseId + 2 ]
  
-    console.log(related1.linkUrl)
+    //console.log(related1.linkUrl)
 
 
     this.setState({

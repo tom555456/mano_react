@@ -103,9 +103,6 @@ function MyNavbar(props) {
           <Nav.Link as={NavLink} to="/mall/cart">
             購物車
           </Nav.Link>
-          <Nav.Link as={NavLink} to="/mall/testupload">
-            Test Upload
-          </Nav.Link>
           <Nav.Link as={NavLink} to="/mall/faq">
             FAQ
           </Nav.Link>
@@ -153,8 +150,8 @@ function MyNavbar(props) {
           <Nav.Link as={NavLink} to="/life/comment">
             Comment
           </Nav.Link>
-          <Nav.Link as={NavLink} to="/life/testupload">
-            Test Upload
+          <Nav.Link as={NavLink} to="/life/map">
+            抹茶地圖
           </Nav.Link>
           <Nav.Link as={NavLink} to="/life/faq">
             FAQ
@@ -172,7 +169,7 @@ function MyNavbar(props) {
         <Nav className="mr-auto justify-content-end w-75 align-items-center">
           <Nav.Link
             as={NavLink}
-            to="/cart"
+            to={props.history.location.pathname.includes("/mall") ? "/mall/cart" : "/life/cart"}
             className="d-flex align-items-center"
             disabled
             exact
@@ -181,17 +178,17 @@ function MyNavbar(props) {
           </Nav.Link>
           <MdKeyboardArrowRight className="ml-1" />
           <MdKeyboardArrowRight className="mr-1" />
-          <Nav.Link as={NavLink} to="/cart/comfirm" disabled>
+          <Nav.Link as={NavLink} to={props.history.location.pathname.includes("/mall") ? "/mall/cart/comfirm" : "/life/cart/comfirm"} disabled>
             確認訂單
           </Nav.Link>
           <MdKeyboardArrowRight className="ml-1" />
           <MdKeyboardArrowRight className="mr-1" />
-          <Nav.Link as={NavLink} to="/cart/payment" disabled>
+          <Nav.Link as={NavLink} to={props.history.location.pathname.includes("/mall") ? "/mall/cart/payment" : "/life/cart/payment"} disabled>
             付款
           </Nav.Link>
           <MdKeyboardArrowRight className="ml-1" />
           <MdKeyboardArrowRight className="mr-1" />
-          <Nav.Link as={NavLink} to="/cart/complete" disabled>
+          <Nav.Link as={NavLink} to={props.history.location.pathname.includes("/mall") ? "/mall/cart/complete" : "/life/cart/complete"} disabled>
             完成訂單
           </Nav.Link>
         </Nav>

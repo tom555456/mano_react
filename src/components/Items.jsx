@@ -53,20 +53,20 @@ class Items extends Component {
 
   insertWishListToDb = async (wishList) => {
     const request = new Request(`http://localhost:3002/itemTracking/add`, {
-      method: "POST",
+      method: 'POST',
       body: JSON.stringify(wishList),
       headers: new Headers({
-        Accept: "application/json",
-        "Content-Type": "application/json",
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       }),
     })
 
-    console.log("After JSON: ", JSON.stringify(wishList))
+    console.log('After JSON: ', JSON.stringify(wishList))
 
-    const response =  await fetch(request)
+    const response = await fetch(request)
     //const data =  await response.json()
     this.handleWishShow()
-}
+  }
 
   getCatData = async (categoryParentId) => {
     const response = await fetch(
@@ -84,7 +84,7 @@ class Items extends Component {
 
   getRecursiveCategoryIds = async (categoryId) => {
     const output = await this.getCatData(categoryId)
-    //console.log(output)
+    // console.log(output)
     if (output.length > 0) {
       for (let i = 0; i < output.length; i++) {
         await this.setState({
@@ -164,7 +164,7 @@ class Items extends Component {
     const allData = json.allData
 
     this.setState({
-      data: allData,
+      // data: allData,
       showPage: false,
     })
   }
@@ -219,9 +219,8 @@ class Items extends Component {
             variant="primary"
             onClick={() => {
               const path = this.props.history.location.pathname
-              if(path.includes("/mall")) this.props.history.push("/mall/cart")
-              else this.props.history.push("/life/cart")
-
+              if (path.includes('/mall')) this.props.history.push('/mall/cart')
+              else this.props.history.push('/life/cart')
             }}
           >
             前往購物車結帳
@@ -240,7 +239,9 @@ class Items extends Component {
         <Modal.Header closeButton>
           <Modal.Title>加入願望清單訊息</Modal.Title>
         </Modal.Header>
-        <Modal.Body>產品：{this.state.productName} 已成功加入願望清單</Modal.Body>
+        <Modal.Body>
+          產品：{this.state.productName} 已成功加入願望清單
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={this.handleWishClose}>
             繼續購物
@@ -316,15 +317,13 @@ class Items extends Component {
                   shippingId: item.shippingId,
                 })
               }}
-
-              handleWishListClick={()=>{
-                 this.insertWishListToDb({
-                    "itemId": item.itemId,
-                    "itemPrice": item.itemPrice
+              handleWishListClick={() => {
+                this.insertWishListToDb({
+                  itemId: item.itemId,
+                  itemPrice: item.itemPrice,
                 })
-                this.setState({productName: item.itemName})
-                    }
-                }
+                this.setState({ productName: item.itemName })
+              }}
             />
           ))}
 
