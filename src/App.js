@@ -6,6 +6,7 @@ import MyFooter from './components/MyFooter'
 import MainContent from './components/MainContent'
 
 import LifePage from './pages/LifeStyle/LifePage'
+import MallPage from './pages/MallPage'
 //import MapPage from './components/Map/MapPage'
 
 import Home from './pages/Home'
@@ -27,7 +28,7 @@ import Cart from './pages/Cart/Cart'
 import Membercenter from './pages/Membercenter'
 import Coupon from './pages/Coupon'
 import MemberOrders from "./pages/MemberOrders"
-import MemberItemtrack from "./pages/MemberItemtrack"
+import MemberItemtrack from "./pages/MemberItemTrack"
 
 import NotFoundPage from './pages/NotFoundPage'
 
@@ -152,7 +153,7 @@ function App(props) {
             </Route> */}
 
             <Route path="/mall" exact>
-        
+                <MallPage />
             </Route>
 
 

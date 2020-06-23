@@ -124,8 +124,11 @@ function Coupon(props) {
           </Table>
           </Col>
           <div style={{textAlign:"center"}}>升級會員，享有更多優惠，會員等級說明
-          <Link to="/faq"
+          
+          <Link to="../faq"
           >看這邊>></Link>
+            
+         
           </div>
         </Col>
       </MemberSideLink>

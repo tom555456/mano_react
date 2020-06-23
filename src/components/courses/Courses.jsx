@@ -284,8 +284,8 @@ class Courses extends Component {
           .map((course) => (
             <Course
               key={course.courseId}
-              linkUrl={course.linkUrl}
               courseId={course.courseId}
+              linkUrl={course.linkUrl}
               courseImg={course.courseImg}
               courseImg2={course.courseImg2}
               courseName={course.courseName}

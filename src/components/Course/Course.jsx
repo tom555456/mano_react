@@ -4,7 +4,6 @@ import { withRouter } from "react-router-dom"
 
 
   function Course(props) {
-    console.log(props)
     
   return (
     <div className="item-card" 
