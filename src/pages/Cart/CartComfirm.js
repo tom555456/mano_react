@@ -29,7 +29,6 @@ function Cart(props) {
   const [relCourseCouponId, setRelCourseCouponId] = useState(0)
   const [relShopCouponId, setRelShopCouponId] = useState(0)
 
-  const [isSelect, setIsSelect] = useState(true)
 
   async function getShopCouponData(memberId) {
     const request = new Request(
@@ -195,8 +194,8 @@ function Cart(props) {
                     <tbody>
                       <tr
                         onClick={() => {
-                          setRelCourseCouponId(0)
-                          setCourseDiscount(0)
+                          setRelShopCouponId(0)
+                          setShopDiscount(0)
                         }}
                       >
                         <td>
