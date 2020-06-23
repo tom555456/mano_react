@@ -29,7 +29,7 @@ export default function Slider() {
 
   const life = (
     <div className="shop">
-      <a href="/shop" onClick={() => localStorage.setItem('page', 1)}>
+      <a href="/mall" onClick={() => localStorage.setItem('page', 1)}>
         <Button className="button-shop">SHOP →</Button>
       </a>
     </div>

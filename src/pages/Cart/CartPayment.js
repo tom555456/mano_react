@@ -9,9 +9,6 @@ function CartPayment (props) {
     const [order, setOrder] = useState("")
     const [orderList, setOrderList] = useState("")
     const [orderPayment, setOrderPayment] = useState("")
-    const [finalCart, setFinalCart] = useState([])
-    const [finalCourseCart, setFinalCourseCart] = useState([])
-    const [insertId, setInsertId] = useState(0)
 
     const [name, setName] = useState("")
     const [card, setCard] = useState("")
@@ -41,8 +38,6 @@ function CartPayment (props) {
         const relCourseCouponId = localStorage.getItem("relCourseCouponId")
         const relShopCouponId = localStorage.getItem("relShopCouponId")
 
-        setFinalCart(finalCart)
-        setFinalCourseCart(finalCourseCart)
 
         if(relCourseCouponId) setCourseDiscountUpdate({
           relCouponId: Number(relCourseCouponId),
@@ -69,16 +64,36 @@ function CartPayment (props) {
             note: note
         })
 
-        
-    
+        let newOrderList = []
+
+        for(let i=0; i < finalCart.length; i++ ) {
+          newOrderList.push({
+              itemId: finalCart[i].id,
+              checkPrice: finalCart[i].price,
+              checkQuantity: finalCart[i].amount,
+              checkSubtotal: finalCart[i].price * finalCart[i].amount
+          })
+        }
+
+        for(let i=0; i < finalCourseCart.length; i++ ) {
+          newOrderList.push({
+              courseId: finalCourseCart[i].id,
+              checkPrice: finalCourseCart[i].price,
+              checkQuantity: finalCourseCart[i].amount,
+              checkSubtotal: finalCourseCart[i].price * finalCourseCart[i].amount
+          })
+        }
+
+        setOrderList(newOrderList)
+
       }, [])
 
 
       async function orderSuccessCallback() {
         console.log("callback")
-        await insertOrderToSever(order)
+        await insertOrderPaymentToSever(order, orderList, orderPayment)
         if(courseDiscountUpdate !== "") await updateDiscountToSever(courseDiscountUpdate)
-        console.log(shopDiscountUpdate)
+
       }
 
       function validate() {
@@ -132,28 +147,15 @@ function CartPayment (props) {
       }
     
     
-      async function insertOrderListToSever(item) {
-        const request = new Request("http://localhost:3002/order/insertOrderList", {
-          method: "POST",
-          body: JSON.stringify(item),
-          headers: new Headers({
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          }),
-        })
-    
-        console.log("After JSON: ", JSON.stringify(item))
-    
-        const response = await fetch(request)
-        const data = await response.json()
-    
-      }
 
-
-      async function insertOrderPaymentToSever(item) {
+      async function insertOrderPaymentToSever(item, item2, item3) {
         const request = new Request("http://localhost:3002/order/insertOrderPayment", {
           method: "POST",
-          body: JSON.stringify(item),
+          body: JSON.stringify({
+            item: item,
+            item2: item2,
+            item3: item3
+          }),
           headers: new Headers({
             Accept: "application/json",
             "Content-Type": "application/json",
@@ -168,12 +170,13 @@ function CartPayment (props) {
       }
 
 
-
-
-    async function insertOrderToSever(item) {
+    async function insertOrderToSever(item, item2) {
         const request = new Request("http://localhost:3002/order/insertOrder", {
           method: "POST",
-          body: JSON.stringify(item),
+          body: JSON.stringify({
+            item: item,
+            item2: item2
+          }),
           headers: new Headers({
             Accept: "application/json",
             "Content-Type": "application/json",
@@ -181,50 +184,18 @@ function CartPayment (props) {
         })
     
         console.log("After JSON: ", JSON.stringify(item))
+        console.log("After JSON: ", JSON.stringify(item2))
     
         const response = await fetch(request)
         const data = await response.json()
 
         console.log(data)
 
-        const id = data.results.insertId
-        await setInsertId(id)
+        // const id = data.results.insertId
+        // await setInsertId(id)
       }
 
-      
-      const handleInsertData = async () => {
-
-        await setOrderPayment({
-            ...orderPayment,
-            orderId: insertId
-        })
-
-        let newOrderList = []
-
-          for(let i=0; i < finalCart.length; i++ ) {
-            await newOrderList.push({
-                orderId: insertId,
-                itemId: finalCart[i].id,
-                checkPrice: finalCart[i].price,
-                checkQuantity: finalCart[i].amount,
-                checkSubtotal: finalCart[i].price * finalCart[i].amount
-            })
-          }
-
-          for(let i=0; i < finalCourseCart.length; i++ ) {
-            await newOrderList.push({
-                ...orderList,
-                orderId: insertId,
-                courseId: finalCourseCart[i].id,
-                checkPrice: finalCourseCart[i].price,
-                checkQuantity: finalCourseCart[i].amount,
-                checkSubtotal: finalCourseCart[i].price * finalCourseCart[i].amount
-            })
-          }
-
-          await setOrderList(newOrderList)
-    }
-    
+          
     return(
         <>
         <Container className="w-75 d-flex fd-col">
@@ -389,7 +360,6 @@ function CartPayment (props) {
 
                     onMouseUp={async () => {
                       if(orderErrors.length === 0) {
-                        await handleInsertData()
                         if(shopDiscountUpdate !== "") {await updateDiscountToSever(shopDiscountUpdate);}
   
                       }
@@ -397,17 +367,13 @@ function CartPayment (props) {
 
                     onClick={async () => {
                       if(orderErrors.length === 0) {  
-                        await insertOrderPaymentToSever(orderPayment)
-                        for(let i = 0; i < orderList.length; i++) {
-                          await insertOrderListToSever(orderList[i])
-                        }
                       
                         const path = props.history.location.pathname
                         if(path.includes("/mall")) props.history.push("/mall/cart/complete")
                         else props.history.push("/life/cart/complete")
 
 
-                      localStorage.removeItem("shipTotal")
+                      {/* localStorage.removeItem("shipTotal")
                       localStorage.removeItem("discount")
                       localStorage.removeItem("finalCourseCart")
                       localStorage.removeItem("shopTotal")
@@ -417,7 +383,7 @@ function CartPayment (props) {
                       localStorage.removeItem("finalCart")
                       localStorage.removeItem("courseTotal")
                       localStorage.removeItem("relCourseCouponId")
-                      localStorage.removeItem("relShopCouponId")
+                      localStorage.removeItem("relShopCouponId") */}
                       }
                     }}
                     >前往付款</Button>
@@ -427,28 +393,23 @@ function CartPayment (props) {
               <div className="d-flex justify-content-center pt-3 pb-3">
                 <Button className="mt-2 mb-2" variant="outline-primary"
                     onMouseDown={async () => {
-                      await insertOrderToSever(order)
+                      await insertOrderToSever(order, orderList)
                       if(courseDiscountUpdate !== "") await updateDiscountToSever(courseDiscountUpdate)
 
                     }}
 
                     onMouseUp={async () => {
-                        await handleInsertData()
                         if(shopDiscountUpdate !== "") {await updateDiscountToSever(shopDiscountUpdate);}
                     }}    
 
                     onClick={async () => {
-                        console.log(order)
-                        for(let i = 0; i < orderList.length; i++) {
-                          await insertOrderListToSever(orderList[i])
-                        }
                       
                         const path = props.history.location.pathname
                         if(path.includes("/mall")) props.history.push("/mall/cart/complete")
                         else props.history.push("/life/cart/complete")
 
 
-                      localStorage.removeItem("shipTotal")
+                      {/* localStorage.removeItem("shipTotal")
                       localStorage.removeItem("discount")
                       localStorage.removeItem("finalCourseCart")
                       localStorage.removeItem("shopTotal")
@@ -458,7 +419,7 @@ function CartPayment (props) {
                       localStorage.removeItem("finalCart")
                       localStorage.removeItem("courseTotal")
                       localStorage.removeItem("relCourseCouponId")
-                      localStorage.removeItem("relShopCouponId")
+                      localStorage.removeItem("relShopCouponId") */}
                     }}
                     >前往付款</Button>
             </div> ) : "" }

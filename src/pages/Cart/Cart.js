@@ -122,7 +122,7 @@ function Cart(props) {
     const newCart = filtered
     localStorage.setItem('cart', JSON.stringify(newCart))
 
-    setMyCourseCart(newCart)
+    setMycart(newCart)
   }
 
   function sumShipping(items) {

@@ -29,6 +29,8 @@ function Cart(props) {
   const [relCourseCouponId, setRelCourseCouponId] = useState(0)
   const [relShopCouponId, setRelShopCouponId] = useState(0)
 
+  const [isSelect, setIsSelect] = useState(true)
+
   async function getShopCouponData(memberId) {
     const request = new Request(
       `http://localhost:3002/order/shopCoupon/${memberId}`,
@@ -191,6 +193,18 @@ function Cart(props) {
                       </tr>
                     </thead>
                     <tbody>
+                      <tr
+                        onClick={() => {
+                          setRelCourseCouponId(0)
+                          setCourseDiscount(0)
+                        }}
+                      >
+                        <td>
+                          <input name="shopradio" type="radio" />
+                        </td>
+                        <td colSpan="3">本次消費暫不使用優惠卷</td>
+                      </tr>
+
                       {shopCoupon.map((value, index) => {
                         return (
                           <tr
@@ -296,6 +310,18 @@ function Cart(props) {
                       </tr>
                     </thead>
                     <tbody>
+                      <tr
+                        onClick={() => {
+                          setRelCourseCouponId(0)
+                          setCourseDiscount(0)
+                        }}
+                      >
+                        <td>
+                          <input name="courseradio" type="radio" />
+                        </td>
+                        <td colSpan="3">本次消費暫不使用優惠卷</td>
+                      </tr>
+
                       {courseCoupon.map((value, index) => {
                         return (
                           <tr
