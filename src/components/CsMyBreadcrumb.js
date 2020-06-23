@@ -9,32 +9,35 @@ function MyBreadcrumb(props) {
   //   });
   const pathlist = [
     '/',
-    '/course',
-    '/cuisine',
-    '/clothes',
-    '/life',
-    '/limit',
-    '/new',
-    '/anti',
+    '/life/course',
+    '/life/course/cuisine',
+    '/life/course/clothes',
+    '/life/course/life',
+    '/life/course/limit',
+    '/life/course/new',
+    '/life/course/anti',
   ]
   const pathnames = ['首頁', '所有課程', '抹の食', '抹の著', '抹の生活', '期間限定', '手摘專屬體驗', '防疫限定']
 // /course/new?categoryId=31
 // /courseDetail/course/new?courseId=8
   // 先找出對應的中文詞
   let locationPathname = props.location.pathname
+  let detailPathname = `/life/${props.match.params.second}/${props.match.params.third}`
   let catUrl = `/${props.match.params.second}/${props.match.params.third}?${props.match.params.fourth}`
 
   // console.log(`${locationPathname}${courseId}`)
+  console.log(locationPathname)
   console.log(props)
   // `/product/xxxx` 轉為 `/product`
-   if (locationPathname.includes('/clothes')) locationPathname = '/clothes'
-   if (locationPathname.includes('/cuisine')) locationPathname = '/cuisine'
-   if (locationPathname.includes('/life')) locationPathname = '/life'
-   if (locationPathname.includes('/limit')) locationPathname = '/limit'
-   if (locationPathname.includes('/new')) locationPathname = '/new'
-   if (locationPathname.includes('/anti')) locationPathname = '/anti'
+  //  if (locationPathname.includes('/clothes')) locationPathname = '/clothes'
+  //  if (locationPathname.includes('/cuisine')) locationPathname = '/cuisine'
+  //  if (locationPathname.includes('/life')) locationPathname = '/life'
+  //  if (locationPathname.includes('/limit')) locationPathname = '/limit'
+  //  if (locationPathname.includes('/new')) locationPathname = '/new'
+  //  if (locationPathname.includes('/anti')) locationPathname = '/anti'
 
   const index = pathlist.findIndex((v) => v === locationPathname)
+  const index1 = pathlist.findIndex((v) => v === detailPathname)
 
 // console.log(locationPathname)
 
@@ -64,13 +67,13 @@ const detail = (
           <li 
             className="breadcrumb-item">
           <a 
-          href="/course?categoryId=26"
+          href="/life/course"
           >所有課程</a>
           </li>
           <li className="breadcrumb-item active" aria-current="page">
           <a 
           href={catUrl}
-          >{pathnames[index]}</a>
+          >{pathnames[index1]}</a>
           </li>
           <li 
           className="breadcrumb-item active" aria-current="page">
@@ -90,7 +93,7 @@ const two = (
           <li 
             className="breadcrumb-item">
           <a 
-          href="/course"
+          href="/life/course"
           >所有課程</a>
           </li>
           <li 
@@ -104,15 +107,16 @@ const two = (
 
 let display;
 
-if(props.location.pathname === "/course"){
+if(props.location.pathname === "/life/course"){
       display = allcourse
   }else{
   display = two
 }
 
-if(props.match.params.fourth){
+if(props.match.params.third){
   display = detail
 }
+
 
 
   return (

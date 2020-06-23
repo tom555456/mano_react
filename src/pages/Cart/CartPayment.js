@@ -1,5 +1,5 @@
 import React, { Component, Fragment, useState, useEffect } from "react";
-import { Table, Container, Alert, Button, Form } from "react-bootstrap"
+import { Table, Container, Alert, Button, Form, Figure } from "react-bootstrap"
 
 import { withRouter } from "react-router-dom";
 
@@ -227,8 +227,55 @@ function CartPayment (props) {
     
     return(
         <>
-        <Container className="w-25">
-          <Form.Group className="text-center" controlId="exampleForm.ControlSelect1">
+        <Container className="w-75 d-flex fd-col">
+          <div className="d-flex justify-content-between">
+          <Figure>
+              <Figure.Image
+                width={180}
+                height={180}
+                alt="貨到付款"
+                src="/payment/貨到付款.png"
+              />
+              <Figure.Caption>
+              貨到付款
+              </Figure.Caption>
+            </Figure>
+            <Figure>
+            <Figure.Image
+                width={180}
+                height={180}
+                alt="ATM轉帳"
+                src="/payment/ATM轉帳.png"
+              />
+              <Figure.Caption>
+              ATM轉帳
+              </Figure.Caption>
+              </Figure>
+              <Figure>
+              <Figure.Image
+                width={180}
+                height={180}
+                alt="linePay"
+                src="/payment/linePay.png"
+              />
+              <Figure.Caption>
+                Line Pay
+              </Figure.Caption>
+              </Figure>
+              <Figure>
+              <Figure.Image
+                width={180}
+                height={180}
+                alt="信用卡"
+                src="/payment/信用卡.png"
+              />
+              <Figure.Caption>
+              信用卡
+              </Figure.Caption>
+              </Figure>
+          </div>
+          <div className="d-flex align-items-center justify-content-center mt-5">
+          <Form.Group className="text-center w-25" controlId="exampleForm.ControlSelect1">
             <Form.Label>選擇付款方式：</Form.Label>
             <Form.Control as="select" onChange={(event) => {
               console.log(event.target.value)
@@ -253,6 +300,7 @@ function CartPayment (props) {
               <option value="LinePay">LINE PAY</option>
             </Form.Control>
           </Form.Group>
+          </div>
         </Container>
 
         <Container className="w-75">

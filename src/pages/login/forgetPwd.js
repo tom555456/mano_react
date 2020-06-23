@@ -5,13 +5,28 @@ import { withRouter } from 'react-router-dom'
 function MyForgetPwd(props) {
   const {
     username,
-    setUsername,
-    auth,
+    setUsername
   } = props
 
-  const displayForm = auth ? (
-    ''
-  ) : (
+
+  async function sendGmail(item) {
+    const request = new Request("http://localhost:3002/member/sendGmail", {
+      method: "POST",
+      body: JSON.stringify(item),
+      headers: new Headers({
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      }),
+    })
+
+    console.log("After JSON: ", JSON.stringify(item))
+
+    const response = await fetch(request)
+    const data = await response.json()
+
+  }
+
+  const displayForm =  (
     <>
       <div className="bg position-relative d-flex">
         <div className="bgLeft">
@@ -33,7 +48,9 @@ function MyForgetPwd(props) {
               <div className="loginBlock">
                 <button
                   className="btn btn-primary mb2 loginBlock loginBtn"
-                  onClick={() => {}}
+                  onClick={() => {
+                    sendGmail({email: username})
+                  }}
                 >
                   Send
                 </button>

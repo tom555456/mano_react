@@ -178,7 +178,7 @@ function App(props) {
               <CourseList 
               changeBackgroundColorLight={changeBackgroundColorLight}/>
             </Route>
-            <Route path="/life/courseDetail">
+            <Route path="/life/courseDetail/:second?/:third?/:fourth?">
               <CourseDetail 
               changeBackgroundColorLight={changeBackgroundColorLight}/>
             </Route>

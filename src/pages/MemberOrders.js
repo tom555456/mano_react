@@ -233,6 +233,7 @@ function MemberOrders(props) {
                   return (
                     <tr key={index}>
                       <td>
+                        {/* {value.created_at.toLocaleString()} */}
                         {value.created_at.substr(0, 10)}
                         <br />
                         {value.created_at.substr(-13, 5)}

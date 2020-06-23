@@ -4,12 +4,13 @@ import { withRouter } from "react-router-dom"
 
 
   function Course(props) {
+    console.log(props)
     
   return (
     <div className="item-card" 
     value={props.courseId}  
     >
-      <div className="item-img"  onClick={() => props.history.push(`/life/courseDetail?courseId=${props.courseId}`)}>
+      <div className="item-img"  onClick={() => props.history.push(`/life/courseDetail${props.linkUrl}?courseId=${props.courseId}`)}>
         <img
           src={`/courses/${props.courseImg}`}
           alt={props.courseImg}
