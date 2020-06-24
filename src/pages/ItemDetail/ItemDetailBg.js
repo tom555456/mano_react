@@ -10,7 +10,7 @@ function ItemDetailBg() {
 
   return (
     <>
-      <div className="container">{display}</div>
+      <div>{display}</div>
     </>
   )
 }

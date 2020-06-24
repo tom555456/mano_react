@@ -248,17 +248,10 @@ class Items extends Component {
           <Button
             variant="primary"
             onClick={() => {
-<<<<<<< HEAD
-              this.props.history.push('/cart')
-            }}
-          >
-            前往購物車結帳
-=======
               this.props.history.push('/mall/ItemTracking')
             }}
           >
             前往願望清單
->>>>>>> 436cae4b8467e1b3e3c1b50436c4217811a63c4d
           </Button>
         </Modal.Footer>
       </Modal>
