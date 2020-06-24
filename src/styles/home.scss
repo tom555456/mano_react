@@ -15,7 +15,7 @@
       background: url('../pages/homeImages/oval.svg') no-repeat;
       background-size: 100% 100%;
       background-position: center;
-      transform: translateY(150px); 
+      transform: translateY(150px);
     }
   }
   .bgRight {
@@ -23,72 +23,78 @@
     height: 100%;
     .aLink {
       margin-top: 45%;
+      a:hover {
+        text-decoration: none;
+      }
       h5 {
         margin: 30px 0;
         letter-spacing: 5px;
         color: #bf9a00;
         text-align: center;
+        &:hover {
+          text-shadow: 0 0 5px brown;
+          transform: scale(1.2);
+        }
       }
     }
   }
 }
 
 .secondPage {
-
   width: 1440px;
   height: 900px;
   background-color: #a8b38b;
   position: relative;
-  .line{
+  .line {
     width: 128px;
     height: 238px;
     border-bottom: 1px solid white;
   }
-  
-    h3 {
-      font-size: 27pt;
-      letter-spacing: 5px;
-      color: white;
-      position: absolute;
-      left: 120px;
-      top: 180px;
-      font-weight: bold;
-    }
-    .brandPic {
-      background: url('../pages/homeImages/home.svg') no-repeat;
-      background-size:cover ;
-      background-position: center;
-      height: 352px;
-      width: 230px;
-      position: absolute;
-      top: 300px;
-      left: 163px;
-      z-index: 1;
-    }
-    .description2 {
-      width: 530px;
-      height: 238px;
-      position: absolute;
+
+  h3 {
+    font-size: 27pt;
+    letter-spacing: 5px;
+    color: white;
+    position: absolute;
+    left: 120px;
+    top: 180px;
+    font-weight: bold;
+  }
+  .brandPic {
+    background: url('../pages/homeImages/home.svg') no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 352px;
+    width: 230px;
+    position: absolute;
+    top: 300px;
+    left: 163px;
+    z-index: 1;
+  }
+  .description2 {
+    width: 530px;
+    height: 238px;
+    position: absolute;
+    color: #5c6447;
+    border: 1px solid #5c6447;
+    padding: 20px;
+    left: 320px;
+    top: 602px;
+    h4 {
+      font-size: 24px;
+      letter-spacing: 10px;
+      margin: 24px 0 24px 78px;
       color: #5c6447;
-      border: 1px solid #5c6447;
-      padding: 20px;
-      left: 320px;
-      top: 602px;
-      h4 {
-        font-size: 24px;
-        letter-spacing: 10px;
-        margin: 24px 0 24px 78px;
-        color: #5c6447;
-      }
-      p {
-        width: 362px;
-        height: 139px;
-        font-size: 18px;
-        margin-left: 78px;
-        color: #5c6447;
-      }
     }
-  
+    p {
+      width: 362px;
+      height: 139px;
+      font-size: 18px;
+      margin-left: 78px;
+      color: #5c6447;
+    }
+  }
+
   .description1 {
     width: 545px;
     height: 232px;
@@ -113,7 +119,7 @@
       line-height: 48px;
     }
   }
-  
+
   .moreBtn {
     width: 367px;
     height: 130px;
@@ -145,21 +151,20 @@
   background-color: #a8b38b;
   position: relative;
 
-  h3{
+  h3 {
     font-size: 38pt;
     position: absolute;
     left: 573px;
-    top:88px;
+    top: 88px;
   }
-  p{
+  p {
     color: #5c6447;
     font-size: 18px;
-
   }
 }
 .brandPic2 {
   background: url('../pages/homeImages/home.svg') no-repeat;
-  background-size:cover ;
+  background-size: cover;
   background-position: center;
   height: 363px;
   width: 100%;
@@ -169,15 +174,14 @@
   z-index: 1;
 }
 .transparentbox {
-  background:  #c5895a;
+  background: #c5895a;
   width: 626px;
   height: 277px;
   position: absolute;
   top: 481px;
   left: 789px;
-  opacity:0.5;
+  opacity: 0.5;
   z-index: 1;
-
 }
 .inputbox {
   width: 626px;
@@ -187,17 +191,17 @@
   left: 789px;
   z-index: 1;
 }
-.btn-ipb{
+.btn-ipb {
   width: 182px;
   height: 55px;
-  position:relative;
-  left:367px;
-  top:124px;
-  border:1px solid black;
+  position: relative;
+  left: 367px;
+  top: 124px;
+  border: 1px solid black;
   border-radius: 0;
-  color:black;
+  color: black;
 }
-.contactinfo{
+.contactinfo {
   width: 626px;
   height: 277px;
   position: absolute;
@@ -205,34 +209,33 @@
   left: 100px;
   z-index: 1;
 }
-.ctitle{
+.ctitle {
   color: #5c6447;
 }
-.fifthPage{
+.fifthPage {
   width: 1440px;
   height: 533px;
   background-color: #a8b38b;
   color: white;
-
 }
-.fifthPage p{
+.fifthPage p {
   font-size: 18pt;
   margin-top: 86px;
 }
 
-.footline{
+.footline {
   width: 1162px;
   height: 1px;
   background: white;
   margin-top: 85px;
 }
-.buttonarea{
+.buttonarea {
   width: 210px;
   height: 34px;
   font-size: 34px;
   margin-top: 80px;
 }
-.fifthPage span{
+.fifthPage span {
   font-size: 10pt;
   margin-top: 75px;
 }

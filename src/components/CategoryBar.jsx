@@ -3,8 +3,8 @@ import { withRouter } from 'react-router-dom'
 import { ListGroup } from 'react-bootstrap'
 
 class CategoryBar extends Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
     this.state = {
       data: [],
       listArray: [],
@@ -45,9 +45,7 @@ class CategoryBar extends Component {
   }
 
   async componentDidMount() {
-    
-    await this.treeMenu(0);
-    
+    await this.treeMenu(0)
   }
 
   render() {
@@ -57,7 +55,6 @@ class CategoryBar extends Component {
         onClick={() => localStorage.setItem('page', 1)}
         style={{
           textAlign: 'center',
-          textDecoration: 'underline',
           width: '200px',
         }}
       >
@@ -67,7 +64,7 @@ class CategoryBar extends Component {
               action
               href={`/mall${list.url}?categoryId=${list.id}`}
               style={{
-                backgroundColor: '#CFDDCD',
+                backgroundColor: '#E4EEE3',
                 color: '#5E6248',
               }}
             >

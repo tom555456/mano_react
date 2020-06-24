@@ -32,16 +32,21 @@ function Item(props) {
     <Container className="container mb-2">
       <Row>
         <Col xs={12} md={4} className="d-flex">
-          <Image
-            onClick={() =>
-              props.history.push(
-                `/mall/itemDetail${props.linkUrl}/categoryId=${props.categoryId}?itemId=${props.itemId}`
-              )
-            }
-            src={`/items/${props.itemImg}`}
-            thumbnail
-            style={{ height: '200px', width: '200px' }}
-          />
+          <a
+            href={`/mall/itemDetail${props.linkUrl}/categoryId=${props.categoryId}?itemId=${props.itemId}`}
+          >
+            <img
+              thumbnail
+              // onClick={() =>
+              //   props.history.push(
+              //     `/mall/itemDetail${props.linkUrl}/categoryId=${props.categoryId}?itemId=${props.itemId}`
+              //   )
+              // }
+              src={`/items/${props.itemImg}`}
+              alt={props.itemImg}
+              style={{ height: '200px', width: '200px' }}
+            />
+          </a>
 
           <div className="ml-2">
             <Card style={{ width: '35rem', height: '200px' }}>
@@ -53,7 +58,7 @@ function Item(props) {
                   商品介紹 : {props.itemDescription}
                 </Card.Subtitle>
                 <div>
-                  <Card.Text className="item-price text-right cardText">
+                  <Card.Text className="item-price text-right cardText2">
                     $ {props.itemPrice}
                   </Card.Text>
 

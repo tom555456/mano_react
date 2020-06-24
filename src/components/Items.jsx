@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
-import { Modal, Button } from 'react-bootstrap'
 import { withRouter } from 'react-router-dom'
+
 import Item from './Item'
+
 import SearchBar from '../components/courses/SearchBar'
 import MyBreadcrumb from './MyBreadcrumb'
 
+import { Modal, Button } from 'react-bootstrap'
+
 class Items extends Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
     this.state = {
       data: [],
       totalPages: '',
@@ -115,8 +118,6 @@ class Items extends Component {
     return this.state.data
   }
   async componentDidMount() {
-
-
     let params = new URLSearchParams(this.props.location.search)
     let catIdParams = params.get('categoryId')
     if (catIdParams) {
@@ -128,8 +129,6 @@ class Items extends Component {
     }
 
     await this.getItemsData()
-    
-    
   }
 
   handleChange = async (event) => {
@@ -168,7 +167,7 @@ class Items extends Component {
     const allData = json.allData
 
     this.setState({
-      // data: allData,
+      data: allData,
       showPage: false,
     })
   }

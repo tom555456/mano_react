@@ -1,129 +1,129 @@
 .item-card {
-    display: flex;
-    padding: 15px;
-  }
-  
-  .item-img {
-    width: 25%;
-    box-shadow: 1px 1px 1px gray;
-    text-align: center;
-    height: 150px;
-  }
-  
-  .item-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .item-content {
-    width: 70%;
-    display: flex;
-    box-shadow: 1px 1px 1px gray;
-    margin-left: 15px;
-    padding: 0 10px 15px 10px;
-  }
-  
-  .item-content-left {
-    width: 65%;
-  }
-  
-  .fd-col {
-    flex-direction: column;
-  }
-  
-  .item-content-right {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .item-price {
-    color: #bf8c60;
-  }
-  
-  .add-cart {
-    background-color: #bf8c60;
-    color: #ffffff;
-    border: 1px solid #bf8c60;
-    border-radius: 20px;
-    padding: 5px;
-    width: 500px;
-    text-align: center;
-  }
-  
-  .add-fav {
-    margin-top: 10px;
-    border: 1px solid #000000;
-    border-radius: 20px;
-    background-color: #ffffff;
-    padding: 5px;
-    width: 150px;
-  }
-  
-  .item-content-top {
-    justify-content: space-between;
-  }
-  
-  .item-content-bottom {
-    padding-top: 25px;
-  }
-  
-  .mark-btn {
-    background-color: #bf8c60;
-    color: #ffffff;
-    border: 1px solid #bf8c60;
-    border-radius: 20px;
-    padding: 0;
-    width: 80px;
-    text-align: center;
-    line-height: 17px;
-    font-size: 12px;
-  }
-  
-  .total-container {
-    display: flex;
-    flex-direction: column;
-    box-shadow: 1px 1px 1px gray;
-    margin: 20px;
-    padding: 20px;
-  }
-  
-  .border-bottom {
-    border-bottom: 1px solid black;
-    margin: 100px 0 40px 0;
-  }
-  
-  .comfirm-lists {
-    width: 100%;
-  }
-  
-  .comfirm-card {
-    width: 100%;
-    display: flex;
-    padding: 15px;
-  }
-  
-  .comfirm-content {
-    width: 100%;
-    display: flex;
-    box-shadow: 1px 1px 1px gray;
-    margin-left: 15px;
-    padding: 0 10px 15px 10px;
-  }
-  
-  .bg-brown {
-    background-color: #dfbc9e;
-  }
-  
-  .cardText {
-    font-size: 48px;
-    position: absolute;
-    right: 20px;
-    top: 40px;
-    text-shadow: 1px 1px #000;
-  }
-  
-  .cardLink {
-    position: relative;
-    bottom: -40px;
-  }
+  display: flex;
+  padding: 15px;
+}
+
+.item-img {
+  width: 25%;
+  box-shadow: 1px 1px 1px gray;
+  text-align: center;
+  height: 150px;
+}
+
+.item-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item-content {
+  width: 70%;
+  display: flex;
+  box-shadow: 1px 1px 1px gray;
+  margin-left: 15px;
+  padding: 0 10px 15px 10px;
+}
+
+.item-content-left {
+  width: 65%;
+}
+
+.fd-col {
+  flex-direction: column;
+}
+
+.item-content-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-price {
+  color: #bf8c60;
+}
+
+.add-cart {
+  background-color: #bf8c60;
+  color: #ffffff;
+  border: 1px solid #bf8c60;
+  border-radius: 20px;
+  padding: 5px;
+  width: 500px;
+  text-align: center;
+}
+
+.add-fav {
+  margin-top: 10px;
+  border: 1px solid #000000;
+  border-radius: 20px;
+  background-color: #ffffff;
+  padding: 5px;
+  width: 150px;
+}
+
+.item-content-top {
+  justify-content: space-between;
+}
+
+.item-content-bottom {
+  padding-top: 25px;
+}
+
+.mark-btn {
+  background-color: #bf8c60;
+  color: #ffffff;
+  border: 1px solid #bf8c60;
+  border-radius: 20px;
+  padding: 0;
+  width: 80px;
+  text-align: center;
+  line-height: 17px;
+  font-size: 12px;
+}
+
+.total-container {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 1px 1px 1px gray;
+  margin: 20px;
+  padding: 20px;
+}
+
+.border-bottom {
+  border-bottom: 1px solid black;
+  margin: 100px 0 40px 0;
+}
+
+.comfirm-lists {
+  width: 100%;
+}
+
+.comfirm-card {
+  width: 100%;
+  display: flex;
+  padding: 15px;
+}
+
+.comfirm-content {
+  width: 100%;
+  display: flex;
+  box-shadow: 1px 1px 1px gray;
+  margin-left: 15px;
+  padding: 0 10px 15px 10px;
+}
+
+.bg-brown {
+  background-color: #dfbc9e;
+}
+
+.cardText2 {
+  font-size: 48px;
+  position: absolute;
+  right: 20px;
+  top: 40px;
+  text-shadow: 1px 1px #dfbc9e;
+}
+
+.cardLink {
+  position: relative;
+  bottom: -40px;
+}

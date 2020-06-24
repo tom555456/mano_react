@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { ListGroup } from "react-bootstrap";
+import { ListGroup } from 'react-bootstrap'
 
 class CsCategoryBar extends Component {
   constructor() {
@@ -23,7 +23,6 @@ class CsCategoryBar extends Component {
     this.setState({
       data: cscategory,
     })
-    
 
     return this.state.data
   }
@@ -37,8 +36,8 @@ class CsCategoryBar extends Component {
         this.state.listArray.push({
           name: output[i]['categoryName'],
           id: output[i]['categoryId'],
-          url: output[i]['linkUrl']
-      })
+          url: output[i]['linkUrl'],
+        })
         await this.treeMenu(output[i]['categoryId'])
       }
       // this.state.listArray.push(`</ul>`)
@@ -55,14 +54,29 @@ class CsCategoryBar extends Component {
 
   render() {
     return (
-      
-      <div className="cat-container" onClick={() => localStorage.setItem("page",1)}>
-      <ListGroup variant="flush">
-        {this.state.listArray.map(list => (
-            <ListGroup.Item action href={`/life${list.url}?categoryId=${list.id}`}>{list.name}</ListGroup.Item>
-        ))}
-      </ListGroup>
-    </div>
+      <div
+        className="cat-container"
+        onClick={() => localStorage.setItem('page', 1)}
+        style={{
+          textAlign: 'center',
+          width: '200px',
+        }}
+      >
+        <ListGroup variant="flush">
+          {this.state.listArray.map((list) => (
+            <ListGroup.Item
+              action
+              href={`/life${list.url}?categoryId=${list.id}`}
+              style={{
+                backgroundColor: '#E4EEE3',
+                color: '#5E6248',
+              }}
+            >
+              {list.name}
+            </ListGroup.Item>
+          ))}
+        </ListGroup>
+      </div>
     )
   }
 }
