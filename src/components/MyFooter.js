@@ -26,7 +26,8 @@ function MyFooter(props) {
     <>
       <footer className="footer mt-auto py-3 text-center ">
         <div className="container mb-2">
-          <h3> 最新活動 </h3>
+
+          {/* <h3> 最新活動 </h3>
           <div className="d-flex row" style={{ backgroundColor: '#D4AE5C' }}>
             <img
               className="col-8"
@@ -40,11 +41,13 @@ function MyFooter(props) {
               <h5 style={{ color: '#FFFFFF' }}>屬於大人的手作課程</h5>
               <Button variant="outline-light">給自己的練習課</Button>
             </div>
-          </div>
+          </div> */}
+
+          
           <div style={{ marginTop: '40px' }}></div>
           <img className="m-2 p-2" src="/picture/mano_logo_dark-01.svg"></img>
 
-          <div className="d-flex row" style={cssSocial}>
+          <div className="d-flex row mb-3" style={cssSocial}>
             <div className="col-lg align-self-center">
               <a
                 style={{ color: '#5C6447' }}
@@ -123,9 +126,13 @@ function MyFooter(props) {
   if (
     path === '/mall/login' ||
     path === '/mall/welcome' ||
+    path === '/mall/register' ||
+    path === '/mall/forgetpwd' ||
     path === '/' ||
     path === '/life/welcome' ||
-    path === 'life/login' ||
+    path === '/life/login' ||
+    path === '/life/register' ||
+    path === '/life/forgetpwd' ||
     path === '/404'
   )
     displayFooter = ''

@@ -20,6 +20,11 @@ function MyRegister(props) {
     setData,
   } = props
 
+  useEffect(()=>{
+    props.changeBackgroundColorBrown()
+  },[])
+
+
   async function getData(username) {
     const response = await fetch(`http://localhost:3002/member/${username}`)
     const json = await response.json()
@@ -47,7 +52,7 @@ function MyRegister(props) {
 
   const registerSuccessCallback = () => {
     insertMemberToServer(insertData)
-    alert('註冊成功，跳到login')
+    //alert('註冊成功，跳到login')
     const path = props.history.location.pathname
     if(path.includes("/mall")) props.history.push("/mall/login")
     else props.history.push("/life/login")

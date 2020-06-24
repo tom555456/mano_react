@@ -73,6 +73,21 @@ function App(props) {
     document.body.style.background ='url(/bg-dark-with-pattern.svg) repeat'
   }
 
+  function changeBackgroundColorBrown(){
+    document.body.style.background ='#CDBAA9'
+  }
+
+  function changeBackgroundColorWhite(){
+    document.body.style.background ='#FFFFFF'
+  }
+
+  function changeBackgroundColorGreen(){
+    document.body.style.background ='#A8B38B'
+  }
+
+
+
+
 
 
   // 處理會員登入
@@ -166,11 +181,11 @@ function App(props) {
 
             <Route path="/mall/about">
               <About 
-              changeBackgroundColorLight={changeBackgroundColorLight}/>
+              changeBackgroundColorGreen={changeBackgroundColorGreen}/>
             </Route>
             <Route path="/life/about">
               <About 
-              changeBackgroundColorLight={changeBackgroundColorLight}/>
+              changeBackgroundColorGreen={changeBackgroundColorGreen}/>
             </Route>
 
             <Route path="/mall/shop/:second?/:third?/:fourth?/:fifth?/:sixth?/:seventh?/:page?">
@@ -257,6 +272,7 @@ function App(props) {
 
             <Route path="/mall/login">
               <Login
+                changeBackgroundColorBrown={changeBackgroundColorBrown}
                 username={username}
                 setUsername={setUsername}
                 setPassword={setPassword}
@@ -270,12 +286,14 @@ function App(props) {
 
             <Route path="/mall/welcome">
               <MyWelcome
+                changeBackgroundColorBrown={changeBackgroundColorBrown}
                 logoutProcess={logoutProcess}
               />
             </Route>
 
             <Route path="/mall/register">
               <MyRegister
+                changeBackgroundColorBrown={changeBackgroundColorBrown}
                 setName={setName}
                 username={username}
                 setUsername={setUsername}
@@ -291,6 +309,7 @@ function App(props) {
 
             <Route path="/mall/forgetpwd">
               <MyForgetPwd
+                changeBackgroundColorBrown={changeBackgroundColorBrown}
                 username={username}
                 setUsername={setUsername}
               />
@@ -298,6 +317,7 @@ function App(props) {
 
             <Route path="/life/login">
               <Login
+                changeBackgroundColorBrown={changeBackgroundColorBrown}
                 username={username}
                 setUsername={setUsername}
                 setPassword={setPassword}
@@ -311,12 +331,14 @@ function App(props) {
 
             <Route path="/life/welcome">
               <MyWelcome
+                changeBackgroundColorBrown={changeBackgroundColorBrown}
                 logoutProcess={logoutProcess}
               />
             </Route>
 
             <Route path="/life/register">
               <MyRegister
+                changeBackgroundColorBrown={changeBackgroundColorBrown}
                 setName={setName}
                 username={username}
                 setUsername={setUsername}
@@ -332,6 +354,7 @@ function App(props) {
 
             <Route path="/life/forgetpwd">
               <MyForgetPwd
+                changeBackgroundColorBrown={changeBackgroundColorBrown}
                 username={username}
                 setUsername={setUsername}
               />
@@ -381,11 +404,10 @@ function App(props) {
 
             <Route exact path="/">
               <Home 
-              changeBackgroundColorLight={changeBackgroundColorLight}/>
+              changeBackgroundColorWhite={changeBackgroundColorWhite}/>
             </Route>
             <Route exact path="/404">
-              <NotFoundPage 
-              changeBackgroundColorLight={changeBackgroundColorLight}/>
+              <NotFoundPage />
             </Route>
             <Redirect to="/404" />
           </Switch>

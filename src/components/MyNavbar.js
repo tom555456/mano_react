@@ -42,12 +42,16 @@ function MyNavbar(props) {
 
   const displayButton = member[0].memberName !== '' ? logoutButton : loginButton
   const pathlist = [
+    "/login",
+    "/about",
     "/membercenter",
-    "*",
+    "/404",
     "/life",
     "/mall"
   ]
   const themenames = [
+    "dark",
+    "dark",
     "dark",
     "dark",
     "light",
@@ -59,6 +63,11 @@ function MyNavbar(props) {
   // 先找出對應的主題
   let locationPathname = props.location.pathname
   // `/product/xxxx` 轉為 `/product`
+  if (locationPathname.includes("/login")) locationPathname = "/login"
+  if (locationPathname.includes("/register")) locationPathname = "/login"
+  if (locationPathname.includes("/welcome")) locationPathname = "/login"
+  if (locationPathname.includes("/forgetpwd")) locationPathname = "/login"
+  if (locationPathname.includes("/about")) locationPathname = "/about"
   if (locationPathname.includes("/membercenter")) locationPathname = "/membercenter"
   if (locationPathname.includes("/coupon")) locationPathname = "/membercenter"
 
@@ -76,10 +85,6 @@ function MyNavbar(props) {
           <Nav.Link as={NavLink} to="/mall" exact>
             商城首頁
           </Nav.Link>
-          <Nav.Link as={NavLink} to="/mall/about">
-            關於我們
-          </Nav.Link>
-
           {member[0].memberName !== '' ? (
             <Nav.Link as={NavLink} to="/mall/membercenter">
               Member center
@@ -103,9 +108,6 @@ function MyNavbar(props) {
           <Nav.Link as={NavLink} to="/mall/cart">
             購物車
           </Nav.Link>
-          <Nav.Link as={NavLink} to="/mall/faq">
-            FAQ
-          </Nav.Link>
         </Nav>
         <Form inline>{displayButton}</Form>
       </Navbar>
@@ -120,9 +122,6 @@ function MyNavbar(props) {
           <Nav.Link as={NavLink} to="/life" exact>
             社群首頁
           </Nav.Link>
-          <Nav.Link as={NavLink} to="/life/about">
-            關於我們
-          </Nav.Link>
 
           {member[0].memberName !== '' ? (
             <Nav.Link as={NavLink} to="/life/membercenter">
@@ -134,27 +133,8 @@ function MyNavbar(props) {
             </Nav.Link>
           )}
 
-          <Nav.Link
-            as={NavLink}
-            to="/life/course"
-            onClick={() => localStorage.setItem('page', 1)}
-          >
-            課程列表
-          </Nav.Link>
           <Nav.Link as={NavLink} to="/life/cart">
             購物車
-          </Nav.Link>
-          <Nav.Link as={NavLink} to="/life/marketing">
-            Marketing
-          </Nav.Link>
-          <Nav.Link as={NavLink} to="/life/comment">
-            Comment
-          </Nav.Link>
-          <Nav.Link as={NavLink} to="/life/map">
-            抹茶地圖
-          </Nav.Link>
-          <Nav.Link as={NavLink} to="/life/faq">
-            FAQ
           </Nav.Link>
         </Nav>
         <Form inline>{displayButton}</Form>

@@ -66,6 +66,7 @@ function CartPayment(props) {
     for (let i = 0; i < finalCart.length; i++) {
       newOrderList.push({
         itemId: finalCart[i].id,
+        itemName: finalCart[i].name,
         checkPrice: finalCart[i].price,
         checkQuantity: finalCart[i].amount,
         checkSubtotal: finalCart[i].price * finalCart[i].amount,
@@ -75,6 +76,7 @@ function CartPayment(props) {
     for (let i = 0; i < finalCourseCart.length; i++) {
       newOrderList.push({
         courseId: finalCourseCart[i].id,
+        courseName: finalCourseCart[i].name,
         checkPrice: finalCourseCart[i].price,
         checkQuantity: finalCourseCart[i].amount,
         checkSubtotal: finalCourseCart[i].price * finalCourseCart[i].amount,
@@ -152,14 +154,19 @@ function CartPayment(props) {
   }
 
   async function insertOrderPaymentToSever(item, item2, item3) {
+
+    const member = JSON.parse(localStorage.getItem('member'))
+    const email = member[0].email
+
     const request = new Request(
-      'http://localhost:3002/order/insertOrderPayment',
+      'http://localhost:3002/order/insertOrderPaymentAndSendMail',
       {
         method: 'POST',
         body: JSON.stringify({
           item: item,
           item2: item2,
           item3: item3,
+          email: email,
         }),
         headers: new Headers({
           Accept: 'application/json',
@@ -175,11 +182,16 @@ function CartPayment(props) {
   }
 
   async function insertOrderToSever(item, item2) {
-    const request = new Request('http://localhost:3002/order/insertOrder', {
+
+    const member = JSON.parse(localStorage.getItem('member'))
+    const email = member[0].email
+
+    const request = new Request('http://localhost:3002/order/insertOrderAndSendMail', {
       method: 'POST',
       body: JSON.stringify({
         item: item,
         item2: item2,
+        email: email,
       }),
       headers: new Headers({
         Accept: 'application/json',
@@ -220,6 +232,7 @@ function CartPayment(props) {
               width={180}
               height={180}
               alt="貨到付款"
+              value="貨到付款"
               src="/payment/貨到付款.png"
             />
             <Figure.Caption>貨到付款</Figure.Caption>
@@ -229,6 +242,7 @@ function CartPayment(props) {
               width={180}
               height={180}
               alt="ATM轉帳"
+              value="ATM轉帳"
               src="/payment/ATM轉帳.png"
             />
             <Figure.Caption>ATM轉帳</Figure.Caption>
@@ -237,7 +251,8 @@ function CartPayment(props) {
             <Figure.Image
               width={180}
               height={180}
-              alt="linePay"
+              alt="LinePay"
+              value="LinePay"
               src="/payment/linePay.png"
             />
             <Figure.Caption>Line Pay</Figure.Caption>
@@ -247,6 +262,7 @@ function CartPayment(props) {
               width={180}
               height={180}
               alt="信用卡"
+              value="信用卡"
               src="/payment/信用卡.png"
             />
             <Figure.Caption>信用卡</Figure.Caption>
@@ -258,7 +274,7 @@ function CartPayment(props) {
             controlId="exampleForm.ControlSelect1"
           >
             <Form.Label className="labelTxt labelSize">
-              選擇付款方式：
+             請選擇付款方式
             </Form.Label>
             <Form.Control
               className="paymentOption w-40"
@@ -280,7 +296,7 @@ function CartPayment(props) {
                 }
               }}
             >
-              <option>請選擇付款方式</option>
+              <option value="">請選擇付款方式</option>
               <option value="ATM轉帳">ATM 轉帳</option>
               <option value="貨到付款">貨到付款</option>
               <option value="信用卡">信用卡</option>
@@ -434,8 +450,7 @@ function CartPayment(props) {
                       props.history.push('/mall/cart/complete')
                     else props.history.push('/life/cart/complete')
 
-                    {
-                      /* localStorage.removeItem("shipTotal")
+                      localStorage.removeItem("shipTotal")
                       localStorage.removeItem("discount")
                       localStorage.removeItem("finalCourseCart")
                       localStorage.removeItem("shopTotal")
@@ -445,8 +460,7 @@ function CartPayment(props) {
                       localStorage.removeItem("finalCart")
                       localStorage.removeItem("courseTotal")
                       localStorage.removeItem("relCourseCouponId")
-                      localStorage.removeItem("relShopCouponId") */
-                    }
+                      localStorage.removeItem("relShopCouponId")
                   }
                 }}
               >
@@ -458,7 +472,7 @@ function CartPayment(props) {
           ''
         )}
         {paymentMethod !== '' && paymentMethod !== '信用卡' ? (
-          <div className="d-flex justify-content-center pt-3 pb-3">
+          <div className="d-flex justify-content-center pt-3 pb-3 mb-5">
             <Button
               className="mt-2 mb-2 nextBtn"
               variant="outline-primary"
@@ -478,8 +492,8 @@ function CartPayment(props) {
                   props.history.push('/mall/cart/complete')
                 else props.history.push('/life/cart/complete')
 
-                {
-                  /* localStorage.removeItem("shipTotal")
+                
+                      localStorage.removeItem("shipTotal")
                       localStorage.removeItem("discount")
                       localStorage.removeItem("finalCourseCart")
                       localStorage.removeItem("shopTotal")
@@ -489,8 +503,8 @@ function CartPayment(props) {
                       localStorage.removeItem("finalCart")
                       localStorage.removeItem("courseTotal")
                       localStorage.removeItem("relCourseCouponId")
-                      localStorage.removeItem("relShopCouponId") */
-                }
+                      localStorage.removeItem("relShopCouponId") 
+                
               }}
             >
               前往付款

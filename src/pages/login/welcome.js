@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './login.scss'
 // import MyBanner from '../../components/MyBanner'
 import { withRouter } from 'react-router-dom'
@@ -8,9 +8,14 @@ function MyWelcome(props) {
     logoutProcess
   } = props
 
+  useEffect(()=>{
+    props.changeBackgroundColorBrown()
+  },[])
+
+
   //continue shop的callback
   const continueShopCallback = () => {
-    alert('開始購物囉!!!')
+    //alert('開始購物囉!!!')
     const path = props.history.location.pathname
     if(path.includes("/mall")) props.history.push("/mall")
     else props.history.push("/life")
@@ -19,7 +24,7 @@ function MyWelcome(props) {
 
   // logout成功時的callback
   const logoutSuccessCallback = () => {
-    alert('登出成功，跳回上一頁')
+    //alert('登出成功，跳回上一頁')
     localStorage.removeItem('member')
     props.history.push("/")
 

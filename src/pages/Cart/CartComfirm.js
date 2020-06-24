@@ -316,7 +316,7 @@ function Cart(props) {
                         }}
                       >
                         <td>
-                          <input name="courseradio" type="radio" />
+                          <input name="courseradio" type="radio"/>
                         </td>
                         <td colSpan="3">本次消費暫不使用優惠卷</td>
                       </tr>
@@ -371,16 +371,6 @@ function Cart(props) {
 
         <Row className="mr-5">
           <Col className="w-25">
-            {/* <Form.Group controlId="exampleForm.ControlSelect1">
-                <Form.Label>選擇付款方式</Form.Label>
-                <Form.Control as="select" onChange={(event) => setPaymentMedthod(event.target.value)}>
-                  <option>請選擇付款方式</option>
-                  <option value="ATM 轉帳">ATM 轉帳</option>
-                  <option value="貨到付款">貨到付款</option>
-                  <option value="信用卡">信用卡</option>
-                  <option value="LINE PAY">LINE PAY</option>
-                </Form.Control>
-              </Form.Group> */}
           </Col>
           <Col className="text-right">
             <p className="orderTotal">
