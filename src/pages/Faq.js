@@ -1,10 +1,16 @@
-import React from 'react'
+import React , { useEffect } from 'react'
 import { Accordion, Card, Button } from 'react-bootstrap'
 
 import bgSvg from '../components/bg-pattern.svg'
 import FaqBg from './FaqBg'
 
-const Faq = () => (
+const Faq = (props) => {
+  
+  useEffect(()=>{
+    props.changeBackgroundColorLight()
+  },[])
+  
+  return(
   <>
     <div style={{ backgroundImage: `url(${bgSvg})` }} className="bgSvg">
       <FaqBg />
@@ -101,6 +107,6 @@ const Faq = () => (
       </div>
     </div>
   </>
-)
+)}
 
 export default Faq

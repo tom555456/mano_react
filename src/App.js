@@ -6,6 +6,8 @@ import MyFooter from './components/MyFooter'
 import MainContent from './components/MainContent'
 
 import LifePage from './pages/LifeStyle/LifePage'
+import MallPage from './pages/MallPage'
+//import MapPage from './components/Map/MapPage'
 
 import Home from './pages/Home'
 import About from './pages/About'
@@ -26,9 +28,9 @@ import Cart from './pages/Cart/Cart'
 import Membercenter from './pages/Membercenter'
 import Coupon from './pages/Coupon'
 import MemberOrders from "./pages/MemberOrders"
+import MemberItemtrack from "./pages/MemberItemTrack"
 
 import NotFoundPage from './pages/NotFoundPage'
-import uploadMyFile from "./pages/testupload"
 
 import Marketing from './pages/Marketing'
 import Comment from './pages/Comment'
@@ -61,7 +63,7 @@ function App(props) {
   }
 
   function changeBackgroundColorDark(){
-    document.body.style.background ='#5C6447'
+    document.body.style.background ='url(/bg-dark-with-pattern.svg) repeat'
   }
 
 
@@ -146,8 +148,12 @@ function App(props) {
             <Route path="/life" exact>
               <LifePage/>
             </Route>
+            {/* <Route path="/life/map" exact>
+              <MapPage/>
+            </Route> */}
+
             <Route path="/mall" exact>
-        
+                <MallPage />
             </Route>
 
 
@@ -160,11 +166,11 @@ function App(props) {
               changeBackgroundColorLight={changeBackgroundColorLight}/>
             </Route>
 
-            <Route path="/mall/shop/:second?/:third?/:fourth?/:page?">
+            <Route path="/mall/shop/:second?/:third?/:fourth?/:fifth?/:sixth?/:seventh?/:page?">
               <ProductList 
               changeBackgroundColorLight={changeBackgroundColorLight}/>
             </Route>
-            <Route path="/mall/itemDetail">
+            <Route path="/mall/itemDetail/:second?/:third?/:fourth?/:fifth?/:sixth?/:seventh?/:page?">
               <ItemDetail 
               changeBackgroundColorLight={changeBackgroundColorLight}/>
             </Route>
@@ -173,7 +179,7 @@ function App(props) {
               <CourseList 
               changeBackgroundColorLight={changeBackgroundColorLight}/>
             </Route>
-            <Route path="/life/courseDetail">
+            <Route path="/life/courseDetail/:second?/:third?/:fourth?">
               <CourseDetail 
               changeBackgroundColorLight={changeBackgroundColorLight}/>
             </Route>
@@ -233,12 +239,6 @@ function App(props) {
               changeBackgroundColorLight={changeBackgroundColorLight}/>
             </Route>
 
-            <Route path="/mall/testupload">
-              <uploadMyFile />
-            </Route>
-            <Route path="/life/testupload">
-              <uploadMyFile />
-            </Route>
 
             <Route path="/mall/login">
               <Login
@@ -327,24 +327,29 @@ function App(props) {
             </ProtectedRoute> */}
 
             <Route exact path="/mall/membercenter">
-              <Membercenter />
+              <Membercenter changeBackgroundColorDark={changeBackgroundColorDark}/>
             </Route>
             <Route exact path="/mall/membercenter/coupon">
-              <Coupon />
+              <Coupon changeBackgroundColorDark={changeBackgroundColorDark}/>
             </Route>
             <Route exact path="/mall/membercenter/memberorders">
-              <MemberOrders />
+              <MemberOrders changeBackgroundColorDark={changeBackgroundColorDark}/>
+            </Route>
+            <Route exact path="/mall/membercenter/memberitemtracking">
+              <MemberItemtrack/>
             </Route>
             <Route exact path="/life/membercenter">
-              <Membercenter />
+              <Membercenter changeBackgroundColorDark={changeBackgroundColorDark}/>
             </Route>
             <Route exact path="/life/membercenter/coupon">
-              <Coupon />
+              <Coupon changeBackgroundColorDark={changeBackgroundColorDark}/>
             </Route>
             <Route exact path="/life/membercenter/memberorders">
-              <MemberOrders />
+              <MemberOrders changeBackgroundColorDark={changeBackgroundColorDark}/>
             </Route>
-
+            <Route exact path="/life/membercenter/memberitemtracking">
+              <MemberItemtrack />
+            </Route>
 
 
             <Route exact path="/mall/faq">

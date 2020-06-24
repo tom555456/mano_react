@@ -54,10 +54,10 @@
 }
 
 h3{
-   margin:40px;
-    display:flex;
+    letter-spacing: 1px;
+   margin-bottom:40px;
     justify-content: start;
-    font-weight: 900;
+    /* font-weight: 900; */
 }
 .btn-life{
     background: #BF8C60;
@@ -71,7 +71,59 @@ h3{
     left:50;
     transform: translate(20%, 600%);
 }
+/* miz card strat----- */
+.big-field{
+    width: 90vw;
+    margin: 0 auto;
+}
+.card-field{
+    width: 608px;
+}
 
+.card-horizon{
+    width: 578px;
+    height: 299px;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 15px;
 
+}
+.c-h-button{
+    width: 132px;
+    height: 47px;
+    border-radius: 24px;
+    color: #fff;
+    position: absolute;
+    left:20px ;
+    bottom:20px;
+}
+.c-h-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
+.card-vertical{
+    width: 273px;
+    height: 396px;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
 
+    margin: 15px;
+}
+.c-v-button{
+    width: 132px;
+    height: 47px;
+    border-radius: 24px;
+    color: #fff;
+    position: absolute;
+    left:20px ;
+    bottom:20px;
+}
+.c-v-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

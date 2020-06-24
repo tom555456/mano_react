@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './ProductList-style.css'
+import '../styles/ProductList-style.css'
 
 function ProductListBg() {
   const display = (

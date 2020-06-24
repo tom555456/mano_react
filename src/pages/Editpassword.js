@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react"
-import { Form, Alert } from "react-bootstrap"
+import { Form, Alert,Col } from "react-bootstrap"
+import MemberSideLink from "./MemberSideLink"
+
 
 var sha1 = require('sha1');
 
@@ -34,6 +36,9 @@ function Editpassword(props) {
  
   return (
     <>
+    <MemberSideLink>
+    <Col md={10}>
+      <h1 className="text-white">修改會員密碼</h1>
       <form style={{ width: "200px" ,color:"white"}}>
         <Form.Group controlId="formBasicEmail" >
           <Form.Label>輸入舊密碼</Form.Label>
@@ -112,6 +117,8 @@ function Editpassword(props) {
           </button>
         </Form.Group>
       </form>
+      </Col>
+    </MemberSideLink>
     </>
   )
 }

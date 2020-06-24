@@ -1,0 +1,77 @@
+.cross {
+  font-size: 24px;
+  color: rgb(207, 87, 87);
+  position: relative;
+  margin: auto 0;
+  top: -2px;
+  left: 40px;
+}
+
+.productName {
+  font-size: 20px;
+  font-weight: 900;
+  margin: auto 0;
+  padding-left: 20px;
+}
+
+.productCard {
+  background-color: white;
+  height: 100px;
+  box-shadow: 0 0 5px white;
+}
+
+.thPrice {
+  position: relative;
+  left: -20px;
+}
+
+.thNumber {
+  position: relative;
+  left: -20px;
+}
+
+.thTotal {
+  position: relative;
+  left: -20px;
+}
+
+.cardPrice {
+  text-align: center;
+  margin: auto 0;
+  position: relative;
+  left: -10px;
+}
+
+.cardNumber {
+  text-align: center;
+  margin: auto 0;
+  position: relative;
+  left: 15px;
+  background-color: #cfddcd;
+}
+
+.cardTotal {
+  text-align: center;
+  margin: auto 0;
+  position: relative;
+  left: 40px;
+}
+
+.totalCard {
+  background-color: white;
+  height: 300px;
+  box-shadow: 0 0 5px white;
+
+  h5,
+  h6 {
+    margin: 20px auto;
+    text-align: center;
+  }
+}
+
+.nextBtn {
+  width: 150px;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 20px;
+}

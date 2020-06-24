@@ -1,12 +1,12 @@
 .firstPage {
-  width: 100vw;
-  height: 100vh;
+  width: 1440px;
+  height: 900px;
   background-color: white;
   .bgLeft {
-    width: 50vw;
-    height: 100vh;
+    width: 50%;
+    height: 100%;
     background: url('../pages/homeImages/home.svg') no-repeat;
-    background-size: 110% 110%;
+    background-size: cover;
     background-position: center;
     background-color: #eff3ec;
     position: relative;
@@ -19,10 +19,10 @@
     }
   }
   .bgRight {
-    width: 50vw;
-    height: 100vh;
+    width: 50%;
+    height: 100%;
     .aLink {
-      margin-top: 45vh;
+      margin-top: 45%;
       h5 {
         margin: 30px 0;
         letter-spacing: 5px;
@@ -34,94 +34,205 @@
 }
 
 .secondPage {
-  width: 100vw;
-  height: 100vh;
+
+  width: 1440px;
+  height: 900px;
   background-color: #a8b38b;
   position: relative;
-  .story {
+  .line{
+    width: 128px;
+    height: 238px;
+    border-bottom: 1px solid white;
+  }
+  
     h3 {
+      font-size: 27pt;
+      letter-spacing: 5px;
       color: white;
       position: absolute;
-      left: 0;
-      top: 20vh;
+      left: 120px;
+      top: 180px;
       font-weight: bold;
     }
     .brandPic {
       background: url('../pages/homeImages/home.svg') no-repeat;
-      background-size: 110% 110%;
+      background-size:cover ;
       background-position: center;
-      height: 250px;
-      width: 200px;
+      height: 352px;
+      width: 230px;
       position: absolute;
-      top: 30vh;
-      left: 10%;
+      top: 300px;
+      left: 163px;
       z-index: 1;
     }
-  }
+    .description2 {
+      width: 530px;
+      height: 238px;
+      position: absolute;
+      color: #5c6447;
+      border: 1px solid #5c6447;
+      padding: 20px;
+      left: 320px;
+      top: 602px;
+      h4 {
+        font-size: 24px;
+        letter-spacing: 10px;
+        margin: 24px 0 24px 78px;
+        color: #5c6447;
+      }
+      p {
+        width: 362px;
+        height: 139px;
+        font-size: 18px;
+        margin-left: 78px;
+        color: #5c6447;
+      }
+    }
+  
   .description1 {
-    width: 400px;
-    height: 200px;
+    width: 545px;
+    height: 232px;
     position: absolute;
-    right: 300px;
-    top: 35vh;
+    left: 645px;
+    top: 300px;
     border: 1px solid white;
     padding: 20px;
     h4 {
+      font-size: 24px;
+      letter-spacing: 10px;
       color: white;
-      text-align: left;
+      margin: 10px 0 0 22px;
     }
-    h6 {
-      margin-top: 30px;
+    .dec {
+      width: 459px;
+      height: 123px;
+      font-size: 18px;
+      letter-spacing: 5px;
+      margin: 15px 0 0 22px;
       color: white;
-      text-align: center;
+      line-height: 48px;
     }
   }
-  .description2 {
-    width: 400px;
-    height: 200px;
-    position: absolute;
-    color: #5c6447;
-    border: 1px solid #5c6447;
-    padding: 20px;
-    left: 300px;
-    top: 400px;
-    h4 {
-      color: #5c6447;
-      text-align: center;
-    }
-    h6 {
-      margin-top: 30px;
-      color: #5c6447;
-      text-align: center;
-    }
-  }
+  
   .moreBtn {
-    width: 300px;
-    height: 150px;
+    width: 367px;
+    height: 130px;
     background-color: white;
     opacity: 0.5;
     position: absolute;
-    right: 200px;
-    top: 420px;
-    .more {
-      color: #c5895a;
-      font-size: 24px;
-      position: absolute;
-      right: 40px;
-      bottom: 20px;
-      opacity: 1;
-    }
+    left: 903px;
+    top: 488px;
+  }
+  .more {
+    color: #c5895a;
+    font-size: 24px;
+    position: absolute;
+    left: 187px;
+    top: 65px;
+    opacity: 1;
   }
 }
 
 .thirdPage {
-  width: 100vw;
-  height: 100vh;
+  width: 1440px;
+  height: 900px;
   overflow: hidden;
 }
 
 .fourthPage {
-  width: 100vw;
-  height: 100vh;
-  background-color: lightcoral;
+  width: 1440px;
+  height: 900px;
+  background-color: #a8b38b;
+  position: relative;
+
+  h3{
+    font-size: 38pt;
+    position: absolute;
+    left: 573px;
+    top:88px;
+  }
+  p{
+    color: #5c6447;
+    font-size: 18px;
+
+  }
+}
+.brandPic2 {
+  background: url('../pages/homeImages/home.svg') no-repeat;
+  background-size:cover ;
+  background-position: center;
+  height: 363px;
+  width: 100%;
+  position: absolute;
+  top: 250px;
+  left: 0px;
+  z-index: 1;
+}
+.transparentbox {
+  background:  #c5895a;
+  width: 626px;
+  height: 277px;
+  position: absolute;
+  top: 481px;
+  left: 789px;
+  opacity:0.5;
+  z-index: 1;
+
+}
+.inputbox {
+  width: 626px;
+  height: 277px;
+  position: absolute;
+  top: 481px;
+  left: 789px;
+  z-index: 1;
+}
+.btn-ipb{
+  width: 182px;
+  height: 55px;
+  position:relative;
+  left:367px;
+  top:124px;
+  border:1px solid black;
+  border-radius: 0;
+  color:black;
+}
+.contactinfo{
+  width: 626px;
+  height: 277px;
+  position: absolute;
+  top: 681px;
+  left: 100px;
+  z-index: 1;
+}
+.ctitle{
+  color: #5c6447;
+}
+.fifthPage{
+  width: 1440px;
+  height: 533px;
+  background-color: #a8b38b;
+  color: white;
+
+}
+.fifthPage p{
+  font-size: 18pt;
+  margin-top: 86px;
+}
+
+.footline{
+  width: 1162px;
+  height: 1px;
+  background: white;
+  margin-top: 85px;
+}
+.buttonarea{
+  width: 210px;
+  height: 34px;
+  font-size: 34px;
+  margin-top: 80px;
+}
+.fifthPage span{
+  font-size: 10pt;
+  margin-top: 75px;
 }

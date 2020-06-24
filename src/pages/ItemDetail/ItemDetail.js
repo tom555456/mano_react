@@ -11,7 +11,7 @@ import {
 } from 'react-bootstrap'
 import { withRouter } from 'react-router-dom'
 import './ItemDetail-style.css'
-import MyBreadcrumb from '../../components/MyBreadcrumb'
+import DetailBreadcrumb from '../../components/DetailBreadcrumb'
 import { FaFacebookSquare, FaLine } from 'react-icons/fa'
 
 import bgSvg from '../../components/bg-pattern.svg'
@@ -153,9 +153,8 @@ class ItemDetail extends Component {
             variant="primary"
             onClick={() => {
               const path = this.props.history.location.pathname
-              if(path.includes("/mall")) this.props.history.push("/mall/cart")
-              else this.props.history.push("/life/cart")
-
+              if (path.includes('/mall')) this.props.history.push('/mall/cart')
+              else this.props.history.push('/life/cart')
             }}
           >
             前往購物車結帳
@@ -172,7 +171,7 @@ class ItemDetail extends Component {
         <div className="container">
           {messageModal}
           <div className="tools">
-            <MyBreadcrumb />
+            <DetailBreadcrumb />
           </div>
 
           <Container>

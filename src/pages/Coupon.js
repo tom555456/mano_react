@@ -5,7 +5,8 @@ import { Link, withRouter } from 'react-router-dom'
 import MemberSideLink from "./MemberSideLink"
 import MyBreadcrumb from "../components/MyBreadcrumb"
 
-function Coupon() {
+function Coupon(props) {
+  const {changeBackgroundColorDark}=props
 
   const [coupon, setCoupon] = useState([])
   const [couponusedlist, setCouponusedlist] = useState([])
@@ -51,7 +52,7 @@ function Coupon() {
   }
   useEffect(() => {
     getData(localMember[0].memberId)
-    changeBackgroundColor()
+    changeBackgroundColorDark()
     document.getElementById("maintable").classList.add('coupontable')
   }, [])
 
@@ -93,7 +94,6 @@ function Coupon() {
 
   return (
     <>
-      <div style={{background:"url(/bg-pattern.svg) repeat", position:" fixed",left: '0',top: '0',width: "25vw",height: "100vh",opacity:'0.1'}}></div>
       <MyBreadcrumb />
       <MemberSideLink>
         <Col md={10} xs={12} style={{background:"white",padding:"0"}}>
@@ -124,8 +124,11 @@ function Coupon() {
           </Table>
           </Col>
           <div style={{textAlign:"center"}}>升級會員，享有更多優惠，會員等級說明
-          <Link to="/faq"
+          
+          <Link to="../faq"
           >看這邊>></Link>
+            
+         
           </div>
         </Col>
       </MemberSideLink>

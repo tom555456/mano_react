@@ -1,33 +1,33 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
 
-function MyBreadcrumb(props) {
+function DetailBreadcrumb(props) {
   const pathlist = [
     '/',
-    '/mall/shop',
-    '/mall/shop/cuisine',
-    '/mall/shop/cuisine/food',
-    '/mall/shop/cuisine/drinks',
-    '/mall/shop/clothes',
-    '/mall/shop/clothes/man',
-    '/mall/shop/clothes/man/top',
-    '/mall/shop/clothes/man/bottom',
-    '/mall/shop/clothes/man/accessory',
-    '/mall/shop/clothes/woman',
-    '/mall/shop/clothes/woman/top',
-    '/mall/shop/clothes/woman/bottom',
-    '/mall/shop/clothes/woman/accessory',
-    '/mall/shop/goods',
-    '/mall/shop/goods/beauty',
-    '/mall/shop/goods/beauty/makeup',
-    '/mall/shop/goods/beauty/body',
-    '/mall/shop/goods/beauty/fingernail',
-    '/mall/shop/goods/beauty/hair',
-    '/mall/shop/goods/outdoor',
-    '/mall/shop/goods/house',
-    '/mall/shop/goods/house/furniture',
-    '/mall/shop/goods/house/others',
-    '/mall/shop/delivery-free',
+    '/mall/itemDetail/shop',
+    '/mall/itemDetail/shop/cuisine',
+    '/mall/itemDetail/shop/cuisine/food',
+    '/mall/itemDetail/shop/cuisine/drinks',
+    '/mall/itemDetail/shop/clothes',
+    '/mall/itemDetail/shop/clothes/man',
+    '/mall/itemDetail/shop/clothes/man/top',
+    '/mall/itemDetail/shop/clothes/man/bottom',
+    '/mall/itemDetail/shop/clothes/man/accessory',
+    '/mall/itemDetail/shop/clothes/woman',
+    '/mall/itemDetail/shop/clothes/woman/top',
+    '/mall/itemDetail/shop/clothes/woman/bottom',
+    '/mall/itemDetail/shop/clothes/woman/accessory',
+    '/mall/itemDetail/shop/goods',
+    '/mall/itemDetail/shop/goods/beauty',
+    '/mall/itemDetail/shop/goods/beauty/makeup',
+    '/mall/itemDetail/shop/goods/beauty/body',
+    '/mall/itemDetail/shop/goods/beauty/fingernail',
+    '/mall/itemDetail/shop/goods/beauty/hair',
+    '/mall/itemDetail/shop/goods/outdoor',
+    '/mall/itemDetail/shop/goods/house',
+    '/mall/itemDetail/shop/goods/house/furniture',
+    '/mall/itemDetail/shop/goods/house/others',
+    '/mall/itemDetail/shop/delivery-free',
   ]
   const pathnames = [
     '首頁',
@@ -59,15 +59,15 @@ function MyBreadcrumb(props) {
 
   console.log(props)
   // 先找出對應的中文詞
-  let locationPathname = `/mall/shop/${props.match.params.second}`
-  let secondPathname = `/mall/shop/${props.match.params.second}/${props.match.params.third}`
-  let thirdPathname = `/mall/shop/${props.match.params.second}/${props.match.params.third}/${props.match.params.fourth}`
-  let fourthPathname = `/mall/shop/${props.match.params.second}/${props.match.params.third}/${props.match.params.fourth}/${props.match.params.fifth}`
-  let fifthPathname = `/mall/shop/${props.match.params.second}/${props.match.params.third}/${props.match.params.fourth}/${props.match.params.fifth}/${props.match.params.sixth}`
+  let locationPathname = `/mall/itemDetail/shop/${props.match.params.third}`
+  let secondPathname = `/mall/itemDetail/shop/${props.match.params.third}/${props.match.params.fourth}`
+  let thirdPathname = `/mall/itemDetail/shop/${props.match.params.third}/${props.match.params.fourth}/${props.match.params.fifth}`
+  let fourthPathname = `/mall/itemDetail/shop/${props.match.params.third}/${props.match.params.fourth}/${props.match.params.fifth}/${props.match.params.sixth}`
+  let fifthPathname = `/mall/itemDetail/shop/${props.match.params.third}/${props.match.params.fourth}/${props.match.params.fifth}/${props.match.params.sixth}/${props.match.params.sth}`
 
   //productList/shop/cuisine?categoryId=3
-  let catUrl = `/mall/shop/${props.match.params.third}?${props.match.params.fifth}`
-  let catUrl2 = `${secondPathname}${props.location.search}`
+  //let catUrl = `/mall/shop/${props.match.params.third}?${props.match.params.fifth}`
+  let catUrl2 = `/mall/shop/${props.match.params.third}?${props.match.params.sixth}`
 
   // `/product/xxxx` 轉為 `/product`
   if (locationPathname.includes('/parentId=0')) locationPathname = '/mall/shop'
@@ -78,7 +78,7 @@ function MyBreadcrumb(props) {
   console.log(`second: ${secondPathname}`)
   console.log(`third: ${thirdPathname}`)
   console.log(`four: ${fourthPathname}`)
-  console.log(catUrl2)
+  console.log(locationPathname)
   // if (locationPathname.includes('/clothes')) locationPathname = '/clothes'
 
   // if (locationPathname.includes('/goods')) locationPathname = '/goods'
@@ -171,13 +171,13 @@ function MyBreadcrumb(props) {
           <a href="/mall/shop">所有商品</a>
         </li>
         <li className="breadcrumb-item active" aria-current="page">
+          <a href={catUrl2}>{pathnames[index]}</a>
+        </li>
+        <li className="breadcrumb-item active" aria-current="page">
           <a href={catUrl2}>{pathnames[secondIndex]}</a>
         </li>
         <li className="breadcrumb-item active" aria-current="page">
-          <a href={catUrl2}>{pathnames[thirdIndex]}</a>
-        </li>
-        <li className="breadcrumb-item active" aria-current="page">
-          {pathnames[fourthIndex]}
+          {pathnames[thirdIndex]}
         </li>
         {/* <li className="breadcrumb-item active" aria-current="page">
           商品內容
@@ -208,4 +208,4 @@ function MyBreadcrumb(props) {
   )
 }
 
-export default withRouter(MyBreadcrumb)
+export default withRouter(DetailBreadcrumb)

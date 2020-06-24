@@ -266,7 +266,6 @@ class Courses extends Component {
         </div>
       </>
     )
-
     return (
       <div className="container">
         {messageModal}
@@ -286,6 +285,7 @@ class Courses extends Component {
             <Course
               key={course.courseId}
               courseId={course.courseId}
+              linkUrl={course.linkUrl}
               courseImg={course.courseImg}
               courseImg2={course.courseImg2}
               courseName={course.courseName}
@@ -304,7 +304,6 @@ class Courses extends Component {
               // getDetail={this.getItemsDetail}
             />
           ))}
-
         <ul
           style={{ visibility: this.state.showPage ? 'visible' : 'hidden' }}
           className="page-lists"
@@ -315,5 +314,4 @@ class Courses extends Component {
     )
   }
 }
-
 export default withRouter(Courses)
