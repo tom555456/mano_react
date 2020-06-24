@@ -6,8 +6,8 @@ import SearchBar from '../components/courses/SearchBar'
 import MyBreadcrumb from './MyBreadcrumb'
 
 class Items extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       data: [],
       totalPages: '',
@@ -115,6 +115,8 @@ class Items extends Component {
     return this.state.data
   }
   async componentDidMount() {
+
+
     let params = new URLSearchParams(this.props.location.search)
     let catIdParams = params.get('categoryId')
     if (catIdParams) {
@@ -126,6 +128,8 @@ class Items extends Component {
     }
 
     await this.getItemsData()
+    
+    
   }
 
   handleChange = async (event) => {

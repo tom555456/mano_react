@@ -125,7 +125,8 @@ function MyFooter(props) {
     path === '/mall/welcome' ||
     path === '/' ||
     path === '/life/welcome' ||
-    path === 'life/login'
+    path === 'life/login' ||
+    path === '/404'
   )
     displayFooter = ''
   else displayFooter = footer

@@ -3,8 +3,8 @@ import { withRouter } from 'react-router-dom'
 import { ListGroup } from 'react-bootstrap'
 
 class CategoryBar extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       data: [],
       listArray: [],
@@ -45,7 +45,9 @@ class CategoryBar extends Component {
   }
 
   async componentDidMount() {
-    await this.treeMenu(0)
+    
+    await this.treeMenu(0);
+    
   }
 
   render() {

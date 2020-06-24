@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom'
 
 import MyNavbar from './components/MyNavbar'
 import MyFooter from './components/MyFooter'
@@ -41,12 +41,19 @@ import MyRegister from './pages/login/register'
 import MyForgetPwd from './pages/login/forgetPwd'
 import Faq from './pages/Faq'
 
-
+import WithSpinner from "./utils/WithSpinner/WithSpinner"
 import ProtectedRoute from './utils/ProtectedRoute'
 var sha1 = require('sha1');
 
+const CartWhithSpinner = WithSpinner(Cart);
+const ShopWithSpinner = WithSpinner(ProductList);
+const CourseWithSpinner = WithSpinner(CourseList);
+
 
 function App(props) {
+
+  const [isLoading, setIsLoading] = useState(false)
+
   const [name, setName] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -167,8 +174,10 @@ function App(props) {
             </Route>
 
             <Route path="/mall/shop/:second?/:third?/:fourth?/:fifth?/:sixth?/:seventh?/:page?">
-              <ProductList 
-              changeBackgroundColorLight={changeBackgroundColorLight}/>
+              <ShopWithSpinner 
+              changeBackgroundColorLight={changeBackgroundColorLight}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading} />
             </Route>
             <Route path="/mall/itemDetail/:second?/:third?/:fourth?/:fifth?/:sixth?/:seventh?/:page?">
               <ItemDetail 
@@ -190,7 +199,10 @@ function App(props) {
             </Route>
 
             <Route path="/mall/cart" exact>
-              <Cart changeBackgroundColorLight={changeBackgroundColorLight} />
+              <CartWhithSpinner 
+              changeBackgroundColorLight={changeBackgroundColorLight}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading} />
             </Route>
             <Route path="/mall/cart/comfirm" exact>
               <CartComfirm 
@@ -210,7 +222,10 @@ function App(props) {
             </Route>
 
             <Route path="/life/cart" exact>
-              <Cart changeBackgroundColorLight={changeBackgroundColorLight} />
+              <CartWhithSpinner 
+                changeBackgroundColorLight={changeBackgroundColorLight}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading} />
             </Route>
             <Route path="/life/cart/comfirm" exact>
               <CartComfirm 
@@ -368,10 +383,11 @@ function App(props) {
               <Home 
               changeBackgroundColorLight={changeBackgroundColorLight}/>
             </Route>
-            <Route exact path="*">
+            <Route exact path="/404">
               <NotFoundPage 
               changeBackgroundColorLight={changeBackgroundColorLight}/>
             </Route>
+            <Redirect to="/404" />
           </Switch>
         </MainContent>
         <MyFooter />
