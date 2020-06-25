@@ -4,7 +4,7 @@ import { Table, Container, Row, Col, ListGroup, Image } from "react-bootstrap"
 import { withRouter } from "react-router-dom"
 import MemberListShow from "./MemberListShow"
 import Editpassword from "./Editpassword"
-import MyBreadcrumb from '../components/MyBreadcrumb'
+import MyBreadcrumb from '../components/MyBreadcrumbForMember'
 
 function Membercenter(props) {
   const {changeBackgroundColorDark}=props

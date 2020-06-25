@@ -10,12 +10,12 @@ import {
 } from 'react-bootstrap'
 import { Link, withRouter } from 'react-router-dom'
 
-import MyBreadcrumb from '../components/MyBreadcrumb'
+import MyBreadcrumb from '../components/MyBreadcrumbForMember'
 
 import MemberSideLink from './MemberSideLink'
 
 function MemberOrders(props) {
-  const {changeBackgroundColorDark}=props
+  const { changeBackgroundColorDark } = props
 
   const [order, setOrder] = useState([])
   const [pageArr, setPagearr] = useState([])
@@ -69,10 +69,9 @@ function MemberOrders(props) {
   useEffect(() => {
     getData(localMember[0].memberId, 1)
     getPageData(localMember[0].memberId)
-    document.getElementById('maintable').classList.add('coupontable')
     changeBackgroundColorDark()
-
   }, [])
+
   async function getDetailData(orderId) {
     const request = new Request(
       `http://localhost:3002/membercenter/memberorderdetail/${orderId}`,
@@ -114,6 +113,7 @@ function MemberOrders(props) {
     getCourseDetailData(orderId)
     setDetailshow(true)
   }
+
   const displayDetail = (
     <>
       <Table responsive bordered style={{ fontSize: '10pt' }}>
@@ -193,6 +193,7 @@ function MemberOrders(props) {
       <MyBreadcrumb />
 
       <MemberSideLink>
+        {/* <Table id="maintable" className="d-none"></Table> */}
         <Col md={10} xs={12} style={{ background: 'white', padding: '0' }}>
           <div
             style={{
@@ -215,24 +216,35 @@ function MemberOrders(props) {
             </button>
           </div>
           <Col md={{ span: 10, offset: 1 }}>
-            <Table responsive hover id="maintable" style={{ fontSize: '10pt' }}>
-              <thead
-                style={{ border: '2px solid #C5895A', borderBottom: '#C5895A' }}
-              >
-                <tr className="bg-primary ">
-                  <th>訂單日期</th>
-                  <th>訂單狀態</th>
-                  <th>訂單金額</th>
-                  <th>付款方式</th>
-                  <th>付款狀態</th>
-                  <th>出貨狀態</th>
-                  <th>明細</th>
-                </tr>
-              </thead>
-              <tbody id="orderRow">
-                {order.map((value, index) => {
-                  return (
-                    <tr key={index}>
+            {order.map((value, index) => {
+              return [
+                <Link to="#">{value.orderNumber}</Link>,
+                <Table
+                  key={index}
+                  responsive
+                  hover
+                  id="maintable"
+                  style={{ fontSize: '10pt' }}
+                  className="coupontable"
+                >
+                  <thead
+                    style={{
+                      border: '2px solid #C5895A',
+                      borderBottom: '#C5895A',
+                    }}
+                  >
+                    <tr className="bg-primary ">
+                      <th>訂單日期</th>
+                      <th>訂單狀態</th>
+                      <th>訂單金額</th>
+                      <th>付款方式</th>
+                      <th>付款狀態</th>
+                      <th>出貨狀態</th>
+                      <th>明細</th>
+                    </tr>
+                  </thead>
+                  <tbody id="orderRow">
+                    <tr>
                       <td>
                         {value.created_at.substr(0, 10)}
                         <br />
@@ -259,11 +271,12 @@ function MemberOrders(props) {
                         </Link>
                       </td>
                     </tr>
-                  )
-                })}
-              </tbody>
-            </Table>
-            {detailshow ? displayDetail : ''}
+                  </tbody>
+                </Table>,
+                detailshow && orderindex === index ? displayDetail : '',
+              ]
+            })}
+
             <div className="d-flex justify-content-center">
               <Pagination>
                 <Pagination.Prev
