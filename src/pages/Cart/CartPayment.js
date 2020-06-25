@@ -2,6 +2,7 @@ import React, { Component, Fragment, useState, useEffect } from 'react'
 import { Table, Container, Alert, Button, Form, Figure } from 'react-bootstrap'
 
 import { withRouter } from 'react-router-dom'
+import { func } from 'prop-types'
 
 function CartPayment(props) {
   const [order, setOrder] = useState('')
@@ -19,6 +20,39 @@ function CartPayment(props) {
   const [shopDiscountUpdate, setShopDiscountUpdate] = useState('')
 
   const [paymentMethod, setPaymentMedthod] = useState('')
+
+
+  function handleKeyPress(event) {
+    
+    let nameInput = document.getElementById("name"),
+    cardInput = document.getElementById("card");
+
+    if (event.keyCode === 13 && nameInput.value !== "" ) {
+      cardInput.focus();
+    }
+
+
+  }
+
+  function handleKeyUp(event) {
+
+    let cardInput = document.getElementById("card"),
+    closingDateInput = document.getElementById("closingDate"),
+    cvvInput = document.getElementById("cvv"),
+    addressInput = document.getElementById("address");
+
+    if ( cardInput.value.match(/^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$/) ) {
+      closingDateInput.focus();
+    }
+    if ( closingDateInput.value.match(/^[0-9]{2}\/[0-9]{2}$/) ) {
+      cvvInput.focus();
+    }
+    if ( cvvInput.value.match(/^[0-9]{3}$/) ) {
+      addressInput.focus();
+    }
+
+    
+  }
 
   useEffect(() => {
     props.changeBackgroundColorLight()
@@ -84,7 +118,17 @@ function CartPayment(props) {
     }
 
     setOrderList(newOrderList)
+
+    document.addEventListener("keypress", handleKeyPress)
+    document.addEventListener("keyup", handleKeyUp)
+    return () => {
+      document.removeEventListener('keypress', handleKeyPress)
+      document.removeEventListener('keyup', handleKeyUp)
+
+    }
+
   }, [])
+
 
   async function orderSuccessCallback() {
     console.log('callback')
@@ -313,22 +357,6 @@ function CartPayment(props) {
               <h3>付款資訊</h3>
             </div>
 
-            {orderErrors.length > 0 ? (
-              <>
-                {orderErrors.map((v, i) => (
-                  <Alert
-                    className="d-flex justify-content-center mt-3"
-                    variant="danger"
-                    key={i}
-                  >
-                    {v}
-                  </Alert>
-                ))}
-              </>
-            ) : (
-              ''
-            )}
-
             <Fragment>
               <Container
                 className="w-100 formBg"
@@ -340,7 +368,8 @@ function CartPayment(props) {
                   </label>
                   <input
                     type="text"
-                    id="example3"
+                    id="name"
+                    value={name}
                     className="form-control form-control-sm inputBg"
                     placeholder="請輸入姓名"
                     onChange={(event) => {
@@ -358,7 +387,8 @@ function CartPayment(props) {
                   </label>
                   <input
                     type="text"
-                    id="example3"
+                    id="card"
+                    value={card}
                     className="form-control form-control-sm inputBg"
                     placeholder="請輸入格式 xxxx-xxxx-xxxx-xxxx"
                     onChange={(event) => {
@@ -377,7 +407,8 @@ function CartPayment(props) {
                     </label>
                     <input
                       type="text"
-                      id="example3"
+                      id="closingDate"
+                      value={closingDate}
                       className="form-control form-control-sm inputBg"
                       placeholder="請輸入格式 xx/xx"
                       onChange={(event) => {
@@ -395,7 +426,8 @@ function CartPayment(props) {
                     </label>
                     <input
                       type="text"
-                      id="example3"
+                      id="cvv"
+                      value={cvv}
                       className="form-control form-control-sm inputBg"
                       placeholder="請輸入格式 xxx"
                       onChange={(event) => {
@@ -414,7 +446,8 @@ function CartPayment(props) {
                   </label>
                   <input
                     type="text"
-                    id="example3"
+                    id="address"
+                    value={address}
                     className="form-control form-control-sm inputBg"
                     placeholder="請輸入帳單地址"
                     onChange={(event) => {
@@ -428,6 +461,22 @@ function CartPayment(props) {
                 </div>
               </Container>
             </Fragment>
+
+            {orderErrors.length > 0 ? (
+              <>
+                {orderErrors.map((v, i) => (
+                  <Alert
+                    className="d-flex justify-content-center"
+                    variant="danger"
+                    key={i}
+                  >
+                    {v}
+                  </Alert>
+                ))}
+              </>
+            ) : (
+              ''
+            )}
 
             <div className="d-flex justify-content-center pt-3 pb-3 mt-5">
               <Button
