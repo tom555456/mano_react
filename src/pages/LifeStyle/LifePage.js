@@ -99,8 +99,8 @@ function LifePage(props) {
         <div className="card-field d-flex flex-wrap">
           <div className="card-horizon">
             <img className="c-h-img" src="/courses/CS013-3.jpg" />
-            <button type="button" className="btn btn-primary c-h-button" onClick={()=> props.history.push("/life/comment")}>
-              留言板 <i className="fas fa-arrow-right"></i>
+            <button type="button" className="btn btn-primary c-h-button" onClick={()=> props.history.push("/life/story")}>
+              故事牆 <i className="fas fa-arrow-right"></i>
             </button>
           </div>
           <div className="card-vertical">

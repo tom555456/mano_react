@@ -172,6 +172,150 @@
         "type": "Point",
         "coordinates": [121.508813, 25.045155]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#5c6447",
+        "PARK_ID": 1031,
+        "FACILITYID": 28031,
+        "NAME": "一〇八抹茶茶廊",
+        "NAME_FR": "甜品店",
+        "ADDRESS": "103台北市大同區承德路一段1號 B3F",
+        "PHONE":"02 2772 2108",
+        "WEBSITE":"http://108matcha-saro.com/",
+        "OPEN": null,
+        "NOTES": "Takeout",
+        "FACILITY": "抹茶專門店",
+        "FACILITY_F": "茶道課程",
+        "DESCRIPTIO": "氣氛悠閒",
+        "DESCRIPT_1": "提供下午茶",
+        "PICTURE_LI": "/mapImages/map004.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [121.517242, 25.049391]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#5c6447",
+        "PARK_ID": 1019,
+        "FACILITYID": 28019,
+        "NAME": "京沺屋抹茶專門",
+        "NAME_FR": "冰品飲料店",
+        "ADDRESS": "108台北市萬華區中華路一段88-2號",
+        "PHONE":"02 2388 6662",
+        "WEBSITE":"https://cutt.ly/cu3TbJY",
+        "OPEN": null,
+        "NOTES": "Takeout",
+        "FACILITY": "抹茶專門店",
+        "FACILITY_F": "茶道課程",
+        "DESCRIPTIO": "氣氛悠閒",
+        "DESCRIPT_1": "專門店",
+        "PICTURE_LI": "/mapImages/map004.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [121.508813, 25.045155]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#5c6447",
+        "PARK_ID": 1035,
+        "FACILITYID": 28035,
+        "NAME": "Suger Miss",
+        "NAME_FR": "甜品店",
+        "ADDRESS": "106台北市大安區光復南路290巷4號1樓",
+        "PHONE":"02 2772 2108",
+        "WEBSITE":"http://108matcha-saro.com/",
+        "OPEN": null,
+        "NOTES": "Takeout",
+        "FACILITY": "抹茶專門店",
+        "FACILITY_F": "茶道課程",
+        "DESCRIPTIO": "氣氛悠閒",
+        "DESCRIPT_1": "提供下午茶",
+        "PICTURE_LI": "/mapImages/map004.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [121.556990, 25.039544]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#5c6447",
+        "PARK_ID": 1043,
+        "FACILITYID": 28043,
+        "NAME": "京沺屋抹茶專門",
+        "NAME_FR": "冰品飲料店",
+        "ADDRESS": "108台北市萬華區中華路一段88-2號",
+        "PHONE":"02 2388 6662",
+        "WEBSITE":"https://cutt.ly/cu3TbJY",
+        "OPEN": null,
+        "NOTES": "Takeout",
+        "FACILITY": "抹茶專門店",
+        "FACILITY_F": "茶道課程",
+        "DESCRIPTIO": "氣氛悠閒",
+        "DESCRIPT_1": "專門店",
+        "PICTURE_LI": "/mapImages/map004.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [121.508813, 25.045155]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#5c6447",
+        "PARK_ID": 1035,
+        "FACILITYID": 28035,
+        "NAME": "gelato pique cafe Taiwan",
+        "NAME_FR": "甜品店",
+        "ADDRESS": "2, No. 12號松高路信義區台北市110",
+        "PHONE":"02 2772 2108",
+        "WEBSITE":"https://www.facebook.com/gelato-pique-cafe-Taiwan-146569716171003/",
+        "OPEN": null,
+        "NOTES": "Takeout",
+        "FACILITY": "抹茶專門店",
+        "FACILITY_F": "茶道課程",
+        "DESCRIPTIO": "氣氛悠閒",
+        "DESCRIPT_1": "提供下午茶",
+        "PICTURE_LI": "/mapImages/map004.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [121.566988, 25.038528]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#5c6447",
+        "PARK_ID": 1036,
+        "FACILITYID": 28036,
+        "NAME": "一〇八抹茶茶廊",
+        "NAME_FR": "甜品店",
+        "ADDRESS": "b2, No. 11號松高路信義區台北市110",
+        "PHONE":"02 2772 2108",
+        "WEBSITE":"http://108matcha-saro.com/",
+        "OPEN": null,
+        "NOTES": "Takeout",
+        "FACILITY": "抹茶專門店",
+        "FACILITY_F": "茶道課程",
+        "DESCRIPTIO": "氣氛悠閒",
+        "DESCRIPT_1": "提供下午茶",
+        "PICTURE_LI": "/mapImages/map004.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [121.565069, 25.039684]
+      }
     }
   ]
 }

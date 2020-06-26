@@ -259,7 +259,7 @@ class CourseDetail extends Component {
           >    
           <Card.Body>
               <Card.Link 
-              href={`/courseDetail${this.state.related1.linkUrl}/categoryId=${this.state.related1.categoryId}?courseId=${this.state.related1.courseId}`}>
+              href={`/life/courseDetail${this.state.related1.linkUrl}/categoryId=${this.state.related1.categoryId}?courseId=${this.state.related1.courseId}`}>
                   <img
                     style={{ height: "60%", objectFit: "cover"}}
                     src={`/courses/${this.state.related1.courseImg}`}
@@ -274,7 +274,7 @@ class CourseDetail extends Component {
           <Card style={{ height: '15rem', width:'10rem'}}>
           <Card.Body>
               <Card.Link 
-                    href={`/courseDetail${this.state.related2.linkUrl}/categoryId=${this.state.related2.categoryId}?courseId=${this.state.related2.courseId}`}>
+                    href={`/life/courseDetail${this.state.related2.linkUrl}/categoryId=${this.state.related2.categoryId}?courseId=${this.state.related2.courseId}`}>
                 <img
                   style={{ height: "60%", objectFit: "cover"}}
                   src={`/courses/${this.state.related2.courseImg}`}
@@ -291,7 +291,7 @@ class CourseDetail extends Component {
           <Card style={{ height: '15rem', width:'10rem' }}>
             <Card.Body>
               <Card.Link 
-                        href={`/courseDetail${this.state.related3.linkUrl}/categoryId=${this.state.related3.categoryId}?courseId=${this.state.related3.courseId}`}>
+                        href={`/life/courseDetail${this.state.related3.linkUrl}/categoryId=${this.state.related3.categoryId}?courseId=${this.state.related3.courseId}`}>
               <img
                 style={{ height: "60%", objectFit: "cover"}}
                 src={`/courses/${this.state.related3.courseImg}`}

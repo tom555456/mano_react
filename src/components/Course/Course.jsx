@@ -27,18 +27,18 @@ function Course(props) {
 
       <div className="content">
         <div className="course-content-left">
-          <h2 className="course-name">{props.courseName}</h2>
+            <h2 className="course-name">{props.courseName}</h2>
           <p className="course-desc">{props.courseDesc}</p>
-          <p className="course-qty">人數上限：{props.courseQty}</p>
         </div>
 
         <div className="course-right">
-          <h2 className="course-price">$ {props.coursePrice}</h2>
-
+         <p className="course-qty">人數上限：{props.courseQty}</p>
           <button className="add-cart" onClick={props.handleClick}>
             add to cart
             <i class="fas fa-shopping-cart" style={{ marginLeft: '8px' }}></i>
           </button>
+          <h2 className="course-price">$ {props.coursePrice}</h2>
+
         </div>
       </div>
     </div>
