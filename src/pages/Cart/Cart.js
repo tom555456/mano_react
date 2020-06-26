@@ -7,6 +7,7 @@ import { BsFillPlayFill } from 'react-icons/bs'
 import '../../styles/cart.scss'
 
 function Cart(props) {
+
   const [mycart, setMycart] = useState([])
   const [mycartDisplay, setMycartDisplay] = useState([])
 
@@ -15,6 +16,7 @@ function Cart(props) {
   const [member, setMember] = useState([])
 
   useEffect(() => {
+    props.setIsLoading(true)
     props.changeBackgroundColorLight()
 
     const initCart = localStorage.getItem('cart') || '[]'
@@ -28,6 +30,7 @@ function Cart(props) {
     setMycart(cartJson)
     setMyCourseCart(courseCartJson)
     setMember(member)
+    props.setIsLoading(false)
   }, [])
 
   useEffect(() => {
@@ -446,8 +449,8 @@ function Cart(props) {
       )}
 
       {mycartDisplay.length <= 0 && myCourseCartDisplay.length <= 0 ? (
-        <div className="d-flex justify-content-center">
-          <h2 className="mt-3 mb-3">購物車沒有東西</h2>
+        <div className="d-flex justify-content-center cartPageSize">
+          <h2 className="cartMargin">購物車沒有東西</h2>
         </div>
       ) : (
         ''

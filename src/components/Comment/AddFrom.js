@@ -53,6 +53,9 @@ function AddForm(props) {
               username: username,
               text: text,
               edited: 0,
+              completed: 0,
+              heart: 0,
+              parentReply: null,
             }
 
             // 建立新的todos陣列

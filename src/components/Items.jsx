@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
-import { Modal, Button } from 'react-bootstrap'
 import { withRouter } from 'react-router-dom'
+
 import Item from './Item'
+
 import SearchBar from '../components/courses/SearchBar'
 import MyBreadcrumb from './MyBreadcrumb'
+
+import { Modal, Button } from 'react-bootstrap'
 
 class Items extends Component {
   constructor() {
@@ -164,7 +167,7 @@ class Items extends Component {
     const allData = json.allData
 
     this.setState({
-      // data: allData,
+      data: allData,
       showPage: false,
     })
   }

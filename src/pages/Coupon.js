@@ -3,7 +3,7 @@ import { Table, Container, Row, Col, ListGroup, Image } from "react-bootstrap"
 import { Link, withRouter } from 'react-router-dom'
 
 import MemberSideLink from "./MemberSideLink"
-import MyBreadcrumb from "../components/MyBreadcrumb"
+import MyBreadcrumb from "../components/MyBreadcrumbForMember"
 
 function Coupon(props) {
   const {changeBackgroundColorDark}=props

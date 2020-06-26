@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom'
 
 import MyNavbar from './components/MyNavbar'
 import MyFooter from './components/MyFooter'
@@ -7,7 +7,11 @@ import MainContent from './components/MainContent'
 
 import LifePage from './pages/LifeStyle/LifePage'
 import MallPage from './pages/MallPage'
+<<<<<<< HEAD
 import Map from './pages/Map'
+=======
+import MapPage from './components/Map/MapPage'
+>>>>>>> 92811bc537ce72ec8602c53baf1644e0b69ffc18
 
 import Home from './pages/Home'
 import About from './pages/About'
@@ -34,6 +38,7 @@ import NotFoundPage from './pages/NotFoundPage'
 
 import Marketing from './pages/Marketing'
 import Comment from './pages/Comment'
+import Story from "./pages/Story"
 
 import Login from './pages/login/login'
 import MyWelcome from './pages/login/welcome'
@@ -41,12 +46,19 @@ import MyRegister from './pages/login/register'
 import MyForgetPwd from './pages/login/forgetPwd'
 import Faq from './pages/Faq'
 
-
+import WithSpinner from "./utils/WithSpinner/WithSpinner"
 import ProtectedRoute from './utils/ProtectedRoute'
 var sha1 = require('sha1');
 
+const CartWhithSpinner = WithSpinner(Cart);
+const ShopWithSpinner = WithSpinner(ProductList);
+const CourseWithSpinner = WithSpinner(CourseList);
+
 
 function App(props) {
+
+  const [isLoading, setIsLoading] = useState(false)
+
   const [name, setName] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -65,6 +77,21 @@ function App(props) {
   function changeBackgroundColorDark(){
     document.body.style.background ='url(/bg-dark-with-pattern.svg) repeat'
   }
+
+  function changeBackgroundColorBrown(){
+    document.body.style.background ='#CDBAA9'
+  }
+
+  function changeBackgroundColorWhite(){
+    document.body.style.background ='#FFFFFF'
+  }
+
+  function changeBackgroundColorGreen(){
+    document.body.style.background ='#A8B38B'
+  }
+
+
+
 
 
 
@@ -149,7 +176,11 @@ function App(props) {
               <LifePage/>
             </Route>
             <Route path="/life/map" exact>
+<<<<<<< HEAD
               <Map/>
+=======
+              <MapPage/>
+>>>>>>> 92811bc537ce72ec8602c53baf1644e0b69ffc18
             </Route>
 
             <Route path="/mall" exact>
@@ -159,16 +190,18 @@ function App(props) {
 
             <Route path="/mall/about">
               <About 
-              changeBackgroundColorLight={changeBackgroundColorLight}/>
+              changeBackgroundColorGreen={changeBackgroundColorGreen}/>
             </Route>
             <Route path="/life/about">
               <About 
-              changeBackgroundColorLight={changeBackgroundColorLight}/>
+              changeBackgroundColorGreen={changeBackgroundColorGreen}/>
             </Route>
 
             <Route path="/mall/shop/:second?/:third?/:fourth?/:fifth?/:sixth?/:seventh?/:page?">
-              <ProductList 
-              changeBackgroundColorLight={changeBackgroundColorLight}/>
+              <ShopWithSpinner 
+              changeBackgroundColorLight={changeBackgroundColorLight}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading} />
             </Route>
             <Route path="/mall/itemDetail/:second?/:third?/:fourth?/:fifth?/:sixth?/:seventh?/:page?">
               <ItemDetail 
@@ -190,7 +223,10 @@ function App(props) {
             </Route>
 
             <Route path="/mall/cart" exact>
-              <Cart changeBackgroundColorLight={changeBackgroundColorLight} />
+              <CartWhithSpinner 
+              changeBackgroundColorLight={changeBackgroundColorLight}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading} />
             </Route>
             <Route path="/mall/cart/comfirm" exact>
               <CartComfirm 
@@ -210,7 +246,10 @@ function App(props) {
             </Route>
 
             <Route path="/life/cart" exact>
-              <Cart changeBackgroundColorLight={changeBackgroundColorLight} />
+              <CartWhithSpinner 
+                changeBackgroundColorLight={changeBackgroundColorLight}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading} />
             </Route>
             <Route path="/life/cart/comfirm" exact>
               <CartComfirm 
@@ -238,10 +277,16 @@ function App(props) {
               <Comment 
               changeBackgroundColorLight={changeBackgroundColorLight}/>
             </Route>
+            <Route exact path="/life/story">
+              <Story 
+              changeBackgroundColorLight={changeBackgroundColorLight}/>
+            </Route>
+
 
 
             <Route path="/mall/login">
               <Login
+                changeBackgroundColorBrown={changeBackgroundColorBrown}
                 username={username}
                 setUsername={setUsername}
                 setPassword={setPassword}
@@ -255,12 +300,14 @@ function App(props) {
 
             <Route path="/mall/welcome">
               <MyWelcome
+                changeBackgroundColorBrown={changeBackgroundColorBrown}
                 logoutProcess={logoutProcess}
               />
             </Route>
 
             <Route path="/mall/register">
               <MyRegister
+                changeBackgroundColorBrown={changeBackgroundColorBrown}
                 setName={setName}
                 username={username}
                 setUsername={setUsername}
@@ -276,6 +323,7 @@ function App(props) {
 
             <Route path="/mall/forgetpwd">
               <MyForgetPwd
+                changeBackgroundColorBrown={changeBackgroundColorBrown}
                 username={username}
                 setUsername={setUsername}
               />
@@ -283,6 +331,7 @@ function App(props) {
 
             <Route path="/life/login">
               <Login
+                changeBackgroundColorBrown={changeBackgroundColorBrown}
                 username={username}
                 setUsername={setUsername}
                 setPassword={setPassword}
@@ -296,12 +345,14 @@ function App(props) {
 
             <Route path="/life/welcome">
               <MyWelcome
+                changeBackgroundColorBrown={changeBackgroundColorBrown}
                 logoutProcess={logoutProcess}
               />
             </Route>
 
             <Route path="/life/register">
               <MyRegister
+                changeBackgroundColorBrown={changeBackgroundColorBrown}
                 setName={setName}
                 username={username}
                 setUsername={setUsername}
@@ -317,6 +368,7 @@ function App(props) {
 
             <Route path="/life/forgetpwd">
               <MyForgetPwd
+                changeBackgroundColorBrown={changeBackgroundColorBrown}
                 username={username}
                 setUsername={setUsername}
               />
@@ -366,12 +418,12 @@ function App(props) {
 
             <Route exact path="/">
               <Home 
-              changeBackgroundColorLight={changeBackgroundColorLight}/>
+              changeBackgroundColorWhite={changeBackgroundColorWhite}/>
             </Route>
-            <Route exact path="*">
-              <NotFoundPage 
-              changeBackgroundColorLight={changeBackgroundColorLight}/>
+            <Route exact path="/404">
+              <NotFoundPage />
             </Route>
+            <Redirect to="/404" />
           </Switch>
         </MainContent>
         <MyFooter />

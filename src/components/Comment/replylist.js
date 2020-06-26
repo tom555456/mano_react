@@ -3,7 +3,7 @@ import ItemC from './ItemC'
 //import EditForm from './EditForm'
 //import ReplyForm from './ReplyForm'
 
-function List(props) {
+function ReplyList(props) {
   //console.log(props)
   const {
     replyCom,
@@ -13,7 +13,7 @@ function List(props) {
     handleReplySave,
     handleEditedToggle,
     handleEditedSave,
-    addNewTodoItemToSever,
+    addNewReplyItemToSever,
     handleCompleted,
     handleEditedHeartPlus
   } = props
@@ -26,16 +26,8 @@ function List(props) {
   return (
     <li className={cssClasses}>
       {replyCom.map((value, index) => {
-        {
-          /* if (value.edited) { */
-        }
         return (
           <>
-            {/* <EditForm
-                    key={value.id}
-                    value={value}
-                    handleEditSave={handleEditedSave}
-                  /> */}
             <ItemC
               key={value.id}
               value={value}
@@ -44,36 +36,13 @@ function List(props) {
               handleDelete={handleDelete}
               handleCompleted={handleCompleted}
               handleEditedHeartPlus={handleEditedHeartPlus}
+              addNewReplyItemToSever={addNewReplyItemToSever}
             />
-            {/* <ReplyForm
-                key={value.id}
-                value={value}
-                replyUser={replyUser}
-                replyText={replyText}
-                replyCom={replyCom}
-                setReplyUser={setReplyUser}
-                setReplyText={setReplyText}
-                setReplyCom={setReplyCom}
-                handleEditSave={handleEditedSave}
-              /> */}
           </>
         )
-
-        {
-          /* return (
-          <ItemC
-            key={value.id}
-            value={value}
-            handleReplyToggle={handleReplyToggle}
-            handleEditedToggle={handleEditedToggle}
-            handleDelete={handleDelete}
-            handleCompleted={handleCompleted}
-          />
-        ) */
-        }
       })}
     </li>
   )
 }
 
-export default List
+export default ReplyList

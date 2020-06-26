@@ -7,6 +7,7 @@ import '../components/courses/courses-style.css'
 
 import bgSvg from '../components/bg-pattern.svg'
 import ProductListBg from './ProductListBg'
+import { func } from 'prop-types'
 
 function ProductList(props) {
 

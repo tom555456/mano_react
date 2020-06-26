@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react'
+
 import './course-style.css'
-import { withRouter } from "react-router-dom"
 
+import { withRouter } from 'react-router-dom'
 
-  function Course(props) {
-    
+function Course(props) {
   return (
-    <div className="item-card" 
-    value={props.courseId}  
-    >
-      <div className="item-img"  onClick={() => props.history.push(`/life/courseDetail${props.linkUrl}?courseId=${props.courseId}`)}>
+    <div className="course-card" value={props.courseId}>
+      <a
+        className="course-img"
+        href={`/life/courseDetail${props.linkUrl}?courseId=${props.courseId}`}
+      >
         <img
           src={`/courses/${props.courseImg}`}
           alt={props.courseImg}
           value={props.courseId}
-         
           onMouseOver={(e) =>
             (e.currentTarget.src = `/courses/${props.courseImg2}`)
           }
@@ -23,19 +23,22 @@ import { withRouter } from "react-router-dom"
           }
         />
         <div className="learnMore">どうぞ</div>
-      </div>
-      <div className="item-content">
-        <div className="item-content-left">
-          <h3 className="item-name">{props.courseName}</h3>
-          <p className="item-description">{props.courseDesc}</p>
-          <p className="item-qty">人數上限：{props.courseQty}</p>
+      </a>
+
+      <div className="content">
+        <div className="course-content-left">
+          <h2 className="course-name">{props.courseName}</h2>
+          <p className="course-desc">{props.courseDesc}</p>
+          <p className="course-qty">人數上限：{props.courseQty}</p>
         </div>
-        <div className="item-content-right">
-          <h3 className="item-price">$ {props.coursePrice}</h3>
+
+        <div className="course-right">
+          <h2 className="course-price">$ {props.coursePrice}</h2>
+
           <button className="add-cart" onClick={props.handleClick}>
             add to cart
+            <i class="fas fa-shopping-cart" style={{ marginLeft: '8px' }}></i>
           </button>
-          <button className="add-fav">add to favtorite</button>
         </div>
       </div>
     </div>

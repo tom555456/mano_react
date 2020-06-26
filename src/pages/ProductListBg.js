@@ -1,7 +1,12 @@
-import React, { Component } from 'react'
+import React, { Componentm, useEffect } from 'react'
 import '../styles/ProductList-style.css'
 
-function ProductListBg() {
+function ProductListBg(props) {
+
+  useEffect(()=>{
+
+  },[])
+
   const display = (
     <>
       <div className="bgSvg"></div>

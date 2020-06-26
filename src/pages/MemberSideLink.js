@@ -26,7 +26,7 @@ function MemberSideLink(props) {
   return (
     <>   
 
-      <Container>
+      <Container style={{padding:"0"}}>
         <Row>
           <Col md={2}>
           {props.history.location.pathname.includes("/mall") ? (

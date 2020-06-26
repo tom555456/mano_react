@@ -8,18 +8,14 @@ function SearchBar(props) {
           type="text"
           value={props.searchValue}
           className="searchBar"
-          onChange={props.onChange}
           style={{
-            width: '100%',
-            height: '30px',
-            background: '#EFF3EC',
-            border: '3px solid #CFDDCD',
+            background: 'transparent',
+            border: '2px solid #ccc',
           }}
+          onChange={props.onChange}
+          placeholder="Search"
         />
-        <i
-          class="fas fa-search"
-          style={{ position: 'relative', top: '-24px', left: '133px' }}
-        ></i>
+        {/* <i className="fas fa-search icon"></i> */}
       </div>
     </>
   )

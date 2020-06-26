@@ -17,6 +17,10 @@ function MyLogin(props) {
     loginErrors,
   } = props
 
+  useEffect(()=>{
+    props.changeBackgroundColorBrown()
+  },[])
+
   async function getData(username) {
     const response = await fetch(`http://localhost:3002/member/${username}`)
     const json = await response.json()
@@ -42,7 +46,7 @@ function MyLogin(props) {
   // login成功時的callback
   const loginSuccessCallback = () => {
     localStorage.setItem('member', JSON.stringify(data))
-    alert('登入成功，跳到Welcome')
+    //alert('登入成功，跳到Welcome')
     const path = props.history.location.pathname
     if(path.includes("/mall")) props.history.push("/mall/welcome")
     else props.history.push("/life/welcome")
@@ -50,7 +54,7 @@ function MyLogin(props) {
 
   // logout成功時的callback
   const logoutSuccessCallback = () => {
-    alert('登出成功，跳回上一頁')
+    //alert('登出成功，跳回上一頁')
     props.history.goBack()
   }
 

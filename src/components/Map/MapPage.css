@@ -1,4 +1,5 @@
 .leaflet-container {
+<<<<<<< HEAD
   width: 100%;
   height: 80vh;
   margin:5% auto;
@@ -12,4 +13,17 @@ height:100%;
 
 .cardText{
 padding:10px;
+=======
+    width: 100%;
+    height: 100vh;
+    margin:5% auto;
+  }
+
+.infoImg{
+  width:100%;
+}
+
+.cardText{
+  padding:10px;
+>>>>>>> 92811bc537ce72ec8602c53baf1644e0b69ffc18
 }

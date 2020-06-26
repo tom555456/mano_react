@@ -55,7 +55,6 @@ class CategoryBar extends Component {
         onClick={() => localStorage.setItem('page', 1)}
         style={{
           textAlign: 'center',
-          textDecoration: 'underline',
           width: '200px',
         }}
       >
@@ -65,7 +64,7 @@ class CategoryBar extends Component {
               action
               href={`/mall${list.url}?categoryId=${list.id}`}
               style={{
-                backgroundColor: '#CFDDCD',
+                backgroundColor: '#E4EEE3',
                 color: '#5E6248',
               }}
             >

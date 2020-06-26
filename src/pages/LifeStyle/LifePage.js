@@ -47,20 +47,20 @@ function LifePage(props) {
         <div className="flex">
           <div className="column a">
             <img className="img-life" src="/courses/CS013-3.jpg" />
-            <Button className="btn-life">留言板--></Button>
+            <Button className="btn-life" onClick={()=> props.history.push("/life/comment") }>留言板--></Button>
           </div>
           <div className="column a">
             <img
               className="img-life"
               src="https://cdn.pixabay.com/photo/2018/10/08/21/22/bank-3733501__340.jpg"
             />
-            <Button className="btn-life">抹茶地圖--></Button>
+            <Button className="btn-life"  onClick={()=> props.history.push("/life/map") }>抹茶地圖--></Button>
           </div>
         </div>
         <a href="/course">
           <div className="column">
             <img className="img-life" src="/courses/CS008-2.jpg" />
-            <Button className="btn-life">達人推薦--></Button>
+            <Button className="btn-life"  onClick={()=> props.history.push("/life/course") }>達人推薦--></Button>
           </div>
         </a>
       </div>
@@ -69,7 +69,7 @@ function LifePage(props) {
         <a href="/course">
           <div className="column">
             <img className="img-life" src="/courses/CS005-1.jpg" />
-            <Button className="btn-life">手作課程--></Button>
+            <Button className="btn-life"  onClick={()=> props.history.push("/life/course") }>手作課程--></Button>
           </div>
         </a>
         <div className="flex">
@@ -78,11 +78,11 @@ function LifePage(props) {
               className="img-life"
               src="https://cdn.pixabay.com/photo/2015/07/16/16/42/sweets-847918__340.jpg"
             />
-            <Button className="btn-life">熱門商品--></Button>
+            <Button className="btn-life"  onClick={()=> props.history.push("/life/course") }>熱門商品--></Button>
           </div>
           <div className="column a">
             <img className="img-life" src="/courses/CS009-4.jpg" />
-            <Button className="btn-life">會員限定--></Button>
+            <Button className="btn-life"  onClick={()=> props.history.push("/life/marketing") }>會員限定--></Button>
           </div>
         </div>
       </div>
@@ -99,19 +99,19 @@ function LifePage(props) {
         <div className="card-field d-flex flex-wrap">
           <div className="card-horizon">
             <img className="c-h-img" src="/courses/CS013-3.jpg" />
-            <button type="button" className="btn btn-primary c-h-button">
+            <button type="button" className="btn btn-primary c-h-button" onClick={()=> props.history.push("/life/comment")}>
               留言板 <i className="fas fa-arrow-right"></i>
             </button>
           </div>
           <div className="card-vertical">
             <img className="c-v-img" src="https://cdn.pixabay.com/photo/2018/10/08/21/22/bank-3733501__340.jpg" />
-            <button type="button" className="btn btn-primary c-v-button">
+            <button type="button" className="btn btn-primary c-v-button" onClick={()=> props.history.push("/life/map") }>
             抹茶地圖 <i className="fas fa-arrow-right"></i>
             </button>
           </div>
           <div className="card-vertical">
             <img className="c-v-img" src="/courses/CS008-2.jpg" />
-            <button type="button" className="btn btn-primary c-v-button">
+            <button type="button" className="btn btn-primary c-v-button" onClick={()=> props.history.push("/life/course") }>
             達人推薦 <i className="fas fa-arrow-right"></i>
             </button>
           </div>
@@ -119,19 +119,19 @@ function LifePage(props) {
         <div className="card-field d-flex flex-wrap">
           <div className="card-vertical">
             <img className="c-v-img" src="/courses/CS005-1.jpg" />
-            <button type="button" className="btn btn-primary c-v-button">
+            <button type="button" className="btn btn-primary c-v-button" onClick={()=> props.history.push("/life/course") }>
             手作課程 <i className="fas fa-arrow-right"></i>
             </button>
           </div>
           <div className="card-vertical">
             <img className="c-v-img" src="https://cdn.pixabay.com/photo/2015/07/16/16/42/sweets-847918__340.jpg" />
-            <button type="button" className="btn btn-primary c-v-button">
+            <button type="button" className="btn btn-primary c-v-button" onClick={()=> props.history.push("/life/course") }>
             熱門商品 <i className="fas fa-arrow-right"></i>
             </button>
           </div>
           <div className="card-horizon">
             <img className="c-h-img" src="/courses/CS009-4.jpg" />
-            <button type="button" className="btn btn-primary c-h-button">
+            <button type="button" className="btn btn-primary c-h-button" onClick={()=> props.history.push("/life/marketing") }>
             會員限定 <i className="fas fa-arrow-right"></i>
             </button>
           </div>

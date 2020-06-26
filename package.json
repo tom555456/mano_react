@@ -8,6 +8,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "aos": "^2.3.4",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "eslint-config-react-app": "^5.2.1",
@@ -37,6 +38,10 @@
     "react-image-magnifiers": "^1.3.2",
     "react-imation": "^0.5.3",
     "react-leaflet": "^2.7.0",
+<<<<<<< HEAD
+=======
+    "react-leaflet-search": "^1.0.3",
+>>>>>>> 92811bc537ce72ec8602c53baf1644e0b69ffc18
     "react-masonry-css": "^1.0.14",
     "react-native-search-bar": "^3.5.1",
     "react-native-web": "^0.12.3",

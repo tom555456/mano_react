@@ -166,20 +166,11 @@ function Comment(props) {
     handleEditedToggle(cid)
   }
   const handleEditedHeartPlus = (cid, value) => {
-    const newHeart = value + 1
+    const newHeart = heart + value
     const comIndex = com.findIndex((v, i) => v.cid === cid)
     if (comIndex !== -1) {
       console.log(heart)
       com[comIndex].heart = heart
-      updateComToServer(com[comIndex])
-      setHeart(newHeart + heart)
-    }
-  }
-  const handleEditedHeartMinus = (value) => {
-    const newHeart = heart - value
-    const comIndex = com.findIndex((v, i) => v.heart === heart)
-    if (comIndex !== -1) {
-      com[comIndex].heart = newHeart
       updateComToServer(com[comIndex])
       setHeart(newHeart)
     }
@@ -200,7 +191,6 @@ function Comment(props) {
         setText={setText}
         setCom={setCom}
         addNewTodoItemToSever={addNewTodoItemToSever}
-        // handleInsertSave={handleInsertSave}
       />
       <List
         com={com}
@@ -211,7 +201,6 @@ function Comment(props) {
         handleEditedSave={handleEditedSave}
         handleCompleted={handleCompleted}
         handleEditedHeartPlus={handleEditedHeartPlus}
-        handleEditedHeartMinus={handleEditedHeartMinus}
       />
     </>
   )

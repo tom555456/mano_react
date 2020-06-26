@@ -11,27 +11,12 @@ function ItemC(props) {
     handleEditedToggle,
     handleCompleted,
     handleEditedHeartPlus,
-    handleEditedHeartMinus,
   } = props
 
   const date = new Date(value.id)
 
   const cssClasses =
     'list-group-item justify-content-between align-items-center list-group-item-light'
-  // async function updateHeartToServer(value) {
-  //   const newHeart = { heart: heart + value }
-  //   const request = new Request('http://localhost:3002/comment', {
-  //     method: 'PUT',
-  //     body: JSON.stringify(newHeart),
-  //     headers: new Headers({
-  //       Accept: 'application/json',
-  //       'Content-Type': 'application/json',
-  //     }),
-  //   })
-  //   const response = await fetch(request)
-  //   const data = await response.json()
-  //   setHeart(heart + value)
-  // }
 
   return (
     <li className={cssClasses}>

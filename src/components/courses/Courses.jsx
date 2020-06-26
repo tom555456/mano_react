@@ -224,9 +224,8 @@ class Courses extends Component {
             variant="primary"
             onClick={() => {
               const path = this.props.history.location.pathname
-              if(path.includes("/mall")) this.props.history.push("/mall/cart")
-              else this.props.history.push("/life/cart")
-
+              if (path.includes('/mall')) this.props.history.push('/mall/cart')
+              else this.props.history.push('/life/cart')
             }}
           >
             前往購物車結帳
