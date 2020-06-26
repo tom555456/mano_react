@@ -13,6 +13,7 @@ import { withRouter } from 'react-router-dom'
 import './ItemDetail-style.css'
 import DetailBreadcrumb from '../../components/DetailBreadcrumb'
 import { FaFacebookSquare, FaLine } from 'react-icons/fa'
+import CategoryBar from '../../components/CategoryBar'
 
 import bgSvg from '../../components/bg-pattern.svg'
 import ItemDetailBg from './ItemDetailBg'
@@ -175,15 +176,21 @@ class ItemDetail extends Component {
           </div>
 
           <Container>
-            <Row xs={12} md={2}>
+            <Row>
+              <Col xs={12} md={2}>
+              <CategoryBar/>
+              </Col>
+              <Col xs={0} md={2}>
+              </Col>
+              <Col xs={12} md={4}>
               <Image
                 src={`/items/${this.state.single.itemImg}`}
                 alt={this.state.single.itemImg}
                 thumbnail
               />
-
-              <Row xs={12} md={2}>
-                <Card style={{ marginLeft: '50px' }}>
+              </Col>
+              <Col xs={12} md={4}>
+              <Card style={{ marginLeft: '50px' }}>
                   <Card.Body className="card-detail">
                     <Card.Title
                       style={{
@@ -278,7 +285,7 @@ class ItemDetail extends Component {
                     <Button className="add-fav">add to favtorite</Button>
                   </div>
                 </Card>
-              </Row>
+              </Col>
             </Row>
           </Container>
         </div>

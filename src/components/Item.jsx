@@ -53,7 +53,7 @@ function Item(props) {
                   商品介紹 : {props.itemDescription}
                 </Card.Subtitle>
                 <div>
-                  <Card.Text className="item-price text-right cardText">
+                  <Card.Text className="item-price text-right cardText2">
                     $ {props.itemPrice}
                   </Card.Text>
 

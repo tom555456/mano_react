@@ -8,13 +8,12 @@ class ItemTracking extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            data: [],
+            data: [], 
             show: false,
             mycart: [],
-            productName: ""
+            productName: "",
          };
     }
-
 
     handleClose = () => this.setState({show: false})
     handleShow = () => this.setState({show: true})
@@ -27,8 +26,7 @@ class ItemTracking extends Component {
         this.setState({ 
             data: items
          });
-
-        return this.state.data
+        return this.state.data;
     }
 
 
@@ -111,7 +109,7 @@ class ItemTracking extends Component {
                 ))}
             {this.state.data.length <= 0 ? (
                 <div className="d-flex justify-content-center m-auto">
-                    <Link className='text-center' style={{ textDecoration: 'none' }} to="/shop" onClick={() => localStorage.setItem("page",1)}><i class="fas fa-heart-broken fa-7x" align-item-center></i><h2 className="mt-3 mb-3">尚未將商品加到願望清單中</h2></Link>
+                    <Link className='text-center' style={{ textDecoration: 'none' }} to="/mall/shop" onClick={() => localStorage.setItem("page",1)}><i class="fas fa-heart-broken fa-7x" align-item-center></i><h2 className="mt-3 mb-3">尚未將商品加到願望清單中</h2></Link>
                     
                 </div>
               ) : "" }

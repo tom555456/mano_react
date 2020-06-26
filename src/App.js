@@ -7,7 +7,7 @@ import MainContent from './components/MainContent'
 
 import LifePage from './pages/LifeStyle/LifePage'
 import MallPage from './pages/MallPage'
-//import MapPage from './components/Map/MapPage'
+import Map from './pages/Map'
 
 import Home from './pages/Home'
 import About from './pages/About'
@@ -148,9 +148,9 @@ function App(props) {
             <Route path="/life" exact>
               <LifePage/>
             </Route>
-            {/* <Route path="/life/map" exact>
-              <MapPage/>
-            </Route> */}
+            <Route path="/life/map" exact>
+              <Map/>
+            </Route>
 
             <Route path="/mall" exact>
                 <MallPage />

@@ -1,0 +1,15 @@
+.leaflet-container {
+  width: 100%;
+  height: 80vh;
+  margin:5% auto;
+}
+
+.infoImg{
+width:100%;
+height:100%;
+
+}
+
+.cardText{
+padding:10px;
+}
