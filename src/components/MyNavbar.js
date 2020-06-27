@@ -135,12 +135,7 @@ function MyNavbar(props) {
 
           <Nav.Link as={NavLink} to="/life/cart">
             購物車
-          </Nav.Link>
-          
-          <Nav.Link as={NavLink} to="/life/story">
-            Story
-          </Nav.Link>
-
+          </Nav.Link>          
         </Nav>
         <Form inline>{displayButton}</Form>
       </Navbar>

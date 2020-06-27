@@ -12,8 +12,8 @@
   }
 }
 
-.bigarea {
-}
+// .bigarea {
+// }
 
 .home {
   width: 100%;
@@ -23,11 +23,20 @@
 .aLink {
   width: 100%;
   height: 100%;
+  a:hover {
+    text-decoration: none;
+  }
   h5 {
     margin: 3.3vw 0;
     letter-spacing: 5px;
     color: #bf9a00;
     text-align: center;
+    transition: 0.7s;
+    &:hover {
+      text-shadow: 0 0 5px brown;
+      transform: scale(1.2);
+      font-weight: 500;
+    }
   }
 }
 
@@ -72,15 +81,13 @@
   .description2 {
     min-width: 482px;
     height: 154px;
-    // position: absolute;
+    position: absolute;
     color: #5c6447;
     border: 1px solid #5c6447;
     margin-bottom: 100px;
     padding: 5px;
     transform: translateY(130px);
 
-    // left: 22.2vw;
-    // top: 66.88vh;
     h4 {
       font-size: 24px;
       letter-spacing: 5px;
@@ -101,9 +108,7 @@
   .description1 {
     min-width: 420px;
     height: 154px;
-    // position: absolute;
-    // left: 44.8vw;
-    // top: 33.3vh;
+    position: absolute;
     border: 1px solid white;
     padding: 5px;
     // transform: translateY(100px);

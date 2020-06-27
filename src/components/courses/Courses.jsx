@@ -22,6 +22,8 @@ class Courses extends Component {
       catData: [],
       showPage: true,
       detailKey: '',
+      sorted:[],
+      isOldestFirst: true,
     }
   }
 
@@ -176,6 +178,38 @@ class Courses extends Component {
       showPage: false,
     })
   }
+
+  priceToggle = (e) => {
+
+
+    
+    const newData = this.state.data
+    let sortedData = newData
+    this.setState({
+      isOldestFirst: !this.state.isOldestFirst,
+    })
+
+    if(this.state.isOldestFirst){
+      sortedData = newData.sort((a, b) => {
+        if(a.coursePrice > b.coursePrice) return 1;
+        if(a.coursePrice < b.coursePrice) return -1;
+      })
+    }else{
+      sortedData = newData.sort((a, b) => {
+        if(a.coursePrice < b.coursePrice) return 1;
+        if(a.coursePrice > b.coursePrice) return -1;
+    })
+  }
+
+
+
+    console.log(sortedData)
+    this.setState({
+      data: sortedData,
+    })
+
+    }
+
   render() {
     const lists = []
 
@@ -266,12 +300,24 @@ class Courses extends Component {
       </>
     )
     return (
-      <div className="container">
+      <>
+     
+      <div className="container-course">
         {messageModal}
+       
         <div className="tools">
-          <CsMyBreadcrumb />
+          <CsMyBreadcrumb  />
+          <div className="result">
           {result}
-          <SearchBar onChange={this.onChange} />
+          </div>
+          <div className="input-container">
+            <SearchBar onChange={this.onChange} />
+            <select className="sortor" onChange={this.priceToggle}>
+            <option value="highToLow">篩選</option>
+            <option value="highToLow">價格高至低</option>
+            <option value="lowtoHigh">價格低至高</option>
+          </select>
+        </div>
         </div>
         {this.state.data
           .filter((course) => {
@@ -310,6 +356,7 @@ class Courses extends Component {
           {lists}
         </ul>
       </div>
+      </>
     )
   }
 }

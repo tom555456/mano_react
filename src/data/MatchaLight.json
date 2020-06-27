@@ -340,6 +340,102 @@
         "type": "Point",
         "coordinates": [121.518286, 25.026794]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#8c9a6a",
+        "PARK_ID": 1032,
+        "FACILITYID": 28032,
+        "NAME": "LOUISA COFFEE 路易莎咖啡",
+        "NAME_FR": "咖啡店",
+        "ADDRESS": "103台北市大同區光能里",
+        "PHONE":"02 2555 0121",
+        "WEBSITE":"http://www.louisacoffee.com.tw/",
+        "OPEN": null,
+        "NOTES": "Takeout",
+        "FACILITY": "插座",
+        "FACILITY_F": "不限時",
+        "DESCRIPTIO": "氣氛悠閒",
+        "DESCRIPT_1": "適合小型聚會",
+        "PICTURE_LI": "/mapImages/map011.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [121.518914, 25.053196]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#8c9a6a",
+        "PARK_ID": 1033,
+        "FACILITYID": 28033,
+        "NAME": "LOUISA COFFEE 路易莎咖啡",
+        "NAME_FR": "咖啡店",
+        "ADDRESS": "103台北市大同區光能里",
+        "PHONE":"02 2555 0121",
+        "WEBSITE":"http://www.louisacoffee.com.tw/",
+        "OPEN": null,
+        "NOTES": "Takeout",
+        "FACILITY": "插座",
+        "FACILITY_F": "不限時",
+        "DESCRIPTIO": "氣氛悠閒",
+        "DESCRIPT_1": "適合小型聚會",
+        "PICTURE_LI": "/mapImages/map011.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [121.557483, 25.038951]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#8c9a6a",
+        "PARK_ID": 1037,
+        "FACILITYID": 28037,
+        "NAME": "LOUISA COFFEE 路易莎咖啡",
+        "NAME_FR": "咖啡店",
+        "ADDRESS": "103台北市大同區光能里",
+        "PHONE":"02 2555 0121",
+        "WEBSITE":"http://www.louisacoffee.com.tw/",
+        "OPEN": null,
+        "NOTES": "Takeout",
+        "FACILITY": "插座",
+        "FACILITY_F": "不限時",
+        "DESCRIPTIO": "氣氛悠閒",
+        "DESCRIPT_1": "適合小型聚會",
+        "PICTURE_LI": "/mapImages/map011.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [121.518914, 25.053196]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#8c9a6a",
+        "PARK_ID": 1041,
+        "FACILITYID": 28041,
+        "NAME": "LOUISA COFFEE 路易莎咖啡",
+        "NAME_FR": "咖啡店",
+        "ADDRESS": "103台北市大同區光能里",
+        "PHONE":"02 2555 0121",
+        "WEBSITE":"http://www.louisacoffee.com.tw/",
+        "OPEN": null,
+        "NOTES": "Takeout",
+        "FACILITY": "插座",
+        "FACILITY_F": "不限時",
+        "DESCRIPTIO": "氣氛悠閒",
+        "DESCRIPT_1": "適合小型聚會",
+        "PICTURE_LI": "/mapImages/map011.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [121.561647, 25.040391]
+      }
     }
   ]
 }

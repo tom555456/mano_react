@@ -208,7 +208,7 @@ class ItemDetail extends Component {
                         </Card.Text>
                       </Card.Body>
 
-                      <div className="link1 link-button" style={{ height: '40px', width: '40px'}}>
+                      <div className="link1" style={{ height: '40px', width: '40px' }}>
                         <a href="http://www.facebook.com">
                           <FaFacebookSquare
                             style={{

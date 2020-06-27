@@ -1,3 +1,8 @@
+.container-course{
+  width:100%;
+  padding:0;
+}
+
 .page-lists {
     list-style: none;
     display: flex;
@@ -15,17 +20,20 @@
     text-align: center;
   }
   
-  .tools {
-    color: rgb(141, 151, 143);
-    font-size: 0.7rem;
-    margin: 0 0 15px 15px;
-    display: flex;
-    justify-content: space-between;
-    width: 75%;
-  }
+
   .bgSvg {
     height: 150%;
     opacity: 0.5;
   }
 
 
+.sortor{
+  background: transparent;
+  border:2px solid rgb(190, 190, 190);
+  color:rgb(124, 121, 121);
+  margin-top:5%;
+}
+
+.result{
+  margin-top:2%;
+}

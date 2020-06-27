@@ -21,7 +21,11 @@ function About(props) {
           <div class="col">
             <div className="row line"></div>
             <h3>品牌故事About Us</h3>
-            <div className="row brandPic align-items-end"></div>
+            <div
+              data-aos="zoom-out-right"
+              data-aos-duration="800"
+              className="row brandPic align-items-end"
+            ></div>
           </div>
           <div class="col align-self-center">
             <div className="row ">
@@ -63,7 +67,7 @@ function About(props) {
                 data-aos-duration="800"
                 data-aos-easing="ease-in-out"
               >
-                <a href={props.history.location.pathname.includes("/mall") ? "/mall/about" : "/life/about"} className="more">
+                <a href="/life/about" className="more">
                   MORE→
                 </a>
               </div>

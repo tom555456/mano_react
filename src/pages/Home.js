@@ -9,9 +9,9 @@ import { useEffect } from 'react'
 function Home(props) {
   AOS.init()
 
-  useEffect(()=>{
+  useEffect(() => {
     props.changeBackgroundColorWhite()
-  },[])
+  }, [])
 
   return (
     <>
@@ -51,7 +51,11 @@ function Home(props) {
           <div class="col">
             <div className="row line"></div>
             <h3>品牌故事About Us</h3>
-            <div className="row brandPic align-items-end"></div>
+            <div
+              data-aos="zoom-out-right"
+              data-aos-duration="800"
+              className="row brandPic align-items-end"
+            ></div>
           </div>
           <div class="col align-self-center">
             <div className="row ">
