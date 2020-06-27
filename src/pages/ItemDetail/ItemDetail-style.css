@@ -27,6 +27,7 @@
 
 .item-price {
   padding-bottom: 20px;
+  align-self: start;
 }
 
 .link-para {

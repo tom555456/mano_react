@@ -7,11 +7,7 @@ import MainContent from './components/MainContent'
 
 import LifePage from './pages/LifeStyle/LifePage'
 import MallPage from './pages/MallPage'
-<<<<<<< HEAD
-import Map from './pages/Map'
-=======
 import MapPage from './components/Map/MapPage'
->>>>>>> 92811bc537ce72ec8602c53baf1644e0b69ffc18
 
 import Home from './pages/Home'
 import About from './pages/About'
@@ -176,11 +172,7 @@ function App(props) {
               <LifePage/>
             </Route>
             <Route path="/life/map" exact>
-<<<<<<< HEAD
-              <Map/>
-=======
               <MapPage/>
->>>>>>> 92811bc537ce72ec8602c53baf1644e0b69ffc18
             </Route>
 
             <Route path="/mall" exact>

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Modal, Button } from 'react-bootstrap'
+import { Modal, Button, Container } from 'react-bootstrap'
 import { withRouter, Link } from 'react-router-dom'
 import TrackingCard from "./TrackingCard";
 import "./item-tracking.css"
+import { BsFillPlayFill } from 'react-icons/bs' 
 
 class ItemTracking extends Component {
     constructor(props) {
@@ -85,9 +86,12 @@ class ItemTracking extends Component {
           )
     
         return(
-            <div className="d-flex"> 
+            
+            <Container className="d-flex  flex-wrap" > 
+               <h3 style={{width: '100%' }}><BsFillPlayFill />願望清單</h3>
               {this.state.data.map(item =>(
-                <TrackingCard key={item.itemId}
+                <TrackingCard xs={12} md={4} 
+                key={item.itemId}
                 itemId={item.itemId}
                 itemImg={item.itemImg}
                 itemName={item.itemName}
@@ -114,7 +118,7 @@ class ItemTracking extends Component {
                 </div>
               ) : "" }
        {messageModal}
-            </div>
+            </Container>
             
         )
     }

@@ -18,35 +18,6 @@ function Item(props) {
   // console.log(props)
 
   return (
-<<<<<<< HEAD
-    <Container className="container mb-2">
-      <Row>
-        <Col xs={12} md={4} className="d-flex">
-          <Image
-            onClick={() =>
-              props.history.push(
-                `/mall/itemDetail${props.linkUrl}/categoryId=${props.categoryId}?itemId=${props.itemId}`
-              )
-            }
-            src={`/items/${props.itemImg}`}
-            thumbnail
-            style={{ height: '200px', width: '200px' }}
-          />
-
-          <div className="ml-2">
-            <Card style={{ width: '35rem', height: '200px' }}>
-              <Card.Body>
-                <Card.Title>
-                  <h2>{props.itemName}</h2>
-                </Card.Title>
-                <Card.Subtitle className="mb-2 mt-2 text-muted d-flex">
-                  商品介紹 : {props.itemDescription}
-                </Card.Subtitle>
-                <div>
-                  <Card.Text className="item-price text-right cardText2">
-                    $ {props.itemPrice}
-                  </Card.Text>
-=======
     <>
       <div className="container mb-2 outside">
         <div className="img">
@@ -61,7 +32,6 @@ function Item(props) {
             />
           </a>
         </div>
->>>>>>> 92811bc537ce72ec8602c53baf1644e0b69ffc18
 
         <div className="item-desc">
           <div className="title-desc">
