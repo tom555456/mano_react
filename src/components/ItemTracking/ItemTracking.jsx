@@ -15,7 +15,9 @@ class ItemTracking extends Component {
             productName: "",
          };
     }
+   
 
+    
     handleClose = () => this.setState({show: false})
     handleShow = () => this.setState({show: true})
 
@@ -23,7 +25,7 @@ class ItemTracking extends Component {
         const response = await fetch(`http://localhost:3002/itemTracking`);
         const json = await response.json();
         const items = json.rows;
-
+      
         this.setState({ 
             data: items
          });
@@ -59,7 +61,7 @@ class ItemTracking extends Component {
     }
 
     render() {
-
+      const { match, location, history } = this.props
           const messageModal = (
             <Modal show={this.state.show} onHide={this.handleClose} backdrop="static" keyboard={false}>
               <Modal.Header closeButton>
@@ -84,11 +86,14 @@ class ItemTracking extends Component {
               </Modal.Footer>
             </Modal>
           )
+        let displaystyle={width:"100%"}
+        let locationPathname = location.pathname
+        if (locationPathname.includes("/membercenter")) displaystyle = {width:"100%",color:"#fff"}
     
         return(
             
             <Container className="d-flex  flex-wrap" > 
-               <h3 style={{width: '100%' }}><BsFillPlayFill />願望清單</h3>
+               <h3 style={displaystyle}><BsFillPlayFill />願望清單</h3>
               {this.state.data.map(item =>(
                 <TrackingCard xs={12} md={4} 
                 key={item.itemId}
