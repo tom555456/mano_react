@@ -69,7 +69,7 @@ function MemberEditForm(props) {
 
   return (
     <>
-      <Col md={10} xs={12} style={{ background: "white" }}>
+      <Col md={10} xs={12} className="mb-5"style={{ background: "white" ,borderRadius:'5px'}}>
         <Table responsive style={{ color: "#5C6447" }}>
           <thead>
             <tr>
@@ -220,7 +220,7 @@ function MemberEditForm(props) {
         </Table>
         <div className=" d-flex justify-content-end">
           <button
-            className="btn btn-primary"
+            className="btn btn-primary mb-3"
             onMouseEnter={()=>{
               setMember({ ...member, memberId: localMember[0].memberId })
             }}
@@ -232,7 +232,7 @@ function MemberEditForm(props) {
             SAVE
           </button>
           <button
-            className="btn btn-secondary"
+            className="btn btn-secondary mb-3"
             onClick={() => setIsedit(!isedit)}
           >
             取消編輯

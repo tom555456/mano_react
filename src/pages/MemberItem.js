@@ -9,7 +9,7 @@ function MemberItem(props) {
   return (
     <>
 
-      <Col md={10} xs={12} style={{background:"white"}}>
+      <Col md={10} xs={12} className="mb-5"  style={{background:"white",borderRadius:'5px'}}>
         <Table responsive id="maintable">
           <thead>
             
@@ -69,7 +69,7 @@ function MemberItem(props) {
           </tbody>
         </Table>
         <div className=" d-flex justify-content-end">
-        <button className="btn btn-primary" onClick={() => setIsedit(!isedit)}>
+        <button className="btn btn-primary mb-3" onClick={() => setIsedit(!isedit)}>
           Edit
         </button>
         </div>

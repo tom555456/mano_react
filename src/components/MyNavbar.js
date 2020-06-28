@@ -56,12 +56,17 @@ function MyNavbar(props) {
           <img src={locationPathname === "/membercenter" ? "/mano_logo_light-01.svg" :
                   "/mano_logo_dark-01.svg"} alt="mano" style={{height: "30px"}}/>
         )}</Navbar.Brand>
-
+        
         <div>
           <Nav className="mr-auto">
             <Nav.Link as={NavLink} to="/mall" exact>
               商城首頁
             </Nav.Link>
+
+            {/* <Nav.Link as={NavLink} to="/mall/burgerBar" exact>
+              burgerBar
+            </Nav.Link> */}
+
             <Nav.Link
               as={NavLink}
               to="/mall/shop"
@@ -74,8 +79,8 @@ function MyNavbar(props) {
               抹茶新生活
               {lifeShow ? (             
                  <div className="d-flex justify-content-center nav-show-box" style={{position:"absolute",
-                    width: "185px", left: "-55px", top: "32px", border: "1px solid #cccccc",
-                    background: "#ffffff", borderRadius: "1px", lineHeight: "12px", zIndex: "100"}}>
+                    width: "185px", left: "0", top: "0", border: "1px solid #cccccc",
+                    background: "#ffffff", borderRadius: "1px", lineHeight: "12px", zIndex: "100", transform: "translate(-55px, 30px)"}}>
                   <Nav.Link as={NavLink} to="/life/course" onClick={()=> setLifeShow(false)}>
                     <img src="/hover_list/hover_list-01.svg" alt="課程報名"/>
                   </Nav.Link>

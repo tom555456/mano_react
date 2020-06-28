@@ -234,7 +234,7 @@ function Cart(props) {
                 <Container className="mt-0 m-3">
                   <Row>
                     <Col xs={12} md={3}
-                     className="cartItem-hover"
+                     className="trans-5s cartItem-hover"
                      style={{cursor: "pointer"}} 
                      onClick={()=> props.history.push(`/mall/itemDetail/shop/categoryId=1?itemId=${value.id}`)}>
                       <Image
@@ -359,7 +359,7 @@ function Cart(props) {
                 <Container className="mt-0 m-3">
                   <Row>
                     <Col xs={12} md={3}
-                     className="cartItem-hover"
+                     className="trans-5s cartItem-hover"
                      style={{cursor: "pointer"}} 
                      onClick={()=> props.history.push(`/life/courseDetail/course/new?courseId=${value.id}`)}>
                       <Image

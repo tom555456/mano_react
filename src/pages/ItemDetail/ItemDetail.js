@@ -35,6 +35,9 @@ class ItemDetail extends Component {
       catData: [],
       showPage: true,
       single: [],
+      related1: [],
+      related2: [],
+      related3: [],
       amount: 1,
     }
   }
@@ -108,10 +111,17 @@ class ItemDetail extends Component {
     const json = await response.json()
     const allData = json.allData
     const single = allData[itemId - 3]
+    const related1 = allData[itemId]
+    const related2 = allData[itemId + 1]
+    const related3 = allData[itemId + 2]
+
     console.log(allData)
 
     this.setState({
       single: single,
+      related1: related1,
+      related2: related2,
+      related3: related3,
     })
 
     // console.log(totalPages)
@@ -181,8 +191,7 @@ class ItemDetail extends Component {
               <Col xs={0} md={2}>
                 <CategoryBar />
               </Col>
-              <Col xs={0} md={1}>
-              </Col>
+              <Col xs={0} md={1}></Col>
               <Col xs={12} md={9}>
                 <Row>
                   <Col xs={12} md={6}>
@@ -193,121 +202,259 @@ class ItemDetail extends Component {
                     />
                   </Col>
                   <Col xs={12} md={6}>
-                    <Card style={{ marginLeft: '50px' }} class="d-flex">
+                    <Card class="d-flex">
                       <Card.Body className="card-detail">
                         <Card.Title
                           style={{
-                            borderBottom: '5px solid #5E6248',
-                            padding: '5px',
+                            fontSize: '36px',
+                            textAlign: 'center',
                           }}
                         >
                           {this.state.single.itemName}
                         </Card.Title>
-                        <Card.Text style={{ fontSize: '15px', color: '#999' }}>
+                        <Card.Text
+                          style={{
+                            fontSize: '15px',
+                            color: '#999',
+                          }}
+                        >
                           {this.state.single.itemDescription}
                         </Card.Text>
-                      </Card.Body>
 
-                      <div className="link1" style={{ height: '40px', width: '40px' }}>
-                        <a href="http://www.facebook.com">
-                          <FaFacebookSquare
-                            style={{
-                              fontSize: '40px',
-                            }}
-                          />
-                        </a>
-                      </div>
-                      <div className="link2">
-                        <a href="https://line.me/zh-hant/">
-                          <FaLine
-                            style={{
-                              fontSize: '40px',
-                            }}
-                          />
-                        </a>
-                      </div>
+                        <div className="link1">
+                          <a href="http://www.facebook.com">
+                            <FaFacebookSquare
+                              style={{
+                                fontSize: '40px',
+                              }}
+                            />
+                          </a>
+                        </div>
+                        <div className="link2">
+                          <a href="https://line.me/zh-hant/">
+                            <FaLine
+                              style={{
+                                fontSize: '40px',
+                              }}
+                            />
+                          </a>
+                        </div>
 
-                      <h3 className="item-price">
-                        $ {this.state.single.itemPrice}
-                      </h3>
+                        <h3 className="itemDetail-price">
+                          $ {this.state.single.itemPrice}
+                        </h3>
 
-                      <div>
-                        <Button
-                          onClick={() =>
-                            this.setState({ amount: this.state.amount - 1 })
-                          }
-                          style={{ margin: '5px' }}
-                        >
-                          -
-                    </Button>
-
-                        <input
+                        <select
                           style={{
-                            textAlign: 'center',
+                            marginBottom: '5px',
+                            width: '60%',
+                            marginLeft: '50px',
                           }}
-                          onChange={(event) => {
-                            this.setState({ amount: event.target.value })
-                          }}
-                          value={this.state.amount < 1 ? 1 : this.state.amount}
-                        />
-
-                        <Button
-                          onClick={() =>
-                            this.setState({ amount: this.state.amount + 1 })
-                          }
-                          style={{ margin: '5px' }}
                         >
-                          +
-                    </Button>
-                      </div>
+                          <option>請選擇商品尺寸</option>
+                          <option>F</option>
+                        </select>
 
-                      <select style={{ margin: '10px' }}>
-                        {/* <option>請選擇商品尺寸</option> */}
-                        <option>F</option>
-                      </select>
-
-                      <div>
-                        <Button
-                          className="add-cart"
-                          onClick={() => {
-                            for (let i = 0; i < this.state.amount; i++) {
-                              this.updateCartToLocalStorage({
-                                id: this.state.single.itemId,
-                                img: this.state.single.itemImg,
-                                name: this.state.single.itemName,
-                                amount: 1,
-                                price: this.state.single.itemPrice,
-                                shippingId: this.state.single.shippingId,
-                              })
+                        <div className="main-btn">
+                          <Button
+                            onClick={() =>
+                              this.setState({ amount: this.state.amount - 1 })
                             }
+                            style={{ margin: '5px' }}
+                          >
+                            -
+                          </Button>
+
+                          <input
+                            style={{
+                              width: '20%',
+                              textAlign: 'center',
+                            }}
+                            onChange={(event) => {
+                              this.setState({ amount: event.target.value })
+                            }}
+                            value={
+                              this.state.amount < 1 ? 1 : this.state.amount
+                            }
+                          />
+
+                          <Button
+                            onClick={() =>
+                              this.setState({ amount: this.state.amount + 1 })
+                            }
+                            style={{ margin: '5px' }}
+                          >
+                            +
+                          </Button>
+                        </div>
+
+                        <div className="cart-btn">
+                          <Button
+                            className="cart"
+                            onClick={() => {
+                              for (let i = 0; i < this.state.amount; i++) {
+                                this.updateCartToLocalStorage({
+                                  id: this.state.single.itemId,
+                                  img: this.state.single.itemImg,
+                                  name: this.state.single.itemName,
+                                  amount: 1,
+                                  price: this.state.single.itemPrice,
+                                  shippingId: this.state.single.shippingId,
+                                })
+                              }
+                            }}
+                          >
+                            add to cart
+                            <i
+                              class="fas fa-shopping-cart"
+                              style={{ marginLeft: '8px' }}
+                            ></i>
+                          </Button>
+
+                          <Button className="fav" style={{ color: '#5E6248' }}>
+                            add to favtorite
+                          </Button>
+                        </div>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                  <Col xs={12} md={12} style={{ margin: '15px 0' }}>
+                    <h4 style={{ width: '100%' }}>
+                      <BsFillPlayFill />
+                      商品詳情
+                    </h4>
+                    <Card body>
+                      這款立領排扣外套採用輕質棉製成，是春夏季的理想選擇。
+                      短袖尖領款式，正面以鈕扣式開合，胸部和腰部設有口袋以便放置各樣細小物件。
+                    </Card>
+                  </Col>
+                  <Col xs={12} md={12} style={{ margin: '15px 0' }}>
+                    <h4 style={{ width: '100%' }}>
+                      <BsFillPlayFill />
+                      商品規格
+                    </h4>
+                    <Card body>
+                      材質:100%棉
+                      <br />
+                      清洗方式:手洗(切勿機洗)
+                      <br />
+                      產地:日本
+                      <br />
+                      模特:身高165.9厘米
+                      <br />
+                      胸圍：58.4厘米
+                      <br />
+                      長度：73.7厘米
+                      <br />
+                    </Card>
+                  </Col>
+                  <Col xs={12} md={12} style={{ margin: '15px 0' }}>
+                    <h4 style={{ width: '100%' }}>
+                      <BsFillPlayFill />
+                      運送及其他規則
+                    </h4>
+                    <Card body>
+                      對於您在網路上購買的商品，在商品未穿、未洗、無損壞、寄送錯誤或有瑕疵的情形下，我們原則上同意在30個日曆天（自產品從我們倉儲出貨時起算）內接受退貨。退貨時應附上原始包裝，可辦理全部或部分退費。點此了解更多。
+                    </Card>
+                  </Col>
+
+                  <Col xs={12} md={12} style={{ margin: '2.5% 0' }}>
+                    <div>
+                      <div>
+                        <h4>
+                          <BsFillPlayFill />
+                          為您推薦
+                        </h4>
+                        <h6>&nbsp;&nbsp;&nbsp;&nbsp;MANO Recommended</h6>
+                      </div>
+
+                      <div
+                        style={{
+                          display: 'flex',
+                        }}
+                      >
+                        <Card
+                          style={{
+                            height: '12rem',
+                            width: '10rem',
+                            margin: '10px',
                           }}
                         >
-                          add to cart
-                    </Button>
+                          <Card.Body className="item-recom-cardBody">
+                            <Card.Link
+                              href={`/mall/itemDetail${this.state.related1.linkUrl}/categoryId=${this.state.related1.categoryId}?itemId=${this.state.related1.itemId}`}
+                            >
+                              <img
+                                className="item-img-detail"
+                                style={{ height: '50%', objectFit: 'cover' }}
+                                src={`/items/${this.state.related1.itemImg}`}
+                                alt={this.state.related1.itemImg}
+                              />
+                              <Card.Title className="item-recom-name">
+                                <p>{this.state.related1.itemName}</p>
+                              </Card.Title>
+                              <Card.Title>
+                                <h6 className="item-more">learn more</h6>
+                              </Card.Title>
+                            </Card.Link>
+                          </Card.Body>
+                        </Card>
+
+                        <Card
+                          style={{
+                            height: '12rem',
+                            width: '10rem',
+                            margin: '10px',
+                          }}
+                        >
+                          <Card.Body className="item-recom-cardBody">
+                            <Card.Link
+                              href={`/mall/itemDetail${this.state.related2.linkUrl}/categoryId=${this.state.related2.categoryId}?itemId=${this.state.related2.itemId}`}
+                            >
+                              <img
+                                className="item-img-detail"
+                                style={{ height: '50%', objectFit: 'cover' }}
+                                src={`/items/${this.state.related2.itemImg}`}
+                                alt={this.state.related2.itemImg}
+                              />
+                              <Card.Title className="item-recom-name">
+                                <h6>{this.state.related2.itemName}</h6>
+                              </Card.Title>
+                              <Card.Title>
+                                <h6 className="item-more">learn more</h6>
+                              </Card.Title>
+                            </Card.Link>
+                          </Card.Body>
+                        </Card>
+
+                        <Card
+                          style={{
+                            height: '12rem',
+                            width: '10rem',
+                            margin: '10px',
+                          }}
+                        >
+                          <Card.Body className="item-recom-cardBody">
+                            <Card.Link
+                              href={`/mall/itemDetail${this.state.related3.linkUrl}/categoryId=${this.state.related3.categoryId}?itemId=${this.state.related3.itemId}`}
+                            >
+                              <img
+                                className="item-img-detail"
+                                style={{ height: '50%', objectFit: 'cover' }}
+                                src={`/items/${this.state.related3.itemImg}`}
+                                alt={this.state.related3.itemImg}
+                              />
+                              <Card.Title className="item-recom-name">
+                                <h6>{this.state.related3.itemName}</h6>
+                              </Card.Title>
+                              <Card.Title>
+                                <h6 className="item-more">learn more</h6>
+                              </Card.Title>
+                            </Card.Link>
+                          </Card.Body>
+                        </Card>
                       </div>
-                    </Card>
-                  </Col>
-                  <Col xs={12} md={12} style={{margin: '15px 0'}}>
-                    <h4 style={{ width: '100%' }}><BsFillPlayFill />商品詳情</h4>
-                    <Card body>
-                    這款立領排扣外套採用輕質棉製成，是春夏季的理想選擇。 短袖尖領款式，正面以鈕扣式開合，胸部和腰部設有口袋以便放置各樣細小物件。
-                    
-                    </Card>
-                  </Col>
-                  <Col xs={12} md={12} style={{margin: '15px 0'}}>
-                    <h4 style={{ width: '100%' }}><BsFillPlayFill />商品規格</h4>
-                    <Card body>
-                    材質:100%棉<br/>
-                    清洗方式:手洗(切勿機洗)<br/>
-                    產地:日本<br/>
-                    模特:身高165.9厘米<br/>
-                    胸圍：58.4厘米<br/>
-                    長度：73.7厘米<br/>
-                    </Card>
-                  </Col>
-                  <Col xs={12} md={12} style={{margin: '15px 0'}}>
-                    <h4 style={{ width: '100%' }}><BsFillPlayFill />運送及其他規則</h4>
-                    <Card body>對於您在網路上購買的商品，在商品未穿、未洗、無損壞、寄送錯誤或有瑕疵的情形下，我們原則上同意在30個日曆天（自產品從我們倉儲出貨時起算）內接受退貨。退貨時應附上原始包裝，可辦理全部或部分退費。點此了解更多。</Card>
+                    </div>
                   </Col>
                 </Row>
               </Col>

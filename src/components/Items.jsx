@@ -6,6 +6,7 @@ import Item from './Item'
 import SearchBar from '../components/courses/SearchBar'
 import MyBreadcrumb from './MyBreadcrumb'
 
+import '../styles/Items-style.css'
 import { Modal, Button } from 'react-bootstrap'
 
 class Items extends Component {
@@ -287,7 +288,7 @@ class Items extends Component {
       <div className="container">
         {wishListModal}
         {messageModal}
-        <div className="tools">
+        <div className="tools" style={{ marginLeft: '60px' }}>
           <MyBreadcrumb />
           {result}
           <SearchBar onChange={this.onChange} />
@@ -330,7 +331,12 @@ class Items extends Component {
             />
           ))}
 
-        <ul style={{ visibility: this.state.showPage ? 'visible' : 'hidden' }}>
+        <ul
+          className="page"
+          style={{
+            visibility: this.state.showPage ? 'visible' : 'hidden',
+          }}
+        >
           {lists}
         </ul>
       </div>

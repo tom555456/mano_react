@@ -42,6 +42,8 @@ import MyRegister from './pages/login/register'
 import MyForgetPwd from './pages/login/forgetPwd'
 import Faq from './pages/Faq'
 
+import BurgerBar from "./components/burgerBar"
+
 import WithSpinner from "./utils/WithSpinner/WithSpinner"
 import ProtectedRoute from './utils/ProtectedRoute'
 var sha1 = require('sha1');
@@ -263,7 +265,7 @@ function App(props) {
 
             <Route exact path="/life/marketing">
               <Marketing 
-              changeBackgroundColorLight={changeBackgroundColorLight}/>
+              changeBackgroundColorWhite={changeBackgroundColorWhite}/>
             </Route>
             <Route exact path="/life/comment">
               <Comment 
@@ -405,7 +407,10 @@ function App(props) {
               changeBackgroundColorLight={changeBackgroundColorLight}/>
             </Route>
 
-
+            <Route exact path="/mall/burgerBar">
+              <BurgerBar 
+              changeBackgroundColorLight={changeBackgroundColorLight} />
+            </Route>
 
 
             <Route exact path="/">

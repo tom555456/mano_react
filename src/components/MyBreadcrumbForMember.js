@@ -4,6 +4,7 @@ import { Form, FormControl,Button,Container,Col,Row } from "react-bootstrap"
 
 
 function MyBreadcrumb(props) {
+  const{handleChangeSearch,handleClickSearch,searchTerm}=props
   const pathlist = [
     "/",
     "/membercenter",
@@ -39,7 +40,12 @@ function MyBreadcrumb(props) {
   const searchicon={borderRadius:"5px 0 0 5px",width:"20%",height:"100%",border:"1px solid white",borderRight:"none",color:"white",padding:"0"}
   const searchbar={borderRadius:"0 5px 5px 0",width:"80%",height:"100%",background:"transparent",borderLeft:"none",color:"white"}
 
-
+  const inputshow =(
+    <Form inline style={{width:"204px",height:"30px"}} onSubmit={()=>{handleClickSearch(searchTerm);return false}} >
+    <Button variant="outline-success" style={searchicon} onClick={()=>{handleClickSearch(searchTerm);}}><i class="fas fa-search"></i></Button>
+    <FormControl type="text"  placeholder="搜尋訂單內容" onChange={(event)=>{handleChangeSearch(event)}} className="ordersearch" style={searchbar}/>
+     </Form>
+  )
 
   return (
     <>
@@ -63,11 +69,8 @@ function MyBreadcrumb(props) {
           </li>
         </ol>
         </div>
-        <Form inline style={{width:"204px",height:"30px"}}>
-        <Button variant="outline-success" style={searchicon}><i class="fas fa-search"></i></Button>
-        <FormControl type="text" placeholder="" className="" style={searchbar}/>
-         </Form>
        
+       {index===3?inputshow:'' }
       </nav>
       </Col>
       </Row>
