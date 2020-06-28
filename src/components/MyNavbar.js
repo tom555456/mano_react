@@ -74,7 +74,7 @@ function MyNavbar(props) {
               抹茶新生活
               {lifeShow ? (             
                  <div className="d-flex justify-content-center nav-show-box" style={{position:"absolute",
-                    width: "185px", left: "-55px", top: "35px", border: "1px solid #cccccc",
+                    width: "185px", left: "-55px", top: "32px", border: "1px solid #cccccc",
                     background: "#ffffff", borderRadius: "1px", lineHeight: "12px", zIndex: "100"}}>
                   <Nav.Link as={NavLink} to="/life/course" onClick={()=> setLifeShow(false)}>
                     <img src="/hover_list/hover_list-01.svg" alt="課程報名"/>
@@ -174,7 +174,7 @@ function MyNavbar(props) {
               抹茶新生活
               {lifeShow ? (             
                  <div className="d-flex justify-content-center nav-show-box" style={{position:"absolute",
-                    width: "185px", left: "-55px", top: "35px", border: "1px solid #cccccc",
+                    width: "185px", left: "-55px", top: "32px", border: "1px solid #cccccc",
                     background: "#ffffff", borderRadius: "1px", lineHeight: "12px", zIndex: "100"}}>
                   <Nav.Link as={NavLink} to="/life/course" onClick={()=> setLifeShow(false)}>
                     <img src="/hover_list/hover_list-01.svg" alt="課程報名"/>
