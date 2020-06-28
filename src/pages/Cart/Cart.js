@@ -3,7 +3,7 @@ import { Table, Container, Row, Col, Image, Button } from 'react-bootstrap'
 import { withRouter, Link } from 'react-router-dom'
 import { GrFormSubtract, GrFormAdd } from 'react-icons/gr'
 import { FaUndo } from 'react-icons/fa'
-import { BsFillPlayFill } from 'react-icons/bs'
+import { BsFillPlayFill, BsX } from 'react-icons/bs'
 import '../../styles/cart.scss'
 
 function Cart(props) {
@@ -292,7 +292,7 @@ function Cart(props) {
                             })
                           }
                         >
-                          <i type="button" class="fas fa-times"></i>
+                        <BsX type="button"></BsX>
                         </p>
                       </Row>
                     </Col>
@@ -419,7 +419,7 @@ function Cart(props) {
                             })
                           }
                         >
-                          <i type="button" class="fas fa-times"></i>
+                        <BsX type="button"></BsX>
                         </p>
                       </Row>
                     </Col>
