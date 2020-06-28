@@ -21,37 +21,30 @@ function CartPayment(props) {
 
   const [paymentMethod, setPaymentMedthod] = useState('')
 
-
   function handleKeyPress(event) {
-    
-    let nameInput = document.getElementById("name"),
-    cardInput = document.getElementById("card");
+    let nameInput = document.getElementById('name'),
+      cardInput = document.getElementById('card')
 
-    if (event.keyCode === 13 && nameInput.value !== "" ) {
-      cardInput.focus();
+    if (event.keyCode === 13 && nameInput.value !== '') {
+      cardInput.focus()
     }
-
-
   }
 
   function handleKeyUp(event) {
+    let cardInput = document.getElementById('card'),
+      closingDateInput = document.getElementById('closingDate'),
+      cvvInput = document.getElementById('cvv'),
+      addressInput = document.getElementById('address')
 
-    let cardInput = document.getElementById("card"),
-    closingDateInput = document.getElementById("closingDate"),
-    cvvInput = document.getElementById("cvv"),
-    addressInput = document.getElementById("address");
-
-    if ( cardInput.value.match(/^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$/) ) {
-      closingDateInput.focus();
+    if (cardInput.value.match(/^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$/)) {
+      closingDateInput.focus()
     }
-    if ( closingDateInput.value.match(/^[0-9]{2}\/[0-9]{2}$/) ) {
-      cvvInput.focus();
+    if (closingDateInput.value.match(/^[0-9]{2}\/[0-9]{2}$/)) {
+      cvvInput.focus()
     }
-    if ( cvvInput.value.match(/^[0-9]{3}$/) ) {
-      addressInput.focus();
+    if (cvvInput.value.match(/^[0-9]{3}$/)) {
+      addressInput.focus()
     }
-
-    
   }
 
   useEffect(() => {
@@ -119,16 +112,13 @@ function CartPayment(props) {
 
     setOrderList(newOrderList)
 
-    document.addEventListener("keypress", handleKeyPress)
-    document.addEventListener("keyup", handleKeyUp)
+    document.addEventListener('keypress', handleKeyPress)
+    document.addEventListener('keyup', handleKeyUp)
     return () => {
       document.removeEventListener('keypress', handleKeyPress)
       document.removeEventListener('keyup', handleKeyUp)
-
     }
-
   }, [])
-
 
   async function orderSuccessCallback() {
     console.log('callback')
@@ -198,7 +188,6 @@ function CartPayment(props) {
   }
 
   async function insertOrderPaymentToSever(item, item2, item3) {
-
     const member = JSON.parse(localStorage.getItem('member'))
     const email = member[0].email
 
@@ -226,22 +215,24 @@ function CartPayment(props) {
   }
 
   async function insertOrderToSever(item, item2) {
-
     const member = JSON.parse(localStorage.getItem('member'))
     const email = member[0].email
 
-    const request = new Request('http://localhost:3002/order/insertOrderAndSendMail', {
-      method: 'POST',
-      body: JSON.stringify({
-        item: item,
-        item2: item2,
-        email: email,
-      }),
-      headers: new Headers({
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }),
-    })
+    const request = new Request(
+      'http://localhost:3002/order/insertOrderAndSendMail',
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          item: item,
+          item2: item2,
+          email: email,
+        }),
+        headers: new Headers({
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        }),
+      }
+    )
 
     console.log('After JSON: ', JSON.stringify(item))
     console.log('After JSON: ', JSON.stringify(item2))
@@ -318,7 +309,7 @@ function CartPayment(props) {
             controlId="exampleForm.ControlSelect1"
           >
             <Form.Label className="labelTxt labelSize">
-             請選擇付款方式
+              請選擇付款方式
             </Form.Label>
             <Form.Control
               className="paymentOption w-40"
@@ -499,17 +490,17 @@ function CartPayment(props) {
                       props.history.push('/mall/cart/complete')
                     else props.history.push('/life/cart/complete')
 
-                      localStorage.removeItem("shipTotal")
-                      localStorage.removeItem("discount")
-                      localStorage.removeItem("finalCourseCart")
-                      localStorage.removeItem("shopTotal")
-                      localStorage.removeItem("total")
-                      localStorage.removeItem("coursecart")
-                      localStorage.removeItem("cart")
-                      localStorage.removeItem("finalCart")
-                      localStorage.removeItem("courseTotal")
-                      localStorage.removeItem("relCourseCouponId")
-                      localStorage.removeItem("relShopCouponId")
+                    localStorage.removeItem('shipTotal')
+                    localStorage.removeItem('discount')
+                    localStorage.removeItem('finalCourseCart')
+                    localStorage.removeItem('shopTotal')
+                    localStorage.removeItem('total')
+                    localStorage.removeItem('coursecart')
+                    localStorage.removeItem('cart')
+                    localStorage.removeItem('finalCart')
+                    localStorage.removeItem('courseTotal')
+                    localStorage.removeItem('relCourseCouponId')
+                    localStorage.removeItem('relShopCouponId')
                   }
                 }}
               >
@@ -541,19 +532,17 @@ function CartPayment(props) {
                   props.history.push('/mall/cart/complete')
                 else props.history.push('/life/cart/complete')
 
-                
-                      localStorage.removeItem("shipTotal")
-                      localStorage.removeItem("discount")
-                      localStorage.removeItem("finalCourseCart")
-                      localStorage.removeItem("shopTotal")
-                      localStorage.removeItem("total")
-                      localStorage.removeItem("coursecart")
-                      localStorage.removeItem("cart")
-                      localStorage.removeItem("finalCart")
-                      localStorage.removeItem("courseTotal")
-                      localStorage.removeItem("relCourseCouponId")
-                      localStorage.removeItem("relShopCouponId") 
-                
+                localStorage.removeItem('shipTotal')
+                localStorage.removeItem('discount')
+                localStorage.removeItem('finalCourseCart')
+                localStorage.removeItem('shopTotal')
+                localStorage.removeItem('total')
+                localStorage.removeItem('coursecart')
+                localStorage.removeItem('cart')
+                localStorage.removeItem('finalCart')
+                localStorage.removeItem('courseTotal')
+                localStorage.removeItem('relCourseCouponId')
+                localStorage.removeItem('relShopCouponId')
               }}
             >
               前往付款

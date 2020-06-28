@@ -77,6 +77,46 @@ function MyNavbar(props) {
   
   const index = pathlist.findIndex((v) => v === locationPathname)
 
+  const newNav = (
+    <>
+    <Navbar variant={themenames[index]}>
+        <Navbar.Brand href="/">抹の</Navbar.Brand>
+        <div>
+                    <Nav className="mr-auto">
+            <Nav.Link as={NavLink} to="/mall" exact>
+              商城首頁
+            </Nav.Link>
+            {member[0].memberName !== '' ? (
+              <Nav.Link as={NavLink} to="/mall/membercenter">
+                Member center
+              </Nav.Link>
+            ) : (
+              <Nav.Link as={NavLink} to="/mall/login">
+                會員登入
+              </Nav.Link>
+            )}
+
+            <Nav.Link
+              as={NavLink}
+              to="/mall/shop"
+              onClick={() => localStorage.setItem('page', 1)}
+            >
+              產品列表
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/mall/ItemTracking">
+              願望清單
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/mall/cart">
+              購物車
+            </Nav.Link>
+          </Nav>
+        </div>
+        <Form inline>{displayButton}</Form>
+      </Navbar>
+
+    </>
+  )
+
   const nav = (
     <>
       <Navbar variant={themenames[index]}>
@@ -199,7 +239,7 @@ function MyNavbar(props) {
   )
 
    displayNav = lifeNav
-  else displayNav = nav
+  else displayNav = newNav
 
   return <>{displayNav}</>
 }

@@ -23,7 +23,7 @@ class Courses extends Component {
       showPage: true,
       detailKey: '',
       sorted:[],
-      isOldestFirst: true,
+      isOldestFirst: false,
     }
   }
 
@@ -180,28 +180,25 @@ class Courses extends Component {
   }
 
   priceToggle = (e) => {
-
-
-    
+ 
     const newData = this.state.data
     let sortedData = newData
-    this.setState({
-      isOldestFirst: !this.state.isOldestFirst,
-    })
 
-    if(this.state.isOldestFirst){
-      sortedData = newData.sort((a, b) => {
-        if(a.coursePrice > b.coursePrice) return 1;
-        if(a.coursePrice < b.coursePrice) return -1;
-      })
-    }else{
+    if(e.currentTarget.value == "highToLow"){
       sortedData = newData.sort((a, b) => {
         if(a.coursePrice < b.coursePrice) return 1;
         if(a.coursePrice > b.coursePrice) return -1;
+      })
+      this.setState({
+          isOldestFirst: !this.state.isOldestFirst,
+        })
+
+    }else{
+      sortedData = newData.sort((a, b) => {
+        if(a.coursePrice > b.coursePrice) return 1;
+        if(a.coursePrice < b.coursePrice) return -1;
     })
   }
-
-
 
     console.log(sortedData)
     this.setState({
