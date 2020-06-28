@@ -101,11 +101,7 @@ function MyFooter(props) {
               <br />
               <a
                 style={{ color: '#5C6447' }}
-                href={
-                  props.history.location.pathname.includes('/mall')
-                    ? '/mall/contact'
-                    : '/life/contact'
-                }
+                href="http://localhost:3000/#fourthPage"
               >
                 Contact Us
               </a>

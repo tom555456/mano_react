@@ -326,6 +326,7 @@ function CartPayment(props) {
                 } else {
                   setOrder({
                     ...order,
+                    paymentStatus: '已付款',
                     paymentMethod: event.target.value,
                   })
                 }

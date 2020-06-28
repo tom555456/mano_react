@@ -192,7 +192,7 @@ function Cart(props) {
           zIndex: -1,
         }}
       ></div>
-      <div className="w-75 d-flex justify-content-end">
+      <div style={{width: "91%"}} className="mt-2 d-flex justify-content-end">
         {props.history.location.pathname.includes('/mall') ? (
           <Link to="/mall/shop" onClick={() => localStorage.setItem('page', 1)}>
             繼續購物 <FaUndo />
@@ -233,7 +233,10 @@ function Cart(props) {
               {mycartDisplay.map((value) => (
                 <Container className="mt-0 m-3">
                   <Row>
-                    <Col xs={12} md={3}>
+                    <Col xs={12} md={3}
+                     className="cartItem-hover"
+                     style={{cursor: "pointer"}} 
+                     onClick={()=> props.history.push(`/mall/itemDetail/shop/categoryId=1?itemId=${value.id}`)}>
                       <Image
                         width={100}
                         height={100}
@@ -355,7 +358,10 @@ function Cart(props) {
               {myCourseCartDisplay.map((value) => (
                 <Container className="mt-0 m-3">
                   <Row>
-                    <Col xs={12} md={3}>
+                    <Col xs={12} md={3}
+                     className="cartItem-hover"
+                     style={{cursor: "pointer"}} 
+                     onClick={()=> props.history.push(`/life/courseDetail/course/new?courseId=${value.id}`)}>
                       <Image
                         width={100}
                         height={100}
