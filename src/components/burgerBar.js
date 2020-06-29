@@ -36,8 +36,6 @@ function BurgerBar (props) {
                 <li className="mt-3"><Link className="burgerListTitle" to="/">關於我們</Link></li>
               </ul>
               </div> 
-          
-
         </div>
         </>
     )

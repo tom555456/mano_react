@@ -31,7 +31,7 @@
     font-size:.8rem;
     color:#5C6447;
     width:80%;
-    margin:2.5%;
+    margin:8% 5% 5% 5%;
     height:10%;
 }
 
@@ -73,10 +73,14 @@
 .course-add-cart{
     width:100%;
 }
-.course-price{
-    width:90%;
-    text-align: center;
-    color:#5C6447;
+
+.course-price-detail{
+    display:flex;
+    justify-content: center;
+    width:100%;
+    color:#bf8c60;
+    font-size: 40px;
+    
 }
 .people{
     font-size:.8rem;
@@ -84,8 +88,13 @@
     margin-bottom:20%;
     display:flex;
     justify-content: space-evenly;
+    color:#97a887b7;
     
 }
 .course-btn{
     background:#D4AE5C;
+}
+
+@media screen and (max-width: 1000px) {
+  
 }

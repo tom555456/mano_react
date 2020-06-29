@@ -16,11 +16,11 @@ padding:10px;
 background:transparent;
 color:#5C6447;
 margin-top: 5px;
+
 }
 .map-top-img{
 overflow: hidden;
 object-fit:"cover" ;
--webkit-object-fit: cover;
 filter:brightness(.6);
 border-radius: 5px;
 }
@@ -44,3 +44,93 @@ color:white;
 z-index: 1;
 }
 
+.map-info{
+  display:flex;
+  width:100%;
+  justify-content: space-around;
+}
+
+.info-wrap{
+  width:100%;
+}
+
+.map-cat{
+  display:flex;
+  justify-content: space-between;
+
+}
+
+@media screen and (max-width: 1000px) {
+  .leaflet-container {
+    width: 90%;
+    height: 70vh;
+    margin:5% auto;
+  }  
+  .map-info{
+    display:flex;
+    width:100%;
+    flex-wrap:wrap;
+    justify-content: space-around;
+    
+  }
+  .info-wrap{
+    width:30%;
+    
+  }
+  .map-cat{
+    width:100%;
+  
+    justify-content: space-around;
+  
+  }
+  .map-input{
+    width:30%;
+    
+  }
+  .mapText{
+    font-size: xx-small;
+  }
+  .map-top-img{
+    height:100%;
+    object-fit: cover;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+  .map-info{
+    display:flex;
+    width:100%;
+    flex-wrap:wrap;
+    justify-content: space-around;
+  }
+
+  .info-wrap{
+    width:50%;
+    
+  }
+  .cardText{
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width:90%;
+  }
+  .map-input{
+    width:20%;
+    
+  }
+  .mapText{
+    font-size: x-small;
+  }
+  .map-top-img{
+    height:100%;
+    object-fit: cover;
+    }
+  .map-input{
+  font-size: x-small;
+  width:20%;
+  margin:5%;
+
+  }
+
+}

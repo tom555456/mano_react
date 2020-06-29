@@ -53,10 +53,10 @@ function MyNavbar(props) {
     <>
     <Navbar variant={themenames[index]} className="d-flex justify-content-between" style={{fontSize: "12px"}}>
 
-        <Navbar.Brand href="/" className="w-25">{props.location.pathname === "/mall" ? '' : (
+        <Navbar.Brand href="/" className="w-25">
           <img src={locationPathname === "/membercenter" ? "/mano_logo_light-01.svg" :
                   "/mano_logo_dark-01.svg"} alt="mano" style={{height: "30px"}}/>
-        )}</Navbar.Brand>
+        </Navbar.Brand>
         
         <div>
           <Nav className="mr-auto">
@@ -64,9 +64,9 @@ function MyNavbar(props) {
               商城首頁
             </Nav.Link>
 
-            <Nav.Link as={NavLink} to="/mall/burgerBar" exact>
+            {/* <Nav.Link as={NavLink} to="/mall/burgerBar" exact>
               burgerBar
-            </Nav.Link>
+            </Nav.Link> */}
 
             <Nav.Link
               as={NavLink}
@@ -82,7 +82,9 @@ function MyNavbar(props) {
                  <div className="d-flex justify-content-center nav-show-box" style={{position:"absolute",
                     width: "185px", left: "0", top: "0", border: "1px solid #cccccc",
                     background: "#ffffff", borderRadius: "1px", lineHeight: "12px", zIndex: "100", transform: "translate(-55px, 30px)"}}>
-                  <Nav.Link as={NavLink} to="/life/course" onClick={()=> setLifeShow(false)}>
+                  <Nav.Link as={NavLink} to="/life/course" onClick={()=> {
+                    setLifeShow(false)
+                    localStorage.setItem('page', 1)}}>
                     <img src="/hover_list/hover_list-01.svg" alt="課程報名"/>
                   </Nav.Link>
                   <Nav.Link as={NavLink} to="/life/map" onClick={()=> setLifeShow(false)}>
@@ -183,7 +185,9 @@ function MyNavbar(props) {
                  <div className="d-flex justify-content-center nav-show-box" style={{position:"absolute",
                     width: "185px", left: "-55px", top: "32px", border: "1px solid #cccccc",
                     background: "#ffffff", borderRadius: "1px", lineHeight: "12px", zIndex: "100"}}>
-                  <Nav.Link as={NavLink} to="/life/course" onClick={()=> setLifeShow(false)}>
+                  <Nav.Link as={NavLink} to="/life/course" onClick={()=> {
+                    setLifeShow(false)
+                    localStorage.setItem('page', 1)}}>
                     <img src="/hover_list/hover_list-01.svg" alt="課程報名"/>
                   </Nav.Link>
                   <Nav.Link as={NavLink} to="/life/map" onClick={()=> setLifeShow(false)}>
@@ -196,7 +200,7 @@ function MyNavbar(props) {
                 ) : ""}
 
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/mall" exact>
+            <Nav.Link as={NavLink} to="/mall" exact onClick={() => localStorage.setItem('page', 1)}>
               抹茶商城
             </Nav.Link>
             <Nav.Link as={NavLink} to="/life/faq">

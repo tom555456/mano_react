@@ -164,11 +164,13 @@ class CourseDetail extends Component {
               <CsCategoryBar />
                 </Col>
                 <Col xs={12} md={6}>
+                <div style={{ height:"60%" }}>
                   <img
-                    style={{ width: '95%' }}
+                    style={{ width: '95%', objectFit:'contain', overflow:'hidden' }}
                     src={`/courses/${this.state.single.courseImg}`}
                     alt={this.state.single.courseImg}
                   />
+                  </div>
                    <p className="course-desc-detail">{this.state.single.courseDesc}</p>
                  
                 </Col>
@@ -181,14 +183,14 @@ class CourseDetail extends Component {
                       <Card.Text>
                         <div className="people">
                           <p>人數上限：{this.state.single.courseQty}</p>
-                          <p>日期:{this.state.single.coursePeriod}</p>
+                          <p>日期 : {this.state.single.coursePeriod}</p>
                         </div>
                       </Card.Text>
                     </Card.Body>
 
                     <ListGroup>
                       <ListGroupItem>
-                        <h1 className="course-price">$ {this.state.single.coursePrice}</h1>
+                        <h1 className="course-price-detail">$ {this.state.single.coursePrice}</h1>
                       </ListGroupItem>
 
                       <ListGroupItem>
@@ -246,6 +248,7 @@ class CourseDetail extends Component {
                           }}
                         >
                           add to cart
+                          <i class="fas fa-shopping-cart" style={{ marginLeft: '8px' }}></i>
                 </Button>
                       </Card.Link>
                     </Card.Body>
