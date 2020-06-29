@@ -15,11 +15,6 @@
   height: 20%;
 }
 
-.card-detail {
-  width: 300px;
-  height: 480px;
-}
-
 .link1 {
   text-align: end;
 }
@@ -46,46 +41,61 @@
   left: 20vh;
 }
 
-.item-img-detail{
+.item-img-detail {
   overflow: hidden;
-  object-fit:cover;
-  height:50%;
-  width:100%;
+  object-fit: cover;
+  height: 50%;
+  width: 100%;
 }
 
 .item-recom-cardBody {
   padding: 0;
 }
 
-.item-recom-name{
-  margin-top:5%;
-  padding:5%;
+.item-recom-name {
+  margin-top: 5%;
+  padding: 5%;
   font-size: 14px;
   text-align: center;
-  overflow:hidden;
+  overflow: hidden;
 }
 
-.item-more{
-  font-size: .8rem;
+.item-more {
+  font-size: 0.8rem;
   text-decoration: underline;
   text-align: center;
-  margin-right:5%;
+  margin-right: 5%;
 }
 
 .cart-btn {
-  display: flex;
+  display: block;
   text-align: center;
   margin-bottom: 10px;
 }
 
 .cart {
+  width: 250px;
+  margin: 0 auto;
   border-radius: 20px;
-  margin-right: 10px;
+  margin-bottom: 10px;
+  /* margin-right: 10px; */
 }
 
 .fav {
+  width: 250px;
+  margin: 0 auto;
   border-radius: 20px;
   background: white;
   border: 1px solid #000;
-  margin-left: 10px;
+  /* margin-left: 10px; */
+}
+
+.fav:hover {
+  color: white !important;
+}
+
+@media screen and (max-width: 1000px) {
+  .tools {
+    display: none;
+  }
 }

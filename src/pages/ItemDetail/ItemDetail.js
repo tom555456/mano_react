@@ -8,6 +8,9 @@ import {
   Card,
   Container,
   Row,
+  ListGroup,
+  ListGroupItem,
+  FormControl,
 } from 'react-bootstrap'
 import { withRouter } from 'react-router-dom'
 import './ItemDetail-style.css'
@@ -15,9 +18,6 @@ import DetailBreadcrumb from '../../components/DetailBreadcrumb'
 import { FaFacebookSquare, FaLine } from 'react-icons/fa'
 import CategoryBar from '../../components/CategoryBar'
 import { BsFillPlayFill } from 'react-icons/bs'
-
-import bgSvg from '../../components/bg-pattern.svg'
-import ItemDetailBg from './ItemDetailBg'
 
 class ItemDetail extends Component {
   constructor(props) {
@@ -177,21 +177,30 @@ class ItemDetail extends Component {
 
     return (
       <>
-        <div style={{ backgroundImage: `url(${bgSvg})` }} className="bgSvg">
-          <ItemDetailBg />
-        </div>
+        <div
+          style={{
+            background: 'url(/bg-pattern.svg) repeat',
+            position: ' fixed',
+            left: '0',
+            top: '0',
+            width: '30vw',
+            height: '100vh',
+            opacity: '0.2',
+            zIndex: '-1',
+          }}
+        ></div>
         <div className="container">
           {messageModal}
-          <div className="tools">
+          <div className="tools" style={{ marginLeft: '70px' }}>
             <DetailBreadcrumb />
           </div>
 
           <Container class="d-flex justify-content-between">
             <Row>
-              <Col xs={0} md={2}>
+              <Col xs={2} md={2}>
                 <CategoryBar />
               </Col>
-              <Col xs={0} md={1}></Col>
+              <Col xs={12} md={1}></Col>
               <Col xs={12} md={9}>
                 <Row>
                   <Col xs={12} md={6}>
@@ -212,16 +221,17 @@ class ItemDetail extends Component {
                         >
                           {this.state.single.itemName}
                         </Card.Title>
-                        <Card.Text
+                        {/* <Card.Text
                           style={{
                             fontSize: '15px',
                             color: '#999',
+                            marginLeft: '25px',
                           }}
                         >
                           {this.state.single.itemDescription}
-                        </Card.Text>
+                        </Card.Text> */}
 
-                        <div className="link1">
+                        {/* <div className="link1">
                           <a href="http://www.facebook.com">
                             <FaFacebookSquare
                               style={{
@@ -238,24 +248,68 @@ class ItemDetail extends Component {
                               }}
                             />
                           </a>
-                        </div>
+                        </div> */}
 
                         <h3 className="itemDetail-price">
-                          $ {this.state.single.itemPrice}
+                          ${this.state.single.itemPrice}
                         </h3>
+                        <center>
+                          <select
+                            style={{
+                              margin: '30px auto',
+                              width: '60%',
+                              // marginLeft: '55px',
+                              // textAlign:
+                            }}
+                          >
+                            <option>請選擇商品尺寸</option>
+                            <option>F</option>
+                          </select>
+                        </center>
 
-                        <select
-                          style={{
-                            marginBottom: '5px',
-                            width: '60%',
-                            marginLeft: '50px',
-                          }}
-                        >
-                          <option>請選擇商品尺寸</option>
-                          <option>F</option>
-                        </select>
+                        <ListGroup>
+                          <InputGroup className="mb-3">
+                            <InputGroup.Append>
+                              <Button
+                                className="course-btn"
+                                style={{ background: '#bf8c60' }}
+                                onClick={() =>
+                                  this.setState({
+                                    amount: this.state.amount - 1,
+                                  })
+                                }
+                              >
+                                -
+                              </Button>
+                            </InputGroup.Append>
+                            <FormControl
+                              style={{
+                                textAlign: 'center',
+                              }}
+                              onChange={(event) => {
+                                this.setState({ amount: event.target.value })
+                              }}
+                              value={
+                                this.state.amount < 1 ? 1 : this.state.amount
+                              }
+                            />
+                            <InputGroup.Append>
+                              <Button
+                                className="course-btn"
+                                style={{ background: '#bf8c60' }}
+                                onClick={() =>
+                                  this.setState({
+                                    amount: this.state.amount + 1,
+                                  })
+                                }
+                              >
+                                +
+                              </Button>
+                            </InputGroup.Append>
+                          </InputGroup>
+                        </ListGroup>
 
-                        <div className="main-btn">
+                        {/* <div className="main-btn">
                           <Button
                             onClick={() =>
                               this.setState({ amount: this.state.amount - 1 })
@@ -286,7 +340,7 @@ class ItemDetail extends Component {
                           >
                             +
                           </Button>
-                        </div>
+                        </div> */}
 
                         <div className="cart-btn">
                           <Button
@@ -324,8 +378,8 @@ class ItemDetail extends Component {
                       商品詳情
                     </h4>
                     <Card body>
-                      這款立領排扣外套採用輕質棉製成，是春夏季的理想選擇。
-                      短袖尖領款式，正面以鈕扣式開合，胸部和腰部設有口袋以便放置各樣細小物件。
+                      這款立領排扣外套採用輕質棉製成，是秋冬季的理想選擇。
+                      率性尖領款式，正面以鈕扣式開合，胸部和腰部設有口袋以便放置各樣細小物件。
                     </Card>
                   </Col>
                   <Col xs={12} md={12} style={{ margin: '15px 0' }}>
@@ -340,7 +394,7 @@ class ItemDetail extends Component {
                       <br />
                       產地:日本
                       <br />
-                      模特:身高165.9厘米
+                      模特:身高171.9厘米
                       <br />
                       胸圍：58.4厘米
                       <br />
@@ -354,7 +408,7 @@ class ItemDetail extends Component {
                       運送及其他規則
                     </h4>
                     <Card body>
-                      對於您在網路上購買的商品，在商品未穿、未洗、無損壞、寄送錯誤或有瑕疵的情形下，我們原則上同意在30個日曆天（自產品從我們倉儲出貨時起算）內接受退貨。退貨時應附上原始包裝，可辦理全部或部分退費。點此了解更多。
+                      對於您在網路上購買的商品，在商品未穿、未洗、無損壞、寄送錯誤或有瑕疵的情形下，我們原則上同意在30個日曆天（自產品從我們倉儲出貨時起算）內接受退貨。退貨時應附上原始包裝，可辦理全部或部分退費。
                     </Card>
                   </Col>
 
