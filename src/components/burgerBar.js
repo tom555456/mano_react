@@ -80,9 +80,9 @@ function BurgerBar (props) {
             <>
             <div style={{position: "relative"}}>
               {locationPathname === "/membercenter" ? (
-                <AiOutlineMenu style={{position: "absolute", top: "22px", left: "2vw"}} className="cWhite hover-op"/>
+                <AiOutlineMenu style={{position: "absolute", top: "17px", left: "2vw"}} className="cWhite hover-op"/>
               ) : (
-                <AiOutlineMenu style={{position: "absolute", top: "22px", left: "2vw"}} className="cGreen hover-op"/>
+                <AiOutlineMenu style={{position: "absolute", top: "17px", left: "2vw"}} className="cGreen hover-op"/>
               )}
             </div>
             </>
