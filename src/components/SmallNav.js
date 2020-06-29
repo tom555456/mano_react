@@ -20,9 +20,9 @@ function SmallNav (props) {
         <BurderBar />
         <Navbar className="d-flex" style={{fontSize: "14px", paddingRight:"0"}}>
 
-            <Navbar.Brand href="/" className="ml-3 w-50 d-flex justify-content-end" style={{marginRight: "0"}}>
+            <Navbar.Brand className="ml-3 w-50 d-flex justify-content-end" style={{marginRight: "0"}}>
             <img src={locationPathname === "/membercenter" ? "/mano_logo_light-01.svg" :
-                    "/mano_logo_dark-01.svg"} alt="mano" style={{height: "30px"}}/>
+                    "/mano_logo_dark-01.svg"} alt="mano" style={{height: "30px", cursor: "pointer"}} onClick={()=> props.history.push("/")}/>
             </Navbar.Brand>
 
          <Nav className="d-flex justify-content-end w-50">

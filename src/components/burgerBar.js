@@ -17,6 +17,7 @@ function BurgerBar (props) {
         {name: "抹の生活 / To Live", url: "/mall/shop/goods?categoryId=5"}
     ])
     const [active, setActive] = useState("mall");
+    const [display, setDisplay] = useState(true);
 
     let locationPathname = props.location.pathname
     if (locationPathname.includes("/membercenter")) locationPathname = "/membercenter"
@@ -24,6 +25,7 @@ function BurgerBar (props) {
 
     return(
         <>
+        {display ? (
         <div className="trans-5s" style={{position: "relative"}}>
           <div className={isToggle ? "burgerBar-show" : "burgerBar-hide"}>
               {locationPathname === "/membercenter" ? (
@@ -68,13 +70,23 @@ function BurgerBar (props) {
                     <li key={index} className="mt-2 burgerListSub">
                         <a href={list.url} onClick={(()=> {
                             localStorage.setItem("page", 1)
-                            setIsToggle(false)
+                            setDisplay(false)
                         })}>{list.name}</a>
                     </li>
                 ))}
               </ul>
               </div> 
-        </div>
+        </div>): (
+            <>
+            <div style={{position: "relative"}}>
+              {locationPathname === "/membercenter" ? (
+                <AiOutlineMenu style={{position: "absolute", top: "22px", left: "2vw"}} className="cWhite hover-op"/>
+              ) : (
+                <AiOutlineMenu style={{position: "absolute", top: "22px", left: "2vw"}} className="cGreen hover-op"/>
+              )}
+            </div>
+            </>
+        )}
         </>
     )
 }
