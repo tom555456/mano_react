@@ -16,15 +16,27 @@ function BurgerBar (props) {
           <div className={isToggle ? "burgerBar-show" : "burgerBar-hide"}>
             <AiOutlineMenu onClick={()=> setIsToggle(!isToggle)} className={isToggle ? "burgerBar-show-btn" : "burgerBar-hide-btn"}/>
             
-              <ul className="d-flex flex-column burgerBar-lists">
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/">Home</Link></li>
+              <ul className={isToggle ? "d-flex flex-column burgerBar-lists m-auto" : "d-flex flex-column burgerBar-lists barLists-disNone m-auto"}>
+                <li><Link className="burgerListTitle" to="/">購物商城</Link>
+                  <ul className="burgerBar-list mt-1">
+                    <li><Link to="/">所有商品</Link></li>
+                    <li><Link to="/">抹の食</Link></li>
+                    <li><Link to="/">抹の衣</Link></li>
+                    <li><Link to="/">抹の生活</Link></li>
+                  </ul>
+                </li>
+                <li className="mt-3"><Link className="burgerListTitle" to="/">抹茶新生活</Link>
+                  <ul className="burgerBar-list mt-1">
+                    <li><Link to="/">課程報名</Link></li>
+                    <li><Link to="/">抹茶地圖</Link></li>
+                    <li><Link to="/">故事牆</Link></li>
+                  </ul>
+                </li>
+                <li className="mt-3"><Link className="burgerListTitle" to="/">常見問題</Link></li>
+                <li className="mt-3"><Link className="burgerListTitle" to="/">關於我們</Link></li>
               </ul>
-               
-          </div>
+              </div> 
+          
 
         </div>
         </>

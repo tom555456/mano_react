@@ -1,14 +1,18 @@
 .burgerBar-show {
   position: absolute;
-  background: #5C6447;
-  width: 20vw;
+  background: #EFF3EC;
+  width: 100vw;
+  height: 90vh;
   left: 0;
   transition: .5s;
   z-index: 1000;
+  padding-top: 20px;
   .burgerBar-show-btn {
+    position: absolute;
     color: #5C6447;
-    margin-left: 20.2vw;
-    transition: .5s;
+    left: 97vw;
+    top: 5px;
+    transition: .3s;
     z-index: 1000;
   }
   
@@ -16,25 +20,40 @@
 
 .burgerBar-hide {
   position: absolute;
-  background: #5C6447;
-  width: 0;
-  left: 0;
-  transition: .5s;
+  background: #EFF3EC;
+  height: 90vh;
+  width: 100vw;
+  left: -100vw;
+  transition: .3s;
   z-index: 1000;
+  padding-top: 20px;
+
   .burgerBar-hide-btn {
+    position: absolute;
     color: #5C6447;
-    margin-left: 0.2vw;
+    left: 100.5vw;
+    top: 5px;
     transition: .5s;
     z-index: 1000;
   }
 
 }
 
+
 .burgerBar-lists {
     list-style: none;
+    transition: .3s;
+
+    .burgerListTitle {
+        //background: #EFF3EC;
+        color: #C5895A;
+        font-weight: 800;
+        //padding: 2px 4px;
+    }
+
     
     li a {
-        color: #ffffff;
+        color: #5C6447;
         font-size: 16px;
         opacity: 0.7;
 
@@ -43,5 +62,15 @@
             opacity: 1;
         }
     }
+
+    .burgerBar-list {
+        list-style: none;
+        padding-left: 0px;
+    }
+}
+
+.barLists-disNone {
+    display: none;
+    transition: .5s;
 }
 

@@ -1,16 +1,3 @@
-@media (max-width: 768px) {
-  .cardTotal {
-    left: 20px !important;
-  }
-  .cross {
-    font-size: 36px !important;
-    left: 40px !important;
-  }
-  h5 {
-    font-size: 16px !important;
-  }
-}
-
 @media (max-width: 1050px) {
   h5 {
     font-size: 18px !important;
@@ -21,12 +8,73 @@
     font-size: 16px !important;
   }
   .cardPrice {
-    left: 10px !important;
+    left: -15px !important;
+  }
+  .cardNumber {
+    left: 13px !important;
+  }
+  .cardTotal {
+    left: 35px !important;
   }
   .productName {
     text-overflow: ellipsis !important;
     white-space: nowrap !important;
     overflow: hidden !important;
+  }
+}
+@media (max-width: 768px) {
+  .cardTotal {
+    left: 20px !important;
+  }
+  .cross {
+    font-size: 36px !important;
+    left: 45px !important;
+  }
+  h5 {
+    font-size: 16px !important;
+  }
+  .cardPrice {
+    left: -30px !important;
+  }
+
+  .cardNumber {
+    left: 0px !important;
+  }
+
+  .cardTotal {
+    left: 30px !important;
+  }
+  .productName {
+    left: -30px !important;
+  }
+}
+
+@media (max-width: 385px) {
+  .cross {
+    // top: -30px !important;
+    // left: -280px !important;
+  }
+  .cardPrice {
+    left: -55px !important;
+    top: 25px !important;
+  }
+
+  .cardNumber {
+    left: -60px !important;
+    top: 25px !important;
+  }
+
+  .cardTotal {
+    left: 110px !important;
+    top: -25px !important;
+  }
+  .productName {
+    left: -40px !important;
+    top: 25px !important;
+  }
+  .cross {
+    top: -25px !important;
+    left: 60px;
   }
 }
 
@@ -44,6 +92,7 @@
   font-weight: 900;
   margin: auto 0;
   padding-left: 20px;
+  position: relative;
 }
 
 .productCard {
@@ -72,7 +121,7 @@
   text-align: center;
   margin: auto 0;
   position: relative;
-  left: -10px;
+  left: -18px;
 }
 
 .cardNumber {
@@ -89,7 +138,7 @@
   text-align: center;
   margin: auto 0;
   position: relative;
-  left: 40px;
+  left: 45px;
 }
 
 .totalCard {
@@ -117,8 +166,4 @@
 
 .cartMargin {
   margin: 150px auto;
-}
-
-.cartItem-hover:hover {
-  opacity: 0.7;
 }

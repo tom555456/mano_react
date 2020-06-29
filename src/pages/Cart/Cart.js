@@ -192,7 +192,7 @@ function Cart(props) {
           zIndex: -1,
         }}
       ></div>
-      <div style={{width: "91%"}} className="mt-2 d-flex justify-content-end">
+      <div className="w-75 d-flex justify-content-end">
         {props.history.location.pathname.includes('/mall') ? (
           <Link to="/mall/shop" onClick={() => localStorage.setItem('page', 1)}>
             繼續購物 <FaUndo />
@@ -233,10 +233,7 @@ function Cart(props) {
               {mycartDisplay.map((value) => (
                 <Container className="mt-0 m-3">
                   <Row>
-                    <Col xs={12} md={3}
-                     className="trans-5s cartItem-hover"
-                     style={{cursor: "pointer"}} 
-                     onClick={()=> props.history.push(`/mall/itemDetail/shop/categoryId=1?itemId=${value.id}`)}>
+                    <Col xs={4} md={3}>
                       <Image
                         width={100}
                         height={100}
@@ -244,7 +241,7 @@ function Cart(props) {
                         alt={value.img}
                       />
                     </Col>
-                    <Col xs={12} md={9}>
+                    <Col xs={8} md={9}>
                       <Row className="d-flex justify-content-between productCard">
                         <p className="w-25 productName">{value.name}</p>
                         <p className="w-20 text-center cardPrice">
@@ -292,7 +289,7 @@ function Cart(props) {
                             })
                           }
                         >
-                        <BsX type="button"></BsX>
+                          <BsX type="button"></BsX>
                         </p>
                       </Row>
                     </Col>
@@ -358,10 +355,7 @@ function Cart(props) {
               {myCourseCartDisplay.map((value) => (
                 <Container className="mt-0 m-3">
                   <Row>
-                    <Col xs={12} md={3}
-                     className="trans-5s cartItem-hover"
-                     style={{cursor: "pointer"}} 
-                     onClick={()=> props.history.push(`/life/courseDetail/course/new?courseId=${value.id}`)}>
+                    <Col xs={4} md={3}>
                       <Image
                         width={100}
                         height={100}
@@ -369,7 +363,7 @@ function Cart(props) {
                         alt={value.img}
                       />
                     </Col>
-                    <Col xs={12} md={9}>
+                    <Col xs={8} md={9}>
                       <Row className="d-flex justify-content-between productCard">
                         <p className="w-25 productName">{value.name}</p>
                         <p className="w-20 text-center cardPrice">
@@ -419,7 +413,7 @@ function Cart(props) {
                             })
                           }
                         >
-                        <BsX type="button"></BsX>
+                          <BsX type="button"></BsX>
                         </p>
                       </Row>
                     </Col>

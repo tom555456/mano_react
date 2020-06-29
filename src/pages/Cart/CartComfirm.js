@@ -123,7 +123,7 @@ function Cart(props) {
             {finalCart.map((value) => (
               <Container className="mb-3">
                 <Row>
-                  <Col xs={2}>
+                  <Col xs={4} md={2}>
                     <Image
                       width={64}
                       height={64}
@@ -133,7 +133,8 @@ function Cart(props) {
                     />
                   </Col>
                   <Col
-                    xs={10}
+                    xs={8}
+                    md={10}
                     className="d-flex align-items-center cfproductCard"
                   >
                     <p className="w-25 cfproductName">{value.name}</p>
@@ -277,7 +278,7 @@ function Cart(props) {
             {finalCourseCart.map((value) => (
               <Container className="mb-3">
                 <Row>
-                  <Col xs={2}>
+                  <Col xs={4} md={2}>
                     <Image
                       width={64}
                       height={64}
@@ -287,7 +288,8 @@ function Cart(props) {
                     />
                   </Col>
                   <Col
-                    xs={10}
+                    xs={8}
+                    md={10}
                     className="d-flex align-items-center cfproductCard"
                   >
                     <p className="w-25 cfproductName">{value.name}</p>

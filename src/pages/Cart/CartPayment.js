@@ -1,8 +1,18 @@
 import React, { Component, Fragment, useState, useEffect } from 'react'
-import { Table, Container, Alert, Button, Form, Figure } from 'react-bootstrap'
+import {
+  Table,
+  Container,
+  Alert,
+  Button,
+  Form,
+  Figure,
+  Row,
+  Col,
+} from 'react-bootstrap'
 
 import { withRouter } from 'react-router-dom'
 import { func } from 'prop-types'
+import '../../styles/carPayment.scss'
 
 function CartPayment(props) {
   const [order, setOrder] = useState('')
@@ -326,7 +336,6 @@ function CartPayment(props) {
                 } else {
                   setOrder({
                     ...order,
-                    paymentStatus: '已付款',
                     paymentMethod: event.target.value,
                   })
                 }
@@ -350,108 +359,120 @@ function CartPayment(props) {
             </div>
 
             <Fragment>
-              <Container
-                className="w-100 formBg"
-                style={{ padding: '50px 100px' }}
-              >
-                <div className="form-group">
-                  <label className="labelTxt" htmlFor="example3">
-                    持卡人姓名：
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    value={name}
-                    className="form-control form-control-sm inputBg"
-                    placeholder="請輸入姓名"
-                    onChange={(event) => {
-                      setName(event.target.value)
-                      setOrderPayment({
-                        ...orderPayment,
-                        orderPaymentName: event.target.value,
-                      })
-                    }}
-                  />
-                </div>
-                <div className="form-group">
-                  <label className="labelTxt" htmlFor="example3">
-                    卡號：
-                  </label>
-                  <input
-                    type="text"
-                    id="card"
-                    value={card}
-                    className="form-control form-control-sm inputBg"
-                    placeholder="請輸入格式 xxxx-xxxx-xxxx-xxxx"
-                    onChange={(event) => {
-                      setCard(event.target.value)
-                      setOrderPayment({
-                        ...orderPayment,
-                        orderPaymentCard: event.target.value,
-                      })
-                    }}
-                  />
-                </div>
-                <div className="d-flex justify-content-between">
-                  <div className="form-group w-40">
-                    <label className="labelTxt" htmlFor="example3">
-                      到期日：
-                    </label>
-                    <input
-                      type="text"
-                      id="closingDate"
-                      value={closingDate}
-                      className="form-control form-control-sm inputBg"
-                      placeholder="請輸入格式 xx/xx"
-                      onChange={(event) => {
-                        setClosingDate(event.target.value)
-                        setOrderPayment({
-                          ...orderPayment,
-                          closingDate: event.target.value,
-                        })
-                      }}
-                    />
+              <Row>
+                <Container
+                  className="w-100 paymentFormBg"
+                  style={{ padding: '50px 100px' }}
+                >
+                  <Col xs="12">
+                    <div className="form-group">
+                      <label className="labelTxt" htmlFor="example3">
+                        持卡人姓名：
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        value={name}
+                        className="form-control form-control-sm inputBg"
+                        placeholder="請輸入姓名"
+                        onChange={(event) => {
+                          setName(event.target.value)
+                          setOrderPayment({
+                            ...orderPayment,
+                            orderPaymentName: event.target.value,
+                          })
+                        }}
+                      />
+                    </div>
+                  </Col>
+                  <Col xs="12">
+                    <div className="form-group">
+                      <label className="labelTxt" htmlFor="example3">
+                        卡號：
+                      </label>
+                      <input
+                        type="text"
+                        id="card"
+                        value={card}
+                        className="form-control form-control-sm inputBg"
+                        placeholder="請輸入格式 xxxx-xxxx-xxxx-xxxx"
+                        onChange={(event) => {
+                          setCard(event.target.value)
+                          setOrderPayment({
+                            ...orderPayment,
+                            orderPaymentCard: event.target.value,
+                          })
+                        }}
+                      />
+                    </div>
+                  </Col>
+                  <div className="cvv d-flex justify-content-between">
+                    <Col xs="12" md="6">
+                      <div className="form-group w-40">
+                        <label className="labelTxt" htmlFor="example3">
+                          到期日：
+                        </label>
+                        <input
+                          type="text"
+                          id="closingDate"
+                          value={closingDate}
+                          className="form-control form-control-sm inputBg"
+                          placeholder="請輸入格式 xx/xx"
+                          onChange={(event) => {
+                            setClosingDate(event.target.value)
+                            setOrderPayment({
+                              ...orderPayment,
+                              closingDate: event.target.value,
+                            })
+                          }}
+                        />
+                      </div>
+                    </Col>
+                    <Col xs="12" md="6">
+                      <div className="form-group w-40">
+                        <label className="labelTxt" htmlFor="example3">
+                          CVV：
+                        </label>
+                        <input
+                          type="text"
+                          id="cvv"
+                          value={cvv}
+                          className="form-control form-control-sm inputBg"
+                          placeholder="請輸入格式 xxx"
+                          onChange={(event) => {
+                            setCvv(event.target.value)
+                            setOrderPayment({
+                              ...orderPayment,
+                              cvv: event.target.value,
+                            })
+                          }}
+                        />
+                      </div>
+                    </Col>
                   </div>
-                  <div className="form-group w-40">
-                    <label className="labelTxt" htmlFor="example3">
-                      CVV：
-                    </label>
-                    <input
-                      type="text"
-                      id="cvv"
-                      value={cvv}
-                      className="form-control form-control-sm inputBg"
-                      placeholder="請輸入格式 xxx"
-                      onChange={(event) => {
-                        setCvv(event.target.value)
-                        setOrderPayment({
-                          ...orderPayment,
-                          cvv: event.target.value,
-                        })
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className="form-group w-100">
-                  <label className="labelTxt" htmlFor="example3">
-                    帳單地址：
-                  </label>
-                  <input
-                    type="text"
-                    id="address"
-                    value={address}
-                    className="form-control form-control-sm inputBg"
-                    placeholder="請輸入帳單地址"
-                    onChange={(event) => {
-                      setAddress(event.target.value)
-                      setOrderPayment({
-                        ...orderPayment,
-                        checkAddress: event.target.value,
-                      })
-                    }}
-                  />
-                </div>
-              </Container>
+                  <Col xs="12">
+                    <div className="form-group w-100">
+                      <label className="labelTxt" htmlFor="example3">
+                        帳單地址：
+                      </label>
+                      <input
+                        type="text"
+                        id="address"
+                        value={address}
+                        className="form-control form-control-sm inputBg"
+                        placeholder="請輸入帳單地址"
+                        onChange={(event) => {
+                          setAddress(event.target.value)
+                          setOrderPayment({
+                            ...orderPayment,
+                            checkAddress: event.target.value,
+                          })
+                        }}
+                      />
+                    </div>
+                  </Col>
+                </Container>
+              </Row>
             </Fragment>
 
             {orderErrors.length > 0 ? (

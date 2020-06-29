@@ -52,6 +52,7 @@ function MyNavbar(props) {
   const newNav = (
     <>
     <Navbar variant={themenames[index]} className="d-flex justify-content-between" style={{fontSize: "12px"}}>
+
         <Navbar.Brand href="/" className="w-25">{props.location.pathname === "/mall" ? '' : (
           <img src={locationPathname === "/membercenter" ? "/mano_logo_light-01.svg" :
                   "/mano_logo_dark-01.svg"} alt="mano" style={{height: "30px"}}/>
@@ -63,9 +64,9 @@ function MyNavbar(props) {
               商城首頁
             </Nav.Link>
 
-            {/* <Nav.Link as={NavLink} to="/mall/burgerBar" exact>
+            <Nav.Link as={NavLink} to="/mall/burgerBar" exact>
               burgerBar
-            </Nav.Link> */}
+            </Nav.Link>
 
             <Nav.Link
               as={NavLink}
@@ -158,8 +159,9 @@ function MyNavbar(props) {
             </Nav.Link>  
         </Form>
         </Nav>
+        
       </Navbar>
-
+      
     </>
   )
 

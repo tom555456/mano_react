@@ -233,7 +233,7 @@ switch (searchValue) {
                 <option value="中山區">中山區</option>
               </select>
           </div>
-     <Card style={{ marginRight:"10px", width:"20%" }}>
+     <Card style={{ marginRight:"10px", width:"20%", height: "18%" }}>
           <h5 className="mapText">全の分類</h5>
           <img 
           className="map-top-img"
@@ -243,7 +243,14 @@ switch (searchValue) {
             setSearchValue("All")
           }}/>
       </Card>
-      <Card style={{ marginRight:"10px", width:"20%" }}>
+      {/* <h5 className="mapText">小型聚會</h5>
+      <Image
+        style={{ width: "20%", height: "20%" }}
+        src="/checkbox/gather.jpg"
+        alt=""
+      /> */}
+
+      <Card style={{ marginRight:"10px", width:"20%", height: "10%" }}>
           <h5 className="mapText">小型聚會</h5>
           <img 
           className="map-top-img"
