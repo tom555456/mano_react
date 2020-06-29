@@ -1,17 +1,16 @@
 .burgerBar-show {
-  position: absolute;
+  position: fixed;
   background: #EFF3EC;
   width: 100vw;
-  height: 90vh;
+  height: 100vh;
   left: 0;
   transition: .5s;
   z-index: 1000;
-  padding-top: 20px;
+  padding-top: 30px;
   .burgerBar-show-btn {
     position: absolute;
-    color: #5C6447;
-    left: 97vw;
-    top: 5px;
+    left: 93vw;
+    top: 22px;
     transition: .3s;
     z-index: 1000;
   }
@@ -19,20 +18,19 @@
 }
 
 .burgerBar-hide {
-  position: absolute;
+  position: fixed;
   background: #EFF3EC;
-  height: 90vh;
+  height: 100vh;
   width: 100vw;
   left: -100vw;
   transition: .3s;
   z-index: 1000;
-  padding-top: 20px;
+  padding-top: 30px;
 
   .burgerBar-hide-btn {
     position: absolute;
-    color: #5C6447;
-    left: 100.5vw;
-    top: 5px;
+    left: 102vw;
+    top: 22px;
     transition: .5s;
     z-index: 1000;
   }
@@ -45,27 +43,34 @@
     transition: .3s;
 
     .burgerListTitle {
-        //background: #EFF3EC;
-        color: #C5895A;
-        font-weight: 800;
-        //padding: 2px 4px;
-    }
-
-    
-    li a {
         color: #5C6447;
-        font-size: 16px;
         opacity: 0.7;
+        font-weight: 800;
+        margin-right: 20px;
+        cursor: pointer;
 
         &:hover {
-            text-decoration: none;
-            opacity: 1;
+          opacity: 1;
         }
     }
 
-    .burgerBar-list {
-        list-style: none;
-        padding-left: 0px;
+    .titleActive {
+      border-bottom: 2px solid #5C6447;
+    }
+
+    .burgerListSub a {
+        color: #C5895A;
+        opacity: 0.7;
+        font-weight: 800;
+        font-size: 26px;
+
+
+        &:hover {
+          opacity: 1;
+          text-decoration: none;
+
+        }
+
     }
 }
 
@@ -73,4 +78,5 @@
     display: none;
     transition: .5s;
 }
+
 

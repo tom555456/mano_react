@@ -63,11 +63,6 @@ function MyNavbar(props) {
             <Nav.Link as={NavLink} to="/mall" exact>
               商城首頁
             </Nav.Link>
-
-            {/* <Nav.Link as={NavLink} to="/mall/burgerBar" exact>
-              burgerBar
-            </Nav.Link> */}
-
             <Nav.Link
               as={NavLink}
               to="/mall/shop"

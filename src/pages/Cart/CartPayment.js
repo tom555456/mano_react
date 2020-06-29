@@ -354,14 +354,10 @@ function CartPayment(props) {
       <Container className="w-75">
         {paymentMethod === '信用卡' ? (
           <>
-            <div className="text-center">
-              <h3>付款資訊</h3>
-            </div>
-
             <Fragment>
               <Row>
                 <Container
-                  className="w-100 paymentFormBg"
+                  className="w-100 paymentFormBg mt-0 mb-0"
                   style={{ padding: '50px 100px' }}
                 >
                   <Col xs="12">
