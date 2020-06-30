@@ -2,13 +2,13 @@ import React from "react";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 import Leaflet from 'leaflet'
 import { Icon } from "leaflet";
-import * as matchaData from "../../../src/data/MatchaBrown.json";
-import * as matchaDataDark from "../../../src/data/MatchaDark.json";
-import * as matchaDataLight from "../../../src/data/MatchaLight.json";
-import * as matchaDataAll from "../../../src/data/MatchaAll.json";
-import * as matchaDataRecom from "../../../src/data/MatchaRecom.json";
+import * as matchaData from "../../data/MatchaBrown.json";
+import * as matchaDataDark from "../../data/MatchaDark.json";
+import * as matchaDataLight from "../../data/MatchaLight.json";
+import * as matchaDataAll from "../../data/MatchaAll.json";
+import * as matchaDataRecom from "../../data/MatchaRecom.json";
 import "./MapPage.css";
-import { Container, Button, Nav, Navbar, Card, Image } from 'react-bootstrap'
+import { Container, Button, Nav, Navbar, Card, Image, Col } from 'react-bootstrap'
 
 
 
@@ -90,6 +90,7 @@ export default function MApPage() {
 function handleChange(event){
 
 setSearchValue(event.target.value);
+
 
 switch (event.target.value){
   case '大安區':
@@ -221,44 +222,62 @@ switch (searchValue) {
   return (
     <>
      <Container style={{ paddingTop:"2%", marginBottom:"5%" }}>
-     <div>
-          <div style={{ display:"flex", justifyContent:"space-around" }}> 
-            {matchaDataRecom.features.map(park => (
-              <a href={park.properties.WEBSITE}  style={{ width:"100vw", height:"40vh"}}>
-             <Card style={{ marginRight:"10px", height:"90%" }}>
-                 <div className="cardText">
-                    <Card.Text style={{ fontSize:".8rem" }}>{park.properties.NAME}</Card.Text>
-                    <p style={{ fontSize:".8rem", color:"#5c6447" }}>{park.properties.FACILITY}</p>
-                  </div>
-                    <Image style={{ overflow:"hidden", height:"90%", objectFit:"cover" }} className="infoImg" src={park.properties.PICTURE_LI}/>
-              </Card>
-             </a>
-            ))}
-         </div>
-      </div>
- 
-      <div className="map-input"  style={{ display:"flex" }}>
-        <div style={{ marginRight:"5%" }}>
-          <h6>推薦分類：</h6>
-            <select onChange={handleChange}>
-                <option value="All">全分類</option>
-                <option value="Mano推薦">Mano推薦</option>
-                <option value="抹茶專門店">抹茶專門店</option>
-                <option value="適合小型聚會">適合小型聚會</option>
+     <div className="map-cat"> 
+        <div className="map-input">
+            <h6>搜尋行政區：</h6>
+              <select onChange={handleChange}>
+                <option value="All">全區</option>
+                <option value="大安區">大安區</option>
+                <option value="中正區">中正區</option>
+                <option value="信義區">信義區</option>
+                <option value="中山區">中山區</option>
               </select>
           </div>
-
-        <div>
-          <h6>搜尋行政區：</h6>
-            <select onChange={handleChange}>
-              <option value="All">全區</option>
-              <option value="大安區">大安區</option>
-              <option value="中正區">中正區</option>
-              <option value="信義區">信義區</option>
-              <option value="中山區">中山區</option>
-            </select>
-        </div>
+     <Card style={{ marginRight:"10px", width:"20%", height:"20vh" }}>
+          <h5 className="mapText">全の分類</h5>
+          <img 
+          className="map-top-img"
+          src="/checkbox/all.jpg" 
+          style={{ heigth:"100%" }} 
+          onClick={() => {
+            setSearchValue("All")
+          }}/>
+      </Card>
+      <Card style={{ marginRight:"10px", width:"20%", height:"20vh" }}>
+          <h5 className="mapText">小型聚會</h5>
+          <img 
+          className="map-top-img"
+          src="/checkbox/gather.jpg" 
+          style={{height:"100%" }} 
+          onClick={() => {
+            setSearchValue("適合小型聚會")
+          }}
+          />  
+       </Card>
+       <Card style={{ marginRight:"10px", width:"20%", height:"20vh" }}>
+           <h5 className="mapText">抹茶專門</h5>
+            <img 
+            className="map-top-img"
+            src="/checkbox/store.jpg" 
+            style={{ height:"100%"}} 
+            onClick={() => {
+              setSearchValue("抹茶專門店")
+            }}
+          />
+       </Card>
+       <Card style={{ marginRight:"10px", width:"20%", height:"20vh" }}>
+          <h5 className="mapText">抹の推薦</h5>
+          <img 
+          className="map-top-img"
+          src="/checkbox/suggest.jpg" 
+          style={{height:"100%"}} 
+          onClick={() => {
+            setSearchValue("Mano推薦")
+          }}
+          />
+       </Card>
     </div>
+
       <Map center={location} zoom={zoom}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -298,9 +317,10 @@ switch (searchValue) {
 
      <div>
         <h4>information</h4>
-          <div style={{ display:"flex", justifyContent:"space-around" }}> 
+          <div className="map-info" > 
             {matchaDataRecom.features.map(park => (
-              <a href={park.properties.WEBSITE}  style={{ width:"100vw", height:"40vh"}}>
+              <div className="info-wrap">
+              <a href={park.properties.WEBSITE}  style={{ width:"100vh", height:"40vh"}}>
              <Card style={{ marginRight:"10px", height:"90%" }}>
                  <div className="cardText">
                     <Card.Text style={{ fontSize:".8rem" }}>{park.properties.NAME}</Card.Text>
@@ -309,6 +329,7 @@ switch (searchValue) {
                     <Image style={{ overflow:"hidden", height:"90%", objectFit:"cover" }} className="infoImg" src={park.properties.PICTURE_LI}/>
               </Card>
              </a>
+             </div>
             ))}
          </div>
       </div>

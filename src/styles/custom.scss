@@ -30,7 +30,12 @@ main > .container {
 
 .footer {
   background-color: #EFF3EC;
-  color:#5C6447;
+  //color:#5C6447;
+  padding: 10px;
+}
+
+.footer-dark {
+  background-color: #5C6447;
   padding: 10px;
 }
 
@@ -47,3 +52,12 @@ main > .container {
 h1,h2,h3,h4,h5,h6{
   color:#5C6447;
 }
+
+.trans-5s {
+  transition: .5s;
+}
+
+.ordersearch::placeholder{
+  color: white;
+  opacity: 0.6;
+  }

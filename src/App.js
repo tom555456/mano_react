@@ -40,7 +40,12 @@ import Login from './pages/login/login'
 import MyWelcome from './pages/login/welcome'
 import MyRegister from './pages/login/register'
 import MyForgetPwd from './pages/login/forgetPwd'
+import MyChangePassword from './pages/login/changePassword'
+
 import Faq from './pages/Faq'
+
+import SmallNav from "./components/SmallNav"
+import CartToggle from "./components/Cart/CartToggle"
 
 import WithSpinner from "./utils/WithSpinner/WithSpinner"
 import ProtectedRoute from './utils/ProtectedRoute'
@@ -64,6 +69,17 @@ function App(props) {
   // 錯誤訊息陣列
   const [loginErrors, setLoginErrors] = useState([])
 
+  const [width, setWidth] = useState(window.innerWidth)
+
+
+  useEffect(()=>{
+
+    window.addEventListener("resize", ()=>{
+      let width = window.innerWidth;
+      setWidth(width)
+    })
+
+  },[])
 
   //更改背景顏色
   function changeBackgroundColorLight(){
@@ -165,7 +181,12 @@ function App(props) {
   return (
     <Router>
       <>
-        <MyNavbar />
+        {width <= 900 ? (
+          <SmallNav style={{zIndex: "10"}} />
+        ) : (
+          <MyNavbar style={{zIndex: "10"}} />
+        )}
+        {/* <CartToggle /> */}
         <MainContent>
           <Switch>
             <Route path="/life" exact>
@@ -263,7 +284,7 @@ function App(props) {
 
             <Route exact path="/life/marketing">
               <Marketing 
-              changeBackgroundColorLight={changeBackgroundColorLight}/>
+              changeBackgroundColorWhite={changeBackgroundColorWhite}/>
             </Route>
             <Route exact path="/life/comment">
               <Comment 
@@ -318,6 +339,8 @@ function App(props) {
                 changeBackgroundColorBrown={changeBackgroundColorBrown}
                 username={username}
                 setUsername={setUsername}
+                data={data}
+                setData={setData}
               />
             </Route>
 
@@ -363,6 +386,8 @@ function App(props) {
                 changeBackgroundColorBrown={changeBackgroundColorBrown}
                 username={username}
                 setUsername={setUsername}
+                data={data}
+                setData={setData}
               />
             </Route>
 
@@ -404,18 +429,25 @@ function App(props) {
               <Faq 
               changeBackgroundColorLight={changeBackgroundColorLight}/>
             </Route>
-
-
-
-
             <Route exact path="/">
               <Home 
               changeBackgroundColorWhite={changeBackgroundColorWhite}/>
             </Route>
+
+            <Route exact path="/mychangepassword/:furl?">
+              <MyChangePassword
+                changeBackgroundColorBrown={changeBackgroundColorBrown}
+                data={data}
+                setData={setData}
+                username={username}
+                setUsername={setUsername}
+              />
+            </Route>
+
             <Route exact path="/404">
               <NotFoundPage />
             </Route>
-            <Redirect to="/404" />
+            {/* <Redirect to="/404" /> */}
           </Switch>
         </MainContent>
         <MyFooter />

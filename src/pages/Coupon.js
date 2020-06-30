@@ -96,7 +96,7 @@ function Coupon(props) {
     <>
       <MyBreadcrumb />
       <MemberSideLink>
-        <Col md={10} xs={12} style={{background:"white",padding:"0"}}>
+        <Col md={10} xs={12} className="mb-5"  style={{background:"white",padding:"0",borderRadius:'5px',overflow:'hidden'}}>
         <div style={{width:"100%",height:"44px",background:"#D1DBCE",marginBottom:"32px"}} >
           <button className="btn" style={couponshow?activebutton:normalbutton} 
           onClick={()=>{setCouponshow(true) }}
@@ -123,9 +123,9 @@ function Coupon(props) {
             </tbody>
           </Table>
           </Col>
-          <div style={{textAlign:"center"}}>升級會員，享有更多優惠，會員等級說明
+          <div style={{textAlign:"center", marginBottom:"2rem"}}>升級會員，享有更多優惠，會員等級說明
           
-          <Link to="../faq"
+          <Link to="../../life/marketing"
           >看這邊>></Link>
             
          
