@@ -54,7 +54,7 @@ function SmallNav (props) {
                       <MdShoppingCart className="cGreen hover-op" style={{fontSize: "24px" }} />
                     )}
             </Nav.Link>
-            <Nav.Link className="mr-2" as={NavLink} to="/mall/ItemTracking" style={{paddingRight: "0" }}>
+            <Nav.Link className="mr-2" as={NavLink} to={member[0].memberName !== '' ? "/mall/ItemTracking" : "/mall/login"} style={{paddingRight: "0" }}>
             {locationPathname === "/membercenter" ? (
               <GoHeart className="cWhite hover-op" style={{fontSize: "24px" }} />
             ):(

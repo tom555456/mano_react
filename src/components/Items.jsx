@@ -118,6 +118,18 @@ class Items extends Component {
 
     return this.state.data
   }
+
+  getWishData = async (username) => {
+    const response = await fetch(`http://localhost:3002/itemTracking/${username}`);
+    const json = await response.json();
+    const items = json.rows;
+
+    this.setState({wishData: items})
+    
+    return this.state.wishData
+}
+
+
   async componentDidMount() {
     let params = new URLSearchParams(this.props.location.search)
     let catIdParams = params.get('categoryId')
@@ -130,6 +142,11 @@ class Items extends Component {
     }
 
     await this.getItemsData()
+
+    const username = JSON.parse(localStorage.getItem('member')) || [{memberName: ""}]
+    this.setState({username: username[0].memberName})
+    this.getWishData(username[0].memberName)
+
   }
 
   handleChange = async (value) => {
@@ -155,6 +172,8 @@ class Items extends Component {
     this.props.history.push(
       `${this.props.match.url}?categoryId=${catIdParams}&page=${this.state.page}`
     )
+
+    window.scrollTo(0, 0)
   }
 
   onChange = async (event) => {
@@ -176,7 +195,7 @@ class Items extends Component {
   render() {
     const lists1 = []
 
-    for (let i = 1; i <= 6; i++) {
+    for (let i = 1; i <= 9; i++) {
       lists1.push(
         <Pagination.Item
           // size="sm"
@@ -194,7 +213,7 @@ class Items extends Component {
       )
     }
     const lists2 = []
-    for (let i = 15; i <= 20; i++) {
+    for (let i = 26; i <= this.state.totalPages; i++) {
       lists2.push(
         <Pagination.Item
           // size="sm"
@@ -211,60 +230,6 @@ class Items extends Component {
         </Pagination.Item>
       )
     }
-    const lists3 = []
-    for (let i = 27; i <= this.state.totalPages; i++) {
-      lists3.push(
-        <Pagination.Item
-          // size="sm"
-          // className="m-1 p-1"
-          key={i}
-          value={i}
-          onClick={() => {
-            this.handleChange(i)
-            this.setState({ page: i })
-          }}
-          active={i === this.state.page}
-        >
-          {i}
-        </Pagination.Item>
-      )
-    }
-
-    // for (let i = 1; i <= this.state.totalPages; i++) {
-    //   if (i < 10) {
-    //     lists.push(
-    //       <Pagination.Item
-    //         // size="sm"
-    //         // className="m-1 p-1"
-    //         key={i}
-    //         value={i}
-    //         onClick={() => {
-    //           this.handleChange(i)
-    //           this.setState({ page: i })
-    //         }}
-    //         active={i === this.state.page}
-    //       >
-    //         0{i}
-    //       </Pagination.Item>
-    //     )
-    //   } else {
-    //     lists.push(
-    //       <Pagination.Item
-    //         // size="sm"
-    //         // className="m-1 p-1"
-    //         key={i}
-    //         value={i}
-    //         onClick={() => {
-    //           this.handleChange(i)
-    //           this.setState({ page: i })
-    //         }}
-    //         active={i === this.state.page}
-    //       >
-    //         {i}
-    //       </Pagination.Item>
-    //     )
-    //   }
-    // }
 
     const messageModal = (
       <Modal
@@ -350,8 +315,9 @@ class Items extends Component {
       <div className="container">
         {wishListModal}
         {messageModal}
-        <div className="tools" style={{ marginLeft: '60px' }}>
-          <MyBreadcrumb />
+
+        <div className="tool">
+          <MyBreadcrumb className="bread" />
           {result}
           <SearchBar onChange={this.onChange} />
         </div>
@@ -384,26 +350,66 @@ class Items extends Component {
                 })
               }}
               handleWishListClick={() => {
-                this.insertWishListToDb({
-                  itemId: item.itemId,
-                  itemPrice: item.itemPrice,
-                })
-                this.setState({ productName: item.itemName })
+
+              if(this.state.username === "") {
+                this.props.history.push("/mall/login")
+              }else if (this.state.wishData.find(x => x.itemId === item.itemId)){
+                alert('already in wishlist')
+
+              }else {
+              this.insertWishListToDb({
+                username: this.state.username,
+                itemId: item.itemId,
+                itemPrice: item.itemPrice,
+              })
+              this.setState({ productName: item.itemName })
+              this.getWishData(this.state.username)
+
+              }
+              }}
+          />
+          ))}
+        <div className="page-btn-box">
+          <ul
+            className="page-btn"
+            style={{
+              visibility: this.state.showPage ? 'visible' : 'hidden',
+              marginLeft: '30px',
+            }}
+          >
+            <Pagination.First
+              onClick={() => {
+                this.handleChange(1)
               }}
             />
-          ))}
+            <Pagination.Prev
+              onClick={() => {
+                this.handleChange(this.state.page - 1)
+              }}
+              disabled={this.state.page === 1 ? true : false}
+            />
 
-        <ul
-          className="page-btn"
-          style={{
-            visibility: this.state.showPage ? 'visible' : 'hidden',
-            margin: '0 auto',
-          }}
-        >
-          {lists1} <Pagination.Ellipsis /> {lists2}
-          <Pagination.Ellipsis />
-          {lists3}
-        </ul>
+            {lists1}
+
+            <Pagination.Ellipsis />
+
+            {lists2}
+
+            <Pagination.Next
+              onClick={() => {
+                this.handleChange(this.state.page + 1)
+              }}
+              disabled={
+                this.state.page === this.state.totalPages ? true : false
+              }
+            />
+            <Pagination.Last
+              onClick={() => {
+                this.handleChange(this.state.totalPages)
+              }}
+            />
+          </ul>
+        </div>
       </div>
     )
   }

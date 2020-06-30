@@ -96,7 +96,7 @@ const Faq = (props) => {
               <Accordion.Collapse eventKey="5">
                 <Card.Body>
                   如需追蹤商品(課程)，須先加入會員。
-                  在商品或課程列表的右下方會有追蹤此商品(課程)的按鈕，點擊後會提示該商品(課程)已完成追蹤。
+                  在商品或課程列表的右上方會有追蹤此商品(課程)的按鈕，點擊後會提示該商品(課程)已完成追蹤。
                 </Card.Body>
               </Accordion.Collapse>
             </Card>

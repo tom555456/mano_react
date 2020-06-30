@@ -1,3 +1,8 @@
+.tool {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .page-btn {
   list-style: none;
   display: flex;
@@ -12,14 +17,27 @@
 }
 
 @media screen and (max-width: 1000px) {
+  .tool {
+    flex-direction: column;
+    width: 50%;
+    text-align: center;
+    margin: 10px 50px;
+  }
+
+  .page-btn-box {
+    width: 100%;
+    margin-left: -40px;
+  
+  }
+
   .page-btn {
     display: flex;
     width: 100%;
     flex-wrap: wrap;
-    /* text-align: start; */
   }
   .page-link {
     margin: 5px;
     text-align: center;
   }
+  
 }

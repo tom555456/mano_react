@@ -122,11 +122,7 @@ function MyFooter(props) {
               <br />
               <a
                 style={showTextColor}
-                href={
-                  props.history.location.pathname.includes('/mall')
-                    ? '/mall/contact'
-                    : '/life/contact'
-                }
+                href='http://localhost:3000/#fourthPage'
               >
                 Contact Us
               </a>
@@ -146,9 +142,13 @@ function MyFooter(props) {
   if (
     path === '/mall/login' ||
     path === '/mall/welcome' ||
+    path === '/mall/register' ||
+    path === '/mall/forgetpwd' ||
     path === '/' ||
     path === '/life/welcome' ||
-    path === 'life/login'
+    path === '/life/register' ||
+    path === '/life/forgetpwd' ||
+    path === '/life/login'
   )
     displayFooter = ''
   else displayFooter = footer

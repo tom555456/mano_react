@@ -3,6 +3,7 @@ import { Navbar, Nav, Form, FormControl, Button, Image } from 'react-bootstrap'
 import { Link, NavLink, withRouter } from 'react-router-dom'
 import { MdShoppingCart, MdKeyboardArrowRight } from 'react-icons/md'
 import { GoHeart } from "react-icons/go"
+import CartToggle from "./Cart/CartToggle"
 import "../styles/nav.scss"
  
 function MyNavbar(props) {
@@ -147,7 +148,7 @@ function MyNavbar(props) {
                       <MdShoppingCart className="cGreen hover-op" style={{fontSize: "24px" }} />
                     )}
             </Nav.Link>
-            <Nav.Link className="mr-2" as={NavLink} to="/mall/ItemTracking">
+            <Nav.Link className="mr-2" as={NavLink} to={member[0].memberName !== '' ? "/mall/ItemTracking" : "/mall/login"}>
             {locationPathname === "/membercenter" ? (
               <GoHeart className="cWhite hover-op" style={{fontSize: "24px" }} />
             ):(

@@ -12,14 +12,15 @@ function ItemTracking (props) {
   const [show, setShow] = useState(false)
   const [mycart, setMycart] = useState([])
   const [productName, setProductName] = useState('')
-   
+  const [username, setUsername] = useState('')
+
 
     
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
 
-    const getItemsData = async () => {
-        const response = await fetch(`http://localhost:3002/itemTracking`);
+    const getItemsData = async (username) => {
+        const response = await fetch(`http://localhost:3002/itemTracking/${username}`);
         const json = await response.json();
         const items = json.rows;
       
@@ -29,9 +30,12 @@ function ItemTracking (props) {
 
 
     useEffect(()=>{
-      props.changeBackgroundColorLight() 
-      getItemsData();
+      const username = JSON.parse(localStorage.getItem('member'))
 
+      props.changeBackgroundColorLight() 
+      //getItemsData();
+      getItemsData(username[0].memberName)
+      setUsername(username[0].memberName)
     },[])
 
     const updateCartToLocalStorage = (value) => {
@@ -80,14 +84,12 @@ function ItemTracking (props) {
               </Modal.Footer>
             </Modal>
           )
-        let displaystyle={width:"100%"}
-        let locationPathname = location.pathname
-        if (locationPathname.includes("/membercenter")) displaystyle = {width:"100%",color:"#fff"}
     
         return(
-            
+
             <Container className="d-flex  flex-wrap" > 
-               <h3 style={displaystyle}><BsFillPlayFill />願望清單</h3>
+               <h3 className="title" ><BsFillPlayFill />願望清單</h3>
+               <div className="border"></div>
               {data.map(item =>(
                 <TrackingCard xs={12} md={4} 
                 key={item.itemId}
@@ -96,6 +98,7 @@ function ItemTracking (props) {
                 itemName={item.itemName}
                 itemPrice={item.itemPrice}
                 itemDescription={item.itemDescription}
+                username={username}
                 //itemPrice={item.itemPrice}
                 handleClick={() => {    
                     updateCartToLocalStorage({

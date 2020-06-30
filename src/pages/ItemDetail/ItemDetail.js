@@ -1,4 +1,11 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
+
+import DetailBreadcrumb from '../../components/DetailBreadcrumb'
+import CategoryBar from '../../components/CategoryBar'
+import { BsFillPlayFill } from 'react-icons/bs'
+import { FaFacebookSquare, FaLine } from 'react-icons/fa'
+
 import {
   Modal,
   Button,
@@ -12,12 +19,7 @@ import {
   ListGroupItem,
   FormControl,
 } from 'react-bootstrap'
-import { withRouter } from 'react-router-dom'
 import './ItemDetail-style.css'
-import DetailBreadcrumb from '../../components/DetailBreadcrumb'
-import { FaFacebookSquare, FaLine } from 'react-icons/fa'
-import CategoryBar from '../../components/CategoryBar'
-import { BsFillPlayFill } from 'react-icons/bs'
 
 class ItemDetail extends Component {
   constructor(props) {
@@ -39,12 +41,16 @@ class ItemDetail extends Component {
       related2: [],
       related3: [],
       amount: 1,
+      width: window.innerWidth,
     }
   }
 
   //加入購物車
   handleClose = () => this.setState({ show: false })
   handleShow = () => this.setState({ show: true })
+
+  handleWishClose = () => this.setState({ wishShow: false })
+  handleWishShow = () => this.setState({ wishShow: true })
 
   updateCartToLocalStorage = (value) => {
     // 開啟載入指示
@@ -68,6 +74,23 @@ class ItemDetail extends Component {
     //alert('已成功加入購物車')
   }
   //加入購物車 end
+
+  insertWishListToDb = async (wishList) => {
+    const request = new Request(`http://localhost:3002/itemTracking/add`, {
+      method: 'POST',
+      body: JSON.stringify(wishList),
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    })
+
+    console.log('After JSON: ', JSON.stringify(wishList))
+
+    const response = await fetch(request)
+    //const data =  await response.json()
+    this.handleWishShow()
+  }
 
   //fetch 商品
   getItemsData = async () => {
@@ -133,6 +156,11 @@ class ItemDetail extends Component {
     this.props.changeBackgroundColorLight()
     let params = new URLSearchParams(this.props.location.search)
     let catIdParams = params.get('categoryId')
+    window.addEventListener('resize', () => {
+      let width = window.innerWidth
+      this.setState({ width: width })
+    })
+
     if (catIdParams) {
       await this.setState({
         catIds: (this.state.catIds += catIdParams),
@@ -175,6 +203,35 @@ class ItemDetail extends Component {
       </Modal>
     )
 
+    const wishListModal = (
+      <Modal
+        show={this.state.wishShow}
+        onHide={this.handleWishClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>加入願望清單訊息</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          產品：{this.state.productName} 已成功加入願望清單
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={this.handleWishClose}>
+            繼續購物
+          </Button>
+          <Button
+            variant="primary"
+            onClick={() => {
+              this.props.history.push('/mall/ItemTracking')
+            }}
+          >
+            前往願望清單
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    )
+
     return (
       <>
         <div
@@ -190,6 +247,7 @@ class ItemDetail extends Component {
           }}
         ></div>
         <div className="container">
+          {wishListModal}
           {messageModal}
           <div className="tools" style={{ marginLeft: '70px' }}>
             <DetailBreadcrumb />
@@ -198,7 +256,7 @@ class ItemDetail extends Component {
           <Container class="d-flex justify-content-between">
             <Row>
               <Col xs={2} md={2}>
-                <CategoryBar />
+                {this.state.width <= 900 ? '' : <CategoryBar />}
               </Col>
               <Col xs={12} md={1}></Col>
               <Col xs={12} md={9}>
@@ -318,7 +376,6 @@ class ItemDetail extends Component {
                           >
                             -
                           </Button>
-
                           <input
                             style={{
                               width: '20%',
@@ -331,7 +388,6 @@ class ItemDetail extends Component {
                               this.state.amount < 1 ? 1 : this.state.amount
                             }
                           />
-
                           <Button
                             onClick={() =>
                               this.setState({ amount: this.state.amount + 1 })
@@ -365,7 +421,22 @@ class ItemDetail extends Component {
                             ></i>
                           </Button>
 
-                          <Button className="fav" style={{ color: '#5E6248' }}>
+                          <Button
+                            className="fav"
+                            style={{ color: '#5E6248' }}
+                            onClick={() => {
+                              for (let i = 0; i < this.state.amount; i++) {
+                                this.insertWishListToDb({
+                                  id: this.state.single.itemId,
+                                  img: this.state.single.itemImg,
+                                  name: this.state.single.itemName,
+                                  amount: 1,
+                                  price: this.state.single.itemPrice,
+                                  shippingId: this.state.single.shippingId,
+                                })
+                              }
+                            }}
+                          >
                             add to favtorite
                           </Button>
                         </div>
@@ -377,6 +448,9 @@ class ItemDetail extends Component {
                       <BsFillPlayFill />
                       商品詳情
                     </h4>
+
+                    <h6>&nbsp;&nbsp;&nbsp;&nbsp;MANO Item</h6>
+
                     <Card body>
                       這款立領排扣外套採用輕質棉製成，是秋冬季的理想選擇。
                       率性尖領款式，正面以鈕扣式開合，胸部和腰部設有口袋以便放置各樣細小物件。
@@ -387,6 +461,9 @@ class ItemDetail extends Component {
                       <BsFillPlayFill />
                       商品規格
                     </h4>
+
+                    <h6>&nbsp;&nbsp;&nbsp;&nbsp;Item Specification</h6>
+
                     <Card body>
                       材質:100%棉
                       <br />
@@ -407,6 +484,7 @@ class ItemDetail extends Component {
                       <BsFillPlayFill />
                       運送及其他規則
                     </h4>
+                    <h6>&nbsp;&nbsp;&nbsp;&nbsp;Ships & Rules</h6>
                     <Card body>
                       對於您在網路上購買的商品，在商品未穿、未洗、無損壞、寄送錯誤或有瑕疵的情形下，我們原則上同意在30個日曆天（自產品從我們倉儲出貨時起算）內接受退貨。退貨時應附上原始包裝，可辦理全部或部分退費。
                     </Card>

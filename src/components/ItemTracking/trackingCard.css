@@ -1,0 +1,40 @@
+.card{
+    position: relative;
+    width: 200px;
+    height: 350px; 
+    margin: 10px;
+}
+.box{
+    /* position: relative; */
+}
+.photo{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+.card-body{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    padding: 10px;
+}
+.trackingCard-item-name{
+    max-width: 200px;
+    padding-bottom: 5px;
+    margin-bottom: 17px;
+    border-bottom: 1px solid #5C6447;
+}
+.trackingCard-item-price{
+    display: inline;
+    margin: 0px;
+}
+.photo{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.heart-position{
+    position: relative;
+    right: 0;
+    top: 0;
+} 

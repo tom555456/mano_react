@@ -40,6 +40,8 @@ import Login from './pages/login/login'
 import MyWelcome from './pages/login/welcome'
 import MyRegister from './pages/login/register'
 import MyForgetPwd from './pages/login/forgetPwd'
+import MyChangePassword from './pages/login/changePassword'
+
 import Faq from './pages/Faq'
 
 import SmallNav from "./components/SmallNav"
@@ -184,7 +186,7 @@ function App(props) {
         ) : (
           <MyNavbar style={{zIndex: "10"}} />
         )}
-        <CartToggle />
+        {/* <CartToggle /> */}
         <MainContent>
           <Switch>
             <Route path="/life" exact>
@@ -337,6 +339,8 @@ function App(props) {
                 changeBackgroundColorBrown={changeBackgroundColorBrown}
                 username={username}
                 setUsername={setUsername}
+                data={data}
+                setData={setData}
               />
             </Route>
 
@@ -382,6 +386,8 @@ function App(props) {
                 changeBackgroundColorBrown={changeBackgroundColorBrown}
                 username={username}
                 setUsername={setUsername}
+                data={data}
+                setData={setData}
               />
             </Route>
 
@@ -427,6 +433,17 @@ function App(props) {
               <Home 
               changeBackgroundColorWhite={changeBackgroundColorWhite}/>
             </Route>
+
+            <Route exact path="/mychangepassword/:furl?">
+              <MyChangePassword
+                changeBackgroundColorBrown={changeBackgroundColorBrown}
+                data={data}
+                setData={setData}
+                username={username}
+                setUsername={setUsername}
+              />
+            </Route>
+
             <Route exact path="/404">
               <NotFoundPage />
             </Route>

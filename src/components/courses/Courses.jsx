@@ -138,6 +138,7 @@ class Courses extends Component {
 
   //頁碼
   handleChange = async (value) => {
+
     let params = new URLSearchParams(this.props.location.search)
     let catIdParams = params.get('categoryId')
 
@@ -161,11 +162,11 @@ class Courses extends Component {
       page: page,
      
     })
-    console.log(page)
 
     this.props.history.push(
       `${this.props.match.url}?categoryId=${catIdParams}&page=${this.state.page}`
     )
+    window.scrollTo(0, 0)
   }
 
   //搜尋input改變
@@ -206,8 +207,6 @@ class Courses extends Component {
     })
   }
 
-
-
     console.log(sortedData)
     this.setState({
       data: sortedData,
@@ -218,12 +217,12 @@ class Courses extends Component {
   render() {
     const lists = []
     // let active = this.state.page
-    
+  
     for (let i = 1; i <= this.state.totalPages; i++) {
       if (i < 10) {
         lists.push(
           <Pagination.Item
-           className="course-list-btn"
+            className="course-list-btn"
             key={i}
             value={i}
             onClick={() => {
@@ -231,11 +230,12 @@ class Courses extends Component {
               this.setState({ page: i })
               }}
             active={i === this.state.page}
-            
           >
             0{i}
           </Pagination.Item>
-        )
+       
+        )  
+                
       } else {
         lists.push(
           <li
@@ -367,7 +367,22 @@ class Courses extends Component {
           style={{ visibility: this.state.showPage ? 'visible' : 'hidden' }}
           className="page-lists"
         >
+         <Pagination.Prev
+         className="list-btn"
+                   onClick={() => {
+                    this.handleChange(this.state.page - 1)
+                  }}
+                  disabled= {(this.state.page === 1)?
+                  true : false}
+                />
           {lists}
+          <Pagination.Next
+                   onClick={() => {
+                    this.handleChange(this.state.page + 1)
+                  }}
+                  disabled= {(this.state.page === this.state.totalPages)?
+                  true : false}
+              />
         </ul>
       </div>
       </>

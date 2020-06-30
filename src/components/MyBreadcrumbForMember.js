@@ -63,7 +63,7 @@ function MyBreadcrumb(props) {
       </Button>
       <FormControl
         type="text"
-        placeholder="搜尋訂單內容"
+        placeholder="搜尋商品/課程"
         onChange={(event) => {
           handleChangeSearch(event)
         }}
