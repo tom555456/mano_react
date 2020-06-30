@@ -24,6 +24,8 @@ class Items extends Component {
       productName: '',
       catIds: '',
       catData: [],
+      username: "",
+      wishData: []
     }
   }
 
@@ -117,6 +119,18 @@ class Items extends Component {
 
     return this.state.data
   }
+
+  getWishData = async (username) => {
+    const response = await fetch(`http://localhost:3002/itemTracking/${username}`);
+    const json = await response.json();
+    const items = json.rows;
+
+    this.setState({wishData: items})
+    
+    return this.state.wishData
+}
+
+
   async componentDidMount() {
     let params = new URLSearchParams(this.props.location.search)
     let catIdParams = params.get('categoryId')
@@ -129,6 +143,11 @@ class Items extends Component {
     }
 
     await this.getItemsData()
+
+    const username = JSON.parse(localStorage.getItem('member')) || [{memberName: ""}]
+    this.setState({username: username[0].memberName})
+    this.getWishData(username[0].memberName)
+
   }
 
   handleChange = async (event) => {
@@ -322,11 +341,22 @@ class Items extends Component {
                 })
               }}
               handleWishListClick={() => {
+
+                if(this.state.username === "") {
+                  this.props.history.push("/mall/login")
+                }else if (this.state.wishData.find(x => x.itemId === item.itemId)){
+                  alert('already in wishlist')
+            
+                }else {
                 this.insertWishListToDb({
+                  username: this.state.username,
                   itemId: item.itemId,
                   itemPrice: item.itemPrice,
                 })
                 this.setState({ productName: item.itemName })
+                this.getWishData(this.state.username)
+
+                }
               }}
             />
           ))}
