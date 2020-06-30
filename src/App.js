@@ -43,6 +43,7 @@ import MyForgetPwd from './pages/login/forgetPwd'
 import Faq from './pages/Faq'
 
 import SmallNav from "./components/SmallNav"
+import CartToggle from "./components/Cart/CartToggle"
 
 import WithSpinner from "./utils/WithSpinner/WithSpinner"
 import ProtectedRoute from './utils/ProtectedRoute'
@@ -183,6 +184,7 @@ function App(props) {
         ) : (
           <MyNavbar style={{zIndex: "10"}} />
         )}
+        <CartToggle />
         <MainContent>
           <Switch>
             <Route path="/life" exact>
