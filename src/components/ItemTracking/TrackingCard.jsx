@@ -8,9 +8,9 @@ const TrackingCard = props => {
 
     return (
         <>
-            <div className="card">
+            <div className="track-card">
                 
-                    <img className="photo" style={{ width: '198px', height: '250px', overflow: 'hidden' }} variant="top" src={`/items/${props.itemImg}`}
+                    <img className="track-photo" style={{ width: '198px', height: '250px', overflow: 'hidden' }} variant="top" src={`/items/${props.itemImg}`}
                         alt={props.itemImg} />
                 <div className="heart-position">
                    <Heart
@@ -20,7 +20,7 @@ const TrackingCard = props => {
                         itemPrice={props.itemPrice} /> 
                 
                 </div>
-                <div className="card-body">
+                <div className="track-card-body">
                     <h5 className="trackingCard-item-name">
                         {props.itemName}
                     </h5>
