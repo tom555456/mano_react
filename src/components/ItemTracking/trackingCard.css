@@ -1,18 +1,15 @@
-.card{
+.track-card{
     position: relative;
     width: 200px;
     height: 350px; 
     margin: 10px;
 }
-.box{
-    /* position: relative; */
-}
-.photo{
+.track-photo{
     position: absolute;
     left: 0px;
     top: 0px;
 }
-.card-body{
+.track-card-body{
     position: absolute;
     bottom: 0px;
     left: 0px;
@@ -27,11 +24,6 @@
 .trackingCard-item-price{
     display: inline;
     margin: 0px;
-}
-.photo{
-    position: absolute;
-    top: 0;
-    left: 0;
 }
 .heart-position{
     position: relative;

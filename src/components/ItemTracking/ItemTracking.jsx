@@ -88,8 +88,8 @@ function ItemTracking (props) {
         return(
 
             <Container className="d-flex  flex-wrap" > 
-               <h3 className="title" ><BsFillPlayFill />願望清單</h3>
-               <div className="border"></div>
+               <h3 className="track-title" ><BsFillPlayFill />願望清單</h3>
+               <div className="track-border"></div>
               {data.map(item =>(
                 <TrackingCard xs={12} md={4} 
                 key={item.itemId}
