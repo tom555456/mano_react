@@ -42,6 +42,8 @@ class ItemDetail extends Component {
       related3: [],
       amount: 1,
       width: window.innerWidth,
+      username: "",
+      wishData: [],
     }
   }
 
@@ -120,6 +122,16 @@ class ItemDetail extends Component {
     return this.state.data
   }
 
+  getWishData = async (username) => {
+    const response = await fetch(`http://localhost:3002/itemTracking/${username}`);
+    const json = await response.json();
+    const items = json.rows;
+
+    this.setState({wishData: items})
+    
+    return this.state.wishData
+}
+
   //單一商品
   getItemsDetail = async () => {
     console.log('detail!!')
@@ -171,6 +183,9 @@ class ItemDetail extends Component {
 
     await this.getItemsData()
     await this.getItemsDetail()
+    const username = JSON.parse(localStorage.getItem('member')) || [{memberName: ""}]
+    this.getWishData(username[0].memberName)
+    this.setState({username: username[0].memberName})
   }
 
   render() {
@@ -424,18 +439,24 @@ class ItemDetail extends Component {
                           <Button
                             className="fav"
                             style={{ color: '#5E6248' }}
-                            onClick={() => {
-                              for (let i = 0; i < this.state.amount; i++) {
-                                this.insertWishListToDb({
-                                  id: this.state.single.itemId,
-                                  img: this.state.single.itemImg,
-                                  name: this.state.single.itemName,
-                                  amount: 1,
-                                  price: this.state.single.itemPrice,
-                                  shippingId: this.state.single.shippingId,
-                                })
+                            onClick ={async () => {
+                              // alert("alert")
+                              if(this.state.username === "") {
+                                this.props.history.push("/mall/login")
+                              }else if (this.state.wishData.find(x => x.itemId === this.state.single.itemId)){
+                                alert('already in wishlist')
+                
+                              }else {
+                              this.insertWishListToDb({ 
+                                username: this.state.username,
+                                itemId: this.state.single.itemId,
+                                itemPrice: this.state.single.itemPrice,
+                              })
+                              this.setState({ productName: this.state.single.itemName })        
                               }
-                            }}
+                              await this.getWishData(this.state.username)
+
+                              }}
                           >
                             add to favtorite
                           </Button>
